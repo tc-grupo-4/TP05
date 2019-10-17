@@ -1,0 +1,16 @@
+\begin{circuitikz}[american voltages]
+\draw
+(0,0) node[op amp, noinv input up] (opamp) {}
+(opamp.+) to ++(-1,0) coordinate(tmp1)
+(tmp1) to[generic=$Z_4$] ++(0,-2) node[ground] {}
+(tmp1) to[generic=$Z_2$] ++(-2,0) coordinate(vx)
+(vx) to[generic=$Z_1$,o-o] ++(-2,0) node[left] {$V_{in}$}
+(opamp.out) to[short, o-o] ++(1,0) coordinate(tmp2)
+(tmp2) to ++(1,0) node[right] {$V_{out}$}
+(opamp.-) to ++(0,-1) -| (opamp.out)
+(tmp2) to [short] ++(0,2) coordinate (tmp3)
+(vx) to [short] ++(0,1.5) coordinate (tmp4)
+(tmp3) to [generic=$Z_3$] (tmp4)
+;
+\end{circuitikz}
+\caption{Celda Sallen-Key}
