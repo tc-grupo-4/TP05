@@ -1,0 +1,54 @@
+\documentclass[spanish]{report}
+
+\makeatletter 
+\def\input@path{{../../}} 
+\makeatother
+\input{tc_tp5_preamble.tex}
+
+\begin{document}
+
+\newgeometry{}
+
+\input{tc_tp5_caratula.tex}
+\tableofcontents
+\newpage
+
+
+
+\newgeometry{left =1.5cm, right=2cm, top=2cm, bottom=2cm}	%texto ocupa mas ancho de pagina
+%esto no esta en el preambulo para que la caratula tenga margenes distintos
+
+
+%hago backup del comando \input actual, y lo cambio para que cambie el path de buqueda de nuevos archivos
+%esto va a afectar a los includes de este archivo y a los del archivo del subfile, pero solo cuando compilo desde aca. Si compilo desde el subfile este cambio no sucede entonces sigue andando.
+
+
+\let\oldinput=\input 	
+\def\input#1{\oldinput{Ej1/Informe/#1}}	
+%agrego el archivo y despues restauro al comando original
+\subfile{tc_tp5_ej1.tex}
+\let\input=\oldinput
+
+\clearpage
+
+\let\oldinput=\input 	
+\def\input#1{\oldinput{Ej2/Informe/#1}}	
+\subfile{tc_tp5_ej2.tex}
+\let\input=\oldinput
+
+\clearpage
+
+\let\oldinput=\input 	
+\def\input#1{\oldinput{Ej3/Informe/#1}}	
+\subfile{tc_tp5_ej3.tex}
+\let\input=\oldinput
+
+\clearpage
+
+\let\oldinput=\input 	
+\def\input#1{\oldinput{Ej4/Informe/#1}}	
+\subfile{tc_tp5_ej4.tex}
+\let\input=\oldinput
+
+
+\end{document}
