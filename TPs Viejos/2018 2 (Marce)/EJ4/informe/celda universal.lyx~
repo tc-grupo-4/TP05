@@ -1,0 +1,2471 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\headheight 2cm
+\headsep 2cm
+\footskip 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Celda universal 
+\end_layout
+
+\begin_layout Subsection
+Introducción
+\end_layout
+
+\begin_layout Standard
+El método de conexión de celdas en cascada es uno de los mas utilizados
+ para la implementación de filtros activos de orden alto.
+ Dependiendo de la aplicación del filtro se determina la configuración y
+ el tipo de celda a utilizar.
+ Para el caso de la celda universal, también conocida como de variables
+ de estado, existen distintas configuraciones donde cada una de ellas tiene
+ sus ventajas y desventajas.
+ Para construirlas se utilizan bloques sumadores, restadores, amplificadores,
+ atenuadores e integradores conectados en cascada para lograr la tranferencia
+ buscada.
+ Los filtros de variable de estado son filtros activos de segundo orden
+ RC que consisten en dos integradores de amplificador operacional idénticos,
+ cada uno de los cuales actúa como un filtro de paso bajo de un solo polo
+ de primer orden, un amplificador de suma alrededor del cual podemos configurar
+ la ganancia de los filtros y su realimentación de amortiguamiento red.
+ Permiten hacer cualquier tipo de filtro de segundo orden y son muy útiles
+ para los de alto factor de calidad (Q).
+ A continuación se analizarán cuatro configuraciones para luego elegiruna
+ de ellas para cumplir la plantilla deseada.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename KHN GENERICO.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda Universal
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Implementaciones
+\end_layout
+
+\begin_layout Subsubsection
+Kerwin-Huelsman-Newcomb
+\end_layout
+
+\begin_layout Standard
+La configuración KHN es la siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename CONFIG KHN.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración KHN
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A la cual le corresponde el siguienre diagrama de bloques:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename CONFIG KHN BLOCK INVERTING.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración KHN: diagrama de bloques
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Observando el diagrama de bloques se puede obtener:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{HP}=-V_{I}+V_{BP}\frac{3R_{3}}{R_{3}+R_{4}}-V_{LP}\label{eq:1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En donde:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{LP}=-\frac{1}{sC_{2}R_{2}}V_{BP}\label{eq:2}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+V_{BP}=-\frac{1}{sC_{1}R_{1}}V_{HP}\label{eq:3}
+\end{equation}
+
+\end_inset
+
+Reemplazando 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:3"
+
+\end_inset
+
+ en 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:2"
+
+\end_inset
+
+ y luego en 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:1"
+
+\end_inset
+
+se llega a:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{HP}=-V_{I}-\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,\frac{1}{s}\,V_{HP}-\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}\,\frac{1}{s^{2}}\,V_{HP}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Realizando el despeje algebraico:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{HP}}{V_{I}}=-\frac{s^{2}}{s^{2}+\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto también se tiene que:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{BP}=-\frac{1}{sC_{1}R_{1}}V_{HP}\Longrightarrow\frac{V_{BP}}{V_{I}}=\frac{\frac{s}{C_{1}R_{1}}}{s^{2}+\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}}\label{eq:3-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{LP}=\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}\,\frac{1}{s^{2}}\,V_{HP}\Longrightarrow\frac{V_{LP}}{V_{I}}=-\frac{\frac{1}{R_{1}R_{2}C_{1}C_{2}}}{s^{2}+\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tomando a 
+\begin_inset Formula $C_{1}=C_{2}=C$
+\end_inset
+
+ y a 
+\begin_inset Formula $R_{1}=R_{2}=R$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=\frac{1}{RC}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q=\frac{R_{3}+R_{4}}{3R_{3}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con este resultado se puede ver que hay un control independiente en Q ajustando
+ el valor de 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+sin afectar al 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ del filtro.
+ La magnitud de la ganancia en 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ en cualquiera de las tres salidas está determinada por Q.
+\end_layout
+
+\begin_layout Standard
+Otra de las ventajas de la celda universal son las múltiples salidas que
+ posee, con ellas se puede obtener una respuesta pasa-banda, pasa-altos,
+ pasa-bajos, y combinando las dos últimas una rechaza-banda, ya que 
+\begin_inset Formula $H_{BR}=H_{LP}+H_{HP}$
+\end_inset
+
+, 
+\end_layout
+
+\begin_layout Standard
+por lo que la función transferencia se puede obtener con un sumador y con
+ las dos transferencias ya obtenidas como se muestra en las siguiente figura:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename SUMADOR.png
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bloque sumador
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De aquí se obtiene que:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{BR}=-\frac{R_{X}}{R_{LP}}\,V_{LP}-\frac{R_{X}}{R_{HP}}\,V_{HP}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{BR}}{V_{I}}=\frac{\frac{R_{X}}{R_{HP}}\left(\frac{R_{HP}}{R_{LP}}\,\frac{1}{C^{2}R^{2}}+\,s^{2}\right)}{s^{2}+\frac{1}{CR}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C^{2}R^{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Tow-Thomas
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename tt config.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración Tow-Thomas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La configuración Tow-Thomas parte de la configuración anterior.
+ La diferencia es que se junta el bloque sumador con el primer integrador
+ y se agrega un inversor, que combinado con el segundo integrador forman
+ un integrador no inversor.
+ En este caso se pierde la salida del pasa altos, por lo que no es posible
+ realizar un Notch.
+\end_layout
+
+\begin_layout Standard
+Las funciones transferencia del pasa bajos y del pasa banda son las siguientes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{BP}}{V_{I}}=-\frac{\frac{s}{C_{1}R_{1}}}{s^{2}+\frac{s}{C_{1}R_{1}}+\frac{1}{C_{1}C_{2}R_{2}R_{3}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La condición del rechazabanda impone 
+\begin_inset Formula $R_{1}=R_{4}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{LP}}{V_{I}}=\frac{\frac{1}{C_{1}C_{2}R_{2}R_{4}}}{s^{2}+\frac{s}{C_{1}R_{1}}+\frac{1}{C_{1}C_{2}R_{2}R_{3}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=\frac{1}{\sqrt{C_{1}C_{2}R_{2}R_{3}}},\,\,\,\,\,Q=R_{1}\,\sqrt{\frac{C_{1}}{C_{2}R_{2}R_{3}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tomando 
+\begin_inset Formula $C_{1}=C_{2}=C$
+\end_inset
+
+ y a 
+\begin_inset Formula $R_{3}=R_{2}=R$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=\frac{1}{CR},\,\,\,\,\,Q=\frac{R_{1}}{R}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De esta manera la resistencia R modifica tanto el factor de calidad como
+ el 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ del circuito, lo que hace que el diseño sea mas restrictivo
+\end_layout
+
+\begin_layout Subsubsection
+Ackerberg-Mossberg
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename AM CONFIG 2.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración Ackerberg-Mossberg
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta configuración es muy similar a Tow-Thomas y las ecuaciones de diseño
+ son las mismas y por lo tanto también coinciden las sensibilidades.
+ La diferencia entre ambas es la forma de implementar el integrador no inversor,
+ de forma de mejorar el comportamiento del filtro, el segundo integrador
+ tiende a compensar los efectos del primero cuando estos estan matcheados.
+\end_layout
+
+\begin_layout Standard
+En este caso tampoco se cuenta con una salida pasa altos, por lo que tampoco
+ sirve para realizar el filtro del ejercicio.
+\end_layout
+
+\begin_layout Subsubsection
+Fleischer-Tow
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename FR CONFIG.png
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración Fleischer-Tow
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Esta configuración es una modificación de la Tow-Thomas, utilizando la técnica
+ del feedfoward, se inyecta la señal la señal de entrada en las entradas
+ de los sucesivos amplificadores.
+ Esto produce que haya ceros en el numerador de la transferencia y hace
+ posible obtener una función rechaza-banda, por ejemplo.
+ 
+\end_layout
+
+\begin_layout Standard
+A continuación se resuelve la transferencia del circuito:
+\end_layout
+
+\begin_layout Standard
+Se tiene que
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{in}}{R_{4}}=-\frac{V_{o1}}{\frac{R_{1}}{sC_{1}R_{1}+1}}-\frac{V_{o3}}{R_{3}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{in}}{R_{6}}=-\frac{V_{o1}}{R_{7}}-\frac{V_{o}}{R_{8}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{in}}{R_{5}}=-\frac{V_{o}}{R_{2}}-V_{o3}sC_{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Y resolviendo el sistema se llega a la transferencia buscada:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{o}}{V_{in}}=\frac{\frac{R_{8}}{R_{6}}s^{2}+\frac{1}{R_{1}C_{1}}\left(\frac{R_{8}}{R_{6}}-\frac{R_{8}R_{1}}{R_{4}R_{7}}\right)s+\frac{R_{8}}{R_{3}R_{5}R_{7}C_{1}C_{2}}}{s^{2}+\frac{1}{R_{1}C_{1}}s+\frac{R_{8}}{R_{3}R_{2}R_{7}C_{1}C_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A partir de una sola salida, dependiendo de las condiciones de diseño se
+ pueden obtener diferentes funciones.
+ En el caso de la respuesta rechaza bandas se debe cumplir que 
+\begin_inset Formula $R_{4}=\frac{R_{6}R_{1}}{R_{8}}$
+\end_inset
+
+ y 
+\begin_inset Formula $R_{7}=R_{8}$
+\end_inset
+
+ para anular el termino lineal en el numerador.
+ Por lo tanto la función transferencia queda:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{o}}{V_{in}}=\frac{\frac{R_{8}}{R_{6}}s^{2}+\frac{1}{R_{3}R_{5}C_{1}C_{2}}}{s^{2}+\frac{1}{R_{1}C_{1}}s+\frac{1}{R_{3}R_{2}C_{1}C_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{z}=\sqrt{\frac{R_{6}}{R_{3}R_{5}R_{8}C_{1}C_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=\sqrt{\frac{1}{R_{3}R_{2}C_{1}C_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+Q=R_{1}C_{1}\omega_{0}=R_{1\,}\sqrt{\frac{C_{1}}{R_{3}R_{2}C_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para simplificar el diseño y poder ajustar los parámetros del circuito facilment
+e y de manera independiente al resto se eligen 
+\begin_inset Formula $R_{2}=R_{3}=R$
+\end_inset
+
+, 
+\begin_inset Formula $C_{1}=C_{2}=C$
+\end_inset
+
+ y 
+\begin_inset Formula $R_{5}=R_{6}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H(s)=G\frac{\left(\frac{s}{\omega_{z}}\right)^{2}+1}{\left(\frac{s}{\omega_{0}}\right)^{2}+\frac{1}{Q\,\omega_{0}}s+1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{z}=\frac{1}{C\sqrt{RR_{7}}}\label{eq:WZ}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=\frac{1}{RC}\label{eq:W0}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+Q=\frac{R_{1}}{R}\label{eq:Q}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G=\frac{R}{R_{6}}\label{eq:G}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Elección de configuración
+\end_layout
+
+\begin_layout Standard
+De acuerdo con los parámetros del filtro rechaza banda provistos por la
+ consigna:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q=3,5\,\,\,\,\,\,\,f_{\infty}=51KHz
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para realizar los cálculos se utilizó 
+\begin_inset Formula $Q=5$
+\end_inset
+
+ para tomar un margen respecto del mínimo que pide la consigna.
+ Además se pide un filtro de orden 5, pero aprovechando de que cada celda
+ es de orden 2, se optó por realizar uno de orden 6.
+\end_layout
+
+\begin_layout Standard
+Por lo tanto:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\Delta f_{p}=\frac{f_{\infty}}{Q}=10.2KHz
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Además se sabe que:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\Delta f_{p}=f_{p}^{+}-f_{p}^{-}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f_{\infty}^{2}=f_{p}^{+}\,f_{p}^{-}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Resolviendo el sistema:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f_{p}^{-}=46154.4Hz
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+f_{p}^{+}=56354.4Hz
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para obtener el 
+\begin_inset Formula $\Delta f_{a}$
+\end_inset
+
+, utilizando el programa de aproximaciones realizado en el tp anterior,
+ se buscó el máximio valor tal que se cumpla el orden deseado, en este caso
+ se eligió 
+\begin_inset Formula $\Delta f_{a}=1.5KHz$
+\end_inset
+
+, y análogamente al cálculo anterior se llega a:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f_{a}^{-}=50255.5Hz
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+f_{a}^{+}=51755.5Hz
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Una vez elegida la plantilla se procede la elección de la configuración
+ que se utilizará.
+ Como se mencionó anterioirmente las configuraciones Tow-Thomas y Akerberg-Mossb
+erg al no tener la salida pasa altos se descartaron, por lo que queda decidir
+ entre la KHN y la Fleischer-Tow.
+ Considerando que para la KHN se necesita agregar un sumador para lograr
+ la respuesta Notch se optó por la configuración Fleischer Tow.
+ Además la KHN no tiene buena sensibilidad para la ganancia lo que puede
+ afectar el rango dinámico.
+\end_layout
+
+\begin_layout Subsection
+Análsis de sensibilidades
+\end_layout
+
+\begin_layout Standard
+Ya seleccionada la configuración a utilizar, se procederá a analizar como
+ afecta cada componente de la celda a los parámetros de la misma.
+ A continuación se realiza el cálculo de las sensibilidades relativas para
+ la ganancia, el factor de calidad y la frecuencias de los polos y los ceros.
+ Para ello se utilizó la siguiente fórmula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{x_{k}}^{f(X)}=\left(\frac{\partial f\,(X)}{\partial x_{k}}\,\frac{x_{k}}{f(X)}\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Factor de calidad del cero
+\end_layout
+
+\begin_layout Standard
+Para realizar este cálculo se ignorarán las igualdades de componentes realizadas
+ en la sección 2, ya que si se cumplen el factor de calidad sería infinito
+ y el propósito es saber cuales son los componentes que mas lo afectan.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q_{z}=\frac{R_{1}R_{4}}{R_{4}R_{7}-R_{1}R_{6}}\sqrt{\frac{R_{6}R_{7}C_{1}}{R_{3}R_{5}C_{2}}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{C_{2}}^{Q_{z}}=s_{R_{3}}^{Q_{z}}=s_{R_{5}}^{Q_{z}}=-\frac{1}{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{C_{1}}^{Q_{z}}=\frac{1}{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{R_{1}}^{Q_{z}}=-\frac{R_{4}R_{7}}{R_{1}R_{6}-R_{4}R_{7}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{R_{4}}^{Q_{z}}=\frac{R_{1}R_{6}}{R_{1}R_{6}-R_{4}R_{7}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{R_{6}}^{Q_{z}}=-\frac{1}{2}\frac{R_{1}R_{6}+R_{7}R_{4}}{R_{1}R_{6}-R_{7}R_{4}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{R_{7}}^{Q_{z}}=\frac{1}{2}\frac{R_{1}R_{6}+R_{7}R_{4}}{R_{1}R_{6}-R_{7}R_{4}}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Frecuencia del polo 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=\frac{1}{RC}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{C}^{\omega_{0}}=s_{R}^{\omega_{0}}=-1
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Factor de calidad
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q=\frac{R_{1}}{R}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{R_{1}}^{Q}=1
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+s_{R}^{Q}=1
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Frecuencia del cero
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{z}=\frac{1}{C\sqrt{RR_{7}}}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+s_{C}^{\omega_{z}}=-1
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+s_{R}^{\omega_{z}}=s_{R_{7}}^{\omega_{z}}=-\frac{1}{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Ganancia
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G=\frac{R}{R_{6}}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+s_{R}^{G}=1
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+s_{R_{6}}^{Q}=-1
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Rango dinámico
+\end_layout
+
+\begin_layout Standard
+Para realizar este cálculo se tomó como piso de ruido 
+\begin_inset Formula $V_{Outmin}=10mV$
+\end_inset
+
+ y 
+\begin_inset Formula $V_{OutMax}=13.5V$
+\end_inset
+
+ (tensión de saturación del amplificador menos un margen de tensión).
+ Se tiene que las ganancias máximas de cada etapa son:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G3(dB)=9.5dB\Longrightarrow G3=2.985
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G2(dB)=16.5dB\Longrightarrow G2=6.683
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G1(dB)=0.5dB\Longrightarrow G1=1.059
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{out}=G3.V_{in3}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{in3}=V_{out2}=G2.V_{in2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{in2}=G1.V_{in}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{out}=G3.G2.G1.V_{IN}\Longrightarrow V_{inMax}=0.639V
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ahora se realizó lo mismo pero con la ganancia mínima de la banda pasante
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G3(dB)=-4.1dB\Longrightarrow G3=0.624
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G2(dB)=-2.2dB\Longrightarrow G2=0.776
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+G1(dB)=-2.5dB\Longrightarrow G1=0.750
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{out}=G3.G2.G1.V_{IN}\Longrightarrow V_{inMin}=0.03V
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finalmente, el rango dinámico será:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+RD=20\log\left(\frac{V_{InMax}}{V_{InMin}}\right)=26.57dB
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Diseño
+\end_layout
+
+\begin_layout Standard
+Para el diseño del filtro se utilizó un programa de aproximaciones.
+ En este caso se pide usar Chebyshev II, introduciendo los parámetros calculados
+ en la sección 3, el programa calcula los factores de calidad, los polos
+ y los ceros de cada etapa.
+ Cada una de ellas esta compuesta por un par de polos y otro de ceros complejos
+ conjugados.
+ En cada caso se eligió agrupar el par de polos con el par de ceros mas
+ cercano para mejorar el rango dinámico lo mas posible.
+ El diagrama de bode que se obtuvo fué el siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mag teorica.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "70col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename pha teorica.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de bode teórico
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cuyos polos y ceros corresponden a:
+\end_layout
+
+\begin_layout Itemize
+Etapa 1:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=320442\,\frac{rad}{s}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{z}=320442\,\frac{rad}{s}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q=4,23
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Etapa 2:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=288919\,\frac{rad}{s}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{z}=315250\,\frac{rad}{s}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q=8,51
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Etapa 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=355404\,\frac{rad}{s}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\omega_{z}=325719\,\frac{rad}{s}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q=8,51
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En base a los valores obtenidos obtenidos en cada etapa, como se ha visto
+ en la sección 2 en la configuración Fleischer-Tow, con las ecuaciones 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Q"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:W0"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:WZ"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:G"
+
+\end_inset
+
+ y con las igualdad necesaria de 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ para el notch se calcularon los valores de los componentes.
+\end_layout
+
+\begin_layout Subsection
+Simulación
+\end_layout
+
+\begin_layout Standard
+Se realizó la simulación con el modelo real del operacional utilizado, el
+ TL074.
+ Los valores predefinidos, al haber sido calculados con los operacionales
+ ideales, no cumplían los valores de la consigna, es por ello, que teniendo
+ en cuenta las sensibilidades, se fueron ajustando para llegar a la plantilla
+ deseada.
+\end_layout
+
+\begin_layout Standard
+Se obtuvieron los siguientes resultados:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename BODE SIMULADO MAG.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename BODE SIM FAASE.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Bode simulado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El Q simulado da de 8.15, el cual es mucho mas alto del que se utilizó para
+ hacer los cálculos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Análisis Montecarlo
+\end_layout
+
+\begin_layout Standard
+Se realizó un análsis montecarlo antes de armar la placa para buscra los
+ mejores y peores casos que pueden aparecer según la tolerancia de los component
+es.
+ En este caso se usó 
+\begin_inset Formula $1\%$
+\end_inset
+
+ para las resistencias y 
+\begin_inset Formula $5\%$
+\end_inset
+
+ para los capacitores.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename montecarlo fase.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename montecarlo mag.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de bode con análsis Montecarlo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En este gráfico se puede ver como en los peores casos los parámetros buscados
+ no se llegan a cumplir.
+ Lo que sucede es que todas las ecuaciones que los definen son válidas si
+ es que se cumple la condición de resistencias para el notch.
+ Cuanto más se desvien estos valores, peores serán los parámetros del filtro.
+ 
+\end_layout
+
+\begin_layout Standard
+Otro problema es la tolerancia de los capacitores, que para evitar conflictos
+ se midieron en el analizador de impedancias para ver conseguir el valor
+ mas cercano al utilizado en la simulación.
+\end_layout
+
+\begin_layout Standard
+También se decidió poner un preset en cada etapa para poder ajustar otras
+ variables que lo necesiten.
+ Los presets se colocaron en el lugar de 
+\begin_inset Formula $R_{6}$
+\end_inset
+
+ debido a que forma parte de la condición de notch y afecta al 
+\begin_inset Formula $Q_{z}$
+\end_inset
+
+, además permite regular la ganancia en cada etapa.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Histogramas
+\end_layout
+
+\begin_layout Standard
+En el Montecarlo se graficaron 100 curvas distintas para estudiar en cada
+ una el valor del notch depth, el ancho de banda del circuito y la freceuncia
+ del notch.
+ Para poder visualizar la dispersión de dichos parámetros se realizaron
+ los siguientes histogramas:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename histograma_martu_notch_bw.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename histograma_martu_notch_depth.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename histograma_martu_notch_frecuency.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Histogramas
+\begin_inset Newline newline
+\end_inset
+
+De arriba hacia abajo y de izquierda a derecha: Ancho de banda, profundidad
+ del notch y frecuencia del notch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Impedancia de entrada y de salida
+\end_layout
+
+\begin_layout Subsubsection
+De una etapa
+\end_layout
+
+\begin_layout Standard
+Para ver como se comporta cada etapa cuando se conecta con otra se simularon
+ las impedancias de entrada y de salida
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename impedancia de entrada etapa 1.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename impedancia de salida etapa 1.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada y de salida de una etapa del circuito
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Como se puede ver en ambos gráficos, ambas impedancias son comparables entre
+ si, lo que provocaria que cuando se conecten en cascada se carguen entre
+ sí.
+ Para evitar este problema se decidió poner un buffer entre cada conexión.
+\end_layout
+
+\begin_layout Subsubsection
+De todo el circuito
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Impedancia de entrada.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename impedancia de salida.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada y de salida del circuito
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En ambas figuras de la impedancia de ntrada se presenta un sobrepico, esto
+ se debe a que en esa frecuencia el circuito está en resonancia, por lo
+ que la impedancia será máxima y resistiva pura.
+ 
+\end_layout
+
+\begin_layout Standard
+Debido a que la impedancia de entrada es baja, se optó por poner un buffer
+ también a la entrada para evitar el efecto de carga.
+\end_layout
+
+\begin_layout Subsection
+Mediciones
+\end_layout
+
+\begin_layout Standard
+Debido a que el circuito oscilaba no llegó a medir la placa.
+\end_layout
+
+\begin_layout Subsection
+Conclusiones
+\end_layout
+
+\begin_layout Standard
+A pesar de que no se puedieron llevar a cabo las mediciones, se observó
+ como a partir de un circuito dado, solo variando el valor de sus componentes
+ se puede obtener distintos tipos de filtros y además se aprendió cómo diseñar
+ un filto de orden mayor conectando varios bloques de celdas en cascada.
+ 
+\end_layout
+
+\begin_layout Standard
+Es muy importante la elección de los componentes para el circuito y también
+ tener en cuenta los efectos de los amplificadores para poder conseguir
+ el correcto funcionamiento del filtro, ya que al no hacerlo pueden aparecer
+ efectos indeseados como en este caso la oscilación.
+\end_layout
+
+\end_body
+\end_document

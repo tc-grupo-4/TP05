@@ -1,0 +1,12 @@
+Board Information Report
+Filename     : C:\Users\Marcelo\Documents\GitHub\InformesTC\TP5\EJ2\Placa\Ej2_Rauch\RauchPB_Placa.PcbDoc
+Date         : 29/10/2018
+Time         : 11:11:53
+Time Elapsed : 00:00:00
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 40
+    Connections routed, 40
+    Connections remaining, 0
+count : 4
