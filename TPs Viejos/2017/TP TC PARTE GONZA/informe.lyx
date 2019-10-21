@@ -1,0 +1,5790 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 1
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Anexo - Celda Universal
+\end_layout
+
+\begin_layout Section
+Análisis de celdas
+\end_layout
+
+\begin_layout Subsection
+Tow Thomas
+\end_layout
+
+\begin_layout Standard
+El circuito Tow Thomas es un circuito utilizado para implementar filtros
+ de tipo LowPass y BandPass (luego, estas salidas pueden ser combinadas
+ para formar otros tipos de filtros).
+ Es un circuito versátil que requiere pocos componentes.
+ Se puede obtener a partir del análisis de un circuito de segundo orden,
+ su representación como sistema retroalimentado y su posterior implementación
+ utilizando circuitos inversores e integradores.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Tow_Thomas.PNG
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda Tow Thomas
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Celda-Tow-Thomas"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Ideal del circuito
+\end_layout
+
+\begin_layout Standard
+De acuerdo a la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Celda-Tow-Thomas"
+
+\end_inset
+
+, considerando que los OpAmps utilizados son ideales, se obtiene el siguiente
+ sistema de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{1}=V_{3}=V_{5}=0 & \text{Tierra Virtual}\\
+V_{2}=-V_{in}\cdot\left(R_{1}\parallel Z_{C1}\right)\cdot\left(\frac{V_{In}}{R_{4}}+\frac{V_{6}}{R_{3}}\right) & \text{"Sumador Inversor}"\\
+V_{4}=-\frac{Z_{C2}}{R_{2}}\cdot V_{2} & \text{Circuito Inversor}\\
+V_{6}=-\frac{R}{R}\cdot V_{5}=-V_{5} & \text{Circuito Inversor}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Resolviendo este sistema, se tiene que
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{2}=-\frac{C_{2}\cdot R_{2}\cdot R_{3}}{R_{4}}\cdot\frac{s}{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot s^{2}+\frac{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}}{R_{1}\cdot C_{1}}\cdot s+1}=-K_{1}\cdot\frac{s}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}=V_{BP} & \text{}\\
+V_{4}=\frac{R_{3}}{R_{4}}\cdot\frac{1}{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot s^{2}+\frac{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}}{R_{1}\cdot C_{1}}\cdot s+1}=K_{2}\cdot\frac{1}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}=-V_{LP} & \text{}\\
+V_{6}=-V_{4}=V_{LP} & \text{}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Donde
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}^{2}=\frac{1}{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\frac{R_{1}}{\sqrt{R_{2}\cdot R_{3}}}\cdot\sqrt{\frac{C_{1}}{C_{2}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+K_{2}=\frac{R_{3}}{R_{4}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+K_{1}=\frac{C_{2}\cdot R_{2}\cdot R_{3}}{R_{4}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Real del Circuito
+\end_layout
+
+\begin_layout Standard
+Si se considera que los operacionales son reales, se llega al siguiente
+ sistemas de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+\frac{V_{In}-V_{1}}{R_{4}}+\frac{V_{6}-V_{1}}{R_{3}}+\frac{V_{2}-V_{1}}{R_{1}\parallel Z_{C1}}=0 & \text{Ecuación nodo V1}\\
+V_{2}=-A\cdot V_{1} & \text{Ecuación de OpAmp U1}\\
+\frac{V_{2}-V_{3}}{R_{2}}+\frac{V_{4}-V_{3}}{Z_{C2}}=0 & \text{Ecuación nodo V3}\\
+V_{4}=-A\cdot V_{3} & \text{Ecuación de OpAmp U2}\\
+\frac{V_{4}-V_{5}}{R}+\frac{V_{6}-V_{5}}{R}=0 & \text{Ecuación nodo V5}\\
+V_{6}=-A\cdot V_{5} & \text{Ecuación de Opamp U3}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+La resolución y la manipulación de las soluciones de este sistema de ecuaciones
+ resultan algebraicamente complejos, por lo que se limitará a presentar
+ el sistema y hacer uso del mismo mediante software matemático para poder
+ realizar gráficos comparativos.
+\end_layout
+
+\begin_layout Subsubsection
+Agregar ceros arbitrarios al filtro
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Agregar-ceros-arbitrarios"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Considerando las salidas disponibles (
+\begin_inset Formula $V_{BP}$
+\end_inset
+
+, 
+\begin_inset Formula $V_{LP}$
+\end_inset
+
+, 
+\begin_inset Formula $-V_{LP}$
+\end_inset
+
+), matemáticamente, considerando una combinación lineal de estas salidas
+ y de la entrada del circuito, se tiene que
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V_{Out}=-(a\cdot V_{In}+V_{B}+(c-d)\cdot V_{L})$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Entonces
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{V_{Out}}{V_{in}}=-\frac{a\cdot\left(\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1\right)-b\cdot K_{1}\cdot s-\left(c-d\right)\cdot K_{2}}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}=
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+=-\frac{\frac{a\cdot s^{2}}{\omega_{0}^{2}}+\left(\frac{a}{Q\cdot\omega_{0}}-b\cdot K_{1}\right)\cdot s+a-\left(c-d\right)\cdot K_{2}}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}\label{eq:tt_arb_zero_eq}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con lo que se pueden agregar ceros arbitrarios al sistema.
+ Esto puede ser implementado utilizando el circuito sumador inversor, conectado
+ a las salidas del circuito, ya que, considerando los OpAmps ideales, el
+ circuito no se verá cargado.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename sumador_inversor.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Circuito Sumador Inversor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notar que agregar un OpAmp extra para obtener esta salida no necesariamente
+ implica mayor costo en el circuito, ya que se consiguen integrados que
+ contienen 4 canales.
+\end_layout
+
+\begin_layout Standard
+Para poder realizar un análisis de cómo la respuesta en frecuencia de este
+ integrado afecta al circuito, se pueden agregar las siguientes ecuaciones
+ al sistema de ecuaciones real visto anteriormente.
+\end_layout
+
+\begin_layout Standard
+Nota: Las admitancias 
+\begin_inset Formula $G$
+\end_inset
+
+, 
+\begin_inset Formula $G_{a}$
+\end_inset
+
+, 
+\begin_inset Formula $G_{b}$
+\end_inset
+
+, 
+\begin_inset Formula $G_{c}$
+\end_inset
+
+ y 
+\begin_inset Formula $G_{d}$
+\end_inset
+
+ también serán referidas como resistencias 
+\begin_inset Formula $R_{Sum}$
+\end_inset
+
+, 
+\begin_inset Formula $R_{a}$
+\end_inset
+
+, 
+\begin_inset Formula $R_{b}$
+\end_inset
+
+, 
+\begin_inset Formula $R_{c}$
+\end_inset
+
+ y 
+\begin_inset Formula $R_{d}$
+\end_inset
+
+ respectivamente
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+(V_{In}-V^{-})\cdot aG+(V_{BP}-V^{-})\cdot bG+(V_{LP}-V^{-})\cdot cG+\\
+\,\,\,\,\,\,\,\,+(-V_{LP}-V^{-})\cdot dG+(V_{Out}-V^{-})\cdot G=0 & \text{}\\
+V_{Out}=-A\cdot V^{-} & \text{}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Fleisher Tow
+\end_layout
+
+\begin_layout Standard
+La celda Fleisher Tow es una modificación de la celda Tow Thomas, que permite
+ obtener cualquier transferencia de segundo orden sin necesidad de agregar
+ OpAmps.
+ Para lograr esto, se agregan dos caminos de 'feed-forward', que terminan
+ agregando ceros al sistema.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Fleisher_Tow.PNG
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda Fleisher Tow
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Celda-Fleisher-Tow"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Ideal del circuito
+\end_layout
+
+\begin_layout Standard
+De acuerdo a la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Celda-Fleisher-Tow"
+
+\end_inset
+
+, considerando que los OpAmps utilizados son ideales, se obtiene el siguiente
+ sistema de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{1}=V_{3}=V_{5}=0 & \text{Tierra Virtual}\\
+V_{2}=-V_{in}\cdot(R_{1}\parallel Z_{C1})\cdot\left(\frac{V_{In}}{R_{4}}+\frac{V_{6}}{R_{3}}\right) & \text{Ecuación sumador inversor}\\
+V_{4}=-R_{B}\cdot(\frac{V_{2}}{R_{A}}+\frac{V_{In}}{R_{5}}) & \text{Ecuación sumador inversor}\\
+V_{6}=-Z_{C2}\cdot(\frac{V_{4}}{R_{2}}+\frac{V_{In}}{R_{6}}) & \text{Ecuación sumador inversor}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Resolviendo este sistema, se tiene que
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{2}=-\frac{R_{1}\cdot R_{A}\cdot(R_{B}\cdot R_{4}\cdot R_{6}-R_{2}\cdot R_{4}\cdot R_{5}+C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{5}\cdot R_{6}\cdot s)}{R_{4}\cdot R_{5}\cdot R_{6}\cdot(C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{3}\cdot R_{A}\cdot s^{2}+C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}\cdot s+R_{1}\cdot R_{B})}\\
+V_{4}=-\frac{R_{2}\cdot R_{B}\cdot(R_{1}\cdot R_{4}\cdot R_{5}+C_{2}\cdot R_{A}\cdot R_{3}\cdot R_{4}\cdot R_{6}\cdot s-C_{2}\cdot R_{1}\cdot R_{3}\cdot R_{5}\cdot R_{6}\cdot s+C_{1}\cdot C_{2}\cdot R_{A}\cdot R_{1}\cdot R_{3}\cdot R_{4}\cdot R_{6}\cdot s^{2})}{R_{4}\cdot R_{5}\cdot R_{6}\cdot(C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{3}\cdot R_{A}\cdot s^{2}+C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}\cdot s+R_{1}\cdot R_{B})}\\
+V_{6}=-\frac{R_{3}\cdot(R_{2}\cdot R_{4}\cdot R_{5}\cdot R_{A}-R_{A}\cdot R_{B}\cdot R_{4}\cdot R_{6}+R_{1}\cdot R_{5}\cdot R_{6}\cdot R_{B}-C_{1}\cdot R_{A}\cdot R_{B}\cdot R_{1}\cdot R_{4}\cdot R_{6}\cdot s+C_{1}\cdot R_{1}\cdot R_{2}\cdot R_{4}\cdot R_{5}\cdot R_{A}\cdot s)}{R_{4}\cdot R_{5}\cdot R_{6}\cdot(C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{3}\cdot R_{A}\cdot s^{2}+C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}\cdot s+R_{1}\cdot R_{B})}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Acomodando un poco
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{2}=-\frac{R_{B}\cdot R_{6}\cdot R_{A}-R_{2}\cdot R_{5}\cdot R_{A}}{R_{5}\cdot R_{6}\cdot R_{B}}\cdot\frac{1+\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{5}\cdot R_{6}}{R_{B}\cdot R_{4}\cdot R_{6}-R_{2}\cdot R_{4}\cdot R_{5}}\cdot s}{\frac{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{B}}\cdot s^{2}+\cdot\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{1}\cdot R_{B}}\cdot s+1}\\
+V_{4}=-\frac{R_{2}}{R_{6}}\cdot\frac{(1+\frac{C_{2}\cdot R_{A}\cdot R_{3}\cdot R_{4}\cdot R_{6}-C_{2}\cdot R_{1}\cdot R_{3}\cdot R_{5}\cdot R_{6}}{R_{1}\cdot R_{4}\cdot R_{5}}\cdot s+\frac{C_{1}\cdot C_{2}\cdot R_{A}\cdot R_{3}\cdot R_{6}}{R_{5}}\cdot s^{2})}{\frac{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{B}}\cdot s^{2}+\cdot\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{1}\cdot R_{B}}\cdot s+1}\\
+V_{6}=-\frac{R_{3}\cdot\left(R_{2}\cdot R_{4}\cdot R_{5}\cdot R_{A}-R_{A}\cdot R_{B}\cdot R_{4}\cdot R_{6}+R_{1}\cdot R_{5}\cdot R_{6}\cdot R_{B}\right)}{R_{4}\cdot R_{5}\cdot R_{6}\cdot R_{1}\cdot R_{B}}\cdot\frac{(1+\frac{C_{1}\cdot R_{1}\cdot R_{2}\cdot R_{4}\cdot R_{5}\cdot R_{A}-C_{1}\cdot R_{A}\cdot R_{B}\cdot R_{1}\cdot R_{4}\cdot R_{6}}{R_{2}\cdot R_{4}\cdot R_{5}\cdot R_{A}-R_{A}\cdot R_{B}\cdot R_{4}\cdot R_{6}+R_{1}\cdot R_{5}\cdot R_{6}\cdot R_{B}}\cdot s)}{\frac{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{B}}\cdot s^{2}+\cdot\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{1}\cdot R_{B}}\cdot s+1} & \text{}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Tomando 
+\begin_inset Formula $R_{4}=\frac{R_{5}\cdot R_{1}}{R_{A}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{4}=-\frac{R_{2}}{R_{6}}\cdot\frac{1+\frac{C_{1}\cdot C_{2}\cdot R_{A}\cdot R_{3}\cdot R_{6}}{R_{5}}\cdot s^{2}}{\frac{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{B}}\cdot s^{2}+\cdot\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}{R_{1}\cdot R_{B}}\cdot s+1}=-K\cdot\frac{\frac{s^{2}}{\omega_{1}^{2}}+1}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Donde
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}^{2}=\frac{R_{B}}{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\sqrt{\frac{C_{1}}{C_{2}}}\cdot\sqrt{\frac{R_{B}}{R_{A}}}\cdot\frac{R_{1}}{\mathrm{\sqrt{R_{2}\cdot R_{3}}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{1}^{2}=\frac{R_{5}}{C_{1}\cdot C_{2}\cdot R_{A}\cdot R_{3}\cdot R_{6}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+K=\frac{R_{2}}{R_{6}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Real del Circuito
+\end_layout
+
+\begin_layout Standard
+Si se considera que los operacionales son reales, se llega al siguiente
+ sistemas de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+\frac{V_{In}-V_{1}}{R_{4}}+\frac{V_{6}-V_{1}}{R_{3}}+\frac{V_{2}-V_{1}}{R_{1}\parallel Z_{C1}}=0 & \text{Ecuación nodo V1}\\
+V_{2}=-A\cdot V_{1} & \text{Ecuación OpAmp U1}\\
+\frac{V_{2}-V_{3}}{R}+\frac{V_{In}-V_{3}}{R_{5}}+\frac{V_{4}-V_{3}}{R}=0 & \text{Ecuación nodo V3 }\\
+V_{4}=-A\cdot V_{3} & \text{Ecuación OpAmp U3}\\
+\frac{V_{4}-V_{5}}{R_{2}}+\frac{V_{In}-V_{5}}{R_{6}}+\frac{V_{6}-V_{5}}{Z_{C2}}=0 & \text{Ecuación nodo V5}\\
+V_{6}=-A\cdot V_{5} & \text{Ecuación OpAmp U2}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+La resolución y la manipulación de las soluciones de este sistema de ecuaciones
+ resultan algebraicamente complejas, por lo que se limitará a presentar
+ el sistema y hacer uso del mismo mediante software matemático para poder
+ realizar gráficos comparativos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Ackerberg-Mossberg
+\end_layout
+
+\begin_layout Standard
+Este circuito es una modificación del circuito Tow Thomas, en el que el
+ OpAmp U3 se utiliza para compensar pérdidas producidas por 
+\begin_inset Formula $A_{VOL}$
+\end_inset
+
+ finito de U2, mejorando la respuesta en frecuencia del circuito para las
+ altas frecuencias.
+ Resulta importante que los OpAmps U2 y U3 provengan de un mismo integrado,
+ ya que es necesario que los polos dominantes de ambos operacionales sean
+ iguales, pues U3 genera un cero que compensa el polo generado por el polo
+ dominante de U2.
+ Esto no puede ser observado en el análisis ideal del circuito.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ackberg_mossberg.PNG
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda Ackerberg-Mossberg
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Celda-Ackerberg-Mossberg"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Ideal del circuito
+\end_layout
+
+\begin_layout Standard
+De acuerdo a la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Celda-Ackerberg-Mossberg"
+
+\end_inset
+
+, considerando que los OpAmps utilizados son ideales, se obtiene el siguiente
+ sistema de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{1}=V_{3}=V_{5}=0 & \text{Tierra Virtual}\\
+V_{2}=-(QR\parallel Z_{C})\cdot\left(\frac{V_{In}}{R/k}+\frac{V_{4}}{R_{1}}\right) & \text{Ecuación sumador inversor}\\
+V_{6}=-\frac{r}{r}\cdot V_{4}=-V_{4} & \text{Circuito inversor}\\
+V_{4}=\frac{Z_{C}}{R}\cdot V_{2} & \text{Notar Feedback negativo}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Resolviendo este sistema, se tiene que
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{2}=-k\frac{k\cdot\frac{s}{1/(R\cdot C)}}{\frac{1}{1/(R\cdot C)^{2}}\cdot s^{2}+\frac{1}{Q\cdot1/(R\cdot C)}\cdot s+1}=-k\cdot\frac{\frac{s}{\omega_{0}}}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}=V_{BP} & \text{Band Pass}\\
+V_{4}=-\frac{k}{\frac{1}{1/(R\cdot C)^{2}}\cdot s^{2}+\frac{1}{Q\cdot1/(R\cdot C)}\cdot s+1}=-k\cdot\frac{1}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}=V_{LP} & \text{Low Pass}\\
+V_{6}=-V_{4}=-V_{BP} & \text{Low Pass}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Donde
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}=\frac{1}{C\cdot R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Real del Circuito
+\end_layout
+
+\begin_layout Standard
+Si se considera que los operacionales son reales, se llega al siguiente
+ sistemas de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+\frac{V_{In}-V_{1}}{R/k}+\frac{V_{4}-V_{1}}{R}+\frac{V_{2}-V_{1}}{QR\parallel Z_{C}}=0 & \text{Ecuación nodo V1}\\
+V_{2}=-A\cdot V_{1} & \text{Ecuación de OpAmp U1}\\
+\frac{V_{2}-V_{3}}{R}+\frac{V_{6}-V_{3}}{Z_{C}}=0 & \text{Ecuación nodo V3}\\
+V_{4}=A\cdot V_{3} & \text{Ecuación de OpAmp U2}\\
+\frac{V_{4}-V_{5}}{r}+\frac{V_{6}-V_{5}}{r}=0 & \text{Ecuación nodo V5}\\
+V_{6}=-A\cdot V_{5} & \text{Ecuación de Opamp U3}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La resolución y la manipulación de las soluciones de este sistema de ecuaciones
+ resultan algebraicamente complejas, por lo que se limitará a presentar
+ el sistema y hacer uso del mismo mediante software matemático para poder
+ realizar gráficos comparativos.
+\end_layout
+
+\begin_layout Subsubsection
+Agregar ceros arbitrarios al filtro
+\end_layout
+
+\begin_layout Standard
+Teniendo las ecuaciones de este circuito la misma estructura que las ecuaciones
+ realizadas en el análisis de Tow Thomas, se omite el desarrollo de esta
+ sección, resultando el mismo idéntico al contenido desarrollado en 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Agregar-ceros-arbitrarios"
+
+\end_inset
+
+, considerando 
+\begin_inset Formula $K_{1}=k/\omega_{0}$
+\end_inset
+
+ y 
+\begin_inset Formula $K_{2}=k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Ackerberg-Mossberg modificada
+\end_layout
+
+\begin_layout Standard
+De la misma forma en la que se puede modificar la Tow Thomas, inyectando
+ caminos de 'feed-forward' en las tierras virtuales de los operacionales,
+ se puede hacer lo mismo con la celda Ackerberg-Mossberg para poder obtener
+ ceros arbitrarios, y por lo tanto más tipos de filtros, sin necesidad de
+ insertar un OpAmp extra.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ackberg_mossberg_modificada.PNG
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda Ackerberg-Mossberg modificada
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ackenberg_mossberg_modificada"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Ideal del circuito
+\end_layout
+
+\begin_layout Standard
+De acuerdo a la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ackenberg_mossberg_modificada"
+
+\end_inset
+
+, considerando que los OpAmps utilizados son ideales, se obtiene el siguiente
+ sistema de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{1}=V_{3}=V_{5}=0 & \text{Tierra Virtual}\\
+V_{2}=-(QR\parallel Z_{C})\cdot\left(\frac{V_{In}}{(R/k)\parallel Z_{aC}}+\frac{V_{4}}{R_{1}}\right) & \text{Ecuación sumador inversor}\\
+V_{6}=-r\cdot\left(\frac{V_{4}}{r}+\frac{V_{In}}{R/b}\right) & \text{Circuito inversor}\\
+V_{4}=Z_{c}\cdot\left(\frac{V_{2}}{R}+\frac{V_{In}}{R/c}\right) & \text{Notar Feedback negativo}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Resolviendo este sistema, se tiene que
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{2}=-c\cdot\frac{\left(\frac{a\cdot R^{2}\cdot C^{2}}{c}s^{2}+\frac{\left(k\cdot C\cdot R-b\cdot r\cdot C\right)}{c}\cdot s+1\right)}{R^{2}\cdot C^{2}\cdot s^{2}+\frac{R\cdot C}{Q}\cdot s+1} & \text{}\\
+V_{4}=-\frac{Q\cdot k-c}{Q}\cdot\frac{1+\frac{\left(C\cdot b\cdot r+R\cdot C\cdot Q\cdot\left(a-c\right)\right)}{Q\cdot k-c}\cdot s+\frac{R\cdot r\cdot C^{2}\cdot Q\cdot b}{Q\cdot k-c}\cdot s^{2}}{R^{2}\cdot C^{2}\cdot s^{2}+\frac{R\cdot C}{Q}\cdot s+1}\\
+V_{6}=-\frac{R\cdot c-Q\cdot R\cdot k+Q\cdot b\cdot r}{Q\cdot R}\cdot\frac{1+\frac{C\cdot Q\cdot R^{2}\cdot c-C\cdot Q\cdot R^{2}\cdot a}{R\cdot c-Q\cdot R\cdot k+Q\cdot b\cdot r}\cdot s}{R^{2}\cdot C^{2}\cdot s^{2}+\frac{R\cdot C}{Q}\cdot s+1} & \text{}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Trabajando sobre 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+, con 
+\begin_inset Formula $r=R$
+\end_inset
+
+ se tiene que
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{2}=-c\cdot\frac{\left(\frac{a}{c}\cdot\frac{s^{2}}{\omega_{0}^{2}}+\frac{\frac{\left(k-b\right)}{c}}{\omega_{0}}s+1\right)}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}s+1}
+\]
+
+\end_inset
+
+Donde
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}=\frac{1}{R\cdot C}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Algunos casos de interés para este trabajo son los siguientes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+a
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+b
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+c
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+k
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Notch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HighPass Notch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+a
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+<a
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LowPass Notch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+a
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+>a
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Posibles configuraciones del circuito
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Real del Circuito
+\end_layout
+
+\begin_layout Standard
+Si se considera que los operacionales son reales, se llega al siguiente
+ sistemas de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+\frac{V_{In}-V_{1}}{(R/k)\parallel Z_{aC}}+\frac{V_{4}-V_{1}}{R}+\frac{V_{2}-V_{1}}{QR\parallel Z_{C}}=0 & \text{Ecuación nodo V1}\\
+V_{2}=-A\cdot V_{1} & \text{Ecuación de OpAmp U1}\\
+\frac{V_{2}-V_{3}}{R}+\frac{V_{6}-V_{3}}{Z_{C}}+\frac{V_{In}-V_{3}}{R/c}=0 & \text{Ecuación nodo V3}\\
+V_{4}=A\cdot V_{3} & \text{Ecuación de OpAmp U2}\\
+\frac{V_{4}-V_{5}}{r}+\frac{V_{6}-V_{5}}{r}+\frac{V_{In}-V_{5}}{R/b}=0 & \text{Ecuación nodo V5}\\
+V_{6}=-A\cdot V_{5} & \text{Ecuación de Opamp U3}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La resolución y la manipulación de las soluciones de este sistema de ecuaciones
+ resultan algebraicamente complejas, por lo que se limitará a presentar
+ el sistema y hacer uso del mismo mediante software matemático para poder
+ realizar gráficos comparativos.
+\end_layout
+
+\begin_layout Subsection
+Hewin Huelsman Newcomb
+\end_layout
+
+\begin_layout Standard
+El circuito Hewin Huelsman Newcomb es una celda para implementar filtros
+ de 2do orden.
+ La ventaja que tiene este circuito es que puede producir simultáneamente
+ salidas de tipo LowPass, HighPass y BandStop y BandPass a partir de una
+ única entrada.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename KHN.PNG
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda KHN
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Celda-KHN"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Ideal del circuito
+\end_layout
+
+\begin_layout Standard
+De acuerdo a la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Celda-KHN"
+
+\end_inset
+
+, considerando que los OpAmps utilizados son ideales, se obtiene el siguiente
+ sistema de ecuaciones
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{3}=V_{5}=0 & \text{Tierra Virtual}\\
+V_{7}=V_{1} & \text{'Tierra Virtual'}\\
+V_{1}=\frac{R_{4}}{R_{4}+R_{3}}\cdot\left(V_{In}-V_{4}\right) & \text{Divisor Resistivo}\\
+V_{2}=V_{7}-\frac{V_{6}-V_{7}}{R_{5}}\cdot R_{6} & \text{Corriente en Rama de Realimentación de U1}\\
+V_{4}=-\frac{ZC1}{R_{1}}\cdot V_{2} & \text{Ecuación OpAmp U2}\\
+V_{6}=-\frac{ZC2}{R_{2}}\cdot V_{4} & \text{Ecuación OpAmp U3}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Resolviendo este sistema, se tiene que
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{7}=V_{1}=\frac{R_{4}\cdot\left(C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}\cdot s^{2}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)+C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)\cdot s+C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}\cdot\left(R_{3}+R_{4}\right)\cdot s^{2}} & \text{}\\
+V_{2}=\frac{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{4}\cdot\left(R_{5}+R_{6}\right)\cdot s^{2}}{R_{6}\cdot\left(R_{3}+R_{4}\right)+C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)\cdot s+C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}\cdot\left(R_{3}+R_{4}\right)\cdot s^{2}}\\
+V_{4}=-\frac{C_{2}\cdot R_{2}\cdot R_{4}\cdot\left(R_{5}+R_{6}\right)\cdot s}{R_{6}\cdot\left(R_{3}+R_{4}\right)+C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)\cdot s+C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}\cdot\left(R_{3}+R_{4}\right)\cdot s^{2}}\\
+V_{6}=\frac{R_{4}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)+C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)\cdot s+C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}\cdot\left(R_{3}+R_{4}\right)\cdot s^{2}}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Acomodando un poco
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+V_{7}=V_{1}=\frac{R_{4}}{R_{3}+R_{4}}\cdot\frac{\frac{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}}{R_{6}}\cdot s^{2}+1}{1+\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)}\cdot s+\frac{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}}{R_{6}}\cdot s^{2}} & \text{}\\
+V_{2}=\frac{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{4}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)}\cdot\frac{s^{2}}{1+\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)}\cdot s+\frac{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}}{R_{6}}\cdot s^{2}}\\
+V_{4}=-\frac{C_{2}\cdot R_{2}\cdot R_{4}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)}\cdot\frac{s}{1+\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)}\cdot s+\frac{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}}{R_{6}}\cdot s^{2}}\\
+V_{6}=\frac{R_{4}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)}\cdot\frac{1}{1+\frac{C_{2}\cdot R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)}{R_{6}\cdot\left(R_{3}+R_{4}\right)}\cdot s+\frac{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}}{R_{6}}\cdot s^{2}}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Entonces, se tiene que
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{7}=V_{1}=K\cdot\frac{\frac{s^{2}}{\omega_{1}^{2}}+1}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{\omega_{0}\cdot Q}\cdot s+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $-\frac{\,\left(\,C^{2}\,R^{2}\,s^{2}+C\,R\,s(k-b)s+1\right)}{\,C^{2}\,R^{2}\,s^{2}+C\,R\,s/Q+1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+K=\frac{R_{4}}{R_{3}+R_{4}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}^{2}=\omega_{1}^{2}=\frac{R_{6}}{C_{1}\cdot C_{2}\cdot R_{1}\cdot R_{2}\cdot R_{5}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\frac{R_{6}\cdot\left(R_{3}+R_{4}\right)}{R_{2}\cdot R_{3}\cdot\left(R_{5}+R_{6}\right)}\cdot\sqrt{\frac{C_{1}}{C_{2}}}\cdot\sqrt{\frac{R_{1}\cdot R_{2}\cdot R_{5}}{R_{6}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notar que 
+\begin_inset Formula $\omega_{1}=\omega_{2}$
+\end_inset
+
+, por lo que sin agregar OpAmps adicionales, no se pueden obtener filtros
+ del tipo HighPass Notch o LowPass Notch utilizando este circuito.
+\end_layout
+
+\begin_layout Subsubsection
+Análisis Real del Circuito
+\end_layout
+
+\begin_layout Standard
+Si se considera que los operacionales son reales, se llega al siguiente
+ sistemas de ecuaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Formula $\begin{cases}
+\frac{V_{In}-V_{1}}{R_{3}}+\frac{V_{4}-V_{1}}{R_{4}}=0 & \text{Ecuación nodo V1}\\
+\frac{V_{6}-V_{7}}{R_{5}}+\frac{V_{2}-V_{7}}{R_{6}}=0 & \text{Ecuación nodo V7}\\
+V_{2}=A\cdot(V_{1}-V_{7}) & \text{Ecuación OpAmp U1 }\\
+\frac{V_{2}-V_{3}}{R_{1}}+\frac{V_{4}-V_{3}}{Z_{C1}}=0 & \text{Ecuación nodo V3}\\
+V_{4}=-A\cdot V_{3} & \text{Ecuación OpAmp U2}\\
+\frac{V_{4}-V_{5}}{R_{2}}+\frac{V_{6}-V_{5}}{Z_{C2}}=0 & \text{Ecuación nodo V5}\\
+V_{6}=-A\cdot V_{5} & \text{Ecuación OpAmp U3}
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La resolución y la manipulación de las soluciones de este sistema de ecuaciones
+ resultan algebraicamente complejas, por lo que se limitará a presentar
+ el sistema y hacer uso del mismo mediante software matemático para poder
+ realizar gráficos comparativos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Comparación de celdas y elección de celda a utilizar
+\end_layout
+
+\begin_layout Standard
+Se realizará una comparación entre las celdas disponibles.
+ Teniendo en cuenta que en la implementación del circuito que se requiere
+ se necesitan etapas del tipo HighPass Notch y LowPass Notch, se descarta
+ la celda Hewin Huelsman Newcomb (que, a pesar de poder ser obtenidos realizando
+ una combinación de las salidas y la entrada, siendo que la ventaja de esta
+ celda es justamente tener más trasferencias sin necesidad de más OpAmps,
+ se considera que implementar un OpAmp extra va en contra del objetivo por
+ el cual se puede utilizar esta celda).
+\end_layout
+
+\begin_layout Standard
+Sin embargo, a modo de prueba, se calculará un circuito Notch con cada una
+ de estas celdas, para poder realizar una comparación de las mismas.
+ Se elige este tipo de circuito para realizar las comparaciones, ya que
+ es un régimen parecido al que se utilizarán en la implementación que se
+ requieren, y que el análisis resultará mas sencillo que el que se puede
+ realizar para los casos HighPass Notch y LowPass Notch.
+\end_layout
+
+\begin_layout Standard
+Con el objetivo de que las condiciones del análisis sean similares a las
+ condiciones del circuito a implementar, se consideran los siguientes valores
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{0}=2\pi\cdot\omega_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $26.1KHz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4.5$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Valores de filtro de prueba
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Con esto, se proponen los siguientes valores para realizar el análisis matemátic
+o y las simulaciones.
+ Se omite el proceso de obtención de estos valores.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="33" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Filtro
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valores de Prueba
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tow Thomas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{1}=C_{2}=2.2nF$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{2}=R_{3}=R_{4}=\frac{1}{2\cdot pi\cdot26.1KHz\cdot C_{1}}=2.7717K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{1}=Q\cdot R_{2}=12.473K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G=1/(1K\Omega)\rightarrow R_{Sum}=1K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c=d=0\rightarrow R_{c}=R_{d}=\infty$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a=1\rightarrow R_{a}=1K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $b=1/Q=0.222\rightarrow R_{b}=4.5K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R=1K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fleisher Tow
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{1}=C_{2}=2.2nF\rightarrow C=2.2nF$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{A}=R_{B}=R_{2}=R_{3}=R_{5}=R_{6}=R=$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $=\frac{1}{2\cdot pi\cdot26.1KHz\cdot C_{1}}=2.7717K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{1}=Q\cdot R=12.473K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{4}=\frac{R_{5}\cdot R_{1}}{R}=R_{1}=12.473K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ackerberg-Mossberg
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k=1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q=4.5$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C=2.2nF$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R=\frac{1}{2\cdot pi\cdot26.1KHz\cdot C_{1}}=2.7717K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $QR=12.473K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R/k=R=2.7717K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G=1/(1K\Omega)\rightarrow R_{Sum}=1K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c=d=0\rightarrow R_{c}=R_{d}=0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a=1\rightarrow R_{a}=1K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $b=1/Q=0.222\rightarrow R_{b}=4.5K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r=1K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ackerberg-Mossberg Modificada
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a=c=1\rightarrow C=C_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k=b=0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C=2.2nF$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q=4.5$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R=\frac{1}{2\cdot pi\cdot26.1KHz\cdot C_{1}}=2.7717K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R/k=R/b=\infty$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{a}=R=r=2.7717K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $QR=12.473K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Valores de componentes propuestos que cumplen las condiciones solicitadas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Resultados: Cálculo de transferencia utilizando software matemático
+\end_layout
+
+\begin_layout Standard
+Calculando las transferencias de estas celdas, y se obtuvieron los siguientes
+ gráficos:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename comp_tl084.png
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename zoom_comp_tl084.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gráfico de las transferencias de los filtros, considerados como Reales e
+ Ideales
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:filter_comp"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:filter_comp"
+
+\end_inset
+
+, se puede observar que las transferencias ideales de los distintos filtros
+ son coincidentes, como es de esperar, mientras que, a altas frecuencias,
+ cada filtro se empieza a desviar del resultado ideal en distinta medida,
+ debido a los polos generados por los polos dominantes de los operacionales.
+ Cabe aclarar, para la comprensión de la figura, que el resultado de Tow
+ Thomas Real se superpone con el resultado de Ackerberg Mossberg Real.
+\end_layout
+
+\begin_layout Standard
+El gráfico del notch muestra claramente que éste se ve fuertemente afectado
+ por el polo dominante del operacional, tanto en frecuencia como en profundidad
+ de Notch.
+ 
+\end_layout
+
+\begin_layout Standard
+Notar que, de todas las celdas analizadas, la que tiene una respuesta en
+ frecuencia más parecida a la respuesta ideal es la celda Ackerberg Mossberg,
+ que es justamente la celda que utiliza uno de los OpAmps con el objetivo
+ de compensar los efectos producidos por el polo dominante de otro de estos
+ OpAmps.
+ La celda Ackerberg Mossberg modificada, sin embargo, a pesar de tener mejor
+ respuesta que las Tow Thomas y Fleisher Tow, no tiene tan buena respuesta
+ en frecuencia como la Ackerberg Mossberg original.
+ Es importante mencionar que estos gráficos fueron realizados considerando
+ el OpAmp TL084, con una ganancia típica de 
+\begin_inset Formula $200V/mV$
+\end_inset
+
+ y un ancho de banda de 
+\begin_inset Formula $3MHz$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Como conclusión de este análisis, se tiene que la mejor opción es, en principio,
+ utilizar la celda Ackerberg Mossberg, o utilizar OpAmps con más ancho de
+ banda.
+ Sin embargo, se buscaron alternativas para esto último, y a pesar de haber
+ encontrado algunas opciones, los integrados encontrados resultaron ser
+ de un canal, por lo que se consideró que no era una opción viable, considerando
+ la cantidad de integrados que resultarán necesarios, y el aumento en el
+ costo del circuito.
+ Pero, antes de llegar a una conclusión final, hay que realizar un análisis
+ más en profundidad de las celdas.
+\end_layout
+
+\begin_layout Subsection
+Resultados: Simulación y análisis de Montecarlo de celdas
+\end_layout
+
+\begin_layout Standard
+Se realizaron simulaciones de Montecarlo de las celdas analizadas, con el
+ objetivo de tener una idea general de las sensibilidades de las celdas
+ y ver su comportamiento en un entorno del punto calculado.
+ Los resultados obtenidos son los siguientes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Tow_Thomas_montec.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Fleisher_Tow_montec.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ackberg_mossberg_montec.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ackberg_mossberg_modificada_montec.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Simulaciones de Montecarlo de celdas Tow Thomas, Fleisher Tow, Ackerberg-Mossber
+g y Ackerberg-Mossberg modificada, respectivamente.
+ Tolerancias de 5%
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En las simulaciones realizadas, se puede observar que, en contraste con
+ el análisis matemático realizado anteriormente, es posible conseguir notch
+ depths de alrededor de 
+\begin_inset Formula $50dB$
+\end_inset
+
+ con la celda Fleisher Tow, al realizar un ajuste fino sobre los valores
+ de los componentes.
+ Con respecto a la celda Ackerberg-Mossberg modificada, se pueden observar
+ efectos causados por polos y ceros parásitos de mayor orden de los operacionale
+s, que por lo tanto no fueron observados durante el análisis teórico, y
+ por lo tanto se descarta esta celda.
+ La celda Tow Thomas también se descarta, dado que el análisis de Montecarlo
+ muestra dificultad para poder obtener valores grandes de profundidad de
+ notch.
+\end_layout
+
+\begin_layout Subsection
+Análisis de estabilidad de celda Ackerberg-Mossberg
+\end_layout
+
+\begin_layout Standard
+Un problema que presenta este tipo de celdas, que no puede ser observado
+ mediante el análisis teórico real o ideal, es que la celda puede resultar
+ inestable, y presentar oscilaciones.
+ Esto de debe a fenómenos de mayor orden en la ganancia de los operacionales,
+ y puede ser observado mediante simulaciones del circuito.
+\end_layout
+
+\begin_layout Standard
+En particular, estudiando el circuito de la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Celda-Ackerberg-Mossberg"
+
+\end_inset
+
+, se puede estudiar cual es la relación entre la tensión en la entrada de
+ realimentación y la tensión de salida del OpAmp U2, es decir, 
+\begin_inset Formula $V_{3}/V_{4}.$
+\end_inset
+
+ Considerando esto, y recordando que la realimentación se realiza a través
+ de la entrada no inversora, para considerar feedback negativo, la fase
+ de la relación entre las tensiones debe ser en principio de 
+\begin_inset Formula $180\text{°}$
+\end_inset
+
+.
+ Para que el sistema sea estable, el 'phase lag' de la realimentación relativo
+ a la salida del OpAmp no debe exceder los 
+\begin_inset Formula $180\text{°}$
+\end_inset
+
+ desde la fase anteriormente mencionada (y de hacerlo, la ganancia debe
+ ser menor a 0dB), caso contrario, la entrada de realimentación positiva
+ y la salida del OpAmp se encontrarían en fase, y la realimentación en el
+ integrador no inversor activamente compensado se vuelve positiva.
+ Realizando simulaciones del circuito, se puede observar que esta situación
+ ocurre, según la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:stability"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename stability_simulation.PNG
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename stability_math.PNG
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relación entre realimentación y salida de integrador no inversor, simulada
+ y calculada con polo dominante, respectivamente 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:stability"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la figura se puede observar que, según se dijo anteriormente, esto es
+ un efecto de orden superior de la respuesta en frecuencia de los OpAmps,
+ ya que no se observa en el análisis matemático realizado considerando el
+ polo dominante, por lo que se debe a polos y ceros parásitos de mayor frecuenci
+a.
+\end_layout
+
+\begin_layout Subsubsection
+Conclusión final y elección de celda
+\end_layout
+
+\begin_layout Standard
+Considerando lo visto anteriormente, la celda Ackerberg-Mossberg es la que
+ tiene mejor respuesta en frecuencia, pero presenta el problema de que puede
+ resultar inestable.
+ Buscando evitar este problema, se tiene que la próxima opción es la Fleisher
+ Tow, con la que también se pueden conseguir buenos resultados, según lo
+ visto en la simulación de Montecarlo.
+ Por estos motivos, entonces, se decidió implementar la celda Fleisher Tow.
+\end_layout
+
+\begin_layout Section
+Celda Universal
+\end_layout
+
+\begin_layout Standard
+Se busca implementar la siguiente plantilla utilizando celdas universales:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parámetro
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{\infty}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $26.1KHz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Notch\,Depth$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\geq50dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta f_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $600Hz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta f_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $8500Hz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $40dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $6dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[-3;3\right]dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|Z_{in}(f)\right|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\geq50K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Filtro$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $BR$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Plantilla a cumplir
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con el objetivo de tener un margen de seguridad, se implementará una plantilla
+ más restrictiva, dada por el siguiente cuadro:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parámetro
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{\infty}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $26.1KHz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Notch\,Depth$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\geq50dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta f_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $775Hz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta f_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $7700Hz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $45dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[-3;3\right]dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|Z_{in}(f)\right|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\geq50K\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Filtro$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $BR$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Plantilla a utilizar
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Estas plantillas definen las siguientes frecuencias de paso y atenuación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{P}^{-}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{A}^{-}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{A}^{+}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{P}^{+}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Plantilla Normal
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $22193.76$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $25801.72$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $26401.72$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $30693.76$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Plantilla Restrictiva
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $22532.43$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $25715.38$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $26490.38$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $30232.43$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Frecuencias de paso y atenuación [Hz]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con estos valores, utilizando la función de aproximación Chebyshev II, se
+ llega a un sistema de 2do orden
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plantilla.PNG
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Transferencia a implementar y plantilla más restrictiva superpuesta
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Este filtro puede ser separado en dos etapas, juntando los ceros complejos
+ conjugados con los polos complejos conjugados más cercanos buscando maximizar
+ el rango dinámico.
+ Estas etapas están dadas por las siguientes características:
+\end_layout
+
+\begin_layout Itemize
+Etapa A, High Pass Notch: 
+\begin_inset Formula $Q\approx4.38,$
+\end_inset
+
+ 
+\begin_inset Formula $f_{P}=29311.02Hz$
+\end_inset
+
+, 
+\begin_inset Formula $f_{Z}=26420.83Hz$
+\end_inset
+
+, 
+\begin_inset Formula $G=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Etapa B, Low Pass Notch: 
+\begin_inset Formula $Q\approx4.38$
+\end_inset
+
+, 
+\begin_inset Formula $f_{P}=23240.75Hz$
+\end_inset
+
+, 
+\begin_inset Formula $f_{Z}=25783.07Hz$
+\end_inset
+
+, 
+\begin_inset Formula $G=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Implementación utilizando celdas Fleisher Tow
+\end_layout
+
+\begin_layout Standard
+Este circuito será implementado utilizando celdas Fleisher Tow, de acuerdo
+ a lo analizado en el anexo.
+ Cabe recordar las expresiones a las que se llegaron para esta celda, para
+ su rápida referencia:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{Out}/V_{In}=-G\cdot\frac{\frac{s^{2}}{\omega_{1}^{2}}+1}{\frac{s^{2}}{\omega_{0}^{2}}+\frac{1}{Q\cdot\omega_{0}}\cdot s+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}^{2}=\frac{R_{B}}{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}=\omega_{P}^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\sqrt{\frac{C_{1}}{C_{2}}}\cdot\sqrt{\frac{R_{B}}{R_{A}}}\cdot\frac{R_{1}}{\mathrm{\sqrt{R_{2}\cdot R_{3}}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{1}^{2}=\frac{R_{5}}{C_{1}\cdot C_{2}\cdot R_{A}\cdot R_{3}\cdot R_{6}}=\omega_{Z}^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=\frac{R_{2}}{R_{6}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset Formula $V_{Out}=V_{4}$
+\end_inset
+
+.
+ Además, se debe cumplir que
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{4}=\frac{R_{5}\cdot R_{1}}{R_{A}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para cancelar el término lineal del numerador y que los ceros se encuentren
+ en el eje 
+\begin_inset Formula $j\omega$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Considerando estas ecuaciones, y las características de las etapas, se pueden
+ buscar valores comerciales que aproximen estas condiciones
+\end_layout
+
+\begin_layout Subsubsection
+Cálculo de Low Pass Notch
+\end_layout
+
+\begin_layout Standard
+Buscando conseguir soluciones a estas ecuaciones que cumplan con lo pedido
+ y sean valores comerciales, se pueden obtener los siguientes valores:
+\end_layout
+
+\begin_layout Standard
+Si 
+\begin_inset Formula $C_{1}=C_{2}=C$
+\end_inset
+
+, 
+\begin_inset Formula $R_{2}=R_{3}=R_{6}=R$
+\end_inset
+
+, 
+\begin_inset Formula $R_{A}=R_{B}$
+\end_inset
+
+, y 
+\begin_inset Formula $C=1nF$
+\end_inset
+
+ entonces
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}^{2}=\frac{R_{B}}{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}=\frac{1}{R^{2}\cdot C^{2}}\Rightarrow R=6.8480K\Omega\approx6.8K\Omega+47\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\frac{R_{1}}{\mathrm{R}}\Rightarrow R_{1}=29.99K\Omega=15K\Omega+15K\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\omega_{P}^{2}}{\omega_{Z}^{2}}=\frac{R_{5}}{R_{A}}=1.2307
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si 
+\begin_inset Formula $R_{A}=1K\Rightarrow R_{5}=1.2307K\Omega\approx1.1K\Omega+130\Omega$
+\end_inset
+
+ y se tiene entonces que
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{4}=\frac{R_{5}\cdot R_{1}}{R_{A}}=36.9K\Omega=33K\Omega+3.9K\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Cálculo de High Pass Notch
+\end_layout
+
+\begin_layout Standard
+Buscando conseguir soluciones a estas ecuaciones que cumplan con lo pedido
+ y sean valores comerciales, se pueden obtener los siguientes valores:
+\end_layout
+
+\begin_layout Standard
+Si 
+\begin_inset Formula $C_{1}=C_{2}=C$
+\end_inset
+
+, 
+\begin_inset Formula $R_{2}=R_{3}=R_{6}=R$
+\end_inset
+
+, 
+\begin_inset Formula $R_{A}=R_{B}$
+\end_inset
+
+, y 
+\begin_inset Formula $C=1nF$
+\end_inset
+
+ entonces
+\end_layout
+
+\begin_layout Standard
+Entonces
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}^{2}=\frac{R_{B}}{C_{1}\cdot C_{2}\cdot R_{2}\cdot R_{3}\cdot R_{A}}=\frac{1}{R^{2}\cdot C^{2}}\Rightarrow R=5.429K\Omega\approx5.1K\Omega+330\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\frac{R_{1}}{\mathrm{R}}\Rightarrow R_{1}=23.78K\Omega=22K\Omega+1.8K\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\omega_{P}^{2}}{\omega_{Z}^{2}}=\frac{R_{A}}{R_{5}}=1.2307
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si 
+\begin_inset Formula $R_{5}=1K\Rightarrow R_{A}=1.2307K\Omega\approx1.1K\Omega+130\Omega$
+\end_inset
+
+ y se tiene entonces que
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{4}=\frac{R_{5}\cdot R_{1}}{R_{A}}=19.34K\approx15K\Omega+4.3K\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Comparación entre simulación y valores calculados
+\end_layout
+
+\begin_layout Standard
+Con estos valores, se realizó una simulación y, al observar que la frecuencia
+ de los ceros de las etapas simuladas no coincidieron con los valores calculados
+ en la función de aproximación (
+\begin_inset Formula $f_{P}$
+\end_inset
+
+), se procedió a realizar un ajuste de los valores buscando que los resultados
+ simulados coincidan con los resultados buscados, Para esto, se varió el
+ valor de 
+\begin_inset Formula $R_{5}$
+\end_inset
+
+ y 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ para que cumpla la condición buscada, procediendo de forma iterativa: Modifican
+do 
+\begin_inset Formula $R_{5}$
+\end_inset
+
+ y recalculando 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+, simulando y verificando el resultado obtenido hasta conseguir los resultados
+ buscados.
+\end_layout
+
+\begin_layout Standard
+Ajuste en Low Pass Notch:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{5}=1260\Omega=750\Omega+510\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{4}=37.8K\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{P,inicial}\approx26KHz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{P,final}\approx25.8KHz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ajuste en High Pass Notch:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{5}=1K\Omega+39\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{4}=20.10K\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{P_{Inicial}}\approx25.4KHz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{P_{Final}}\approx26.4KHz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Considerando 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ como variable de ajuste, variando estos dos valores entre 
+\begin_inset Formula $0.8\cdot R_{4}$
+\end_inset
+
+y 
+\begin_inset Formula $1.2$
+\end_inset
+
+ 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ se obtiene el siguiente resultado
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ajuste_r4.PNG
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salida simulada del circuito, variando el valor de 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ de ambas etapas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con lo cual, según este análisis, se puede ajustar 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ para cumplir con la plantilla solicitada.
+\end_layout
+
+\begin_layout Subsubsection
+Impedancia de entrada del circuito
+\end_layout
+
+\begin_layout Standard
+Teniendo los valores calculados, se procede a simular la impedancia de entrada
+ en frecuencia, para determinar si cumple con lo solicitado.
+ El resultado de la simulación es el siguiente
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename impedancia_entrada.PNG
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada del circuito - Simulada
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Según se observa en la figura, los valores de impedancia de entrada del
+ circuito no cumplen con lo pedido.
+ Para solucionar esto, se implementa un Buffer a la entrada del circuito,
+ haciendo que la impedancia de entrada sea "muy alta", y cumpliendo con
+ las especificaciones solicitadas.
+ Adelantándose a la implementación del circuito, utilizar un Buffer a la
+ entrada no necesariamente incrementa el costo del circuito, debido a que
+ hay integrados que tienen varios canales (OpAmps) internos, por lo que
+ puede que, de acuerdo a la implementación, se tenga un OpAmp disponible
+ sin aumentar el costo del circuito.
+\end_layout
+
+\begin_layout Subsubsection
+Análisis de Montecarlo del circuito
+\end_layout
+
+\begin_layout Standard
+Se procede a realizar un análisis de Montecarlo del circuito.
+ Notar que, para este análisis, no se varía el valor de 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+, y este queda fijo en el valor dado anteriormente.
+ Utilizando resistores al 1%, y capacitores al 
+\begin_inset Formula $5\%$
+\end_inset
+
+, se tiene el siguiente resultado
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename montecarlo_1.PNG
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Análisis de Montecarlo: Impacto de las tolerancias de los componentes a
+ la transferencia del circuito
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notar como se ve fuertemente afectada la atenuación en la banda de atenuación,
+ debido a que cambian las frecuencias de los ceros, y la variación es tal
+ que los ceros de las celdas se alejan entre si.
+ Considerando que la variación producida es principalmente causada por los
+ capacitores, que son los elementos con mayor tolerancia y, de acuerdo a
+ la ecuación de la frecuencia de los ceros, como los capacitores a utilizar
+ provienen de una misma tanda, se espera que su desvío con respecto al valor
+ nominal sea similar, por lo que no sería tan importante el cambio producido
+ en la atenuación.
+ Esta afirmación no es necesariamente cierta, por lo que tener variación
+ en sentidos opuestos en los capacitores de las dos etapas puede generar
+ problemas en el filtro.
+ También se tiene la variable de ajuste 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+, que puede ser calibrada para mejorar la profundidad del notch, "empujando"
+ entonces el ripple de la banda atenuada "hacia abajo".
+\end_layout
+
+\begin_layout Subsubsection
+Análisis de sensibilidades
+\end_layout
+
+\begin_layout Standard
+Se calculan las sensibilidades relativas con respecto a las frecuencias
+ de los polos y los ceros (
+\begin_inset Formula $\omega_{P}$
+\end_inset
+
+ y 
+\begin_inset Formula $\omega_{Z}$
+\end_inset
+
+ respectivamente), de la ganancia 
+\begin_inset Formula $G$
+\end_inset
+
+ de la banda de paso, y del factor de calidad de los polos 
+\begin_inset Formula $Q$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="11" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\omega_{P}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\omega_{Z}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q_{P}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{A}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{B}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-1/2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sensibilidades relativa de los valores del filtro en función de los parámetros
+ del mismo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Vease que las sensibilidades de los parámetros justifican el uso de componentes
+ de baja tolerancia, para que tengan poco efecto sobre los valores del circuito.
+\end_layout
+
+\begin_layout Subsection
+Implementación placa y mediciones
+\end_layout
+
+\begin_layout Standard
+Se implementó el circuito en un PCB utilizando resistores y capacitores
+ SMD.
+ Se utilizaron dos integrados TL084, que poseen 4 OpAmps cada uno: 3 OpAmps
+ por celda + 1 OpAmp Buffer de entrada + 1 OpAmp sin utilizar, Buffer a
+ tierra para que la salida sea estable.
+ La placa posee configuración vía jumpers para poder determinar el orden
+ de las etapas, o bien que haya una única etapa conectada en el circuito,
+ redirigiendo las tensiones desde la entrada y hacia la salida de forma
+ adecuada.
+ También posee dos presets para calibrar el valor de 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ de cada etapa.
+ La medición del filtro implementado se puede observar en la siguiente figura
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename medicion.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Transferencia medida Vs Plantilla solicitada
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Como se puede observar, la transferencia del filtro cumple con la plantilla
+ solicitada.
+ La curva resulta muy ajustada a la plantilla, y otras implementaciones
+ del mismo circuito, debido a la tolerancia de los componentes, pueden no
+ cumplir con la plantilla.
+ Con el resultado final, se puede concluir que la plantilla más restrictiva
+ que se eligió con el fin de tener un margen de seguridad no fue la más
+ adecuada, y se podrían haber elegido otras variaciones que agreguen margen
+ a más variables, permitiendo un ajuste más holgado de la transferencia
+ a la plantilla.
+ Otra posibilidad sería agregar más presets a las celdas, permitiendo ajuste
+ de distintas variables (por ej, notch depth y frecuencia de ceros), aunque
+ esta alternativa no es conveniente debido a que los presets son materiales
+ relativamente caros, lo que incrementa el costo de la placa.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,4984 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+% HEADERS and FOOTERS
+\usepackage{fancyhdr}% http://ctan.org/pkg/fancyhdr
+\fancyhead{}% Clear all headers
+\fancyfoot{}% Clear all footers
+\fancyhead[L]{\leftmark} % En la parte izquierda del encabezado, aparecerá el nombre de capítulo
+%\fancyhead[RE]{\rightmark} % En las páginas pares, parte derecha del encabezado, aparecerá el nombre de sección
+%\fancyhead[RO,LE]{\thepage} % Números de página en las esquinas de los encabezados
+\fancyhead[R]{Laboratorio de Electrónica 2015} % MATERIA
+%\fancyhead[L]{2 Cuatrimestre}
+\fancyfoot[L]{TP 2 - Grupo 1} % TRABAJO
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}% Remove header rule
+%\renewcommand{\footrulewidth}{0pt}% Remove footer rule
+\pagestyle{fancy}% Set page style to "fancy"
+
+
+% Sangría al primer párrafo de cada sección
+\usepackage{indentfirst}
+
+% Letras griegas minúsculas romanas (no itálicas)
+\usepackage{upgreek}
+
+% Footnotes abajo bien puestas
+\usepackage[bottom]{footmisc}
+
+
+%%%
+%%% Para que imprima mejor %%%
+%%%
+% if pdflatex is used
+\usepackage{ifpdf}
+\ifpdf
+
+% set fonts for nicer pdf view
+\IfFileExists{lmodern.sty}
+ {\usepackage{lmodern}}{}
+
+\fi % end if pdflatex is used
+%%%
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Celda Rauch
+\end_layout
+
+\begin_layout Subsection
+Análisis teórico
+\end_layout
+
+\begin_layout Standard
+Éste tipo de celda se caracteriza por estar compuesta de solamente un amplificad
+or operacional y pocos componentes, lo cual la convierte en óptima para
+ realizar filtros de bajo costo.
+ Como contrapartida, la misma es muy sensible a variaciones en sus componentes,
+ que fácilmente pueden afectar el ancho de banda del filtro a construir,
+ así como también su ganancia
+\end_layout
+
+\begin_layout Standard
+Esta celda posee a su vez otro nombre por la cual es conocida y dicho nombre
+ surge de las dos personas que comenzaron a hacer uso de la misma.
+ Esas dos personas fueron T.
+ Delyiannis y J.J.
+ Friend y por ende se la conoce a su vez bajo el nombre de celda Delyiannis-Frie
+nd.
+\end_layout
+
+\begin_layout Standard
+Los filtros se realizan a partir de un circuito predeterminado como el que
+ se muestra en la gráfica.
+ Para los diferentes tipos de filtro (paso bajo, pasa banda, paso alto)
+ cambia el tipo de impedancias del circuito, para cumplir con la función
+ de transferencia, cuya ecuación característica es de segundo orden.
+ Esto último, permite una fácil realización, ya que la ecuación de segundo
+ orden en el dominio de la frecuencia, para un sistema, da cuenta de la
+ frecuencia natural de oscilación 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+, el factor de calidad 
+\begin_inset Formula $Q$
+\end_inset
+
+ , entre otras características.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Circuito Rauch.PNG
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda Rauch
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Celda-Rauch"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Función transferencia genérica
+\end_layout
+
+\begin_layout Standard
+Para hallar la función transferencia se tomó al AmpOp como ideal, es decir
+ 
+\begin_inset Formula $A_{vol}$
+\end_inset
+
+ infinito, por lo tanto como 
+\begin_inset Formula $V^{+}=V^{-}$
+\end_inset
+
+ se observa en la figura (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Celda-Rauch"
+
+\end_inset
+
+) que existe una tierra virtual en 
+\begin_inset Formula $V^{-}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Circuito Rauch2.png
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Corrientes y tensiones 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+Se procedió a resolver el circuito por el método de nodos.
+ Así se obtienen las ecuaciones:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{1}+I_{2}=I_{3}+I_{4}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{3}=I_{5}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{i}-V_{a}}{Z_{1}}+\frac{V_{0}-V_{a}}{Z_{2}}=\frac{V_{a}}{Z_{4}}+\frac{V_{a}}{Z_{3}}\label{eq:ec1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{V_{a}}{Z_{3}}=\frac{-V_{0}}{Z_{5}}\label{eq:ec2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Despejando 
+\begin_inset Formula $V_{a}$
+\end_inset
+
+de la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ec2"
+
+\end_inset
+
+) y reemplazando en la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ec1"
+
+\end_inset
+
+) se llega a:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{V_{i}}{Z_{1}}=V_{0}\frac{Z_{3}}{Z_{5}}(\frac{1}{Z_{1}}+\frac{1}{Z_{2}}+\frac{1}{Z_{3}}+\frac{1}{Z_{4}}+\frac{Z_{5}}{Z_{2}Z_{3}})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto la función transferencia queda expresada de la siguiente forma:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H(s)=-\frac{1}{\frac{Z_{1}}{Z_{2}}+\frac{Z_{1}}{Z_{5}}+\frac{Z_{3}}{Z_{5}}(1+\frac{Z_{1}}{Z_{2}}+\frac{Z_{1}}{Z_{4}})}\label{eq:funcion transferencia}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia"
+
+\end_inset
+
+) representa la función transferencia genérica de la celda Rauch.
+ Puede observarse de dicha ecuación que la celda es inversora por el signo
+ negativo en su función transferencia (Tiene que ver con la forma en que
+ la misma afecta a la fase de la señal de entrada con un defasaje de 180°)
+\end_layout
+
+\begin_layout Subsubsection
+Función transferencia filtro Pasa-bajos
+\end_layout
+
+\begin_layout Standard
+Para realizar un filtro pasabajos se toman las impedancias:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{1}=R_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{2}=R_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{3}=R_{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{4}=\frac{1}{sC4}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{5}=\frac{1}{sC_{5}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo que el circuito quedaría como se muestra en la siguiente figura:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename circuito pasabajos.PNG
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración Pasa-bajos para celda Rauch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La ecuación, en el dominio de la frecuencia compleja s, para este tipo de
+ filtro es de la forma :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H(s)=\frac{H_{0}}{(\frac{s}{\omega_{p}})^{2}+\frac{s}{\omega_{p}Q}+1}\label{eq:ec transferencia pasa bajos generica}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si se reemplazan los valores de las impedancias en la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia"
+
+\end_inset
+
+) se llega a la forma:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H_{LP}(s)=-\frac{\frac{R_{2}}{R_{1}}}{s^{2}C_{4}C_{5}R_{2}R_{3}+s(\frac{R_{2}R_{3}C_{5}}{R_{1}}+R_{3}C_{5}+R_{2}C_{5})+1}\label{eq:funcion transferencia pasa bajos}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De las ecuaciónes (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ec transferencia pasa bajos generica"
+
+\end_inset
+
+) y (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia pasa bajos"
+
+\end_inset
+
+) se hallan las siguientes características del filtro:
+\end_layout
+
+\begin_layout Itemize
+Frecuencia del polo: 
+\begin_inset Formula $\omega_{p}=\frac{1}{\sqrt{C_{4}C_{5}R_{2}R_{3}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Factor de calidad: 
+\begin_inset Formula $Q_{p}=\frac{\sqrt{C_{4}R_{2}R_{3}}}{\sqrt{C_{5}}(\frac{R_{2}R_{3}}{R_{1}}+R_{3}+R_{2})}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Ganancia en contínua: 
+\begin_inset Formula $G_{cc}=\frac{R_{2}}{R_{1}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Función transferencia filtro Pasa-altos
+\end_layout
+
+\begin_layout Standard
+Para realizar un filtro pasa-altos se toman las impedancias:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{1}=\frac{1}{sC_{1}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{2}=\frac{1}{sC_{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{3}=\frac{1}{sC_{3}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{4}=R_{4}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{5}=R_{5}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo que el circuito quedaría como se muestra en la siguiente figura:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename circuito pasaaltos.PNG
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración Pasa-altos para celda Rauch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La ecuación, en el dominio de la frecuencia compleja s, para este tipo de
+ filtro es de la forma :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H(s)=\frac{H_{0}s^{2}}{(\frac{s}{\omega_{p}})^{2}+\frac{s}{\omega_{p}Q}+1}\label{eq:funcion trasnferencia pasa altos generica}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si se reemplazan los valores de las impedancias en la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia"
+
+\end_inset
+
+) se llega a la forma:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H_{HP}(s)=-\frac{s^{2}C_{1}C_{3}R_{4}R_{5}}{s^{2}C_{2}C_{3}R_{4}R_{5}+sR_{4}(C_{1}+C_{2}+C_{3})+1}\label{eq:funcion transferencia pasa altos}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De las ecuaciónes (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion trasnferencia pasa altos generica"
+
+\end_inset
+
+) y (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia pasa altos"
+
+\end_inset
+
+) se hallan las siguientes características del filtro:
+\end_layout
+
+\begin_layout Itemize
+Frecuencia del polo: 
+\begin_inset Formula $\omega_{p}=\frac{1}{\sqrt{C_{2}C_{3}R_{4}R_{5}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Factor de calidad: 
+\begin_inset Formula $Q_{p}=\frac{\sqrt{C_{2}C_{3}R_{5}}}{\sqrt{R_{4}}(C_{1}+C_{2}+C_{3})}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Ganancia en contínua: 
+\begin_inset Formula $G_{cc}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Función transferencia filtro Pasa-banda
+\end_layout
+
+\begin_layout Standard
+Para realizar un filtro pasa-altos se toman las impedancias:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{1}=R_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{2}=\frac{1}{sC_{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{3}=\frac{1}{sC_{3}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{4}=R_{4}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Z_{5}=R_{5}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo que el circuito quedaría como se muestra en la siguiente figura:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename circuito pasabanda.PNG
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración Pasa-Banda para celda Rauch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La ecuación, en el dominio de la frecuencia compleja s, para este tipo de
+ filtro es de la forma :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H(s)=\frac{H_{0}\frac{s}{\omega_{p}Q}}{(\frac{s}{\omega_{p}})^{2}+\frac{s}{\omega_{p}Q}+1}\label{eq:funcion transferencia pasa banda enerico}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si se reemplazan los valores de las impedancias en la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia"
+
+\end_inset
+
+) se llega a la forma:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H_{BP}(s)=-\frac{s\frac{R_{5}C_{3}}{1+\frac{R_{1}}{R_{4}}}}{s^{2}\frac{R_{1}R_{5}C_{2}C_{3}}{1+\frac{R_{1}}{R_{4}}}+sR_{1}\frac{(C_{2}+C_{3})}{1+\frac{R_{1}}{R_{4}}}+1}\label{eq:funcion transferencia pasabanda}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De las ecuaciónes (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia pasa banda enerico"
+
+\end_inset
+
+) y (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia pasabanda"
+
+\end_inset
+
+) se hallan las siguientes características del filtro:
+\end_layout
+
+\begin_layout Itemize
+Frecuencia del polo: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{p}=\sqrt{\frac{1+\frac{R_{1}}{R_{4}}}{R_{1}R_{5}C_{2}C_{3}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Factor de calidad:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q_{p}=\frac{\sqrt{1+\frac{R_{1}}{R_{4}}}}{\sqrt{\frac{R_{4}C_{2}}{R_{5}C_{3}}}+\sqrt{\frac{R_{4}C_{3}}{R_{5}C_{2}}}}\label{eq:qp}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Ganancia en
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{p}:H(j\omega_{p})=\frac{\frac{R_{5}}{R_{1}}}{1+\frac{C_{2}}{C_{3}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Ganancia en contínua:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G_{cc}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Poner pelotudeces por aca
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Funcion transferencia filtro Rechaza-Banda
+\end_layout
+
+\begin_layout Standard
+Para implementar un filtro Rechaza-Banda no existe una forma de elejir los
+ componentes para obtenerlo con una celda Rauch, es por ellos que se realiza
+ el siguiente estudio:
+\end_layout
+
+\begin_layout Paragraph*
+Método 1
+\end_layout
+
+\begin_layout Standard
+La forma de la función transferencia del filtro es:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H_{BR}=\frac{As^{2}+B}{Cs^{2}+Ds+E}\label{eq:Hbr}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{BR}=\frac{As^{2}}{Cs^{2}+Ds+E}+\frac{B}{Cs^{2}+Ds+E}=H_{HP}+H_{LP}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con lo cual el filtro Rechaza-Banda se puede implementar como la suma de
+ un filtro Pasa-Altos y un Pasa Bajos.
+ Con lo que implementando un circuito con dos celdas Rauch (una Pasa-Altos
+ y otra Pasa-Bajos) en cascada se consigue el efecto de un filtro Rechaza-Banda.
+ Los dos filtros a sumarse poseen el polo a la misma frecuencia e igual
+ factor de calidad Q.
+\end_layout
+
+\begin_layout Standard
+Por lo tanto de acuerdo con las ecuaciones (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia pasa altos"
+
+\end_inset
+
+) y (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:funcion transferencia pasa bajos"
+
+\end_inset
+
+) la función transferencia queda expresada como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+H_{BR}=-\frac{s^{2}C_{1}C_{3}R_{4}R_{5}}{s^{2}C_{2}C_{3}R_{4}R_{5}+sR_{4}(C_{1}+C_{2}+C_{3})+1}-\frac{\frac{R_{2}}{R_{1}}}{s^{2}C_{4}C_{5}R_{2}R_{3}+s(\frac{R_{2}R_{3}C_{5}}{R_{1}}+R_{3}C_{5}+R_{2}C_{5})+1}\label{eq:hbr,incomplete}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto para que (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hbr,incomplete"
+
+\end_inset
+
+) cumpla (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Hbr"
+
+\end_inset
+
+) se deducen las siguientes condiciones:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $C_{2}C_{3}R_{4}R_{5}=C_{4}C_{5}R_{2}R_{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $R_{4}(C_{1}+C_{2}+C_{3})=\frac{R_{2}R_{3}}{R_{1}}C_{5}+R_{3}C_{5}+R_{2}C_{5}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename rechazabanda l y h.PNG
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Filtro BR como suma de HP y LP
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aunque es posible realizar un filtro BR con esta configuración existen dicultade
+s para realizarlo de esta manera como obtener la misma frecuencia de los
+ polos en ambas celdas pasa-bajos y pasa-altos (por la tolerancia de los
+ componentes).
+ Además, por otra parte, la cantidad de componentes a utilizar aumenta,
+ ya que deben utilizarse dos para el LP y HP, y otro para sumarlas.
+\end_layout
+
+\begin_layout Paragraph*
+Método 2
+\end_layout
+
+\begin_layout Standard
+Utilizando un filtro pasa banda
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{BR}=1+H_{BP}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si se cumple la relación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{5}C_{3}=R_{1}(C_{2}+C_{3})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La cual puede lograrse con 
+\begin_inset Formula $C_{3}=C_{2}$
+\end_inset
+
+ y 
+\begin_inset Formula $2R_{1}=R_{5}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se obtiene que 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{BR}(s)=-\frac{s^{2}C_{2}C_{3}R_{1}R_{5}+1+\frac{R_{1}}{R_{4}}}{(sC_{2}C_{3}R_{1}R_{5}+s(C_{2}R_{1}+C_{3}R_{1})+\frac{R_{1}}{R_{4}}+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}=\sqrt{\frac{1+\frac{R_{1}}{R_{4}}}{C_{2}C_{3}R_{1}R_{5}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\frac{\sqrt{(1+\frac{R_{1}}{R_{4}})\frac{R_{5}C_{2}C_{3}}{R_{1}}}}{C_{2}+C_{3}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En contínua tiene ganancia unitaria.
+\end_layout
+
+\begin_layout Standard
+Si bien esta configuración para lograr un filtro BR puede lograrse utilizando
+ dos OpAmps, tiene una grand dificultad, que es conseguir la relación entre
+ los componentes.
+ Más que nada los capacitores, los cuales suelen tener una disperción elevada.
+ 
+\end_layout
+
+\begin_layout Standard
+A pesar de que se obtuvo como puede lograrse realizar un filtro Rechaza
+ Banda con una celda Rauch, se puede concluir que no resulta fácil de conseguir
+ con este tipo de celda.
+\end_layout
+
+\begin_layout Subsubsection
+Deliyannis-Friend modificada (Q Enhancement) 
+\end_layout
+
+\begin_layout Standard
+De la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:qp"
+
+\end_inset
+
+) puede observarse que para obtenerse un elevado Q deben escojerse los capacitor
+es 
+\begin_inset Formula $C_{2}=C_{3}=C$
+\end_inset
+
+.
+ Luego también deberán escojerse resistencias de valores muy elevados, lo
+ cuál no será fácil.
+ Es por ello que se buscó elevar el Q de la celda Rauch de otra manera.
+ En el libro 
+\emph on
+
+\begin_inset Quotes fld
+\end_inset
+
+Design of Analog Filters (Rolf Schaumann & Mac E.
+ Van Valkenburg)
+\begin_inset Quotes frd
+\end_inset
+
+ 
+\emph default
+se informa que agregando un ciclo de realimentación positiva con un nuevo
+ esquema circuital permite que la celda Delyiannis-Friend trabaje con un
+ valor similar a su Q anterior pero para la transferencia total, se obtenga
+ un alto factor de calidad.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename aumento de q.PNG
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Circuito Delyiannis-Friend con realimentación positiva 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Utilizando 
+\begin_inset Formula $\alpha=\frac{k}{1-k}$
+\end_inset
+
+ se obtiene que el nuevo factor de calidad se expresa como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Q=\frac{Q_{0}}{1-2\alpha Q_{0}^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En el cuál 
+\begin_inset Formula $Q_{0}$
+\end_inset
+
+es el factor de calidad si la realimentación positiva.
+ A su vez la ganancia de la banda de paso puede expresarse como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{B}=H\frac{Q}{Q_{0}}\frac{1}{1-K}
+\]
+
+\end_inset
+
+Un estudio realizado por Schaumann en el año 1990 [7] demuestra que el 
+\begin_inset Formula $Q_{0}$
+\end_inset
+
+ óptimo que debe elegirse al realizar una celda Rauch es de 
+\begin_inset Formula $Q_{0}$
+\end_inset
+
+ = 1.5 y luego debe buscarse la relación de las resistencias en la rama de
+ realimentación positiva para obtener el Q del circuito que se desea.
+\end_layout
+
+\begin_layout Paragraph*
+Función transferencia Pasa-Banda completo
+\end_layout
+
+\begin_layout Standard
+Se hallará la función transferencia de la Rauch pasa-banda considerando
+ la configuración circuital que permite aumentar el factor de calidad del
+ circuito.
+ Se encontró, bajo la ayuda de un software matemático, las transferencias
+ correspondientes a 
+\begin_inset Formula $A_{vol}finito$
+\end_inset
+
+ y con su respectivo polo dominante.
+ A pesar de haberse realizado el despeje de dichas ecuaciones con el software
+ matemático, no se utilizará la de 
+\begin_inset Formula $A_{vol}finito$
+\end_inset
+
+ para el análisis ya que la dependencia de los distintos parámetros, respecto
+ de 
+\begin_inset Formula $A_{vol}$
+\end_inset
+
+ es despreciable.
+ 
+\end_layout
+
+\begin_layout Standard
+La función transferencia completa del circuito es:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{BP}(s)=-\frac{sC_{3}R_{5}R_{4}}{s^{2}(C_{2}C_{3}R_{1}R_{4}R_{5}(1\text{−}K))+s\text{·}(C_{2}R_{1}R_{4}(1\text{−}K)+C_{3}(R_{1}R_{4}(1\text{−}K)\text{−}KR_{5}(R_{1}+R_{4}))+(1\text{−}K)(R_{1}+R_{4})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tomando 
+\begin_inset Formula $C_{2}=C_{3}=C$
+\end_inset
+
+ ,como se detallo anteriormente, las ecuaciones de los polos, el factor
+ de calidad y la ganancia quedan expresadas:
+\end_layout
+
+\begin_layout Itemize
+posición del polo(
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}=\frac{1}{C}\sqrt{\frac{1+\frac{R_{4}}{R_{1}}}{R_{4}R_{5}}}
+\]
+
+\end_inset
+
+ Se observa que la posición de los polos no se ve afectada con la optimización
+ de Q.
+\end_layout
+
+\begin_layout Itemize
+Factor de calidad (
+\begin_inset Formula $Q$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Q=\frac{\sqrt{R_{1}R_{4}R_{5}(R_{1}+R_{4})}}{2R_{1}R_{4}(C_{2}+C_{3})-\frac{k}{k-1}(R_{1}+R_{4})R_{5}}\label{eq:q}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:q"
+
+\end_inset
+
+) da noción de por que es importante poner dos capacitores iguales, ya que
+ el Q se independiza de los mismos, aunque en la práctica esto se hace notableme
+nte dificultoso.
+\end_layout
+
+\begin_layout Itemize
+Ganancia del circuito
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H=\frac{R_{4}R_{5}}{2R_{1}R_{4}(1-k)-kR_{5}(R_{1}-+R_{4})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nuevamente como ocurrió para el factor de calidad, se logra independizar
+ de igual manera el valor de la ganancia respecto de los valores de los
+ capacitores.
+\end_layout
+
+\begin_layout Subsubsection
+Impedancia de entrada 
+\end_layout
+
+\begin_layout Standard
+La impedancia de entrada del circuito se plantea de la relación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Z_{in}=\frac{V_{in}}{I_{in}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con la ayuda de Maple se halló la impedancia de entrada:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Z_{in}=\frac{s^{2}R_{1}R_{4}R_{5}C_{2}C_{3}+sR_{1}R_{4}(C_{2}+C_{3})+R_{1}+R_{4}}{s^{2}R_{4}R_{5}C_{2}C_{3}+sR_{4}(C_{2}+C_{3})+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para bajas frecuencias la impedancia de entrada tiene al valor:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+_{s\rightarrow0}^{Z_{in}}=R_{1}+R_{4}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y para altas frecuencias:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+_{s\rightarrow0}^{Z_{in}}=R_{1}+R_{4}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si uno analiza el circuito, se puede considerar que los capacitores en frecuenci
+as altas se comportan como cables, por lo que se ve (no tan claramente)
+ que la impedancia de entrada es 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+.
+ Sin embargo, si se utilizara el circuito sin 
+\begin_inset Formula $Q_{enhancement}$
+\end_inset
+
+, se puede ver claramente, que en 
+\begin_inset Formula $V^{-}$
+\end_inset
+
+ hay masa virtual, por lo que el circuito se simplica solamente a 
+\begin_inset Formula $V_{in}$
+\end_inset
+
+, 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ y masa virtual, dejando en evidencia que la impedancia de entrada es 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sensibilidades
+\end_layout
+
+\begin_layout Standard
+Para poder diseñar con un mejor criterio a la hora de elegir los valores
+ de los componentes de esta celda, es de suma importancia analizar cuanto
+ afecta cada componente del circuito a los parámetros más importantes de
+ la celda.
+ En otras palabras, se procederá a analizar las variaciones de G, ω0y Q
+ como consecuencia de las variaciones de cada componente pasivo del circuito.
+ Con ayuda del software matemático Maple se hallaron dichas sensibilidades
+ las cuales detallan en la siguiente tabla:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $S_{x}^{\omega_{0}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $S_{x}^{G}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $S_{X}^{Q}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $\frac{1}{2}\frac{R_{4}}{R_{1}+R_{4}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{\text{−}((K\text{−}1)(C_{2}+C_{3})R_{4}+KR_{5}C_{2})R_{1}}{(K\text{−}1)(C_{2}+C_{3})R_{1}R_{4}+K(R_{4}+R_{1})R_{5}C_{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{1}{2}\frac{(R_{4}(((K\text{−}1)(C_{2}+C_{3})R1\text{−}KR_{5}C_{3})R_{4}\text{−}KR_{5}C_{3}R_{1}))}{(R_{4}+R_{1})(((K\text{−}1)(C_{2}+C_{3})R_{1}+KR_{5}C_{3})R_{4}+KR_{5}C_{3}R_{1})}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\text{−}\frac{1}{2}\frac{\text{·}R1}{R1+R4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{KR1R5C2}{((K\text{−}1)(C2+C3)R4+KR5C2)R1+C2KR4R5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{0,5\text{·}(R1(((K\text{−}1)(C2+C3)R4\text{−}KR5C3)R1\text{−}KR5C3R4))}{(((K\text{−}1)(C2+C3)R4+KR5C3)R1+KR5C3R4)(R4+R1)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{(K\text{−}1)(C2+C3)R1R4}{((K\text{−}1)(C2+C3)R4+KR5C2)R1+C2KR4R5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{0.5(R1((K\text{−}1)(C2+C3)R4\text{−}KR5C3)\text{−}KR4R5C3)}{(R1((K\text{−}1)(C2+C3)R4+KR5C3)+KR4R5C3)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{((K\text{−}1)R1R4+K(R4+R1)R5)C2}{(K\text{−}1)(C2+C3)R1R4+K(R4+R1)R5C2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{0,5\text{·}(((C2\text{−}C3)(K\text{−}1)R4\text{−}KR5C3)R1\text{−}KR5C3R4)}{((K\text{−}1)(C2+C3)R4+KR5C3)R1+KR5C3R4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{(((K\text{−}1)R4+KR5)R1+KR4R5)C2}{((K\text{−}1)(C2+C3)R4+KR5C2)R1+KR4R5C2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{0,5\text{·}(((C2\text{−}C3)(K\text{−}1)R4\text{−}KR5C3)R1\text{−}KR5C3R4)}{((K\text{−}1)(C2+C3)R4+KR5C3)R1+KR5C3R4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+K
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-\frac{(R1R4(C2+C3)+(R4+R1)R5C2)K}{(K\text{−}1)(C2+C3)R1R4+K(R4+R1)R5C2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{K(R4+R1)R5C3}{(K\text{−}1)(((K\text{−}1)(C2+C3)R4+KR5C3)R1+KR5C3R4)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Poner subindices
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sensibilidades relativas respecto a los componentes del circuito
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Puede observarse que para el caso de la ganancia y el factor de calidad,
+ los mismos dependen de absolutamente todos los parámetros de la celda.
+ De este resultado puede analizarse que una variación en cualquier componente
+ genera siempre una variación de la ganancia y el factor de calidad y es
+ muy importante en el diseño que los valores de los componentes elegidos
+ tengan una tolerancia lo sucientemente baja como para no condicionar la
+ exactitud querida de Q y G.
+ Sin embargo, para la frecuencia central se observa que las sensibilidades
+ dependen de muy pocos parámetros siendo más fácil de realizar un filtro
+ con frecuencia central especíca con una implementación en celda Rauch.
+\end_layout
+
+\begin_layout Subsection
+Diseño de filtro Pasa-Banda
+\end_layout
+
+\begin_layout Standard
+A continuación re llevará a cabo el procedimiento para el diseño de un filtro
+ Paasa Banda a partir de dos celdas Rauch modificadas tal que cumpla ciertos
+ requisitos y características.
+\end_layout
+
+\begin_layout Subsubsection
+Caracteríticas del filtro
+\end_layout
+
+\begin_layout Standard
+Los requisitos de la plantilla del filtro se exponen en la siguiente tabla:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Especificación
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor a cumplir
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pendiente pasa-bajos normalizado
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-40dB/dec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36kHz
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+B
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{1}{10}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|Z_{in}(f)\right|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\geq50k\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Filtro
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+BP
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Requisitos de diseño para filtro Pasa-Banda
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Requisitos-de-diseño"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para obtener el filtro deseado se utilizó la aproximación de TChebycheff
+ y para ello primero debieron reconocerse los parámetros de la plantilla.
+ 
+\end_layout
+
+\begin_layout Itemize
+La pendiente de -40dB/dec se logra con un filtro de orden 2 (tomando el
+ orden del pasabajos normalizado), por lo tanto deberán de ser dos celdas
+ las que contenga el filtro.
+\end_layout
+
+\begin_layout Itemize
+Las frecuencias de paso 
+\begin_inset Formula $f_{p}^{+}$
+\end_inset
+
+ y 
+\begin_inset Formula $f_{p}^{-}$
+\end_inset
+
+ las cuales se delimitan los bordes de la banda de paso.
+ Para hallar dichas frecuencias se hacen uso de la denición del bandwidth
+ (B) y del promedio logarítmico entre 
+\begin_inset Formula $f_{0}$
+\end_inset
+
+ y ambas frecuencias a hallar (esto se debe a que en un pasa-banda, se definen
+ 
+\begin_inset Formula $f_{p}^{+}$
+\end_inset
+
+ y 
+\begin_inset Formula $f_{p}^{-}$
+\end_inset
+
+ simétricas en escala logarítmica respecto de 
+\begin_inset Formula $f_{0}$
+\end_inset
+
+).
+ Las mismas son: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{0}^{2}=f_{p}^{+}f_{p}^{-}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+B=\frac{f_{p}^{+}-f_{p}^{-}}{f_{0}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+La atenuación en banda de paso debe tener un valor de 3dB.
+ 
+\end_layout
+
+\begin_layout Standard
+Teniendo en cuenta los valores de la tabla (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Requisitos-de-diseño"
+
+\end_inset
+
+) de B y 
+\begin_inset Formula $f_{0}=f_{p}$
+\end_inset
+
+ las frecuencias 
+\begin_inset Formula $f_{p}^{+}$
+\end_inset
+
+y 
+\begin_inset Formula $f_{p}^{-}$
+\end_inset
+
+son:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{p}^{+}=37845Hz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{p}^{-}=34245Hz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con ayuda de Maple y MatLab se logró encontrar las dos etapas BP del filtro
+ y los resultados fueron los siguientes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename filtro sin q.PNG
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Aproximación Chevy con 
+\begin_inset Formula $A_{p}=3dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename diagrama de polos y ceros.PNG
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de polos y ceros con 
+\begin_inset Formula $A_{p}=3dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se obtuvo que el Q con esta configuración fue de 31.04.
+ El problema que se encuentra en el diseño de este circuito es lograr el
+ Q , ya que las sensibilidades para un factor tan elevado son grandes y
+ proporcionales al mismo lo cual sería muy difícil de lograr y se necesitarían
+ componentes con tolerancias muy pequeñas.
+ El orígen de un alto factor de calidad provienen de la aproximación utilizada
+ para hallar la función transferencia.
+ Chebychef I tiene una característica importante, la cual es un ripple en
+ la banda de paso.
+ Para realizar dicho riple, se requieren polos de factores de calidad elevados
+ y mientras más grande sea el riple, más grande a su vez deben ser los Q
+ de los mismos.
+ Para poder solucionar este problema se decidió reducir la atenuación en
+ la banda de paso, para así reducir los Q de cada celda.
+ En definitiva se decidió usar 
+\begin_inset Formula $A_{p}=0.01dB$
+\end_inset
+
+, asi se asegura que el circuito cumpla plantilla.
+ Con éste nuevo valor se obtuvieron los siguientes resultados:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename filtro con q.PNG
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Aproximación Chevy con 
+\begin_inset Formula $A_{p}=0.01dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename polos y ceros con q.PNG
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de polos y ceros con 
+\begin_inset Formula $A_{p}=0.01dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se determinaron los polos y ceros para cada celda, los cuales se detallan
+ en el siguiente cuadro
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="7">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Polo (1)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Polo (2)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cero
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Freq.
+ Central 
+\begin_inset Formula $f_{0}(Hz)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Freq.
+ Central 
+\begin_inset Formula $\omega_{0}(rad/s)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q_{máx}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Etapa (1)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-22250+j.199958
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-22250-j.199958
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0 Hz
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32014.94
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+254361
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.52
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Etapa (2)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-28140+j.252800
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-28140-j.252800
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0 Hz
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40481.16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+201192
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.52
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Configuración de polos y ceros
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A continuación de desarrolla la función transferencia para cada celda.
+\end_layout
+
+\begin_layout Standard
+Función transferencia de etapa 1:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{s}{(s+22250-j.199958)(s+22250-j.199958)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{s}{s^{2}+44500s+4.05x10^{10}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{2}(s)=\frac{1}{4.05x10^{10}}\frac{s}{(\frac{s}{201192})^{2}+\frac{s}{909624}+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Función transferencia de etapa 2:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{s}{(s+28140-j252800)(s+28140+j252800)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{s}{(s+28140)^{2}+6.391x10^{10}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{s}{s^{2}+s.56280+6.47.10^{10}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H_{1}(s)=\frac{1}{6.47.10^{10}}\frac{s}{(\frac{s}{254361})^{2}+\frac{s}{1149604}+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Componentes
+\end_layout
+
+\begin_layout Standard
+Al momento de elejir los componentes, se tuvieron en cuenta una serie de
+ relaciónes útiles para la cponstrucción del circuito.
+ Algunas de ellas provienen de la teoría y otras experimentalmente.
+ En principio y para ambas celdas, los capacitores se elegirán del mismo
+ valor como fue mencionado anteriormente para obtener las ganancias, frecuencias
+ centrales y factores de calidad que se desean.
+ Siguiendo la corriente de pensamiento de lo estudiado anteriormente y trabajand
+o sobre las relaciones existentes entre los factores a elegir (Q, G y wo)
+ se derivan las siguientes relaciones útiles para setear los valores deseados
+ para cada etapa: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Componente
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relación
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{R'}{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{R'}{1-a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{2Q_{0}}{\omega_{0}C}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relaciones para elección de componentes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Las dos primeras elaciones surgen del análisis estudiado por Schaumann y
+ Van Valkenburg donde se utiliza esta relación para reducir la cantidad
+ de componentes que se tienen para seleccionar
+\end_layout
+
+\begin_layout Standard
+Cabe recordar que la impedancia de entrada debe ser siempre mayor a cierto
+ valor, cuantitativamente 
+\begin_inset Formula $Z_{in}>50k\Omega$
+\end_inset
+
+.
+ Esto se debe cumplir en la primer etapa (respetando siempre que la segunda
+ etapa debe tener una impedancia de entrada considerablemente mayor a la
+ impedancia de salida de la primer etapa, al estar ambas etapas con una
+ conexión en cascada) ya que es la impedancia de entrada que se ve desde
+ el generador de funciones, o en otras palabras 
+\begin_inset Formula $V_{in}$
+\end_inset
+
+ del filtro total.
+ Es por ello que primero se seteó las resistencia 
+\begin_inset Formula $R_{1}=82k\Omega$
+\end_inset
+
+para asegurarse que se cumpla que la impedancia de entrada sea considerablemente
+ mayor al valor exigido de plantilla.
+ Luego haciendo uso de las ecuaciones del filtro pasabanda completo se pudieron
+ hallar los valores de los capacitores.
+ El problema es que los capacitores tiene mayor dispersión que las resistencias
+ ( ya que las mismas pueden usarse smd y tienen una tolerancia del 1%) por
+ lo tanto resulta inconveniente tener que poner capacitores en serie o paralelo
+ para alcanzar los valores que se hallaron.
+ Es por ello que a partir de los valores encontrados para los capacitores
+ se buscaron los valores nominales más cercanos y se setearon con un valor
+ para tener que poner solo un capacitor y no tener la necesidad de asociarlos.
+ 
+\end_layout
+
+\begin_layout Standard
+El procedimiento para hallar los valores fue el siguiente:
+\end_layout
+
+\begin_layout Standard
+Primero se halla el valor de 
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha=\frac{1}{2Q_{0}^{2}}(1-\frac{Q_{0}}{Q'})=0.1485
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la cual 
+\begin_inset Formula $Q_{0}=1.5$
+\end_inset
+
+ y 
+\begin_inset Formula $Q'=4.52$
+\end_inset
+
+ es el factor de calidad que se desea para cada etapa.
+\end_layout
+
+\begin_layout Standard
+Con el valor de 
+\begin_inset Formula $\alpha$
+\end_inset
+
+se puede hallar el valor de k:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+k=\frac{\alpha}{1+\alpha}=0.13
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+luego se halla el valor de H y con éste,el valor de ''a'':
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H=H_{B}\frac{Q_{0}}{Q\text{'}}(1-k)=0.398
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a=\frac{H}{2Q_{0}^{2}}=0.0884
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La resistencia 
+\begin_inset Formula $R_{5}$
+\end_inset
+
+ se obtiene:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{5}=\frac{2Q_{0}}{\omega_{0}C}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los valores de C se setearon en 
+\begin_inset Formula $C_{etapa\,1}=220pF$
+\end_inset
+
+ y 
+\begin_inset Formula $C_{etapa\,2}=330pF$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{5_{etapa\,1}}=67.8k\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{5_{etapa\,2}}=35.74k\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y 
+\begin_inset Formula $R':$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R'=\frac{R_{5}}{4Q_{0}^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+así ya puede saberse los valores de 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+y 
+\begin_inset Formula $R_{4}$
+\end_inset
+
+ para cada etapa
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{1_{etapa\,1}}=85.17k\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{4_{etapa\,1}}=8.26k\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{1_{etapa\,2}}=35.74k\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{4_{etapa\,2}}=4.36k\Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para la implementación en placa se utilizaron otros valores de resistencias,
+ asociando entre las resistencias smd que se tuvieron disponibles.
+ Por otra parte en cada etapa las resistencias 
+\begin_inset Formula $R_{5}$
+\end_inset
+
+se incluyeron como resistencias variables (Presets de 
+\begin_inset Formula $100k\Omega$
+\end_inset
+
+ de 25 vueltas).
+ La desición de poner a las resistencias 
+\begin_inset Formula $R_{5}$
+\end_inset
+
+variables fue para poder ajustar el circuito a que se adapte a la plantilla
+ que era requerida para la celda Rauch, y como se estudió en la sección
+ de sensibilidades, es la que mejor se adapta para variar el circuito.
+\end_layout
+
+\begin_layout Standard
+Por último, se utilizó el operacional T L084.
+ La razón de su uso no radica simplemente en su alta impedancia de entrada
+ (que es muy elevada, del orden de los 
+\begin_inset Formula $10^{12}\Omega$
+\end_inset
+
+) sino también su relación entre Avol (100000 veces) y GBP (4MHz) (relación
+ que como se explicó en trabajos previos modica el polo dominante que genera
+ el operacional) es lo sucientemente buena como para que el filtro funcione
+ de la manera esperada hasta frecuencias del orden de los 300 kHz.
+ Además utilizando éste OpAmp se disponen 4 operacionales en un integrado
+ lo cuál deja dos operacionales para algún uso, que podría ser una etapa
+ de búffer (aunque no fue necesario implementar), o para implementar una
+ etapa de ganancia.
+ Ésta última se dispuso en la placa en caso de que se tuviera que subir
+ o bajar la ganancia del circuito para que el circuito cumpla los requerimientos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+cuadro con componentes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Estudio de Rango Dinámico
+\end_layout
+
+\begin_layout Standard
+El rango dinámico permite conocer cuales son los valores de tensión con
+ los que puede ingresar una señal al circuito para los cuales la salida
+ obtenida es la esperada.
+ Más específicamente, dicho rango se calcula de la siguiente manera:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Rango\,Dinámico[dB]=20log(\frac{V_{máx}}{V_{mín}})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En primera instancia las ganancias se suman generando que la ganancia total
+ para el circuito es de 3 dB.
+ A pesar de ello, esto no signica que una señal que pase por el circuito
+ se aumente sólo en esa magnitud.
+ Lo que debe tenerse en cuenta es que para cada etapa, la ganancia es distinta.
+ Para analizar a que tensión máxima se le puede entrar al circuito, hay
+ que ver para que tomar en cuenta la tensión de saturación del operacional
+ utilizado la cual es típicamente de 
+\begin_inset Formula $V_{sat}$
+\end_inset
+
+ = ±13.5 V (al estar alimentado el operacional a una fuente externa de tensión
+ ±15 V ).
+ Como la ganancia de la primera etapa es de 2.78 dB, la ganancia, en veces
+ es de 1.377 veces.
+ La mayor tensión a la entrada es entonces 
+\begin_inset Formula $\frac{V_{sat}}{G_{et_{max\,1}}}=9.8V$
+\end_inset
+
+ .
+ No hace falta analizar la 
+\begin_inset Formula $V_{max}$
+\end_inset
+
+ de la segunda etapa ya que la misma tiene la misma ganancia que la primera.
+\end_layout
+
+\begin_layout Standard
+La tensión mínima estará delimitada por el piso de ruido (que se considerará
+ 50mV que es mayor que el real, pero es conveniente analizar para un caso
+ adverso) y la atenuación de la primera etapa.
+ Es relevante considerar esto último, ya que si la señal es atenuada por
+ la primer etapa en gran medida y luego amplificada por la segunda, una
+ reducción de gran magnitud en la primer etapa llevaría a la señal cerca
+ del piso de ruido, el cual se mezclará con dicha señal y será amplificada
+ con la segunda etapa.
+ Esto es claramente desfavorable, dado que si la primer señal es llevada
+ muy cerca del piso mencionado, puede llegar a no distinguirse claramente
+ en la salida.
+ Se toma entonces la atenuación que existe en 
+\begin_inset Formula $f_{p}^{+}$
+\end_inset
+
+ para calcular la tensión mínima a entrar al circuito, la cuál es de aproximadam
+ente 1.83dB=1.23 veces, por lo cual la tensión mínima teórica con la que se
+ puede entrar al circuito es de 61.73mV .
+ Esto muestra que el diseño y la distribución de las etapas es adecuado
+ para baja señal.
+ 
+\end_layout
+
+\begin_layout Standard
+Por último el Rango dinámico :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+RD=44dB
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es importante reconocer que el filtro se realizó con dos etapas BP, y al
+ ser éste de banda angosta no se perciben grandes pérdidas de rango dinámico.
+ Sin embargo si se desea implementar el mismo tipo de filtro pero de mayor
+ ancho de banda el rango dinámico se vería afectado negativamente, muy disminuíd
+o.
+ Para ello sería convieniente implementar dos etapas, con un pasa-altos
+ y un pasa-bajos para poder obetener un mayor rango dinámico, aunque si
+ se requiere una caída de 40dB por década como en este caso, deberán implementar
+se 4 etapas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Simulaciones y análisis de montecarlo
+\end_layout
+
+\begin_layout Standard
+Se realizaron las simulaciones correspondientes utilizando los valores reales
+ que se implementaron en la práctica con sus respectivas tolerancias(Resistencia
+s al 1% y capacitores al 5%) y el operacional TL084.
+\end_layout
+
+\begin_layout Paragraph*
+
+\color orange
+Respuesta en frecuencia
+\end_layout
+
+\begin_layout Standard
+Se realizó la simulación con los valores ideales que se incluyeron en la
+ placa, la cuál se representa con el siguiente gráfico:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename simulación respuesta en frecuencia.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia con valores ideales de los componentes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename respuesta en frecuencia ampliado.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia ampliado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Puede observarse que en un caso ideal de los componetes, el circuito se
+ comporta de una manera excelente.
+\end_layout
+
+\begin_layout Standard
+Luego se exponen los montecarlo de la primera y segunda etapa en 
+\color lime
+lima
+\color inherit
+ y 
+\color blue
+azul
+\color inherit
+ respectivamente, y luego en 
+\color red
+rojo
+\color inherit
+ la salida final del circuito
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename montecarlo las 3 juntas.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Montecarlo de las dos etapas y 
+\begin_inset Formula $V_{out}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename montecarlo las 3 juntas ampliado.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Montecarlo de las dos etapas y 
+\begin_inset Formula $V_{out}$
+\end_inset
+
+ ampliado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Luego para ver con mayor detalle la salida del circuito:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename montecarlo des ampliado.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Montecarlo del circuito completo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename montecarlo.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Montecarlo del circuito completo ampliado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Puede observarse que pueden existir valores de resistencias y capacitores
+ para los cuales el circuito no cumplirá la plantilla requerida, es por
+ ello que se decidió incluir una etapa de ganancia a la salida del circuito
+ para en caso que deba ajustarse.
+ La etapa de ganancia se detallará mas adelante.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+
+\color orange
+Impedancia de entrada
+\end_layout
+
+\begin_layout Standard
+Se realizó la simulación en montecarlo
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename simulacion impedancia de entrada.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Simulación impedancia de entrada
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Luego se realizó un análisis de montecarlo para la impedancia de entrada
+ para ver el peor caso (la 
+\begin_inset Formula $Z_{in}$
+\end_inset
+
+ más baja).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename montecarlo impedancia de entrada.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Simulación de montecarlo impedancia de entrada
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename montecarlo impedancia de entrada peor caso.PNG
+	lyxscale 50
+	scale 40
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada mas baja
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Puede observarse que en el peor caso la impedancia de entrada esta más de
+ 
+\begin_inset Formula $13k\Omega$
+\end_inset
+
+ por encima de la requerida (
+\begin_inset Formula $50k\Omega$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Paragraph*
+
+\color orange
+Impedancia de salida
+\end_layout
+
+\begin_layout Standard
+Se realizó el análisis de montecarlo para la impedancia de salida
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename impedancia de salida.PNG
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de salida
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Puede observarse que la impedancia de salida es muy baja, no supera los
+ 
+\begin_inset Formula $40\Omega$
+\end_inset
+
+, por lo tanto la resistencia 
+\begin_inset Formula $R_{1}$
+\end_inset
+
+ de la segunda etapa puede considerarse bien elejida ya que supera en 3
+ órdenes de magnitud.
+\end_layout
+
+\begin_layout Paragraph*
+
+\color orange
+Histogramas
+\end_layout
+
+\begin_layout Standard
+Luego de hacer un análisis de montecarlo de 100 curvas de la respuesta en
+ frecuencia del circuito, se realizó un historama con la misma para analizar
+ la dispersión:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename hitograma 1.png
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Histograma
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+
+\color orange
+Respuesta al escalón
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Respuesta al escalon.PNG
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Análisis de montecarlo de la respuesta al escalón
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Etapa de ganancia
+\end_layout
+
+\begin_layout Standard
+Se incluyó una etapa de ganancia para poder ''compensar'' el circuito si
+ éste presentaba demasiada atenuación o ganancia, tal cómo se exibió en
+ el análisis de montecarlo.
+ La etapa se realizó con 3 resistencias de 
+\begin_inset Formula $10k\Omega$
+\end_inset
+
+y un preset de 
+\begin_inset Formula $25k\Omega$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename etapa ganancia.PNG
+	scale 60
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Etapa de ganancia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para obtener la expresión de la ganancia analizando al OpAmp como idea,
+ tomando 
+\begin_inset Formula $R=10k\Omega$
+\end_inset
+
+y 
+\begin_inset Formula $R'$
+\end_inset
+
+la resistencia variable:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{V_{in}}{2R}=\frac{V^{+}}{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{V_{6}}{R'+R}=\frac{V^{-}}{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se toma 
+\begin_inset Formula $V^{+}=V^{-}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{V_{6}}{R'+R}=\frac{V_{in}}{2R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{V_{6}}{V_{in}}=\frac{1}{2}+\frac{R'}{2R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo tanto podríamos obtener una atenuación de 6dB con el preset en 
+\begin_inset Formula $0\Omega$
+\end_inset
+
+o hasta una ganancia de 4.86dB, lo que da márgen suficiente para manejar
+ la ganancia del circuito en caso de ser necesaria.
+\end_layout
+
+\begin_layout Subsection
+Implementación en placa impresa y resultados
+\end_layout
+
+\begin_layout Standard
+En esta sección se analizarán los resultados teóricos, medidos y simulados
+ conjuntamente de la implementación del filtro utilizando la celda Delyiannis-Fr
+iend.
+ El circuito analizado e implementado en PCB es el siguiente: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename esquemático.PNG
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Esquemático del circuito para implementación en pcb
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En el esquématico se observa que se incliyero pines para poder medir cada
+ etapa por separado, e incluyendo jumpers, las dos etapas en conjunto con
+ la etapa de ganancia
+\end_layout
+
+\begin_layout Subsubsection
+Respuesta en frecuencia
+\end_layout
+
+\begin_layout Standard
+Se midió la respuesta en frecuencia considerando la tensión máxima de entrada,
+ entre frecuencias considerables ya que más alla de 60dB de atenuanción
+ las mediciones no son totalmente confiables porque aunque entrando con
+ la tensión máxima de entrada la salida es menor al piso de ruido.
+ 
+\end_layout
+
+\begin_layout Standard
+Lo primero que se realizó fue medir cada etapa cada etapa por separado para
+ poder calibrar las frecuencias centrales de cada celda Pasa Banda.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename dos etapas sin ganancia.png
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mediciones de cada celda por separado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Luego se midió la salida 
+\color red
+sin la etapa de ganancia
+\color inherit
+, la cual se detalla a continuación con los siguientes gráficos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename med respuesta en frecuencia sin ganancia.png
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia sin etapa de ganancia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename med respuesta en frecuencia sin ganancia ampliado.png
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia sin etapa de ganancia (ampliado)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename phase sin ganancia.png
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fase sin etapa de ganancia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se observó que se debía calibrar el preset de la etapa de ganancia para
+ que el circuito cumpla los requisitos de la plantilla.
+ Luego de un fino análisis se pudo calibrar la etapa de ganancia, con lo
+ cual las mediciones arrojaron los siguientes gráficos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename med respuesta en frecuencia con ganancia.png
+	lyxscale 70
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+PAINT PARA PONER LA PLANTILLA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia con etapa de ganancia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename med respuesta en frecuencia con ganancia ampliado.png
+	lyxscale 70
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia con etapa de ganancia (ampliado)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fase con ganancia.png
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fase con etapa de ganancia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se aprecia que con esta configuración el circuito cumple que la banda de
+ paso se ubique entre -3dB y 0dB.
+\end_layout
+
+\begin_layout Subsubsection
+Impedancia de entrada
+\end_layout
+
+\begin_layout Standard
+Para medir la impedancia de entrada se utilizó una resistencia de 
+\begin_inset Formula $47k\Omega$
+\end_inset
+
+en serie con la entrada del circuito, midiendo así la caída de tensión sobre
+ la resistencia, luego se calcula la corriente, y finalmente puede hallarse
+ la impedancia de entrada.
+ Se halló que la impedancia de entrada mínima se encontraba muy cercana
+ a la frecuencia central del filtro pasabanda (
+\begin_inset Formula $36kHz$
+\end_inset
+
+), y la misma tuvo un valor de 
+\begin_inset Formula $62k\Omega$
+\end_inset
+
+.
+ Así se determinó experimentalmente que el filtro cumple todas las especificacio
+nes que se exigieron para la construcción del mismo.
+ 
+\end_layout
+
+\begin_layout Subsection
+Conclusiones
+\end_layout
+
+\begin_layout Standard
+La implementación en celda Rauch de un ltro pasa-altos, pasa-bajos o pasa-banda
+ resulta una implementación tanto útil como de realización simple.
+ Si se desea utilizar para el caso de un filtro BP de banda angosta pueden
+ emplearse dos celdas BP y en el caso de banda ancha, pueden utilizarse
+ en cascada un LP y HP que pueden ser implementados también con la Rauch.
+\end_layout
+
+\begin_layout Standard
+En denitiva, la elección de dos pasa-bandas para la implementación del circuito
+ actuó de la manera esperada correspondiendo al análisis de rango dinámico
+ propuesto, ya que el ltro es de un pasa-banda de banda angosta.
+ 
+\end_layout
+
+\begin_layout Standard
+La desventaja que tiene esta celda son sus sensibilidades, sobretodo aquellas
+ relacionadas al Q y la ganancia.
+ Esto prácticamente obliga a utilizar componentes de muy buena calidad (baja
+ tolerancia) para que los parámetros mencionados no varíen significativamente.
+\end_layout
+
+\end_body
+\end_document
