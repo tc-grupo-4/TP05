@@ -1,0 +1,47 @@
+* C:\Users\mlste\Documents\ITBA\6 Cuatrimestre\TC\TC_TP5\Ej3\Simulacion\version 2\sedra version 2.asc
+R1 N001 P001 {mc{15k, tolr}}
+R2 N001 N003 {mc{3.9k, tolr}}
+R3 N005 N001 {mc{1k,tolr}}
+R4 0 P002 {mc{6.8k,tolr}}
+R5 N009 N007 {mc{47,tolr}}
+C1 N011 N010 {mc{82, tolc}}
+C2 0 N011 {mc{560p,tolc}}
+C3 N017 N011 {mc{4.7n,tolc}}
+XU1 N007 N001 v+ v- N005 LM833#0
+R7 P001 0 {mc{180,tolr}}
+R8 N003 in1 {mc{10k,tolr}}
+R9 P002 N007 {mc{220,tolr}}
+R10 in1 N009 {mc{12k,tolr}}
+R11 N005 N011 {mc{18k,tolr}}
+R6 N005 N011 {mc{470,tolr}}
+C4 N017 in1 {mc{680n,tolc}}
+C5 N010 N007 {mc{5.6n,tolc}}
+V2 v+ 0 15
+V3 0 v- 15
+R12 N002 0 {mc{1k8, tolr}}
+R13 N002 N004 {mc{5.6k, tolr}}
+R14 N006 N002 {mc{1k,tolr}}
+R16 N012 N008 {mc{3k9,tolr}}
+C6 N014 N013 {mc{12n, tolc}}
+C7 N016 N014 {mc{22n,tolc}}
+C8 in2 N014 {mc{1n,tolc}}
+XU2 N008 N002 v+ v- N006 LM833#0
+R18 N004 in2 {mc{270,tolr}}
+R20 in2 N012 {mc{10k,tolr}}
+C10 N013 N008 {mc{8.2n,tolc}}
+R17 N002 0 {mc{270, tolr}}
+R15 N008 0 {mc{680, tolr}}
+R19 N008 0 {mc{2k2,tolr}}
+R21 N006 P003 {mc{470,tolr}}
+R22 P003 N014 {mc{1k2, tolr}}
+C9 N016 0 {mc{4n7,tolc}}
+XU4 N015 in1 v+ v- in1 LM833#0
+V1 N015 0 PULSE(1 1 0 1p 1p 10u 20u) AC 3 Rser=50
+XU3 N005 in2 v+ v- in2 LM833#0
+.inc "LM833.mod"
+.param tolc=0.1
+.param tolr=0.01
+.ac dec 100 1000 1000000
+;.step param run 1 30 1
+.backanno
+.end

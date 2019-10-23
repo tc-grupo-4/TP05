@@ -1,0 +1,37 @@
+\contentsline {chapter}{\numberline {1}Celda Sallen-Key}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Introducci\'on: la celda Sallen-Key}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}An\'alisis de sensibilidades}{7}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}Filtro 1: Legendre}{8}{section.1.2}
+\contentsline {section}{\numberline {1.3}Filtro 2: Bessel}{8}{section.1.3}
+\contentsline {chapter}{\numberline {2}Celda Rauch (Deliyannis-Friend modificada)}{9}{chapter.2}
+\contentsline {chapter}{\numberline {3}Sedra-Ghorab-Martin}{10}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introducci\'on}{10}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Usos}{10}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Obtenci\'on funcion transferencia con Cauer}{10}{section.3.2}
+\contentsline {section}{\numberline {3.3}Elecci\'on de componentes}{15}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Uso y ubicaci\'on del preset}{16}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Uso de buffers}{16}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.4}Mediciones}{18}{section.3.4}
+\contentsline {section}{\numberline {3.5}Estabilidad}{20}{section.3.5}
+\contentsline {section}{\numberline {3.6}Anexo}{21}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Transformaci\'on complementaria: relaci\'on entre celda HPB y Deliyannis}{21}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Transferencia con polo dominante por feedback}{22}{subsection.3.6.2}
+\contentsline {chapter}{\numberline {4}Celda Universal}{24}{chapter.4}
+\contentsline {section}{\numberline {4.1}Comparaci\IeC {\'o}n de celdas universales}{25}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Kerwin Huelsman Newcomb (KHD)}{25}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Tow Thomas}{26}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Akerberg Mossberg}{26}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Fleischer Tow}{27}{subsection.4.1.4}
+\contentsline {subsubsection}{Pasa bajos}{27}{section*.30}
+\contentsline {subsubsection}{Pasa banda}{27}{section*.31}
+\contentsline {subsubsection}{Pasa altos}{27}{section*.32}
+\contentsline {subsubsection}{Rechaza banda}{27}{section*.33}
+\contentsline {subsubsection}{Pasa todo}{27}{section*.34}
+\contentsline {section}{\numberline {4.2}Elaboraci\IeC {\'o}n del filtro}{28}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Plantilla a relizar}{28}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Elecci\IeC {\'o}n de celda}{28}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Analisis de sensivilidades de la celda Fleischer Tow}{28}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Dise\IeC {\~n}o del filtro}{28}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Simulaci\IeC {\'o}n del modulo del la respuesta en frecuencia}{29}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}Simulaci\IeC {\'o}n de la impedancia de entrada}{30}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.7}Mediciones}{30}{subsection.4.2.7}

@@ -1,0 +1,3926 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Introducción
+\end_layout
+
+\begin_layout Standard
+En el paper ''Optimum Configurations for Single-Amplifier Biquadratic Filters''
+ se introducen nuevos circuitos biquad (que poseen terminos bicuadráticos
+ en la función transferencia) basados en la estructura de realimentación
+ positiva de la celda Sallen Key y brindan la posibilidad de poder realizar
+ cualquier función transferencia de segundo orden.
+ 
+\end_layout
+
+\begin_layout Standard
+Una de las principales desventajas de los Single-Amplifier Biquads es que
+ tienen una sensibilidad relativa de Q con respecto de la ganancia del amplifica
+dor es alta.
+ El diseño en este paper se especializa en reducir S
+\begin_inset Formula $_{A}^{Q}$
+\end_inset
+
+ en los SABs pero a cambio del aumento de las sensibilidades de los componentes
+ pasivos.
+\end_layout
+
+\begin_layout Section*
+Especificaciones del filtro
+\end_layout
+
+\begin_layout Standard
+Las especificaciones para el filtro de cauer fueron las siguientes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10550Hz
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21100Hz
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $|Z_{IN}(f)|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\geq$
+\end_inset
+
+50K
+\begin_inset Formula $\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Especificaciones de la plantilla de la consigna
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Especificaciones-de-la"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con los parámetros de la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Especificaciones-de-la"
+
+\end_inset
+
+, para poder cumplir plantilla se necesita de un filtro de cauer de orden
+ 4 (orden mínimo).
+ Como es debido, realizaremos una plantilla aún más restrictiva para establecer
+ un margen.
+ 
+\end_layout
+
+\begin_layout Standard
+Sabiendo esto, se propone una nueva plantilla:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11000Hz
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20500Hz
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{p}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+45dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.5dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $|Z_{IN}(f)|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\geq$
+\end_inset
+
+50K
+\begin_inset Formula $\Omega$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Plantilla más restrictiva propuesta
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Circuito a implementar
+\end_layout
+
+\begin_layout Standard
+En el paper que se pidió investigar se presentan dos circuitos: LPB y HPB
+ (Low Pass Biquad y High Pass Biquad).
+ Como lo que se planea realizar es un pasa altos sólo se analizará el HPB.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Highpass_BQ.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Circuito HPB
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Circuito-highpass"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El circuito de la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Circuito-highpass"
+
+\end_inset
+
+ se puede utilizar tanto para implementar un high pass como un high pass
+ notch.
+ En nuestro caso, al observar que la función transferencia de cauer tiene
+ ceros de transmisión, nos concentraremos en el high pass notch .
+\end_layout
+
+\begin_layout Standard
+Todos los componentes indicados con G corresponden a la conductancia del
+ elemento pasivo, por ende si se refiere a la componente resistiva esta
+ es de la forma 
+\begin_inset Formula $G_{X}=\frac{1}{R_{X}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+La función transferencia de la celda está dada por 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T(s)=\frac{n_{2}s^{2}+n_{1}s+n_{0}}{s^{2}+s(\frac{\omega_{0}}{Q})+\omega_{0}^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega_{0}^{2}=\frac{G_{1}(G_{41}+G_{42})}{C_{3}(C_{21}+C_{22})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\omega_{0}}{Q}=(G_{41}+G_{42})(\frac{1}{C_{21}+C_{22}}+\frac{1}{C_{3}})-(\frac{G_{1}}{C_{21}+C_{22}})(\frac{G_{a1}+G_{a2}}{G_{b}})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{2}=(\frac{G_{a1}+G_{a2}+G_{b}}{G_{b}})(\frac{C_{22}}{C_{21}+C_{22}})-\frac{G_{a2}}{G_{b}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{1}=(\frac{G_{a1}+G_{a2}+G_{b}}{G_{b}})G_{42}(\frac{1}{C_{21}+C_{22}}+\frac{1}{C_{3}})-\frac{G_{a2}}{G_{b}}\left[\frac{G_{1}}{C_{21}+C_{22}}+(G_{41}+G_{42})(\frac{1}{C_{21}+C_{22}}+\frac{1}{C_{3}})\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{0}=\frac{G_{1}(G_{41}+G_{42})}{C_{3}(C_{21}+C_{22})}\left[(\frac{G_{42}}{G_{41}+G_{42}})(\frac{G_{a1}+G_{a2}+G_{b}}{G_{b}})-\frac{G_{a2}}{G_{b}}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Ecuaciones utilizadas para cada celda
+\end_layout
+
+\begin_layout Standard
+Fijando los parámetros Q, 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $\omega_{z}$
+\end_inset
+
+, n
+\begin_inset Formula $_{2}$
+\end_inset
+
+ , Q0, C, Gb se obtienen los valores de componentes.
+ 
+\end_layout
+
+\begin_layout Standard
+n
+\begin_inset Formula $_{2}$
+\end_inset
+
+ es la ganancia de la celda en 
+\begin_inset Formula $\omega\rightarrow\infty$
+\end_inset
+
+ .
+ Las costantes n
+\begin_inset Formula $_{2}$
+\end_inset
+
+ y K fijan las constantes k, n y m que determinan las relaciones de los
+ componentes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ y Q son propiedades de los polos de la función de la función transferencia
+ y 
+\begin_inset Formula $\omega_{z}$
+\end_inset
+
+ es la frecuencia de corte de los ceros de la función transferencia.
+ 
+\end_layout
+
+\begin_layout Standard
+Q0 no representa físicamente nada sino que es un parámetro el cual se fija
+ de forma tal que queden valores nominales de componentes pero siempre mantenien
+do Q0<Q.
+ Hay que tener en cuenta que tiene cierta influencia en la sensibilidad
+ de los parámetros Q y 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+, que se verá plasmada en el análisis de sensibilidad.
+\end_layout
+
+\begin_layout Standard
+C, G4 y Gb se fijan por lo cual conviene asignarle un valor nominal.
+\end_layout
+
+\begin_layout Standard
+Todo componente que se llame Z
+\begin_inset Formula $_{N}$
+\end_inset
+
+
+\begin_inset Formula $_{i}$
+\end_inset
+
+ (donde Z y N corresponden a qué componente pertenece e i denota el número
+ de componente) es parte de la suma de dos componentes que forman uno, por
+ ejemplo G4 = G
+\begin_inset Formula $_{41}$
+\end_inset
+
+ + G
+\begin_inset Formula $_{42}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G4=C*\frac{\omega_{0}}{2*Q0}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G1=4*Q0^{2}*G4
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parámetro
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fórmula
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+K
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1+\frac{(1-\frac{Q0}{Q})}{2*Q0^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{2}*\frac{(\frac{\omega_{z}}{\omega_{0}})^{2}}{1-\frac{Q0}{Q}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k*(1-\frac{Q0}{K*Q})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k*(K-1)*\frac{(1+2*Q0^{2}*(\frac{\omega_{0}}{\omega_{z}})^{2})}{K}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Parámetros intrínsecos de cada celda
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Componente
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relación
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G
+\begin_inset Formula $_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(K-1)*G
+\begin_inset Formula $_{b}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G
+\begin_inset Formula $_{a1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(1-k)*G
+\begin_inset Formula $_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G
+\begin_inset Formula $_{a2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+k*G
+\begin_inset Formula $_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G
+\begin_inset Formula $_{41}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(1-n)*G4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G
+\begin_inset Formula $_{42}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+n*G4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C
+\begin_inset Formula $_{21}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(1-m)*C
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C
+\begin_inset Formula $_{22}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relación entre componentes según los parámetros intrinsecos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Análisis de sensibilidades
+\end_layout
+
+\begin_layout Standard
+Se introduce la tabla correspondiente a las sensibilidades del HPB:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $Q$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-(
+\begin_inset Formula $\frac{Q}{Q_{0}}$
+\end_inset
+
+-
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $\frac{1}{2}(\frac{Q}{Q_{0}}-1)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $C_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{1}{2}(\frac{Q}{Q_{0}}-1)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{Q}{Q_{0}}-\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $-(\frac{Q}{Q_{0}}-1)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $R_{b}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{Q}{Q_{0}}-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Sensibilidades de 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ y 
+\begin_inset Formula $Q$
+\end_inset
+
+ respecto de los componentes pasivos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que tanto la sensibilidad de 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ respecto de R
+\begin_inset Formula $_{a}$
+\end_inset
+
+ y R
+\begin_inset Formula $_{b}$
+\end_inset
+
+ es 0, resulta útil colocar un preset de ajuste del Q en alguno de los dos
+ componentes, por ese motivo se elige arbitrariamente R
+\begin_inset Formula $_{b}$
+\end_inset
+
+ como componente de resistencia variable.
+\end_layout
+
+\begin_layout Section*
+Función transferencia 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Función transferencia.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Función transferencia graficada en Atenuación (dB)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Como en este caso el filtro de cauer es de orden 4, se requiere de dos BIQUADS
+ para poder implementar la función transferencia.
+ Dicho esto se desglosa la función transferencia en dos etapas las cuales
+ se implementarán con la celda Sedra que darán como resultado dos high pass
+ notch puestos en cascada.
+ Más adelante se discutirán detalles de implementación como asociación de
+ polos y ceros, rango dinámico y asignación de ganancia.
+\end_layout
+
+\begin_layout Standard
+Sabemos que Q y 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ de los polos de cada etapa y 
+\begin_inset Formula $\omega_{z}$
+\end_inset
+
+ de los ceros de cada etapa, son fijos (dada la plantilla).
+ Estos son de: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Etapa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Q
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+(
+\begin_inset Formula $\frac{rad}{s}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{0}$
+\end_inset
+
+(Hz)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\omega_{z}$
+\end_inset
+
+(
+\begin_inset Formula $\frac{rad}{s}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{z}$
+\end_inset
+
+(Hz)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bajo Q
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.81
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+220935.8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35163,02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31779
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5057,78
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Alto Q
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.41
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+129062.66
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20540,96
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+71273.16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11343,47
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Q y 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+ de los polos de la función transferencia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Más adelante se podrá ver que por la forma de la curva en el gráfico de
+ bode (magnitud), la etapa de bajo Q empieza a atenuar antes que la de alto
+ Q, por lo cual resulta razonable poner esta etapa primero, para maximizar
+ el rango dinámico.
+ Esto puede ser visto de la siguiente forma probando por el absurdo:
+\end_layout
+
+\begin_layout Standard
+Asumiendo que la primera etapa es tal que maximiza el rango dinámico y que
+ se trata de la de alto Q, si analizamos el comportamiento frente al mismo
+ intervalo de frecuencias (alrededor de los 10KHz - 50 KHz), se da antes
+ la saturación que si se pusiera al revés, por lo cual con esta configuración
+ no hemos maximizado el rango dinámico ergo nos quedamos con la otra.
+ 
+\end_layout
+
+\begin_layout Standard
+Esta situación se puede generalizar como ordenar las etapas según Q de forma
+ creciente.
+\end_layout
+
+\begin_layout Standard
+Para la asignación de la ganancia en cada etapa se tiene que tener en considerac
+ión que dado que se quiere maximizar el rango dinámico en un filtro en cascada,
+ es necesario maximizar en cada sección del filtro el mínimo nivel de señal.
+ Además, la tensión de salida de todas las secciones debe ser igual.
+ Para poder lograr ese objetivo primero se eligen los pares cero-polo ,
+ luego ordenamos por Q creciente y por último se determina la ganancia para
+ cada etapa.
+ Para poder llegar a la solución óptima es necesario tener un programa adecuado.
+ Para más información ver páginas 237, 238 y 239 de ''Design with Operational
+ Amplifiers and Analog Integrated Circuits - Sergio Franco''.
+\end_layout
+
+\begin_layout Standard
+Como en nuestro caso si se disponía se obtuvieron las siguientes ganancias
+ para cada etapa:
+\end_layout
+
+\begin_layout Standard
+Recordamos que como las funciones transferencia por separado son de high
+ pass notch cumplen con el formato:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T(s)=\frac{n_{2}s^{2}+n_{1}s+n_{0}}{s^{2}+s(\frac{\omega_{0}}{Q})+\omega_{0}^{2}}=n_{2}\frac{(s^{2}+\frac{n_{1}}{n_{2}}s+\frac{n_{0}}{n_{2}})}{s^{2}+s(\frac{\omega_{0}}{Q})+\omega_{0}^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset Formula $T(s)|_{s\rightarrow\infty}=n_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Etapa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ganancia (n
+\begin_inset Formula $_{2}$
+\end_inset
+
+) en dB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bajo Q
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.73
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Alto Q
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-3.23
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ganancias obtenidas por medio de software
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Primer etapa: Etapa de bajo Q
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Stage1.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia de la magnitud de la primera etapa
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Segunda etapa: Etapa de alto Q
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Stage2_.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia de la magnitud de la segunda etapa
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Diagrama de polos y ceros de H(s)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/polos y ceros de la funcion.png
+	scale 85
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de polos y ceros de la función transferencia
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Diagrama-de-polos"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para la implementación de la función transferencia se deben asociar los
+ polos y ceros de forma tal que se mantenga la distancia mínima entre los
+ mismos.
+ Esto se ve reflejado en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Diagrama-de-polos"
+
+\end_inset
+
+ con las flechas que indican cómo deben asociarse los mismos, el color denota
+ que pertenecen a funciones transferencia distintas.
+ 
+\end_layout
+
+\begin_layout Standard
+Se puede observar que H(s) posee ceros de transmisión.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Asociación de polos y ceros
+\end_layout
+
+\begin_layout Standard
+La estrategia para cualquier BIQUAD en un circuito en cascada debemos evadir
+ atenuación indebida y ganancia innecesaria, lo cual nos lleva a pensar
+ en el criterio de que la señal sea lo más ''plana'' posible, por arriba
+ del nivel de ruido y por debajo de la tensión de saturación del amplificador
+ operacional.
+ Especificada la ganancia total del sistema, si algún contenido armónico
+ de la señal se vuelve muy pequeño, el mismo debe ser amplificado hasta
+ el nivel fijado por la ganancia total pero como consecuencia, se amplifica
+ el ruido.
+ De la misma forma, si un contenido armónico de la señal se vuelve muy grande
+ debe ser atenuado hasta el nivel de la ganancia total, pero esto reduce
+ las componentes restantes de baja señal, cuya magnitud se acerca al piso
+ de ruido.
+ Por ende se concluye que mantener la señal lo más plana posible en la banda
+ pasante optimiza el rango dinámico.
+\end_layout
+
+\begin_layout Standard
+Según la distribución de polos y ceros se puede llevar a cabo o no, que
+ la señal sea lo más plana posible en la banda pasante.
+ Existen algoritmos para poder llevar a cabo la correcta asignación de polos
+ pero también se puede llegar intuitivamente a una solución subóptima: Si
+ un par cero-polo fuera idéntico, no se proveería ningún tipo de filtro
+ pero la función sería optimamente plana.
+ Se sigue que para poder lograr nuestro objetivo, simplemente asignamos
+ cada polo o par de polos al cero más cercano (tiene prioridad el que más
+ cerca está).
+\end_layout
+
+\begin_layout Section*
+Obtención de los valores de componentes para las celdas
+\end_layout
+
+\begin_layout Standard
+Utilizando las ecuaciones para cada celda y teniendo las precauciones ya
+ mencionadas sobre Q0 se obtuvieron los siguientes valores:
+\end_layout
+
+\begin_layout Subsubsection*
+Para la celda de bajo Q:
+\end_layout
+
+\begin_layout Standard
+Q0 = 0.31
+\end_layout
+
+\begin_layout Standard
+C = 10nf
+\end_layout
+
+\begin_layout Standard
+Gb = 1/(1000
+\begin_inset Formula $\Omega$
+\end_inset
+
+) 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Componente
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor obtenido (
+\begin_inset Formula $\Omega$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor nominal asignado (
+\begin_inset Formula $\Omega$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+730
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+750
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ra1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+324.64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+330
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ra2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7612.11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R41
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+291.46
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+300
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R42
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7546.34
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Componente
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor obtenido (nf) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor nominal asignado (nf)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.7904
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.8nf
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C22
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.2095
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.3nf
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10nf
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Valores asignados de componentes para la celda de bajo Q
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Para la celda de alto Q:
+\end_layout
+
+\begin_layout Standard
+Gb = 1/(100
+\begin_inset Formula $\Omega$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Q0 = 2.20
+\end_layout
+
+\begin_layout Standard
+C = 10nf
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Componente
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor obtenido (
+\begin_inset Formula $\Omega$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor nominal asignado (
+\begin_inset Formula $\Omega$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+176.094
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+180
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ra1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3327.8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3300
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ra2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4603.8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4700
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R41
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4373.9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4300
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+R42
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15457
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Componente
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor obtenido (nf) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor nominal asignado (nf)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.23838
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.3nf
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C22
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.7616
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.8nf
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10nf
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Valores asignados de componentes para la celda de alto Q
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Mediciones
+\end_layout
+
+\begin_layout Standard
+En un principio se había considerado poner un buffer entre las distintas
+ etapas para que una no cargue a la otra, sin embargo, al efectuar las correspon
+dientes simulaciones, se pudo inferir que no había problema alguno al poner
+ las dos etapas en cascada sin el buffer.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/impedanciadesalidabajoQ.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de salida de la etapa de bajo Q
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/impedancia de entradaAltoQ.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada de la etapa de alto Q
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sin embargo, no fue lo que en un principio se hizo, sino que se utilizó
+ un buffer y ahí es cuando surgió una problemática al medir y es que el
+ sistema oscilaba.
+ Por esta razón es que se investigó acerca de la impedancia de salida de
+ la etapa 1 y la impedancia de entrada de la etapa 2.
+\end_layout
+
+\begin_layout Standard
+Una vez que se retiró el buffer del circuito, el sistema dejó de oscilar,
+ esto se debe a que seguramente algún polo de los amplificadores operacionales
+ involucrados tenía un sobrepico que hacía que disminuya el gain margin
+ de alguno de las ganancias a lazo abierto, dando lugar a que se produzca
+ la situación descripta por el criterio de barkhausen.
+\end_layout
+
+\begin_layout Subsection*
+Impedancia de entrada
+\end_layout
+
+\begin_layout Standard
+Por medio de las simulaciones adecuadas se obtuvo que la impedancia de entrada
+ del circuito total es baja, del orden de los K
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/ImpedanciaentradTot.png
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada del circuito 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Impedancia-de-entrada"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se concluye de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Impedancia-de-entrada"
+
+\end_inset
+
+ que la impedancia de entrada no se mantiene mayor a 50KHz como lo pide
+ la consigna el mayor rango de frecuencias posibles.
+ Para solucionar este percance se optó por poner un buffer a la entrada
+ y que la impedancia de entrada sea muy grande en un rango mcuho más abarcativo.
+\end_layout
+
+\begin_layout Standard
+Se realizó además un montecarlo para ver como variaba la función según las
+ tolerancias de los componentes asigando tolerancia 0.01 a los resistores
+ (dado que se utilizó SMD) y 0.1 a los capacitores cerámicos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Montecarlo_Mag.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Montecarlo del diagrama de Bode (módulo)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se puede destacar que a pesar de las tolerancias, la función siempre cumple
+ la plantilla en la banda atenuada.
+ Debido a que los capacitores varían tanto en su valor, la curva tiene pocos
+ aciertos donde cumple plantilla.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Montecarlo_Pha.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Montecarlo del diagrama de Bode (fase)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Montecarlo-del-diagrama"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se puede ver en la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Montecarlo-del-diagrama"
+
+\end_inset
+
+ que hay un salto repentino de fase en 5KHz que tiene que ver con el cero
+ de la primera etapa.
+ Dado que no se puede lograr un circuito perfecto y el cero se encuentra
+ sobre el eje j
+\begin_inset Formula $\omega$
+\end_inset
+
+ el mismo puede cambiar de fase abruptamente dependiendo en qué parte del
+ plano complejo s se encuentre.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/EJ3/mediciones/MagnitudBode.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Bode (módulo) del sistema completo 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Diagrama-de-Bode-Mod"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se puede observar en la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Diagrama-de-Bode-Mod"
+
+\end_inset
+
+ que a grandes frecuencias empieza a crecer el medido y se separa del modelo
+ teórico y de la simulación.
+ Esto se debe al polo dominante del amplificador operacional que tiene un
+ sobrepico.
+ Por más que exceda 0dB a los 300KHz ya para ese entonces el sistema empieza
+ a estar limitado por el slew rate, dado que se usó un LM833 con slew rate
+ = 7
+\begin_inset Formula $\frac{V}{\mu s}$
+\end_inset
+
+ y un TL082 con slew rate de 
+\begin_inset Formula $13\frac{V}{\mu s}$
+\end_inset
+
+.
+ Significa que si entro con una señal de Vp = 12 V la máxima frecuencia
+ de operación es de 92.84KHz.
+ Sin embargo las mediciones se realizaron con Vp = 1 cuya máxima frecuencia
+ de opreacion es 1.114MHz.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/bandapsnt.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Bode (módulo) de la banda pasante (21KHz - 500KHz)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notar que todos dan distintas curvas para la banda pasante, sin embargo
+ todas cumplen plantilla sin lugar a duda.
+ El medido no coincide ya que sufrió un par de ajustes con los presets propuesto
+s inicialmente.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/EJ3/mediciones/FaseBode.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Bode (fase) del sistema completo
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Diagrama-de-Bode-Phase"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Diagrama-de-Bode-Phase"
+
+\end_inset
+
+ se observa el cambio abrupto de fase en la simulación en 4KHz aproximadamente,
+ si se ve en el gráfico de módulo el mismo se atenúa.
+ dando lugar a un cero que provoca un salto de fase.
+ 
+\end_layout
+
+\begin_layout Section*
+Rango dinámico
+\end_layout
+
+\begin_layout Standard
+El rango dinámico se calcula teniendo en cuenta la ganancia máxima en el
+ espectro cada etapa.
+ Llamemos G1
+\begin_inset Formula $_{max}$
+\end_inset
+
+ a la ganancia máxima en la etapa de bajo Q y G2
+\begin_inset Formula $_{max}$
+\end_inset
+
+ a la ganancia máxima de la etapa de alto Q.
+\end_layout
+
+\begin_layout Standard
+En la etapa de bajo Q la mayor ganancia se obtiene a los 2.368 dB y en la
+ de alto Q se obtiene a los 6.06dB
+\end_layout
+
+\begin_layout Standard
+G1
+\begin_inset Formula $_{max}$
+\end_inset
+
+=1.313409
+\end_layout
+
+\begin_layout Standard
+G2
+\begin_inset Formula $_{max}$
+\end_inset
+
+=2.0009
+\end_layout
+
+\begin_layout Standard
+Le asignamos como Vout = 13.5V (la tensión de saturación del amplificador
+ operacional menos un margen de tensión)
+\end_layout
+
+\begin_layout Standard
+Vout = G2
+\begin_inset Formula $_{max}$
+\end_inset
+
+.
+ V
+\begin_inset Formula $_{in2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V
+\begin_inset Formula $_{in2}$
+\end_inset
+
+= G1
+\begin_inset Formula $_{max}$
+\end_inset
+
+ .
+ V
+\begin_inset Formula $_{in1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{Vout}{G2_{max}G1_{max}}=V_{in1}$
+\end_inset
+
+= 
+\begin_inset Formula $V_{max_{in}}=5.11627V$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Realizamos lo mismo pero con la ganancia mínima en la banda pasante.
+\end_layout
+
+\begin_layout Standard
+Vout = 10mV (el piso de ruido considerado)
+\end_layout
+
+\begin_layout Standard
+Vout = G2
+\begin_inset Formula $_{min}$
+\end_inset
+
+ .
+ V
+\begin_inset Formula $_{in2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Vin
+\begin_inset Formula $_{2}$
+\end_inset
+
+= G1
+\begin_inset Formula $_{min}$
+\end_inset
+
+V
+\begin_inset Formula $_{in1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+G1
+\begin_inset Formula $_{min}$
+\end_inset
+
+=1.78dB 
+\begin_inset Formula $\rightarrow G1_{min}=$
+\end_inset
+
+1.227439
+\end_layout
+
+\begin_layout Standard
+G2
+\begin_inset Formula $_{min}$
+\end_inset
+
+=-3.415dB 
+\begin_inset Formula $\rightarrow G2_{min}=$
+\end_inset
+
+0.67491
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{Vout}{G2_{min}G1_{min}}=V_{in1}=V_{min_{in}}=8.28418x10^{-3}V$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rd = 20 log (
+\begin_inset Formula $\frac{Vmax_{in}}{Vmin_{in}}$
+\end_inset
+
+)=55.81407dB
+\end_layout
+
+\begin_layout Section*
+Respuesta al escalón
+\end_layout
+
+\begin_layout Standard
+Se midió la respuesta al escalón con una tensión Vpp =2V y Voffset = 1V
+ y se obtuvieron las siguientes gráficas:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/EJ3/mediciones/step_resp.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta al escalón del sistema
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Estas pruebas suelen realizarse para saber si el sistema oscila o no, ya
+ que el escalón posee una gran variedad de armónicos.
+ Si en algún momento en el circuito se cumpliera el criterio de Barkhousen,
+ veríamos oscilaciones.
+ Otra alternativa es entrar con ruido al sistema.
+\end_layout
+
+\begin_layout Standard
+Para ver una oscilación, se procede a mostrar con un buffer entre etapa
+ y etapa para ver cómo afecta.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/rta_esc.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta al escalón oscilando
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Respuesta-al-escalón"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Al principio la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Respuesta-al-escalón"
+
+\end_inset
+
+ puede resultar inusual.
+ La verdad es que dentro de esa banda que se peude ver hay distintas frequencias.
+ Va a alcanzar un punto en el que empiece a oscilar con otra frecuencia
+ que no es la de entrada.
+ Lo que se pudo observar experimentalmente es que estas oscilaciones eran
+ de frecuencias altas (>500KHz) lo cual otra vez reafirma lo planteado sobre
+ el polo del amplificador operacional.
+\end_layout
+
+\begin_layout Section*
+Dispersión del ancho de banda y frecuencia de los polos
+\end_layout
+
+\begin_layout Standard
+Partiendo de las fórmulas necesarias para construir la función transferencia
+ y variando los componentes con su respectiva tolerancia dentro de un rango
+ lineal, se tomaron 1000 muestras y se armaron distintos histogramas.
+ En cada muestra el valor de cada componente fue elegido aleatoriamente
+ entre todos los valores que según la tolerancia podia tener.
+\end_layout
+
+\begin_layout Standard
+Se tomará la nomenclatura polo
+\begin_inset Formula $_{XY}$
+\end_inset
+
+ donde X denota a que etapa pertenece e Y cuál de los polos es.
+ En este caso, hacemos una distinción con lo planteado en un principio como
+ etapa 1 y 2, ahora pasará a ser etapas 0 y 1 respectivamente.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_q_poles_00.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_poles_00.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dispersión del polo 00
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_q_poles_01.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_poles_01.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dispersión del polo 01
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_q_poles_10.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_poles_10.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dispersión del polo 10
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_q_poles_11.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_poles_11.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dispersión del polo 11
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_zeros_00.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_zeros_01.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dispersión del cero de la primer transferencia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_zeros_10.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/joa-m/InformesTC/TP5/histogramas/output/joaco/histograma_joaco_w0_zeros_11.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dispersión del cero de la segunda transferencia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En esta parte de la sección, no informamos sobre Q ya que es muy grande
+ considerando que están en el caso ideal en el origen.
+\end_layout
+
+\begin_layout Section*
+Conclusiones
+\end_layout
+
+\begin_layout Standard
+Para finalizar, podemos concluir que si bien la celda Sedra nos permite
+ realizar cualquier función transferencia de segundo orden, tiene sus ventajas
+ y desventajas.
+ Por ejemplo, es fácil hacerlo oscilar dependiendo de los valores que se
+ hayan puesto en los capacitores.
+ Sin embargo, la regulación de Q resulta trivial con un preset, por lo que
+ sería cuestión de ser precavido con los 
+\begin_inset Formula $\omega_{0}$
+\end_inset
+
+, si ya conseguimos eso, solamente va a haber que ajustar ganancia con un
+ sobrepico o sin él.
+ No tener en cuenta el sobrepico dado por el amplificador operacional es
+ un error gravísimo ya que es lo que me hace ganar más en alta frecuencia.
+ Como es un filtro elítpico de orden 4 es sabido que el roll-off va a ser
+ mucho mejor de esta forma.
+ 
+\end_layout
+
+\begin_layout Standard
+Por último, la celda puede llegar a alto Q muy fácilmente y en general uno
+ tiende a diseñar para que la celda tenga bajas sensibilidades.
+ 
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,5651 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{fancyhdr}
+\usepackage{lscape}
+\pagestyle{fancy}
+\lhead{Teoría de Circuitos 22.01}
+\chead{TPL5}
+\rhead{ITBA}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.25cm
+\topmargin 2.25cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Celda Rauch (Deliyannis-Friend modificada)
+\end_layout
+
+\begin_layout Standard
+En esta sección se implementa un filtro pasabanda que verifique los siguientes
+ datos, de acuerdo al número de grupo correspondiente, utilizando la aproximació
+n de Chebyshev.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pendiente pasabajos normalizada
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$-40dB/dec$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f_p$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$36KHz$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$10$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A_p$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$3dB$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$|Z_in(f)|$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+geq 50K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Filtro pasabanda por Chebyshev
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Transferencia numérica
+\end_layout
+
+\begin_layout Standard
+En base a las características propuestas, se construye la siguiente plantilla
+ pasa banda a aproximar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Dibujos/Plantilla.png
+	display false
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Plantilla pasa banda
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que la pendiente pasabajos se da como dato, el orden de la transferencia
+ pasabajos normalizada queda determinado.
+ Como dicha pendiente es de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$-40dB/dec$
+\end_layout
+
+\end_inset
+
+, el orden resultante de pasabajos es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n=2$
+\end_layout
+
+\end_inset
+
+.
+ El 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Ap_{MAX}$
+\end_layout
+
+\end_inset
+
+ es de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$3dB$
+\end_layout
+
+\end_inset
+
+, pero para tener en cuenta que la curva de transferencia se desplaza debido
+ a las tolerancias de los componentes, se utilizará uno un poco menor para
+ tener un margen, tomando 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Ap = 1dB$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Mediante la aproximación de Chebyshev y posterior denormalización (ver procedimi
+ento en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Anexo$
+\end_layout
+
+\end_inset
+
+), se obtiene que la transferencia final numérica es la siguiente función
+ de orden 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n = 4$
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H(S) = 
+\backslash
+frac{708.078 
+\backslash
+cdot 10^6 
+\backslash
+cdot S^2}{S^4 + 29.217 
+\backslash
+cdot 10^3 
+\backslash
+cdot S^3 + 1.031 
+\backslash
+cdot 10^{11} 
+\backslash
+cdot S^2 + 1.495 
+\backslash
+cdot 10^{15} 
+\backslash
+cdot S + 2.618 
+\backslash
+cdot 10^{21}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Factorizando en productos de transferencias de orden 2 para posterior implementa
+ción queda:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H(S) = 708.078 
+\backslash
+cdot 10^6 
+\backslash
+cdot 
+\backslash
+frac{S}{S^2 + 1.537 
+\backslash
+cdot 10^4 
+\backslash
+cdot S + 5.685 
+\backslash
+cdot 10^{10}} 
+\backslash
+cdot 
+\backslash
+frac{S}{S^2 + 1.384 
+\backslash
+cdot 10^4 
+\backslash
+cdot S + 4.605 
+\backslash
+cdot 10^{10}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Circuito a implementar
+\end_layout
+
+\begin_layout Standard
+El circuito a utilizar como celda básica de segundo orden pasabanda es la
+ Deliyannis-Friend con Q mejorado dado que, consultando con el libro 
+\begin_inset Quotes fld
+\end_inset
+
+Design of Analog Filters
+\begin_inset Quotes frd
+\end_inset
+
+ (de Rolf Schaumann) el Q solicitado es alto, lo que implicaría que en circuito
+ Deliyannis-Friend original resulte un relación entre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_2$
+\end_layout
+
+\end_inset
+
+ demasiado grande Realizando la modificación de realimentación positiva,
+ se logra que el ciruito original opere a un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q_0$
+\end_layout
+
+\end_inset
+
+ más bajo, pero que el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ final resultante sea mayor.
+\end_layout
+
+\begin_layout Standard
+El circuito en cuestión se muestra en la siguiente imagen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Dibujos/Circuito.png
+	display false
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Celda Deliyannis-Friend con Q mejorado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dicha modificación produce que en la entrada no inversora la tensión ya
+ no sea 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0V$
+\end_layout
+
+\end_inset
+
+, sino que pasa a ser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K 
+\backslash
+cdot V_o$
+\end_layout
+
+\end_inset
+
+.
+ Resolviendo el circuito (ver en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Anexo$
+\end_layout
+
+\end_inset
+
+), la transferencia resultante es:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H(S) = 
+\backslash
+frac{V_o}{V_i} = -
+\backslash
+left(
+\backslash
+frac{1}{1-K}
+\backslash
+right) 
+\backslash
+cdot 
+\backslash
+frac{
+\backslash
+frac{aS}{CR_1}}{S^2 + S 
+\backslash
+cdot 
+\backslash
+frac{2}{CR_2} (1-
+\backslash
+frac{1}{2R_1R_2} 
+\backslash
+cdot 
+\backslash
+frac{K}{1-K}) + 
+\backslash
+frac{1}{C^2 R_1R_2}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Diseño del filtro
+\end_layout
+
+\begin_layout Standard
+Partiendo de la expresión de la función transferencia del circuito, llamando
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+alpha = 
+\backslash
+frac{K}{1-K}$
+\end_layout
+
+\end_inset
+
+, se reescribe como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$
+\backslash
+frac{V_o}{V_i} = -
+\backslash
+left(
+\backslash
+frac{1}{1-K}
+\backslash
+right) 
+\backslash
+cdot 
+\backslash
+frac{
+\backslash
+frac{SH
+\backslash
+omega_0}{Q_0}}{S^2 + S
+\backslash
+omega_0 (
+\backslash
+frac{1-2
+\backslash
+alpha {Q_0}^2}{Q_0}) + {
+\backslash
+omega_0}^2}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la cual es más simple observar que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+alpha$
+\end_layout
+
+\end_inset
+
+ modifica sólo la selectividad resultante 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q = 
+\backslash
+frac{Q_0}{1-2
+\backslash
+alpha {Q_0}^2}$
+\end_layout
+
+\end_inset
+
+, que viene acompañado por una modificación en la ganancia debido a que
+ también cambia el factor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{1}{1-K}$
+\end_layout
+
+\end_inset
+
+, mientras que la frecuencia central 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+ se mantiene igual.
+ La ganancia en banda pasante resulta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H_B = H 
+\backslash
+frac{Q}{Q_0} 
+\backslash
+frac{1}{1-K}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De la cual se despejará luego el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$H$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Al ser la transferencia final de orden 4, se implementarán en principio
+ dos de estas celdas de orden 2 en cascada.
+ Se analizará luego si se requieren buffers y/o compensación de ganacia,
+ para que la transferencia resultante sea efectivamente en producto de las
+ de cada celda.
+ Los valores de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+ a utilzar en cada una surgen de la transferencia numérica obtenida en la
+ sección 
+\begin_inset Quotes fld
+\end_inset
+
+2.1
+\begin_inset Quotes frd
+\end_inset
+
+, siendo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_{01} = 
+\backslash
+sqrt{4.605 
+\backslash
+cdot 10^{10}} = 214.593 
+\backslash
+cdot 10^3 rad/s$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_{02} = 
+\backslash
+sqrt{5.685 
+\backslash
+cdot 10^{10}} = 238.432 
+\backslash
+cdot 10^3 rad/s$
+\end_layout
+
+\end_inset
+
+ respectivamente.
+ Siguiendo las especificaciones de la plantilla, se toma acorde 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$H_B = 1$
+\end_layout
+
+\end_inset
+
+ es decir 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0dB$
+\end_layout
+
+\end_inset
+
+.
+ Para elegir el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q_0$
+\end_layout
+
+\end_inset
+
+, de acuerdo a un estudio de las sensibilidades del circuito realizado por
+ el autor del libro (R.
+ Schaumann), sugiere que un valor óptimo es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q_0 = 1.5$
+\end_layout
+
+\end_inset
+
+, por lo que se tomará dicho valor para diseño.
+ Para el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ de cada etapa, se debe elegir uno menor al final buscado, dado que si ambas
+ se diseñan con el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q = 10$
+\end_layout
+
+\end_inset
+
+ que debe resultar al final, en realidad se obtiene uno más grande (dado
+ que se debe tener en cuenta que, al sumarse los módulos de las transferencias
+ en dB, las frecuencias que delimitan el ancho de banda se acercan más,
+ lo que resulta en un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ mayor).
+ Para ambas celdas, se buscó un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ adecuado en forma iterativa utilizando Matlab para el cálculo de las transferen
+cias numéricas y diagramas de bode para verificar en cada caso el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ final resultante (a partir de medir el ancho de banda).
+ De este procedimiento, se consignó un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q = 8.5$
+\end_layout
+
+\end_inset
+
+ para cada celda.
+\end_layout
+
+\begin_layout Standard
+Habiendo definido el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ y el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q_0$
+\end_layout
+
+\end_inset
+
+ de cada celda, se procede a calcular los diferentes parámetros y componentes
+ de la celda.
+ De despejar de los coeficientes de la función transferencia se obtienen
+ las expresiones a utilizar, que por simplicidad se toman directamente del
+ libro.
+\end_layout
+
+\begin_layout Standard
+Inicialmente, se calcula el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+alpha$
+\end_layout
+
+\end_inset
+
+, que será el mismo para ambas:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$
+\backslash
+alpha = 
+\backslash
+frac{1}{2{Q_0}^2}(1-
+\backslash
+frac{Q_0}{Q}) = 0.183$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si se despeja 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+ de la expresión definida anteriormente para 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+alpha$
+\end_layout
+
+\end_inset
+
+, resulta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$K = 
+\backslash
+frac{
+\backslash
+alpha}{1+
+\backslash
+alpha} = 0.155$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Recordando que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$H_B = 1$
+\end_layout
+
+\end_inset
+
+, se obtiene el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$H$
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H = H_B 
+\backslash
+frac{Q_0}{Q} (1-K) = 0.149$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para los valores de las resistencias, las expresiones resultantes tomadas
+ del libro son:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$R_2 = 
+\backslash
+frac{2Q_0}{
+\backslash
+omega_0C} 
+\backslash
+hspace{2cm} R_1 = 
+\backslash
+frac{R_2}{4{Q_0}^2} 
+\backslash
+hspace{2cm} a = 
+\backslash
+frac{H}{2{Q_0}^2}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la siguiente tabla se resumen los valores obtenidos para ambas celdas.
+ En principio se elige 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R = 10K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+ dado que al multiplicar por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$(1-K)$
+\end_layout
+
+\end_inset
+
+, la resistencia resultante en ambos casos no resulte demasiado baja (menor
+ a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+).
+ Con ese mismo criterio se elige el valor de los capacitores, buscando además
+ que los mismos sean multicapa debido que éstos presentan una mejor respuesta
+ en frecuencia que los electrolíticos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Celda 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Celda 2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$C$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$470pF$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1nF$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$3.3K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1.39K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/a$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$99.7K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$42.2K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/(1-a)$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$3.4K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1.4K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_2$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$29.7K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$12.6K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$KR$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1.55K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1.55K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$(1-K)R$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$8.45K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$8.45K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Valores de componentes para las celdas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+No se normalizan los valores de las resistencias aún, dado que en la sección
+ siguiente se realiza el análisis de sensibilidades para definir cuales
+ redondear, o si es necesario agrupar en serie o paralelo, utilización de
+ presets o tolerancias de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1
+\backslash
+%$
+\end_layout
+
+\end_inset
+
+ según sea necesario.
+ El valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$C$
+\end_layout
+
+\end_inset
+
+ para la Celda 1 se eligió de manera tal que el módulo de la impedancia
+ de entrada verificara la condición pedida de ser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+geq 50K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+, por lo que dicha celda se colocará primera a la entrada.
+ La segunda celda posee una impedancia de entrada menor, pero que en módulo
+ sigue siendo del mismo orden que la primera (siendo los capacitores cercanos
+ y las resistencias del mismo orden de magnitud, puede intuirse sin necesidad
+ de recalcular la impedancia de entrada analíticamente para la segunda celda),
+ y dado que la impedancia de salida del operacional es muy baja comparada
+ a la de entrada en cuestión, no es necesario colocar un buffer que las
+ separe, evitando utilizar otro operacional adicional.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Sensibilidades - Ajuste de valores de componentes
+\end_layout
+
+\begin_layout Standard
+Se busca ahora ver, en base a los valores definidos anteriormente, como
+ resultan las sensibilidades a los parámetros 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+ en cada celda, para definir si se requiere algún ajuste para mantener dichos
+ parámetros lo más controlados posible.
+ Se toma como sensibilidad relativa de una función 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$y$
+\end_layout
+
+\end_inset
+
+ respecto a una variable 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x$
+\end_layout
+
+\end_inset
+
+ como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_x^y = 
+\backslash
+frac{dy}{dx} 
+\backslash
+frac{x}{y}|_{x_0}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se despeja 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+ de las expresiones anteriores utilizadas (ver procedimiento en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Anexo$
+\end_layout
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$
+\backslash
+omega_0 = 
+\backslash
+frac{2}{R_2 C}
+\backslash
+sqrt{
+\backslash
+frac{R_2}{4R_1}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De forma tal de verificar como afectan los tres componentes en juego.
+ Para 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Q = 
+\backslash
+frac{Q_0}{1-
+\backslash
+frac{2K{Q_0}^2}{1-K}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde se buscará analizar la sensibilidad respecto a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+, ya que termina siendo fijado por 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R$
+\end_layout
+
+\end_inset
+
+ en la celda.
+ Realizando los respectivos cálculos de sensibilidades y evaluando las expresion
+es (ver expresiones generales en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Anexo$
+\end_layout
+
+\end_inset
+
+), se muestra en la siguiente tabla los valores obtenidos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sensibilidad
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Celda 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Celda 2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_{R_1}^{
+\backslash
+omega_0}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-0.5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-0.5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_{R_2}^{
+\backslash
+omega_0}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-0.5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-0.5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_{C}^{
+\backslash
+omega_0}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_K^Q$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+5.59
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+5.59
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_{R_1}^G$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-1.21
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-0.74
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_{R_2}^G$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+0.76
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+1.23
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_C^G$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+-0.45
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+0.48
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S_K^G$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+0.18
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+0.18
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tabla de sensibilidades para los valores diseñados
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que la mayor sensibilidad está dada en el parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ respecto al valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+, se decidió poder regular con un preset la relación entre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$KR$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$(1-K)R$
+\end_layout
+
+\end_inset
+
+ de manera tal que, en lugar de utilizar el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R$
+\end_layout
+
+\end_inset
+
+ original, se recalcula con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R = 9.9K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+.
+ Se obtiene así que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$KR = 1.53K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$(1-K)R = 8.37K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+, para poder fijaralas ahora en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$KR_N = 1.5K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$(1-K)R_N = 8.2K
+\backslash
+Omega$$
+\end_layout
+
+\end_inset
+
+ agregando un preset de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$200
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+ para el ajuste fino, verificando 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$8.2K
+\backslash
+Omega + 1.5K
+\backslash
+Omega + 200
+\backslash
+Omega = 9.9K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Conclusiones
+\end_layout
+
+\begin_layout Standard
+La desventaja que surge entonces para esta celda es la alta sensibilidad
+ de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+ sobre la selectividad 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+, que además está relacionada con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$H_B$
+\end_layout
+
+\end_inset
+
+, por lo que esta última aumenta o disminuye con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Para compensar las variaciones que puede sufrir 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+ y la ganancia 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$G$
+\end_layout
+
+\end_inset
+
+, dado que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$C$
+\end_layout
+
+\end_inset
+
+ es fijo con tolerancia de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$5
+\backslash
+%$
+\end_layout
+
+\end_inset
+
+, se optó por utilizar una 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_2$
+\end_layout
+
+\end_inset
+
+ con tolerancia de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1
+\backslash
+%$
+\end_layout
+
+\end_inset
+
+, y a las resultantes 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/a$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/(1-a)$
+\end_layout
+
+\end_inset
+
+ también al 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1
+\backslash
+%$
+\end_layout
+
+\end_inset
+
+.
+ Todo esto se replicó en ambas celdas\SpecialChar endofsentence
+ Se normalizan entonces para la celda
+ 1 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_2 = 30K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/a = 100K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/(1-a) = 3.3K
+\backslash
+omega$
+\end_layout
+
+\end_inset
+
+, y en la celda 2 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_2 = 13K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/a = 42K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/(1-a) = 1.4K
+\backslash
+omega$
+\end_layout
+
+\end_inset
+
+\SpecialChar endofsentence
+
+\end_layout
+
+\begin_layout Standard
+La posibilidad de ajustar el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ resultante con el preset permite entonces a su vez ajustar la ganancia
+ en el rango buscado en la plantilla (como se verificará luego en los gráficos
+ de respuesta en frecuencia donde se superponen el teórico, simulado y medido),
+ por lo que tampoco es necesario implementar una etapa compensadora de ganancia,
+ evitando sumar otro operacional adicional, por lo que finalmente el filtro
+ es implementado utilizando únicamente dos operacionales (uno para cada
+ celda de orden 2).
+ Es razonable que la sensibilidad de la ganancia 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$G$
+\end_layout
+
+\end_inset
+
+ al parámetro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+ sea menor que con los capacitores, dado que al afectar solamente a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ la curva se mueve hacia arriba o hacia abajo, siendo estos cambios mas
+ uniformes ya que no desplaza la frecuencia central, mientras que los capacitore
+s modifican la frecuencia central haciendo que la ganancia en el punto evaluado
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f_0$
+\end_layout
+
+\end_inset
+
+ cambie más bruscamente al desplazarse la curva sobre el eje de las frecuencias.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Respuesta en frecuencia
+\end_layout
+
+\begin_layout Standard
+A partir de la transferencia teórica, simulada y medida, se superponen las
+ curvas obtenidas, verificando que se cumple la plantilla propuesta.
+ Se efectuaron las mediciones utilizando una señal de entrada de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1V_p$
+\end_layout
+
+\end_inset
+
+, en el rango de frecuencias de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$20KHz$
+\end_layout
+
+\end_inset
+
+ a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$50KHz$
+\end_layout
+
+\end_inset
+
+ porque por un lado, al alcanzar dichas frecuencias, la señal de salida
+ toma una amplitud del orden de los 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$20mV$
+\end_layout
+
+\end_inset
+
+ considerados como piso de ruido, y por otro para poder observar en detalle
+ la sección de interés que es la banda pasante, es decir la frecuencia central
+ y las frecuencias a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$-3dB$
+\end_layout
+
+\end_inset
+
+ para verificar que la plantilla se cumple.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_mag_legendre.png
+	display false
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia - Módulo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De los puntos indicados en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f_0$
+\end_layout
+
+\end_inset
+
+ y en aproximadamente 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$-3dB$
+\end_layout
+
+\end_inset
+
+, se obtiene el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ práctico resultante:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Q = 
+\backslash
+frac{f_0}{f_2-f_1} = 
+\backslash
+frac{36KHz}{37.45KHz - 34.22KHz} = 11.14$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_pha_legendre.png
+	display false
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en frecuencia - Fase
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Impedancia de entrada
+\end_layout
+
+\begin_layout Standard
+Para la medición de la impedancia de entrada, se evitó utilizar el método
+ de incluir una resistencia en serie a la entrada para medir la corriente,
+ dado que se modifica el comportamiento de la celda debido a la sensibilidad
+ a 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1/a$
+\end_layout
+
+\end_inset
+
+.
+ En cambio, se midió directamente sobre esta resistencia, calculando la
+ impedancia de entrada como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Z_{in} = 
+\backslash
+frac{V_i}{
+\backslash
+frac{V_i - V_1}{R_1/a}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_i$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_1$
+\end_layout
+
+\end_inset
+
+ son las tensiones entre bornes de la resistencia.
+ La expresión resultante analítica se incluye en el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Anexo$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Dado que se está conectando las puntas del osciloscopio directamente en
+ el circuito, se tuvo la precaución de verificar mediante simulación si
+ éstas afectaban a la medición, lo cual ocurría notablemente para la configuraci
+ón en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+times 1$
+\end_layout
+
+\end_inset
+
+, mientras que en configuración 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+times 10$
+\end_layout
+
+\end_inset
+
+ no se producían modificaciones apreciables, por lo que se realizaron las
+ mediciones con esta configuracion.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_mag.png
+	display false
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada - Módulo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde, en las curvas obtenidas, se observa que el módulo cumple con la especific
+ación buscada de ser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+geq 50K
+\backslash
+Omega$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_pha.png
+	display false
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Impedancia de entrada - Fase
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por otra parte, de la curva de fase obtenida se observa que en la banda
+ pasante la impedancia de entrada adquiere un poco de carácter capacitivo,
+ mientras que en el resto de las frecuencias es prácticamente resistiva
+ pura.
+ Al tener además una impedancia de salida muy baja, permite acoplar las
+ etapas en cascada fácilmente sin requerir de un buffer intermedio.
+\end_layout
+
+\begin_layout Subsection
+Calibración
+\end_layout
+
+\begin_layout Standard
+Conectando la alimentación al circuito de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+pm 12V$
+\end_layout
+
+\end_inset
+
+, se procede:
+\end_layout
+
+\begin_layout Itemize
+Medir en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_A$
+\end_layout
+
+\end_inset
+
+, y buscar la frecuencia donde la relación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{V_A}{V_i}$
+\end_layout
+
+\end_inset
+
+ es máxima, y ajustar 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_{10}$
+\end_layout
+
+\end_inset
+
+ de manera tal que dicha relación sea 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$6dB$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Medir ahora en la salida 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_o$
+\end_layout
+
+\end_inset
+
+, encontrar la segunda frecuencia donde hay un máximo en la relación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{V_o}{V_i}$
+\end_layout
+
+\end_inset
+
+, y ajustar el preset 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_{11}$
+\end_layout
+
+\end_inset
+
+ de manera tal que la relación sea de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0dB$
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Verificar que en las frecuencias que delimitan el ancho de banda (que recordando
+ son 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$34.25KHz$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$37.84KHz$
+\end_layout
+
+\end_inset
+
+) y dentro de la banda la relación sea 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$>-3dB$
+\end_layout
+
+\end_inset
+
+, sino repetir el paso anterior con el preset 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_{10}$
+\end_layout
+
+\end_inset
+
+, midiendo en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_o$
+\end_layout
+
+\end_inset
+
+ y buscando la primer frecuencia donde se tiene un máximo de ganancia.
+\end_layout
+
+\begin_layout Subsection
+Rango dinámico
+\end_layout
+
+\begin_layout Standard
+Se calcula el rango dinámico teniendo en cuenta el caso de ganancia máxima,
+ que en este caso se da a la salida de la etapa 1, con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$G_{MAX} = 6dB 
+\backslash
+Rightarrow 2$
+\end_layout
+
+\end_inset
+
+.
+ Considerando como tensión de salida máxima antes de saturación 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$10.5V$
+\end_layout
+
+\end_inset
+
+ (dado que la alimentación es de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+pm 12V$
+\end_layout
+
+\end_inset
+
+), resulta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Vi_{MAX} = 
+\backslash
+frac{Vo_{MAX}}{2} = 6V$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tomando la ganancia mínima, resulta de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$-0.2dB 
+\backslash
+Rightarrow 0.98$
+\end_layout
+
+\end_inset
+
+ a la salida del filtro, y considerando como 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Vo_{MIN} = 10mV$
+\end_layout
+
+\end_inset
+
+, se calcula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Vi_{MIN} = 
+\backslash
+frac{Vo_{MIN}}{0.98} = 10.2mV$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo que el rango dinámico resulta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$RD = 2Log(
+\backslash
+frac{Vi{MAX}}{Vi_{MIN}}) = 55.39dB$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Análisis de Montecarlo - Histogramas
+\end_layout
+
+\begin_layout Standard
+Se realizó el análisis de montercarlo en LTSpice considerando las tolerancias
+ de los resistores y capacitores, tanto del 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$5
+\backslash
+%$
+\end_layout
+
+\end_inset
+
+ como del 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1
+\backslash
+%$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Dibujos/MontecarloRauch.pdf
+	display false
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Análisis de montecarlo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En el cual se observa la gran dispersión en la banda pasante debido a las
+ altas sensibilidades de los parámetros hacia los componentes que los determinan.
+\end_layout
+
+\begin_layout Standard
+A partir de este análisis, se obtuvieron los siguientes histogramas de la
+ dispresión de las frecuencias que delimitan el ancho de banda.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/histogramas/output/histograma_marce_EJ2_f13db.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Histograma - Dispersión de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f_p^- = 34.25KHz$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/histogramas/output/histograma_marce_EJ2_f23db.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Histograma - Dispersión de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f_p^+ = 37.84KHz$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La dispersión observada en ambos valores resulta consistente, debido a que
+ los parámetros de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+ en este filtro, como se calculó anteriormente, son bastante sensibles a
+ variaciones en los componentes debido a las tolerancias.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Anexo
+\end_layout
+
+\begin_layout Subsubsection
+Transferencia numérica
+\end_layout
+
+\begin_layout Standard
+Para la transferencia numérica, con los datos propuestos, dado que 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$A_p$
+\end_layout
+
+\end_inset
+
+ no es 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$3dB$
+\end_layout
+
+\end_inset
+
+, se debe calcula el valor de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+varepsilon$
+\end_layout
+
+\end_inset
+
+ (que será distinto de 1):
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$
+\backslash
+varepsilon = 
+\backslash
+sqrt{10^{
+\backslash
+frac{A_p}{10}} - 1} = 
+\backslash
+sqrt{10^{
+\backslash
+frac{1}{10}} - 1} = 0.5088$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Teniendo esto, se calculan la singularidades de la transferencia pasabajos
+ normalizada, sabiendo que:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_p = 
+\backslash
+sigma_k + j
+\backslash
+omega_k = -sen(
+\backslash
+alpha)senh(
+\backslash
+beta) + j cos(
+\backslash
+alpha)cosh(
+\backslash
+beta)$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+alpha = 
+\backslash
+pi 
+\backslash
+frac{(2k-1)}{2n}$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+beta = 
+\backslash
+frac{arcsenh(
+\backslash
+frac{1}{
+\backslash
+varepsilon})}{n}$
+\end_layout
+
+\end_inset
+
+, y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$k$
+\end_layout
+
+\end_inset
+
+ varía entre 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+0
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2n-1$
+\end_layout
+
+\end_inset
+
+.
+ Se obtienen 4 polos (2 pares complejos conjugados), y se utiliza el par
+ que se encuentra en el semiplano izquierdo.
+ Reemplazando en las expresiones anteriores por los datos numéricos obtenidos,
+ se obtiene que:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H(S)_{LPN} = 
+\backslash
+frac{1}{(S-S_{p1})(S-S_{
+\backslash
+overline{p1}})} = 
+\backslash
+frac{1}{S^2 + 1.098S + 1.103}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que el filtro buscado es un pasabajos, se aplica la transformación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S 
+\backslash
+longrightarrow 
+\backslash
+frac{1}{B}(
+\backslash
+frac{S}{
+\backslash
+omega_0} + 
+\backslash
+frac{
+\backslash
+omega_0}{S})$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo que resulta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H_{BP}(S) = 
+\backslash
+frac{708.078 
+\backslash
+cdot 10^6 
+\backslash
+cdot S^2}{S^4 + 29.217 
+\backslash
+cdot 10^3 
+\backslash
+cdot S^3 + 1.031 
+\backslash
+cdot 10^{11} 
+\backslash
+cdot S^2 + 1.495 
+\backslash
+cdot 10^{15} 
+\backslash
+cdot S + 2.618 
+\backslash
+cdot 10^{21}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Transferencia analítica del circuito
+\end_layout
+
+\begin_layout Standard
+Para calcular la transferencia de la celda, se plantean los sentidos de
+ corriente indicados a continuación.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Dibujos/CircuitoAnalisis.png
+	display false
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Circuito de análisis
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Considerando al operacional como ideal, se tiene:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$i_6 = i_7 
+\backslash
+Longrightarrow V = V_o 
+\backslash
+frac{KR}{KR + (1-K)R} 
+\backslash
+Longrightarrow V = K 
+\backslash
+cdot V_o$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por otro lado:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$i_3 = i_4 
+\backslash
+Longrightarrow (V_1 - V)SC = 
+\backslash
+frac{V - V_o}{R_2}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reemplazando con la expresión de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V$
+\end_layout
+
+\end_inset
+
+ se obtiene:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$V_1 = V_o(K+
+\backslash
+frac{K-1}{SCR_2})$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se plantea la ecuación de las corrientes sobre el nodo con 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_1$
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$i_1 + i_5 = i_2 + i_3$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$
+\backslash
+frac{V_i - V_1}{R_1/a} + (V_o - V_1)SC = 
+\backslash
+frac{V_1}{R_1}(1-a) + (V_1 - V)SC$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde, reemplazando las expresiones obtenidas anteriormente para 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_1$
+\end_layout
+
+\end_inset
+
+, desarrollando algebraicamente se obtiene finalmente la transferencia de
+ la celda:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$H(S) = 
+\backslash
+frac{V_o}{V_i} = -
+\backslash
+left(
+\backslash
+frac{1}{1-K}
+\backslash
+right) 
+\backslash
+cdot 
+\backslash
+frac{
+\backslash
+frac{aS}{CR_1}}{S^2 + S 
+\backslash
+cdot 
+\backslash
+frac{2}{CR_2} (1-
+\backslash
+frac{1}{2R_1R_2} 
+\backslash
+cdot 
+\backslash
+frac{K}{1-K}) + 
+\backslash
+frac{1}{C^2 R_1R_2}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Impedancia de entrada analítica
+\end_layout
+
+\begin_layout Standard
+Para la impedancia de entrada, considerando 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_i$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_1$
+\end_layout
+
+\end_inset
+
+ las tensiones en bornes de la resistencia, se calcula como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Z_{in} = 
+\backslash
+frac{V_i}{
+\backslash
+frac{V_i - V_1}{R_1/a}} = 
+\backslash
+frac{V_i 
+\backslash
+cdot R_1/a}{V_i-V_1} = 
+\backslash
+frac{R_1/a}{1-
+\backslash
+frac{V_1}{V_i}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde, reemplazando por la expresión de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$V_1$
+\end_layout
+
+\end_inset
+
+ obtenida anteriormente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Z_{in} = 
+\backslash
+frac{R_1/a}{1-
+\backslash
+frac{V_o}{V_i}(K+
+\backslash
+frac{(K-1)}{SCR_2})}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Siendo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{V_o}{V_i}$
+\end_layout
+
+\end_inset
+
+ la relación entre la entrada y salida de la celda, por lo que desarrollando
+ algebraicamente se llega a que:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Z_{in} = 
+\backslash
+frac{S}{a
+\backslash
+, 
+\backslash
+left(
+\backslash
+frac{a
+\backslash
+, 
+\backslash
+left(K - 
+\backslash
+frac{K - 1}{C
+\backslash
+, R_2
+\backslash
+, S}
+\backslash
+right)}{C
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)
+\backslash
+, 
+\backslash
+left(S^2 + 
+\backslash
+frac{1}{C^2
+\backslash
+, R_2
+\backslash
+, S} + 
+\backslash
+frac{2
+\backslash
+, S
+\backslash
+, 
+\backslash
+left(
+\backslash
+frac{K}{2
+\backslash
+, R_2
+\backslash
+, S
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)} + 1
+\backslash
+right)}{C
+\backslash
+, R_2}
+\backslash
+right)} + 1
+\backslash
+right)}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sensibilidades - Cálculo de expresiones literales
+\end_layout
+
+\begin_layout Standard
+Partiendo de las expresiones:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$R_2 = 
+\backslash
+frac{2Q_0}{
+\backslash
+omega_0C} 
+\backslash
+hspace{2cm} R_1 = 
+\backslash
+frac{R_2}{4{Q_0}^2} 
+\backslash
+hspace{2cm} a = 
+\backslash
+frac{H}{2{Q_0}^2}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comenzando por obtener 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+, se despeja 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q_0$
+\end_layout
+
+\end_inset
+
+ de la expresión de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1$
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Q_0 = 
+\backslash
+sqrt{
+\backslash
+frac{R_2}{4R_1}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Reemplazando en la expresión de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_2$
+\end_layout
+
+\end_inset
+
+, se despeja 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$R_2 = 
+\backslash
+frac{2}{
+\backslash
+omega_0 C}
+\backslash
+sqrt{
+\backslash
+frac{R_2}{4R_1}} 
+\backslash
+Longrightarrow 
+\backslash
+omega_0 = 
+\backslash
+frac{2}{R_2 C}
+\backslash
+sqrt{
+\backslash
+frac{R_2}{4R_1}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Calculando ahora la sensibilidad de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+ respecto a los componentes que la afectan se obtiene:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_{R_1}^{
+\backslash
+omega_0} = 
+\backslash
+frac{d
+\backslash
+omega_0}{dR_1}
+\backslash
+frac{R_1}{
+\backslash
+omega_0} = -0.5$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_{R_2}^{
+\backslash
+omega_0} = 
+\backslash
+frac{d
+\backslash
+omega_0}{dR_2}
+\backslash
+frac{R_2}{
+\backslash
+omega_0} = -0.5$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_C^{
+\backslash
+omega_0} = 
+\backslash
+frac{d
+\backslash
+omega_0}{dC}
+\backslash
+frac{C}{
+\backslash
+omega_0} = -1$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Que para la configuración del circuito propuesta, resultan constantes.
+\end_layout
+
+\begin_layout Standard
+Ahora analizando 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+, se retoman las expresiones:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$
+\backslash
+alpha = 
+\backslash
+frac{K}{1-K} 
+\backslash
+hspace{2cm} 
+\backslash
+alpha = 
+\backslash
+frac{1}{2{Q_0}^2}
+\backslash
+left(1-
+\backslash
+frac{Q_0}{Q}
+\backslash
+right)$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se igualan ambas expresiones para despejar 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q$
+\end_layout
+
+\end_inset
+
+, obteniendo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$Q = 
+\backslash
+frac{Q_0}{1-
+\backslash
+frac{2{Q_0}^2 K}{1-K}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$Q_0$
+\end_layout
+
+\end_inset
+
+ se había determinado constante (1.5).
+ Se calcula entonces la sensibilidad relativa a la variable 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+ (que es regulada por el preset en la realimentación positiva):
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_K^Q = 
+\backslash
+frac{dQ}{dK}
+\backslash
+frac{K}{Q} = 
+\backslash
+frac{9
+\backslash
+, K}{11
+\backslash
+, K^2 - 13
+\backslash
+, K + 2}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finalmente, para la ganancia 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$G$
+\end_layout
+
+\end_inset
+
+ de la celda, se toma el módulo evaluado en la frecuencia central 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$S = j
+\backslash
+omega_0$
+\end_layout
+
+\end_inset
+
+, siendo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$G = |H(j
+\backslash
+omega_0)| = 
+\backslash
+frac{a
+\backslash
+, 
+\backslash
+omega_0}{C
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)
+\backslash
+, 
+\backslash
+sqrt{{
+\backslash
+left({
+\backslash
+omega_0}^2 - 
+\backslash
+frac{1}{C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2}
+\backslash
+right)}^2 + 
+\backslash
+frac{4
+\backslash
+, {
+\backslash
+omega_0}^2
+\backslash
+, {
+\backslash
+left(
+\backslash
+frac{K}{2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)} + 1
+\backslash
+right)}^2}{C^2
+\backslash
+, {R_2}^2}}}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se calculan entonces las sensibilidades respecto a los parámetros 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_1$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$R_2$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$C$
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$K$
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_{R_1}^G = 
+\backslash
+frac{dG}{dR_1}
+\backslash
+frac{R_1}{G} = -
+\backslash
+frac{{
+\backslash
+omega_0}^2
+\backslash
+, 
+\backslash
+left(2
+\backslash
+, K - 4
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2 - K
+\backslash
+, {R_2}^2 + {R_2}^2 + 4
+\backslash
+, K
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2 - C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, {R_2}^3
+\backslash
+, {
+\backslash
+omega_0}^2 + C^2
+\backslash
+, K
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, {R_2}^3
+\backslash
+, {
+\backslash
+omega_0}^2
+\backslash
+right)}{C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, {R_2}^3
+\backslash
+, 
+\backslash
+left(
+\backslash
+frac{{
+\backslash
+left(C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2
+\backslash
+, {
+\backslash
+omega_0}^2 - 1
+\backslash
+right)}^2}{C^4
+\backslash
+, {
+\backslash
+mathrm{R1}}^2
+\backslash
+, {R_2}^2} + 
+\backslash
+frac{{
+\backslash
+omega_0}^2
+\backslash
+, {
+\backslash
+left(K - 2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2 + 2
+\backslash
+, K
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2
+\backslash
+right)}^2}{C^2
+\backslash
+, {
+\backslash
+mathrm{R1}}^2
+\backslash
+, {R_2}^4
+\backslash
+, {
+\backslash
+left(K - 1
+\backslash
+right)}^2}
+\backslash
+right)
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)} $$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_{R_2}^G = 
+\backslash
+frac{dG}{dR_2}
+\backslash
+frac{R_2}{G} = 
+\backslash
+frac{R_2
+\backslash
+, 
+\backslash
+left(
+\backslash
+frac{8
+\backslash
+, {
+\backslash
+omega_0}^2
+\backslash
+, {
+\backslash
+left(
+\backslash
+frac{K}{2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)} + 1
+\backslash
+right)}^2}{C^2
+\backslash
+, {R_2}^3} - 
+\backslash
+frac{2
+\backslash
+, 
+\backslash
+left({
+\backslash
+omega_0}^2 - 
+\backslash
+frac{1}{C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2}
+\backslash
+right)}{C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, {R_2}^2} + 
+\backslash
+frac{4
+\backslash
+, K
+\backslash
+, {
+\backslash
+omega_0}^2
+\backslash
+, 
+\backslash
+left(
+\backslash
+frac{K}{2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)} + 1
+\backslash
+right)}{C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, {R_2}^4
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)}
+\backslash
+right)}{2
+\backslash
+, 
+\backslash
+left({
+\backslash
+left({
+\backslash
+omega_0}^2 - 
+\backslash
+frac{1}{C^2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2}
+\backslash
+right)}^2 + 
+\backslash
+frac{4
+\backslash
+, {
+\backslash
+omega_0}^2
+\backslash
+, {
+\backslash
+left(
+\backslash
+frac{K}{2
+\backslash
+, 
+\backslash
+mathrm{R1}
+\backslash
+, R_2
+\backslash
+, 
+\backslash
+left(K - 1
+\backslash
+right)} + 1
+\backslash
+right)}^2}{C^2
+\backslash
+, {R_2}^2}
+\backslash
+right)} $$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$$S_C^G = 
+\backslash
+frac{dG}{dC}
+\backslash
+frac{C}{G} 
+\backslash
+hspace{2cm} S_K^G = 
+\backslash
+frac{dG}{dK}
+\backslash
+frac{K}{G}$$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La expresión matemática resultante es demasiado extensa para estos últimos,
+ por lo que solamente se deja expresado la forma de cálculo de las mismas.
+\end_layout
+
+\end_body
+\end_document

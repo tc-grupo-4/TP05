@@ -1,0 +1,12 @@
+Board Information Report
+Filename     : C:\Users\Marcelo\Documents\GitHub\InformesTC\TP5\EJ1\Circuito con Legendre\Placa\Ej1_SallenKey_Legendre\KeyLegendrePCB.PcbDoc
+Date         : 25/10/2018
+Time         : 15:21:56
+Time Elapsed : 00:00:00
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 51
+    Connections routed, 51
+    Connections remaining, 0
+count : 4

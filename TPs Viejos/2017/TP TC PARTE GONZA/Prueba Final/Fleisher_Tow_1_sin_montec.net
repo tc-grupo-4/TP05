@@ -1,0 +1,37 @@
+* C:\Users\grein\Desktop\TP TC\Prueba Final\Fleisher_Tow_1_sin_montec.asc
+R4 V1 Vin {mc(20.10K,tola)}
+R1 V1 V2 {mc(22k+1.8K,tola)}
+C1 V1 V2 {mc(1n,tolb)}
+R2 V5 V4 {mc(5.1K+330,tola)}
+C2 V6 V5 {mc(1n,tolb)}
+Ra V3 V2 {mc(1.1K+130,tola)}
+R5 V3 Vin {mc(1K+39,tola)}
+R6 V5 Vin {mc(5.1K+330,tola)}
+V1 V++ 0 15
+V2 0 V-- 15
+XU1 0 V1 v++ V-- V2 TL084
+XU2 0 V3 v++ V-- V4 TL084
+XU3 0 V5 v++ V-- V6 TL084
+V3 Vin 0 AC 1
+R3 V6 V1 {mc(5.1K+330,tola)}
+RB V4 V3 {mc(1.1K+130,tola)}
+R4_2 N001 V4 {mc(37.8k,tola)}
+R1_2 N001 N003 {mc(15K+15K,tola)}
+C1_2 N001 N003 {mc(1n,tolb)}
+R2_2 N005 N006 {mc(6.8K+47,tola)}
+C2_2 N002 N005 {mc(1n,tolb)}
+RA_2 N004 N003 {mc(1K,tola)}
+R5_2 N004 V4 {mc(1.1k+160,tola)}
+R6_2 N005 V4 {mc(6.8K+47,tola)}
+XU4 0 N001 v++ V-- N003 TL084
+XU5 0 N004 v++ V-- N006 TL084
+XU6 0 N005 v++ V-- N002 TL084
+R3_2 N002 N001 {mc(6.8K+47,tola)}
+RB_2 N006 N004 {mc(1K,tola)}
+.inc TL084.mod
+.ac dec 1000 1e2 1e7
+.param tola=0.01
+.step param run 1 100 1
+.param tolb=0.05
+.backanno
+.end
