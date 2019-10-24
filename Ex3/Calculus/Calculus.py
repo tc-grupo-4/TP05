@@ -2,16 +2,18 @@ from scipy import signal
 import pprint
 
 class Sedra:
-    def __init__(self,Wpol,Avol,Gb,C, name):
+    def __init__(self,Wpol,Avol,Gb,C,tf, name):
         self.WpoloDominante = Wpol
         self.Avol = Avol
         self.Gb = Gb
         self.C = C
         self.name = name
+        self.tf = tf
+        self.resolve()
         return
 
-    def resolve(self,tf):
-        self.calcQandWo(tf)
+    def resolve(self):
+        self.calcQandWo()
         self.calcK()
         self.calcKminusculaAndMandNandG4()
         self.calcWpAndQp()
@@ -20,8 +22,7 @@ class Sedra:
     def getValues(self):
         return self.values
 
-    def calcQandWo(self,transferFunction):
-        self.tf = transferFunction
+    def calcQandWo(self):
         tf = self.tf
         self.num = [tf[0], tf[1], tf[2]]
         num = self.num
@@ -63,8 +64,8 @@ class Sedra:
         temp['Ga2'] = self.k*Ga
         temp['G41'] = (1-self.N)*self.G4
         temp['G42'] = self.N*self.G4
-        temp['C21'] = (1-self.M)*C
-        temp['C22'] = self.M * C
+        temp['C21'] = (1-self.M)*self.C
+        temp['C22'] = self.M * self.C
         temp['Ra1'] = 1/temp['Ga1']
         temp['Ra'] = 1/temp['Ga']
         temp['Ra2'] = 1/temp['Ga2']
@@ -91,26 +92,25 @@ class Sedra:
         print('VALORES DEL FILTRO '+self.name)
         pprint.pprint(self.filterValues)
 
-##Usamos por ahora TL082
 
-wpolodominante = 10
-Avol = 100e3
-wn = 2*3.1415 * 24.4E3
-Gb = 1e-3
-C = 10e-9
+if __name__ == "__main__":
+    ##Usamos por ahora TL082
+    wpolodominante = 10
+    Avol = 100e3
+    wn = 2*3.1415 * 24.4E3
+    Gb = 1e-3
+    C = 10e-9
 
-z,p,k = signal.ellip(4, 2, 40, wn, 'highpass', analog=True ,output='zpk')
-hola = signal.zpk2sos(z, p, k)
-tf1 = hola[0]
-tf2 = hola[1]
+    z,p,k = signal.ellip(4, 2, 40, wn, 'highpass', analog=True, output='zpk')
+    TransferFunction = signal.zpk2sos(z, p, k)
+    tf1 = TransferFunction[0]
+    tf2 = TransferFunction[1]
 
-Etapa1 = Sedra(wpolodominante,Avol,Gb,C,'ETAPA 1')
-Etapa1.resolve(tf1)
-Etapa2 = Sedra(wpolodominante,Avol,Gb,C,'ETAPA 2')
-Etapa2.resolve(tf2)
+    Etapa1 = Sedra(wpolodominante,Avol,Gb,C,tf1,'ETAPA 1')
+    Etapa2 = Sedra(wpolodominante,Avol,Gb,C,tf2,'ETAPA 2')
 
-Etapa1.printFilterValues()
-Etapa1.printComponentValues()
+    Etapa1.printFilterValues()
+    Etapa1.printComponentValues()
 
-Etapa2.printFilterValues()
-Etapa2.printComponentValues()
+    Etapa2.printFilterValues()
+    Etapa2.printComponentValues()
