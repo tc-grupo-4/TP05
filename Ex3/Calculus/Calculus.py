@@ -58,19 +58,22 @@ class Sedra:
 
     def calcGandCValues(self):
         temp = {}
-        temp['Ga'] = (self.K-1)*self.Gb
-        Ga = temp['Ga']
-        temp['Ga1'] = (1-self.k)* Ga
-        temp['Ga2'] = self.k*Ga
-        temp['G41'] = (1-self.N)*self.G4
-        temp['G42'] = self.N*self.G4
+        Ga = (self.K-1)*self.Gb
+        Ga1 = (1-self.k)* Ga
+        Ga2 = self.k*Ga
+        G41 = (1-self.N)*self.G4
+        G42 = self.N*self.G4
         temp['C21'] = (1-self.M)*self.C
         temp['C22'] = self.M * self.C
-        temp['Ra1'] = 1/temp['Ga1']
-        temp['Ra'] = 1/temp['Ga']
-        temp['Ra2'] = 1/temp['Ga2']
-        temp['R41'] = 1/temp['G41']
-        temp['R42'] = 1/temp['G42']
+        temp['C3'] = self.C
+        temp['Ra1'] = 1/Ga1
+        #temp['Ra'] = 1/Ga
+        temp['Ra2'] = 1/Ga2
+        temp['R41'] = 1/G41
+        temp['R42'] = 1/G42
+        G1 = 2 * self.Qo * self.wp * (self.C * (temp['C21']+temp['C22']))**0.5
+        temp['R1'] = 1 / G1
+        temp['Rb'] = 1/ self.Gb
         self.values = temp
         return
 
