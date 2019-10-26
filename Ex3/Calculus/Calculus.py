@@ -98,13 +98,13 @@ class Sedra:
 
 
 if __name__ == "__main__":
-    ##Usamos por ahora TL082
-    wpolodominante = 10
-    Avol = 100e3
+    ##Empeze a usar el LM833 porque tiene mejor GBP y el TL082 la cagaba en las siulaciones
+    wpolodominante = 11
+    Avol = 316227
     wp = 2*3.1415 * 24.4E3
     ws = 2*3.1415 * 12.2e3
     Rb = 10e3
-    C = 1e-9
+    C = 10e-9
 
     n,wn = signal.ellipord(wp,ws,2,40,analog=True)
     z,p,k = signal.ellip(n, 2, 40, wn, 'highpass', analog=True, output='zpk')
