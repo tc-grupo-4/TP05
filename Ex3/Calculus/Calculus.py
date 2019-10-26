@@ -2,10 +2,11 @@ from scipy import signal
 import pprint
 
 class Sedra:
-    def __init__(self,Wpol,Avol,Gb,C,tf, name):
+    def __init__(self,Wpol,Avol,Rb,C,tf, name):
         self.WpoloDominante = Wpol
         self.Avol = Avol
-        self.Gb = Gb
+        self.Rb = Rb
+        self.Gb = 1/Rb
         self.C = C
         self.name = name
         self.tf = tf
@@ -73,12 +74,12 @@ class Sedra:
         temp['R42'] = 1/G42
         G1 = 2 * self.Qo * self.wp * (self.C * (temp['C21']+temp['C22']))**0.5
         temp['R1'] = 1 / G1
-        temp['Rb'] = 1/ self.Gb
+        temp['Rb'] = self.Rb
         self.values = temp
         return
 
     def printComponentValues(self):
-        print('VALORES DE '+ self.name)
+        print('\nVALORES DE '+ self.name)
         pprint.pprint(self.values)
         return
 
@@ -100,20 +101,32 @@ if __name__ == "__main__":
     ##Usamos por ahora TL082
     wpolodominante = 10
     Avol = 100e3
-    wn = 2*3.1415 * 24.4E3
-    Gb = 1e-3
-    C = 10e-9
+    wp = 2*3.1415 * 24.4E3
+    ws = 2*3.1415 * 12.2e3
+    Rb = 10e3
+    C = 1e-9
 
-    z,p,k = signal.ellip(4, 2, 40, wn, 'highpass', analog=True, output='zpk')
+    n,wn = signal.ellipord(wp,ws,2,40,analog=True)
+    z,p,k = signal.ellip(n, 2, 40, wn, 'highpass', analog=True, output='zpk')
     TransferFunction = signal.zpk2sos(z, p, k)
     tf1 = TransferFunction[0]
     tf2 = TransferFunction[1]
 
-    Etapa1 = Sedra(wpolodominante,Avol,Gb,C,tf1,'ETAPA 1')
-    Etapa2 = Sedra(wpolodominante,Avol,Gb,C,tf2,'ETAPA 2')
+    Etapa1 = Sedra(wpolodominante,Avol,Rb,C,tf1,'ETAPA 1')
+    Etapa2 = Sedra(wpolodominante,Avol,Rb,C,tf2,'ETAPA 2')
 
-    Etapa1.printFilterValues()
+    #Etapa1.printFilterValues()
     Etapa1.printComponentValues()
 
-    Etapa2.printFilterValues()
+    #Etapa2.printFilterValues()
     Etapa2.printComponentValues()
+
+    ## Solo para mi despues queda comentado
+    num,den = signal.ellip(n, 2, 80, wn, 'highpass', analog=True)
+    print('Numerador='+str(num[0])+','+str(num[1])+','+str(num[2])+','+str(num[3]))
+    print('Denominad='+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3]))
+    # print('Numerador='+str(tf1[0])+','+str(tf1[1])+','+str(tf1[2]))
+    # print('Denominad='+str(tf1[3])+','+str(tf1[4])+','+str(tf1[5]))
+
+
+
