@@ -2,6 +2,7 @@ from scipy import signal
 import pprint
 from numpy import pi
 from eseries import find_nearest, E12,E24,E48
+import time
 
 class Sedra:
     def __init__(self,Wpol,Avol,Rb,C,tf, name):
@@ -82,7 +83,7 @@ class Sedra:
 
     def exportToSpice(self, file, cellnumber):
         textList=[]
-        for index, key, value in enumerate(self.values):
+        for index, key, value in enumerate(self.values.items()):
             textList.append("TEXT "+str(384+10*cellnumber)+" "+str(736+index*3)+" Left 2 !.param "+key+"_"+str(cellnumber)+" "+value)
         for line in textList:
             file.write(line)
@@ -159,8 +160,9 @@ if __name__ == "__main__":
     print('Denominad=  '+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3]))
     # print('Numerador='+str(tf1[0])+','+str(tf1[1])+','+str(tf1[2]))
     # print('Denominad='+str(tf1[3])+','+str(tf1[4])+','+str(tf1[5]))
+    timestr = time.strftime("%Y%m%d-%H%M%S")
     inF = open("simulation_template.asc", "r")
-    outF=open("simulation_generated.asc","w+")
+    outF=open("simulation_generated_"+timestr+".asc","w+")
     outF.write(inF.read())
     Etapa1.exportToSpice(outF,1)
     Etapa2.exportToSpice(outF,2)
