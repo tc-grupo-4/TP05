@@ -90,7 +90,6 @@ class Sedra:
             file.write(line)
             file.write("\n")
         
-
     def printComponentValues(self):
         print('\nVALORES DE '+ self.name)
         pprint.pprint(self.values)
