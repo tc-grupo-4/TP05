@@ -1,5 +1,6 @@
 from scipy import signal
 import pprint
+from numpy import pi
 
 class Sedra:
     def __init__(self,Wpol,Avol,Rb,C,tf, name):
@@ -97,17 +98,23 @@ class Sedra:
         pprint.pprint(self.filterValues)
 
 
+
 if __name__ == "__main__":
     ##Empeze a usar el LM833 porque tiene mejor GBP y el TL082 la cagaba en las siulaciones
     wpolodominante = 11
     Avol = 316227
-    wp = 2*3.1415 * 24.4E3
-    ws = 2*3.1415 * 12.2e3
-    Rb = 10e3
-    C = 10e-9
+    wp = 2*pi * 24.4E3
+    wa = 2*pi * 12.2E3
+    wpn = 1
+    wan = wp/wa
+    Aa = 40
+    Ap = 2
+    Rb = 1e3
+    C = 5e-9
 
-    n,wn = signal.ellipord(wp,ws,2,40,analog=True)
-    z,p,k = signal.ellip(n, 2, 40, wn, 'highpass', analog=True, output='zpk')
+    n,wn = signal.ellipord(wpn,wan,Ap,Aa,analog=True)
+    z,p,k = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True, output='zpk')
+    z,p,k = signal.lp2hp_zpk(z,p,k,wp)
     TransferFunction = signal.zpk2sos(z, p, k)
     tf1 = TransferFunction[0]
     tf2 = TransferFunction[1]
@@ -122,9 +129,9 @@ if __name__ == "__main__":
     Etapa2.printComponentValues()
 
     ## Solo para mi despues queda comentado
-    num,den = signal.ellip(n, 2, 80, wn, 'highpass', analog=True)
-    print('Numerador='+str(num[0])+','+str(num[1])+','+str(num[2])+','+str(num[3]))
-    print('Denominad='+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3]))
+    num,den = signal.zpk2tf(z,p,k)#signal.ellip(n, Ap, Aa, wn, 'highpass', analog=True)
+    print('Numerador=  '+str(num[0])+','+str(num[1])+','+str(num[2])+','+str(num[3]))
+    print('Denominad=  '+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3]))
     # print('Numerador='+str(tf1[0])+','+str(tf1[1])+','+str(tf1[2]))
     # print('Denominad='+str(tf1[3])+','+str(tf1[4])+','+str(tf1[5]))
 
