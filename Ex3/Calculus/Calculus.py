@@ -83,8 +83,9 @@ class Sedra:
 
     def exportToSpice(self, file, cellnumber):
         textList=[]
-
-        for index, key, value in enumerate(self.values.items()):
+        index=0
+        for key, value in enumerate(self.values.items()):
+            index=index+1
             textList.append("TEXT "+str(384+10*cellnumber)+" "+str(736+index*3)+" Left 2 !.param "+key+"_"+str(cellnumber)+" "+value)
         for line in textList:
             file.write(line)
