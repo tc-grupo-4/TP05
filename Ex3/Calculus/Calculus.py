@@ -1,6 +1,7 @@
 from scipy import signal
 import pprint
 from numpy import pi
+from eseries import find_nearest, E12,E24,E48
 
 class Sedra:
     def __init__(self,Wpol,Avol,Rb,C,tf, name):
@@ -97,6 +98,19 @@ class Sedra:
         print('VALORES DEL FILTRO '+self.name)
         pprint.pprint(self.filterValues)
 
+    def roundValues(self,NormRes, NormCap):
+        roundingNorm = NormRes
+        roundingNormCap = NormCap
+        self.values['C21'] = find_nearest(roundingNormCap,self.values['C21'])
+        self.values['C22'] = find_nearest(roundingNormCap,self.values['C22'])
+        self.values['C3'] = find_nearest(roundingNormCap,self.values['C3'])
+        self.values['Ra1'] = find_nearest(roundingNorm,self.values['Ra1'])
+        self.values['Ra2'] = find_nearest(roundingNorm,self.values['Ra2'])
+        self.values['R41'] = find_nearest(roundingNorm,self.values['R41'])
+        self.values['R42'] = find_nearest(roundingNorm,self.values['R42'])
+        self.values['R1'] = find_nearest(roundingNorm,self.values['R1'])
+        self.values['Rb'] = find_nearest(roundingNorm,self.values['Rb'])
+
 
 
 if __name__ == "__main__":
@@ -123,9 +137,11 @@ if __name__ == "__main__":
     Etapa2 = Sedra(wpolodominante,Avol,Rb,C,tf2,'ETAPA 2')
 
     #Etapa1.printFilterValues()
+    Etapa1.roundValues(E24,E12)
     Etapa1.printComponentValues()
 
     #Etapa2.printFilterValues()
+    Etapa2.roundValues(E24,E12)
     Etapa2.printComponentValues()
 
     ## Solo para mi despues queda comentado
