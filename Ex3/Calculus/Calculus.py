@@ -84,13 +84,13 @@ class Sedra:
     def exportToSpice(self, file, cellnumber):
         textList=[]
         index=0
-        for key, value in enumerate(self.values.items()):
+        for key, value in self.values.items():
             index=index+1
-            textList.append("TEXT "+str(384+10*cellnumber)+" "+str(736+index*3)+" Left 2 !.param "+key+"_"+str(cellnumber)+" "+value)
+            textList.append("TEXT "+str(384+300*cellnumber)+" "+str(736+index*50)+" Left 2 !.param "+str(key)+"_"+str(cellnumber)+" "+str(value))
         for line in textList:
             file.write(line)
             file.write("\n")
-        
+    
     def printComponentValues(self):
         print('\nVALORES DE '+ self.name)
         pprint.pprint(self.values)
@@ -128,46 +128,60 @@ if __name__ == "__main__":
     ##Empeze a usar el LM833 porque tiene mejor GBP y el TL082 la cagaba en las siulaciones
     wpolodominante = 11
     Avol = 316227
-    wp = 2*pi * 24.4E3
-    wa = 2*pi * 12.2E3
+    wp = 2*pi * 23E3               ##no tocar estos valores q anda re piola guachin
+    wa = 2*pi * 13E3
     wpn = 1
     wan = wp/wa
-    Aa = 40
-    Ap = 2
+    Aa = 45
+    Ap = 1
     Rb = 1e3
     C = 5e-9
+    Round = True
+    Montecarlo = False
+    ExportarLTSpice = False
 
+    
     n,wn = signal.ellipord(wpn,wan,Ap,Aa,analog=True)
-    z,p,k = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True, output='zpk')
-    z,p,k = signal.lp2hp_zpk(z,p,k,wp)
-    TransferFunction = signal.zpk2sos(z, p, k)
-    tf1 = TransferFunction[0]
-    tf2 = TransferFunction[1]
+    if n > 4:
+        print("No es posible hacerlo de orden 4")
+    else:
+        z,p,k = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True, output='zpk')
+        z,p,k = signal.lp2hp_zpk(z,p,k,wp)
+        TransferFunction = signal.zpk2sos(z, p, k)
+        tf1 = TransferFunction[0]
+        tf2 = TransferFunction[1]
 
-    Etapa1 = Sedra(wpolodominante,Avol,Rb,C,tf1,'ETAPA 1')
-    Etapa2 = Sedra(wpolodominante,Avol,Rb,C,tf2,'ETAPA 2')
+        Etapa1 = Sedra(wpolodominante,Avol,Rb,C,tf1,'ETAPA 1')
+        Etapa2 = Sedra(wpolodominante,Avol,Rb,C,tf2,'ETAPA 2')
 
-    #Etapa1.printFilterValues()
-    Etapa1.roundValues(E24,E12)
-    Etapa1.printComponentValues()
+        #Etapa1.printFilterValues()
+        if Round is True:
+            Etapa1.roundValues(E24,E12)
+        #Etapa1.printComponentValues()
 
-    #Etapa2.printFilterValues()
-    Etapa2.roundValues(E24,E12)
-    Etapa2.printComponentValues()
+        #Etapa2.printFilterValues()
+        if Round is True:
+            Etapa2.roundValues(E24,E12)
+        #Etapa2.printComponentValues()
 
-    ## Solo para mi despues queda comentado
-    num,den = signal.zpk2tf(z,p,k)#signal.ellip(n, Ap, Aa, wn, 'highpass', analog=True)
-    print('Numerador=  '+str(num[0])+','+str(num[1])+','+str(num[2])+','+str(num[3]))
-    print('Denominad=  '+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3]))
-    # print('Numerador='+str(tf1[0])+','+str(tf1[1])+','+str(tf1[2]))
-    # print('Denominad='+str(tf1[3])+','+str(tf1[4])+','+str(tf1[5]))
-    timestr = time.strftime("%Y%m%d-%H%M%S")
-    inF = open("simulation_template.asc", "r")
-    outF=open("simulation_generated_"+timestr+".asc","w+")
-    outF.write(inF.read())
-    Etapa1.exportToSpice(outF,1)
-    Etapa2.exportToSpice(outF,2)
-    outF.close()
-    inF.close()
+        ## Solo para mi despues queda comentado
+        #num,den = signal.zpk2tf(z,p,k)#signal.ellip(n, Ap, Aa, wn, 'highpass', analog=True)
+        #print('Numerador=  '+str(num[0])+','+str(num[1])+','+str(num[2])+','+str(num[3])+','+str(num[4]))
+        #print('Denominad=  '+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3])+','+str(den[4]))
+        print('Numerador='+str(tf2[0])+','+str(tf2[1])+','+str(tf2[2]))
+        print('Denominad='+str(tf2[3])+','+str(tf2[4])+','+str(tf2[5]))
+        
+        if ExportarLTSpice is True:
+            timestr = time.strftime("%Y%m%d-%H%M%S")
+            if Montecarlo is False:
+                inF = open("simulation_template.asc", "r")
+            else:
+                inF = open("simulation_template2.asc", "r")
+            outF=open("simulation_generated_"+timestr+".asc","w+")
+            outF.write(inF.read())
+            Etapa1.exportToSpice(outF,1)
+            Etapa2.exportToSpice(outF,2)
+            outF.close()
+            inF.close()
 
 
