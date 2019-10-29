@@ -1,9 +1,12 @@
 from scipy import signal
 import pprint
+import numpy as np
 from numpy import pi
 from eseries import find_nearest, E12,E24,E48
 import time
 import control as cl
+import matplotlib.pyplot as plt
+from SpiceParser import SpiceParser 
 import matplotlib.pyplot as plt
 
 def plotPolesAndZeros(tf):
@@ -147,11 +150,19 @@ if __name__ == "__main__":
     Ap = 1
     Rb = 1e3
     C = 5e-9
-    Round = True
+    Round = False
     Montecarlo = False
     ExportarLTSpice = False
+    plot=True
+    plotSpice=True
+    spiceFile=False
+    if spiceFile is True:
+        parser=SpiceParser()
+        if parser.parseSpiceFile(filePath="spicetxt.txt") != -1:
+            wspice, magspice, phasespice = parser.parseSpiceFile("spicetxt.txt")
+        else:
+            spiceFile=False
 
-    
     n,wn = signal.ellipord(wpn,wan,Ap,Aa,analog=True)
     if n > 4:
         print("No es posible hacerlo de orden 4")
@@ -172,15 +183,32 @@ if __name__ == "__main__":
         Etapa1 = Sedra(wpolodominante,Avol,Rb,C,tf1,'ETAPA 1')
         Etapa2 = Sedra(wpolodominante,Avol,Rb,C,tf2,'ETAPA 2')
 
+        if plot is True:
+            b, a = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True)
+            w, h = signal.freqs(b, a)
+            plt.semilogx(w, 20 * np.log10(abs(h)))
+            plt.title('Elliptic filter frequency response')
+            plt.xlabel('Frequency')
+            plt.ylabel('Amplitude [dB]')
+            plt.margins(0, 0.1)
+            plt.grid(which='both', axis='both')
+            plt.axvline(wn, color='green') # cutoff frequency
+            plt.axhline(-Aa, color='green') # rs
+            plt.axhline(-Ap, color='green') # rp
+            if spiceFile and plotSpice:
+                plt.semilogx(wspice, magspice)
+                plt.semilogx(wspice, phasespice)  # Bode phase plot
+            plt.show()
+
         #Etapa1.printFilterValues()
         if Round is True:
             Etapa1.roundValues(E24,E12)
-        #Etapa1.printComponentValues()
+        Etapa1.printComponentValues()
 
         #Etapa2.printFilterValues()
         if Round is True:
             Etapa2.roundValues(E24,E12)
-        #Etapa2.printComponentValues()
+        Etapa2.printComponentValues()
 
         ## Solo para mi despues queda comentado
         #num,den = signal.zpk2tf(z,p,k)#signal.ellip(n, Ap, Aa, wn, 'highpass', analog=True)
