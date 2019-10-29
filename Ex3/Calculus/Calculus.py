@@ -3,6 +3,17 @@ import pprint
 from numpy import pi
 from eseries import find_nearest, E12,E24,E48
 import time
+import control as cl
+import matplotlib.pyplot as plt
+
+def plotPolesAndZeros(tf):
+    num = [tf[0] , tf[1], tf[2]]
+    den = [tf[3] , tf[4], tf[5]]
+    sistema = cl.TransferFunction(num,den)
+    cl.pzmap(sistema,Plot=True)
+    plt.show()
+    return
+
 
 class Sedra:
     def __init__(self,Wpol,Avol,Rb,C,tf, name):
@@ -147,9 +158,16 @@ if __name__ == "__main__":
     else:
         z,p,k = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True, output='zpk')
         z,p,k = signal.lp2hp_zpk(z,p,k,wp)
+        # num,den = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True)
+        # num,den = signal.lp2hp(num,den,wp)
+        # sistema = cl.TransferFunction(num,den)
+        # cl.pzmap(sistema,Plot=True)
+        # plt.show()
         TransferFunction = signal.zpk2sos(z, p, k)
         tf1 = TransferFunction[0]
+        # plotPolesAndZeros(tf1)
         tf2 = TransferFunction[1]
+        # plotPolesAndZeros(tf2)
 
         Etapa1 = Sedra(wpolodominante,Avol,Rb,C,tf1,'ETAPA 1')
         Etapa2 = Sedra(wpolodominante,Avol,Rb,C,tf2,'ETAPA 2')
@@ -183,5 +201,3 @@ if __name__ == "__main__":
             Etapa2.exportToSpice(outF,2)
             outF.close()
             inF.close()
-
-
