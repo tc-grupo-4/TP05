@@ -1,0 +1,3047 @@
+%% LyX 2.3.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,spanish]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.25cm,bmargin=2cm,lmargin=2.25cm,rmargin=2cm}
+\usepackage{float}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{fancyhdr}
+\usepackage{lscape}
+\pagestyle{fancy}
+\lhead{Teoría de Circuitos 22.01}
+\chead{TPL5}
+\rhead{ITBA}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\makeatother
+
+\usepackage{babel}
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+
+\begin{document}
+\tableofcontents{}
+
+\newpage
+
+\section{Celda Sallen-Key}
+
+\subsection{Aproximación con Legendre}
+
+En esta sección se implementa un filtro pasabajos que verifica los
+siguientes requerimientos, utilizando la aproximación de Legendre.
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+Orden & 5\tabularnewline
+\hline 
+$f_p$ & $27KHz \pm 5\%$\tabularnewline
+\hline 
+$A_p$ & $3dB$\tabularnewline
+\hline 
+$|Z_{in}(f)|$ & $\geq 50K\Omega$\tabularnewline
+\hline 
+Filtro & Pasa Bajos\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Filtro pasabajos por Legendre}
+\end{figure}
+
+
+\subsubsection{Transferencia numérica}
+
+De acuerdo a la información provista, se construye la siguiente plantilla
+a aproximar.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7]{\string"EJ1/Circuito con Legendre/Dibujos/PlantillaLegendre\string".eps}
+\par\end{centering}
+\caption{Plantilla pasa bajos}
+
+\end{figure}
+
+Teniendo ya el orden determinado, se utilizan los polinomios de Legendre
+normalizados ya tabulados, obteniendo la transferencia normalizada.
+Al desnormalizar y graficar la respuesta en frecuencia a partir de
+Matlab, se observó que la frecuencia de corte para la cual se desnormalizó
+(que es la correspondiente al número de grupo), no resultó ser la
+misma en el diagrama, sino que éste mostraba su frecuencia de corte
+más atrás (provocando que la transferencia no cumpla la plantilla),
+lo cual se verificó también al simular. Para resolver el inconveniente,
+se desnormalizó para una frecuencia mayor a la dada, de manera tal
+que al desplazarse como ocurrió anteriormente, en el diagrama la frecuencia
+de corte quede en el valor real buscado. Con esta modificación, la
+transferencia normalizada queda (factorizada en términos de ordenes
+1 y 2 para posterior implementación):
+
+$$H(S)_N = \frac{1}{(S+0.4681)(S^2 + 0.7762 \cdot S + 0.4971)(S^2 + 0.3072 \cdot S + 0.9608)}$$
+
+Denormalizando con $S \rightarrow \frac{S}{\omega_p}$ (el $w_p$
+corregido) queda:
+
+$$H(S) = \frac{3.28 \cdot 10^{26}}{(S + 9.412 \cdot 10^4)(S^2 + 1.56 \cdot 10^5 \cdot S + 2 \cdot 10^{10})(S^2 + 6.18 \cdot 10^4 \cdot S + 3.88 \cdot 10^{10})}$$
+
+\subsubsection{Circuito a implementar}
+
+El circuito a utilizar es la celda Sallen-Key pasabajos para las dos
+etapas de segundo orden, como se muestra en la figura. Se utiliza
+en un caso la celda original y en otro la modificada sobre $R_1$,
+para permitir un ajuste de ganancia adicional.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.3]{\string"EJ1/Circuito con Legendre/Dibujos/CircuitoLegNormal\string".eps}
+\par\end{centering}
+\caption{Celda Sallen-Key pasabajos - Ganancia $K$}
+
+\end{figure}
+
+Resolviendo el circuito (ver en $Anexo$), la transferencia característica
+resulta:
+
+$$H(S) = \frac{\frac{K}{C^2 R_1R_2}}{S^2 + S\frac{[\frac{1}{R_1} + \frac{(2-K)}{R_2}]}{C} + \frac{1}{C^2 R_1R_2}} = \frac{K{\omega_0}^2}{S^2 + S\frac{\omega_0}{Q} + \omega_0}$$
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.3]{\string"EJ1/Circuito con Legendre/Dibujos/CircuitoLeg\string".eps}
+\par\end{centering}
+\caption{Celda Sallen-Key pasabajos con derivación de $R_1$ - Ganancia $aK$
+con $a < 1$}
+
+\end{figure}
+
+La transferencia de esta celda es idéntica a la anterior, excepto
+que se la multiplica por el factor $a$.
+
+Para la celda de orden 1, se utiliza un circuito integrador compensado
+(como se muestra en la figura), en lugar de un RC básico para poder
+eventualmente realizar una pequeña compensación en la ganancia y,
+consecuentemente, desplazamiento vertical de la curva de transferencia.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{\string"EJ1/Circuito con Legendre/Dibujos/Integrador\string".eps}
+\par\end{centering}
+\caption{Celda de orden 1 - Circuito integrador compesado}
+
+\end{figure}
+
+Tomando la transferencia general de un circuito inversor $\frac{V_o}{V_i} = -\frac{Z_f}{Z_r}$,
+se obtiene:
+
+$$H(S) = -\frac{R_f}{R_r(SC_fR_f + 1)}$$
+
+\subsubsection{Diseño del filtro}
+
+A partir de las transferencias numéricas obtenidas en la sección <<1.1.1>>,
+se tienen los valores de las frecuencias de corte para cada etapa
+del filtro desde los términos independientes de los polinomios del
+denominador, siendo las de orden 2 en $\omega_{01} = 1.417 \cdot 10^5$
+y $\omega_{02} = 1.971 \cdot 10^5$, y la restante de orden 1 en $\omega_{03} = 9.412 \cdot 10^4$.
+No se normalizan los valores, sino que se calcularán en forma exacta,
+ajustando luego en la sección de análisis de sensibilidades en caso
+de requerir alguna tolerancia de $1\%$ o un preset (es decir, un
+diseño preliminar), excepto para los capacitores (ya que no hay tanta
+disponibilidad de valores, se los define primero ya normalizados y
+las resistencias necesarias se despejan). 
+
+Iniciando por la etapa de orden 1, sabiendo que:
+
+$$\omega_{03} = \frac{1}{C_fR_f}$$
+
+Se supone un capacitor $C_f = 10nF$, de manera tal que sea multicapa
+ya que poseen una mejor respuesta en frecuencia que los electrolíticos
+y por otra parte la resistencia que se obtiene al despejar toma un
+valor medio fácilmente implementable:
+
+$$R_f = \frac{1}{\omega_{03}C_f} = 1.06K\Omega$$
+
+Para $R_r$, se la toma de igual valor que $R_f$, y se agrega en
+serie un preset de $500\Omega$ para poder realizar ajuste de ganancia
+en caso de ser mayor a $0dB$ a la salida del filtro. Resumiendo,
+los valores resultan:
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+ & Valor\tabularnewline
+\hline 
+\hline 
+$C_f$ & $10nF$\tabularnewline
+\hline 
+$R_f$ & $1.06K\Omega$\tabularnewline
+\hline 
+$R_r$ & $1.06K\Omega + 500\Omega (Preset)$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Valores de los componentes para la etapa de orden 1}
+
+\end{figure}
+
+\newpage
+
+Para las etapas de orden 2, de igualar los coeficientes se obtiene
+en forma genérica:
+
+$$\omega_0 = \sqrt{\frac{1}{R_1R_2C^2}} \hspace{2cm} Q = \frac{\sqrt{\frac{1}{R_1R_2}}}{\frac{1}{R_1} + \frac{(2-K)}{R_2}}$$
+
+Con los valores de $\omega_{01}$ y $\omega_{02}$ obtenidos anteriormente,
+igualando los coeficientes numéricos se despejan los valores de $Q$
+correspondientes:
+
+$$Q_1 = \frac{\omega_{01}}{1.56 \cdot 10^5} = 0.91 \hspace{2cm} Q_2 = \frac{\omega_{02}}{6.18 \cdot 10^4} = 3.19$$
+
+Tomando como guía de referencia el libro <<Design of Analog Filters>>
+(de R.Schaumann), se eligen por conveniencia $C_1 = C_2 = C$ y $R_1 = R_2 = R$.
+Reemplazando en las expresiones anteriores resulta:
+
+$$K = 3-\frac{1}{Q} \hspace{2cm} R = \frac{1}{\omega_0C} \hspace{2cm} K = 1+\frac{R_B}{R_A}$$
+
+Con los valores de $Q$ obtenidos, se calcula el valor de $K$ para
+cada caso. Para la celda correspondiente a $\omega_{02}$, se define
+un valor de $C = 3.3nF$, de manera tal de poder implementar uno multicapa
+y además se obtiene un valor medio de resistencia fácil de implementar:
+
+$$R = \frac{1}{\omega_{02}C} = 1.54K\Omega$$
+
+De la expresión de $K$, se despeja $R_B$, y eligiendo convenientemente
+$R_A = 1K\Omega$, se obtiene un valor para $R_B$ de orden similar
+y cercana a un valor comercial:
+
+$$R_B = (K-1)R_A = 1.56K\Omega$$
+
+Para la etapa restante, se buscó que la impedancia de entrada cumpla
+con el requerimiento de ser en módulo $\geq 50K\Omega$ para evitar
+añadir un buffer a la entrada del filtro. Para un proceso de diseño
+más agilizado, se tomó de patrón el valor de capacitor elegido en
+la celda anterior, calculando las resistencias resultantes y simulando
+en LTSpice la impedancia de entrada resultante en función de la frecuencia,
+repitiendo este proceso en forma iterativa hasta poder cumplir con
+el requerimiento sin mucha dificultad. Luego de este proceso, se definió
+un valor de $C = 150pF$, por lo que reemplazando en las expresiones
+anteriores se obtiene el valor de $R$:
+
+$$R = \frac{1}{\omega_{01}C} = 47K\Omega$$
+
+Se elige luego convenientemente $R_A = 1.2K\Omega$, de manera tal
+que $R_B$ resulta del mismo orden y cercana a un valor comercial:
+
+$$R_B = (K-1)R_A = 1.08K\Omega$$
+
+Resumiendo, los valores resultantes son:
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+ & Celda 1 & Celda 2\tabularnewline
+\hline 
+\hline 
+$C$ & $150pF$ & $3.3nF$\tabularnewline
+\hline 
+$R_1$ & $47K\Omega$ & $1.54K\Omega$\tabularnewline
+\hline 
+$R_2$ & $47K\Omega$ & $1.54K\Omega$\tabularnewline
+\hline 
+$R_A$ & $1.2K\Omega$ & $1K\Omega$\tabularnewline
+\hline 
+$R_B$ & $1.08K\Omega$ & $1.56K\Omega$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Valores de componentes para las celdas de orden 2}
+
+\end{figure}
+
+
+\subsubsection{Sensibilidades - Ajuste de valores de componentes}
+
+Se analiza ahora, en base a los valores definidos anteriormente, como
+resultan las sensibilidades a los parámetros $Q$ y $\omega_0$ en
+las celdas, para definir si se requiere algún ajuste para mantener
+dichos parámetros lo más controlados posible. Se toma como sensibilidad
+relativa de una función $y$ respecto a una variable $x$ como $S_x^y = \frac{dy}{dx} \frac{x}{y}|_{x_0}$.
+
+Para la $\omega_0$, de la expresión:
+
+$$\omega_0 = \sqrt{\frac{1}{R_1R_2C^2}}$$
+
+Se analiza la sensibilidad respecto a los tres parámetros. Para el
+$Q$, se reemplaza la expresión de $K$ en la de $Q$, resultando:
+
+$$Q = \frac{\sqrt{\frac{1}{R_1R_2}}}{\frac{1}{R_1} + \frac{(1-\frac{R_B}{R_A})}{R_2}}$$
+
+Donde se analiza para los cinco parámetros. Realizando los respectivos
+cálculos de sensibilidades y evaluando las expresiones (ver expresiones
+generales en $Anexo$), se muestra en la siguiente tabla los valores
+obtenidos.
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+Sensibilidad & Celda 1 & Celda 2\tabularnewline
+\hline 
+\hline 
+$S_C^{\omega_0}$ & -1 & -1\tabularnewline
+\hline 
+$S_{R_1}^{\omega_0}$ & -0.5 & -0.5\tabularnewline
+\hline 
+$S_{R_2}^{\omega_0}$ & -0.5 & -0.5\tabularnewline
+\hline 
+$S_{R_1}^Q$ & 0.41 & 1.77\tabularnewline
+\hline 
+$S_{R_2}^Q$ & -0.41 & -1.77\tabularnewline
+\hline 
+$S_{R_A}^Q$ & -0.82 & -3.55\tabularnewline
+\hline 
+$S_{R_B}^Q$ & 0.82 & 3.55\tabularnewline
+\hline 
+$S_{R_1}^G$ & -0.4 & 1.78\tabularnewline
+\hline 
+$S_{R_2}^G$ & -1.14 & -0.65\tabularnewline
+\hline 
+$S_C^G$ & -1.55 & 1.13\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Tabla de sensibilidades para los valores obtenidos en diseño}
+
+\end{figure}
+
+Dado que la mayor sensibilidad la presenta $Q$ respecto a las variaciones
+de $RA$ y $RB$, se normalizaron a valores comerciales de manera
+tal que, para la celda 1, $RA_N = 1.2K\Omega$ y $RB_N = 1K\Omega$
+interpolando un preset de $100\Omega$ para ajuste fino. Para la celda
+2, se normalizan $RA_N = 1K\Omega$ y $RB_N = 1.5K\Omega$ interpolando
+un preset de $100\Omega$.
+
+Para la resistencia $R1$, en ambas celdas se la desdobló en la configuración
+del circuito de ganancia $aK$, de manera tal que la ganancia de cada
+celda sea lo más cercana a $0dB$, ampliando el rango dinámico.
+
+\newpage
+
+\subsubsection{Respuesta en frecuencia}
+
+Las mediciones se realizaron a partir de $10KHz$ hasta aproximadamente
+$60KHz$ donde la señal alcanza el piso de ruido de $20mV$, utilizando
+una señal de entrada de $1V_p$. En la gráfica siguiente se superponen
+las curvas teórica, simulada y medida, verificando que la plantilla
+se cumple.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_mag_legendre.png}
+\par\end{centering}
+\caption{Respuesta en frecuencia - Módulo}
+
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_pha_legendre.png}
+\par\end{centering}
+\caption{Respuesta en frecuencia - Fase}
+
+\end{figure}
+
+
+\subsubsection{Impedancia de entrada}
+
+Para efectuar la medición de impedancia de entrada, se descarta el
+método de colocar una resistencia en serie para medir la corriente
+dado que se modifica el comportamiento de la celda. Por ello, se mide
+directamente sobre la resistencia $R_1$ que sigue en serie al generador,
+de manera tal que:
+
+$$Z_{in} = \frac{V_i}{\frac{V_i - V_A}{R_1/a}}$$
+
+Donde $V_i$ y $V_A$ son las tensiones entre bornes de la resistencia.
+La expresión resultante analítica se incluye en el $Anexo$.
+
+Se verfico previamente en la simulación el efecto de las puntas, donde
+se observó que en configuración $\times 1$ modifican el valor de
+la impedancia medida, mientras que el efecto es despreciable en configuración
+$\times 10$, por lo que las mediciones se desarrollaron con dicha
+configuración.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_mag_legendre.png}
+\par\end{centering}
+\caption{Impedancia de entrada - Módulo}
+
+\end{figure}
+
+Donde a partir de las curvas obtenidas, se verifica que cumple con
+la condición buscada de ser $\geq 50K\Omega$.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_pha_lengendre.png}
+\par\end{centering}
+\caption{Impedancia de entrada - Fase}
+\end{figure}
+
+El tener además una impedancia de salida baja permite acoplar las
+celdas en cascada sin necesidad de interpolar un buffer entre ambas.
+
+\subsubsection{Conclusiones}
+
+Partiendo de la expresión de la selectividad $Q$:
+
+$$Q = \frac{1}{3-K}$$
+
+El inconveniente que surge en esta celda es que para obtener valores
+de $Q$ elevados, el valor de $K$ sea hace próximo a 3, por lo que
+$Q$ pasa a ser más dependiente del valor exacto de $K$ (representado
+en la tabla de sensibilidades respecto a los valores de $RA$ y $RB$).
+Los presets colocados en ambas celdas en la conexión de $RA$ y $RB$
+permiten un ajuste fino del parámetro en cuestión, principalmente
+en la celda 2 donde $Q = 3.19$. Luego de ajustar este parámetro,
+consiguiendo que la curva de transferencia sea lo más plana posible,
+se ajusta la ganancia con el preset de la etapa de orden 1, en caso
+de salirse de la plantilla.
+
+\subsubsection{Calibración}
+
+Conectando la alimentación al circuito de $\pm 12V$, se procede:
+\begin{itemize}
+\item Ajustar el preset de $GAIN$ al mínimo es decir, de manera tal que
+midiendo en $V_A$ sea máxima la ganancia.
+\item Ajustar luego el preset $SK1$ de manera tal que la relación $\frac{V_A}{V_i}$
+a $1KHz$ sea $2.4dB$.
+\item Luego ajustar (ahora sí) el preset de $GAIN$ para llevar la relación
+anterior a $1.5dB$.
+\item Finalmente, medir ahora en $V_o$ y ajustar el preset $SK2$ de manera
+tal que a $27KHz$ la relación sea $>-3dB$ para cumplir con la plantilla.
+\end{itemize}
+
+\subsubsection{Rango dinámico}
+
+Se calcula el rango dinámico teniendo en cuenta el caso de ganancia
+máxima, que en este caso se da a la salida de la etapa 1, con $G_{MAX} = 3.2dB \Rightarrow 1.45$.
+Considerando como tensión de salida máxima antes de saturación $10.5V$
+(dado que la alimentación es de $\pm 12V$), resulta:
+
+$$Vi_{MAX} = \frac{Vo_{MAX}}{1.45} = 7.2V$$
+
+Tomando la ganancia mínima, resulta de $-0.7dB \Rightarrow 0.93$,
+y considerando como $Vo_{MIN} = 10mV$, se calcula:
+
+$$Vi_{MIN} = \frac{Vo_{MIN}}{0.93} = 10.8mV$$
+
+Por lo que el rango dinámico resulta:
+
+$$RD = 2Log(\frac{Vi{MAX}}{Vi_{MIN}}) = 56.48dB$$
+
+\newpage
+
+\subsubsection{Análisis de Montecarlo - Histograma}
+
+Mediante LTSpice se realizó una simulación de montecarlo considerando
+las tolerancias de los resistores y capacitores.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.4]{\string"EJ1/Circuito con Legendre/Dibujos/MontecarloLegendre\string".eps}
+\par\end{centering}
+\caption{Análisis de montecarlo}
+
+\end{figure}
+
+Con la simulación de montecarlo, se obtuvo el siguiente histograma
+para la dispersión de la frecuencia de corte.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/histogramas/output/histograma_marce_ej1_legendre.png}
+\par\end{centering}
+\caption{Histograma - Dispersión de la frecuencia de corte}
+\end{figure}
+
+Donde se observa que la mayor parte de las curvas pasan a $3dB$ por
+la frecuencia de corte buscada que es $27KHz$\@.
+
+\newpage
+
+\subsubsection{Anexo}
+
+\paragraph{Transferencia analítica del circuito}
+
+Para el cálculo de la transferencia del circuito, se plantean los
+sentidos de corriente indicados a continuación.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.3]{\string"EJ1/Circuito con Legendre/Dibujos/CircuitoLegConI\string".eps}
+\par\end{centering}
+\caption{Circuito de análisis}
+
+\end{figure}
+
+Se toma el caso general con la derivación de $R_1$ para ganancia
+$aK$, tomando después límite para $a \rightarrow 1$. En base a las
+corrientes planteadas, se tiene que:
+
+$$i_5 = i_6 \Longrightarrow V_B = V_o \frac{R_A}{R_A+R_B}$$
+
+$$i_2 = i_4 \Longrightarrow V_B = \frac{V_A}{SCR_2+1}$$
+
+Igualando nos queda:
+
+$$V_A = V_o \frac{R_A}{R_A+R_B} (SCR_2+1)$$
+
+Planteando la ecuación del nodo a la entrada:
+
+$$i_1 + i_3 = i_2 + i_4$$
+
+$$a\frac{V_i-V_A}{R_1} + (V_o-V_A)SC = \frac{V_A-V_B}{R_2} + \frac{V_A}{R_1}(1-a)$$
+
+Donde reemplazando por las expresiones obtenidas para $V_A$ y $V_B$,
+trabajando algebraicamente se obtiene la transferencia de la celda:
+
+$$H(S) = \frac{\frac{aK}{C^2 R_1R_2}}{S^2 + S\frac{[\frac{1}{R_1} + \frac{(2-K)}{R_2}]}{C} + \frac{1}{C^2 R_1R_2}} = \frac{K{\omega_0}^2}{S^2 + S\frac{\omega_0}{Q} + \omega_0}$$
+
+Donde, si se toma límite para $a \rightarrow 1$, queda:
+
+$$H(S) = \frac{\frac{K}{C^2 R_1R_2}}{S^2 + S\frac{[\frac{1}{R_1} + \frac{(2-K)}{R_2}]}{C} + \frac{1}{C^2 R_1R_2}} = \frac{K{\omega_0}^2}{S^2 + S\frac{\omega_0}{Q} + \omega_0}$$
+
+\paragraph{Impedancia de entrada analítica}
+
+Para el cálculo de la impedancia de entrada, considerando como $V_i$
+y $V_A$ las tensiones en bornes de la resistencia a la entrada $R_1/a$,
+se calcula como:
+
+$$Z_{in} = \frac{V_i}{i_1} = \frac{V_i}{(V_i-V_A)}\frac{R_1}{a} = \frac{R_1}{(1-\frac{V_A}{V_i})a}$$
+
+Donde:
+
+$$V_A = V_o \frac{R_A}{R_A+R_B} (SCR_2+1) \Longrightarrow \frac{V_A}{V_i} = H(S) \frac{R_A}{R_A+R_B} (SCR_2+1)$$
+
+Reemplazando dicho cociente en la expresión de $Z_{in}$ se obtiene
+finalmente:
+
+$$Z_{in} = -\frac{R_1}{a\, \left(\frac{K\, R_A\, a\, \left(C\, R_2\, S + 1\right)}{\left(R_A + R_B\right)\, \left(2\, C\, R_1\, S + C\, R_2\, S + C^2\, R_1\, R_2\, S^2 - C\, K\, R_1\, S + 1\right)} - 1\right)}$$
+
+\paragraph{Sensibilidades - Cálculo de expresiones literales}
+
+Partiendo de las expresiones:
+
+$$\omega_0 = \sqrt{\frac{1}{R_1R_2C^2}} \hspace{2cm} Q = \frac{\sqrt{\frac{1}{R_1R_2}}}{\frac{1}{R_1} + \frac{(1-\frac{R_B}{R_A})}{R_2}} \hspace{2cm} $$
+
+Con la definición de sensibilidad indicada, se calcula para $\omega_0$
+las sensibilidades respecto a los parámetros $R_1$, $R_2$ y $C$,
+obteniendo:
+
+$$S_{R_1}^{\omega_0} = \frac{d\omega_0}{dR_1}\frac{R_1}{\omega_0} = -\frac{1}{2}$$
+
+$$S_{R_2}^{\omega_0} = \frac{d\omega_0}{dR_2}\frac{R_2}{\omega_0} = -\frac{1}{2}$$
+
+$$S_C^{\omega_0} = \frac{d\omega_0}{dC}\frac{C}{\omega_0} = -1$$
+
+Que para la configuración del circuito propuesto, resultan constantes.
+
+Para $Q$, se calculan las sensibilidades respecto a los parámetros
+$R_1$, $R_2$, $R_A$ y $R_B$, resultando:
+
+$$S_{R_1}^Q = \frac{dQ}{dR_1}\frac{R_1}{Q} = \frac{R_2\, R_A - R_1\, R_A + R_1\, R_B}{2\, R_1\, R_A + 2\, R_2\, R_A - 2\, R_1\, R_B}$$
+
+$$S_{R_2}^Q = \frac{dQ}{dR_2}\frac{R_2}{Q} = -\frac{R_2\, R_A - R_1\, R_A + R_1\, R_B}{2\, R_1\, R_A + 2\, R_2\, R_A - 2\, R_1\, R_B}$$
+
+$$S_{R_A}^Q = \frac{dQ}{dR_A}\frac{R_A}{Q} = -\frac{R_1\, R_B}{R_1\, R_A + R_2\, R_A - R_1\, R_B}$$
+
+$$S_{R_B}^Q = \frac{dQ}{dR_B}\frac{R_B}{Q} = \frac{R_1\, R_B}{R_1\, R_A + R_2\, R_A - R_1\, R_B}$$
+
+Para la ganancia $G$ de la celda, se toma el módulo evaluado en la
+frecuencia central $S = j\omega_0$, siendo:
+
+$$G = |H(j\omega_0)| = \frac{K}{C^2\, R_1\, R_2\, \sqrt{{\left({\omega_0}^2 - \frac{1}{C^2\, R_1\, R_2}\right)}^2 + \frac{{\omega_0}^2\, {\left(\frac{1}{R_1} - \frac{K - 2}{R_2}\right)}^2}{C^2}}}$$
+
+De manera que se calculan las sensibilidades respecto a los parámetros
+$R_1$, $R_2$ y $C$, obteniendo:
+
+$$S_{R_1}^G = \frac{dG}{dR_1}\frac{R_1}{G} \hspace{2cm} S_{R_2}^G = \frac{dG}{dR_2}\frac{R_2}{G} \hspace{2cm} S_C^G = \frac{dG}{dC}\frac{C}{G}$$
+
+La expresión matemática resultante es demasiado extensa para estos
+últimos, por lo que solamente se deja expresado la forma de cálculo
+de las mismas.
+
+\newpage
+
+\subsection{Aproximación con Bessel}
+
+En esta sección se implementa un filtro pasa bajos que cumple los
+siguientes requisitos, utilizando la aproximación de Bessel para el
+retardo de grupo.
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+$f_P$ & $550Hz$\tabularnewline
+\hline 
+$f_a$ & $2600Hz$\tabularnewline
+\hline 
+$A_p$ & $3dB$\tabularnewline
+\hline 
+$A_a$ & $40dB$\tabularnewline
+\hline 
+$\Upsilon(f_p)$ & $\leq 5\%$\tabularnewline
+\hline 
+$|Z_{in}(f)|$ & $\geq 50K\Omega$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Filtro pasa bajos por Bessel}
+
+\end{figure}
+
+
+\subsubsection{Transferencia numérica}
+
+A partir de las condiciones pedidas, se construye la plantilla a aproximar,
+que se muestra en la siguiente figura.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{\string"EJ1/Circuito con Bessel/Dibujos/Plantilla\string".eps}
+\par\end{centering}
+\caption{Plantilla pasa bajos}
+
+\end{figure}
+
+Dado que no hay una fórmula cerrada para la obtención del orden del
+filtro, se parte de la transferencia con los polinomios de Bessel
+de orden 2, iternado la desnormalización con diferentes valores de
+retardo de grupo, y subiendo el orden hasta conseguir que cumpla la
+plantilla propuesta. Esto se logró para un retardo de $???$ y orden
+5, obteniendo la siguiente transferencia desnormalizada:
+
+$$H(S) = 6.37 \cdot 10^{37} \cdot \frac{1}{S+5.59\cdot 10^3} \frac{1}{S^2 + S \cdot 10.27 \cdot 10^3 + 33.51 \cdot 10^6} \frac{1}{S^2 + S \cdot 6.89 \cdot 10^3 + 42.62 \cdot 10^6}$$
+
+\subsubsection{Circuito a implementar}
+
+Al ser orden 5 se implementará, al igual que en el caso anterior con
+la aproximación de Legendre, dos celdas Sallen-Key pasabajos y un
+circuito integrador compensado, cuyas transferencias se reproducen
+por comodidad:
+
+$$H(S) = \frac{\frac{K}{C^2 R_1R_2}}{S^2 + S\frac{[\frac{1}{R_1} + \frac{(2-K)}{R_2}]}{C} + \frac{1}{C^2 R_1R_2}} = \frac{K{\omega_0}^2}{S^2 + S\frac{\omega_0}{Q} + \omega_0}$$
+
+Donde para el caso con derivación de $R_1$ se multiplica la transferencia
+por la constante $a$. Para el circuito integrador:
+
+$$H(S) = -\frac{R_f}{R_r(SCR_f+1)}$$
+
+\subsubsection{Diseño del filtro}
+
+De la misma forma que para el circuito con Legendre, de la transferencia
+numérica se obtienen los valores de las frecuencias de corte para
+cada etapa, siendo las de orden 2 $\omega_{01} = 5.49 \cdot 10^3$
+y $\omega_{02} = 6.53 \cdot 10^3$, siendo la restante de orden 1
+en $\omega_{03} = 5.59\cdot 10^3$. Al igual que en el caso de Legendre,
+no se normalizan los valores sino que se dejan en forma exacta, de
+forma tal que con el análisis de sensibilidades definir si se requiere
+alguna tolerancia de $1\%$ o preset de ajuste fino.
+
+Iniciando por la etapa de orden 1, partiendo de:
+
+$$\omega_{03} = \frac{1}{C_fR_f}$$
+
+Se supone un capacitor $C_f = 100nF$, de manera tal que sea multicapa
+(ya que poseen una mejor respuesta en frecuencia que los electrolítico)s
+y por otra parte la resistencia que se obtiene al despejar toma un
+valor medio facil de implementar:
+
+$$R_f = \frac{1}{\omega_{03}C_f} = 1.79K\Omega$$
+
+Para $R_r$, se la toma de igual valor que $R_f$, y se agrega en
+serie un preset de $1K\Omega$ para poder realizar ajuste de ganancia
+en caso de ser mayor a $0dB$ a la salida del filtro. Resumiendo,
+los valores resultan:
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+ & Valor\tabularnewline
+\hline 
+\hline 
+$C_f$ & $100nF$\tabularnewline
+\hline 
+$R_f$ & $1.79K\Omega$\tabularnewline
+\hline 
+$R_r$ & $1.79K\Omega + 1K\Omega (Preset)$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Valores de componentes de la etapa de orden 1}
+
+\end{figure}
+
+Para las etapas de orden 2, utilizando las mismas expresiones del
+filtro anterior:
+
+$$\omega_0 = \sqrt{\frac{1}{R_1R_2C^2}} \hspace{2cm} Q = \frac{\sqrt{\frac{1}{R_1R_2}}}{\frac{1}{R_1} + \frac{(2-K)}{R_2}}$$
+
+Con los valores de $\omega_{01}$ y $\omega_{02}$ obtenidos, igualando
+los coeficientes numéricos se despejan los valores de $Q$ correspondientes:
+
+$$Q_1 = \frac{\omega_{01}}{10.27 \cdot 10^3} = 0.53 \hspace{2cm} Q_2 = \frac{\omega_{02}}{6.89 \cdot 10^3} = 0.95$$
+
+Tomando como guía de referencia el libro <<Design of Analog Filters>>
+(de R.Schaumann), al igual que en el filtro anterior se eligen por
+conveniencia $C_1 = C_2 = C$ y $R_1 = R_2 = R$. Reemplazando en
+las expresiones anteriores resulta:
+
+$$K = 3-\frac{1}{Q} \hspace{2cm} R = \frac{1}{\omega_0C} \hspace{2cm} K = 1+\frac{R_B}{R_A}$$
+
+Con los valores de $Q$ obtenidos, se calcula el valor de $K$ para
+cada caso. Para la celda correspondiente a $\omega_{02}$, se define
+un valor de $C = 100nF$, de manera tal de poder implementar uno multicapa
+y además se consigue un valor medio de resistencia fácil de implementar:
+
+$$R = \frac{1}{\omega_{02}C} = 1.53K\Omega$$
+
+De la expresión de $K$, se despeja $R_B$, y eligiendo convenientemente
+$R_A = 2.2K\Omega$, se obtiene un valor para $R_B$ de orden similar
+y cercana a un valor comercial:
+
+$$R_B = (K-1)R_A = 2K\Omega$$
+
+Para la etapa restante, se procedio en forma similar al filtro anterior,
+buscando que la impedancia de entrada cumpla con el requerimiento
+de ser en módulo $\geq 50K\Omega$ para evitar añadir un buffer a
+la entrada del filtro. Para un proceso de diseño más agilizado, se
+tomó de patrón el valor de capacitor elegido en la celda anterior,
+calculando las resistencias resultantes y simulando en LTSpice la
+impedancia de entrada resultante en función de la frecuencia, repitiendo
+este proceso en forma iterativa hasta poder cumplir con el requerimiento
+sin mucha dificultad. Luego de este proceso, se definió un valor de
+$C = 1nF$, por lo que reemplazando en las expresiones anteriores
+se obtiene el valor de $R$:
+
+$$R = \frac{1}{\omega_{01}C} = 172K\Omega$$
+
+Se elige luego convenientemente $R_A = 10K\Omega$, de manera tal
+que $R_B$ resulta del mismo orden y cercana a un valor comercial:
+
+$$R_B = (K-1)R_A = 2.2K\Omega$$
+
+Resumiendo, los valores resultantes son:
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+ & Celda 1 & Celda 2\tabularnewline
+\hline 
+\hline 
+$C$ & $1nF$ & $100nF$\tabularnewline
+\hline 
+$R_1$ & $172K\Omega$ & $1.53K\Omega$\tabularnewline
+\hline 
+$R_2$ & $172K\Omega$ & $1.53K\Omega$\tabularnewline
+\hline 
+$R_A$ & $10K\Omega$ & $2.2K\Omega$\tabularnewline
+\hline 
+$R_B$ & $2.2K\Omega$ & $2K\Omega$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Valores de componentes para las celdas de orden 2}
+\end{figure}
+
+
+\subsubsection{Sensibilidades - Ajuste de valores de componentes}
+
+Se analiza ahora las sensibilidades a los parámetros $\omega_0$,
+$Q$ y $G$, utilizando las mismas ecuaciones obtenidas en el filtro
+con Legendre. Los valores obtenidos se muestran en la siguiente tabla.
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+Sensibilidad & Celda 1 & Celda 2\tabularnewline
+\hline 
+\hline 
+$S_C^{\omega_0}$ & -1 & -1\tabularnewline
+\hline 
+$S_{R_1}^{\omega_0}$ & -0.5 & -0.5\tabularnewline
+\hline 
+$S_{R_2}^{\omega_0}$ & -0.5 & -0.5\tabularnewline
+\hline 
+$S_{R_1}^Q$ & 0.062 & 0.418\tabularnewline
+\hline 
+$S_{R_2}^Q$ & -0.062 & -0.418\tabularnewline
+\hline 
+$S_{R_A}^Q$ & -0.124 & -0.833\tabularnewline
+\hline 
+$S_{R_B}^Q$ & 0.124 & 0.833\tabularnewline
+\hline 
+$S_{R_1}^G$ & -0.512 & 0.149\tabularnewline
+\hline 
+$S_{R_2}^G$ & -0.634 & -0.607\tabularnewline
+\hline 
+$S_C^G$ & -1.146 & -0.458\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Tabla de sensibilidades para los valores obtenidos en diseño}
+\end{figure}
+
+
+\subsubsection{Conclusiones}
+
+Para la aproximación dada, las sensibilidades resultan ser muy pequeñas
+para ambas celdas en comparación con las obtenidas en el filtro anterior,
+de manera tal que se decide normalizar los valores obtenidos al $5\%$
+de tolerancia, armando $172K\Omega = 150K\Omega + 22K\Omega$, las
+de $1.53K\Omega$ se normalizan a $1.5K\Omega$ y la de $2K\Omega$
+se construye con dos de $1K\Omega$ en serie.
+
+En el circuito integrador, verificando con las mediciones para poder
+ajustar mejor la ganancia de la curva, se modificó $R_r = 2.2K\Omega$.
+
+\newpage
+
+\subsubsection{Respuesta en frecuencia }
+
+Para la respuesta en frecuencia, se tomaron mediciones en el rango
+de $100Hz$ a $3.2KHz$, donde ya se alcanza el piso de ruido en la
+señal de salida.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_mag_beseel.png}
+\par\end{centering}
+\caption{Respuesta en Frecuencia - Módulo}
+
+\end{figure}
+
+Se procedió luego a medir la fase, para luego tomar la derivada en
+los puntos contiguos para obtener el retardo de grupo.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_gd_bessel.png}
+\par\end{centering}
+\caption{Respuesta en frecuencia - Retardo de grupo}
+
+\end{figure}
+
+
+\subsubsection{Impedancia de entrada}
+
+Para la medición de la impedancia de entrada, se procede igual que
+en el filtro con Legendre, midiendo directamente sobre la resistencia
+$R_1$ que sigue en serie al generador, de manera tal que:
+
+$$Z_{in} = \frac{V_i}{\frac{V_i - V_A}{R_1/a}}$$
+
+Donde $V_i$ y $V_A$ son las tensiones entre bornes de la resistencia.
+
+Se simuló el efecto de las puntas, donde se observó que al igual que
+antes en configuración $\times 1$ modifican el valor de la impedancia
+medida, mientras que el efecto es despreciable en configuración $\times 10$,
+por lo que las mediciones se desarrollaron con dicha configuración
+también para este filtro.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_mag.png}
+\par\end{centering}
+\caption{Impedancia de entrada - Módulo}
+\end{figure}
+
+Donde a partir de las curvas obtenidas, se verifica que cumple con
+la condición buscada de ser $\geq 50K\Omega$.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_pha.png}
+\par\end{centering}
+\caption{Impedancia de entrada - Fase}
+\end{figure}
+
+Los saltos que se obtienen se deben a variaciones fuertes en los valores
+de la fase en un lapso de tiempo pequeño, debido a los puntos tomados
+al medir, pero en promedio sigue a la línea central donde la curva
+simulada y teórica cumplen la constancia del retardo en la frecuencia
+de corte con un error de aproximadamente $2\%$.
+
+\subsubsection{Calibración}
+
+Dada la poca sensibilidad a variaciones en los componentes, se requirió
+un único preset de ajuste de ganancia en el circuito integrador, de
+manera que para realizar el ajuste se procede midiendo a $100Hz$
+inyectando una señal senoidal de $1V_p$ y ajustando el preset para
+que la relación entre la entrada y la salida sea de $0dB$.
+
+\subsubsection{Rango dinámico}
+
+Se calcula el rango dinámico teniendo en cuenta el caso de ganancia
+máxima, que en este caso se da a la salida de la etapa 1, con $G_{MAX} = 1.4dB \Rightarrow 1.17$.
+Considerando como tensión de salida máxima antes de saturación $10.5V$
+(dado que la alimentación es de $\pm 12V$), resulta:
+
+$$Vi_{MAX} = \frac{Vo_{MAX}}{1.17} = 8.9V$$
+
+Tomando la ganancia mínima, resulta de $-0.4dB \Rightarrow 0.95$,
+y considerando como $Vo_{MIN} = 10mV$, se calcula:
+
+$$Vi_{MIN} = \frac{Vo_{MIN}}{0.95} = 10.6mV$$
+
+Por lo que el rango dinámico resulta:
+
+$$RD = 2Log(\frac{Vi{MAX}}{Vi_{MIN}}) = 58.48dB$$
+
+\subsubsection{Análisis de Montecarlo - Histogramas}
+
+Mediante LTSpice se realiza una simulación de montecarlo considerando
+las tolerancias de resistores y capacitores.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{\string"EJ1/Circuito con Bessel/Dibujos/MontecarloBessel\string".eps}
+\par\end{centering}
+\caption{Análisis de montecarlo}
+
+\end{figure}
+
+En base a la simulación de montecarlo, se obtuvo el siguiente histograma
+para la dispersión de la frecuencia de corte.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/histogramas/output/histograma_marce_ej1_bessel.png}
+\par\end{centering}
+\caption{Histograma - Dispersión de la frecuencia de corte}
+
+\end{figure}
+
+Notar que la frecuencia de corte que más pasa por $3dB$ está un poco
+desplazada de la buscada que es $550Hz$. Esto asegura que cumpla
+plantilla en la banda de paso, y en la banda de atenuación se verificó
+que en todos los casos la curva pasaba por más de $40dB$, por lo
+que también se cumple la plantilla en dicha banda. Se observa además
+directamente del montecarlo que la transferencia propuesta, al resultar
+los parámetros menos sensibles que en el filtro con Legendre, la dispersión
+de la curva es menor.
+
+\newpage
+
+\section{Celda Rauch (Deliyannis-Friend modificada)}
+
+En esta sección se implementa un filtro pasabanda que verifique los
+siguientes datos, de acuerdo al número de grupo correspondiente, utilizando
+la aproximación de Chebyshev.
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+Pendiente pasabajos normalizada & $-40dB/dec$\tabularnewline
+\hline 
+$f_p$ & $36KHz$\tabularnewline
+\hline 
+$Q$ & $10$\tabularnewline
+\hline 
+$A_p$ & $3dB$\tabularnewline
+\hline 
+$|Z_in(f)|$ & $\geq 50K\Omega$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Filtro pasabanda por Chebyshev}
+
+\end{figure}
+
+
+\subsection{Transferencia numérica}
+
+En base a las características propuestas, se construye la siguiente
+plantilla pasa banda a aproximar.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{EJ2/Dibujos/Plantilla}
+\par\end{centering}
+\caption{Plantilla pasa banda}
+
+\end{figure}
+
+Dado que la pendiente pasabajos se da como dato, el orden de la transferencia
+pasabajos normalizada queda determinado. Como dicha pendiente es de
+$-40dB/dec$, el orden resultante de pasabajos es $n=2$. El $Ap_{MAX}$
+es de $3dB$, pero para tener en cuenta que la curva de transferencia
+se desplaza debido a las tolerancias de los componentes, se utilizará
+uno un poco menor para tener un margen, tomando $Ap = 1dB$.
+
+Mediante la aproximación de Chebyshev y posterior denormalización
+(ver procedimiento en $Anexo$), se obtiene que la transferencia final
+numérica es la siguiente función de orden $n = 4$:
+
+$$H(S) = \frac{708.078 \cdot 10^6 \cdot S^2}{S^4 + 29.217 \cdot 10^3 \cdot S^3 + 1.031 \cdot 10^{11} \cdot S^2 + 1.495 \cdot 10^{15} \cdot S + 2.618 \cdot 10^{21}}$$
+
+Factorizando en productos de transferencias de orden 2 para posterior
+implementación queda:
+
+$$H(S) = 708.078 \cdot 10^6 \cdot \frac{S}{S^2 + 1.537 \cdot 10^4 \cdot S + 5.685 \cdot 10^{10}} \cdot \frac{S}{S^2 + 1.384 \cdot 10^4 \cdot S + 4.605 \cdot 10^{10}}$$
+
+\subsection{Circuito a implementar}
+
+El circuito a utilizar como celda básica de segundo orden pasabanda
+es la Deliyannis-Friend con Q mejorado dado que, consultando con el
+libro <<Design of Analog Filters>> (de Rolf Schaumann) el Q solicitado
+es alto, lo que implicaría que en circuito Deliyannis-Friend original
+resulte un relación entre $R_1$ y $R_2$ demasiado grande Realizando
+la modificación de realimentación positiva, se logra que el ciruito
+original opere a un $Q_0$ más bajo, pero que el $Q$ final resultante
+sea mayor.
+
+El circuito en cuestión se muestra en la siguiente imagen.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{EJ2/Dibujos/Circuito}
+\par\end{centering}
+\caption{Celda Deliyannis-Friend con Q mejorado}
+\end{figure}
+
+Dicha modificación produce que en la entrada no inversora la tensión
+ya no sea $0V$, sino que pasa a ser $K \cdot V_o$. Resolviendo el
+circuito (ver en $Anexo$), la transferencia resultante es:
+
+$$H(S) = \frac{V_o}{V_i} = -\left(\frac{1}{1-K}\right) \cdot \frac{\frac{aS}{CR_1}}{S^2 + S \cdot \frac{2}{CR_2} (1-\frac{1}{2R_1R_2} \cdot \frac{K}{1-K}) + \frac{1}{C^2 R_1R_2}}$$
+
+\subsection{Diseño del filtro}
+
+Partiendo de la expresión de la función transferencia del circuito,
+llamando $\alpha = \frac{K}{1-K}$, se reescribe como:
+
+$$\frac{V_o}{V_i} = -\left(\frac{1}{1-K}\right) \cdot \frac{\frac{SH\omega_0}{Q_0}}{S^2 + S\omega_0 (\frac{1-2\alpha {Q_0}^2}{Q_0}) + {\omega_0}^2}$$
+
+En la cual es más simple observar que $\alpha$ modifica sólo la selectividad
+resultante $Q = \frac{Q_0}{1-2\alpha {Q_0}^2}$, que viene acompañado
+por una modificación en la ganancia debido a que también cambia el
+factor $\frac{1}{1-K}$, mientras que la frecuencia central $\omega_0$
+se mantiene igual. La ganancia en banda pasante resulta:
+
+$$H_B = H \frac{Q}{Q_0} \frac{1}{1-K}$$
+
+De la cual se despejará luego el valor de $H$.
+
+Al ser la transferencia final de orden 4, se implementarán en principio
+dos de estas celdas de orden 2 en cascada. Se analizará luego si se
+requieren buffers y/o compensación de ganacia, para que la transferencia
+resultante sea efectivamente en producto de las de cada celda. Los
+valores de $\omega_0$ a utilzar en cada una surgen de la transferencia
+numérica obtenida en la sección <<2.1>>, siendo $\omega_{01} = \sqrt{4.605 \cdot 10^{10}} = 214.593 \cdot 10^3 rad/s$
+y $\omega_{02} = \sqrt{5.685 \cdot 10^{10}} = 238.432 \cdot 10^3 rad/s$
+respectivamente. Siguiendo las especificaciones de la plantilla, se
+toma acorde $H_B = 1$ es decir $0dB$. Para elegir el valor de $Q_0$,
+de acuerdo a un estudio de las sensibilidades del circuito realizado
+por el autor del libro (R. Schaumann), sugiere que un valor óptimo
+es $Q_0 = 1.5$, por lo que se tomará dicho valor para diseño. Para
+el $Q$ de cada etapa, se debe elegir uno menor al final buscado,
+dado que si ambas se diseñan con el $Q = 10$ que debe resultar al
+final, en realidad se obtiene uno más grande (dado que se debe tener
+en cuenta que, al sumarse los módulos de las transferencias en dB,
+las frecuencias que delimitan el ancho de banda se acercan más, lo
+que resulta en un $Q$ mayor). Para ambas celdas, se buscó un $Q$
+adecuado en forma iterativa utilizando Matlab para el cálculo de las
+transferencias numéricas y diagramas de bode para verificar en cada
+caso el $Q$ final resultante (a partir de medir el ancho de banda).
+De este procedimiento, se consignó un $Q = 8.5$ para cada celda.
+
+Habiendo definido el $Q$ y el $Q_0$ de cada celda, se procede a
+calcular los diferentes parámetros y componentes de la celda. De despejar
+de los coeficientes de la función transferencia se obtienen las expresiones
+a utilizar, que por simplicidad se toman directamente del libro.
+
+Inicialmente, se calcula el valor de $\alpha$, que será el mismo
+para ambas:
+
+$$\alpha = \frac{1}{2{Q_0}^2}(1-\frac{Q_0}{Q}) = 0.183$$
+
+Si se despeja $K$ de la expresión definida anteriormente para $\alpha$,
+resulta:
+
+$$K = \frac{\alpha}{1+\alpha} = 0.155$$
+
+Recordando que $H_B = 1$, se obtiene el valor de $H$:
+
+$$H = H_B \frac{Q_0}{Q} (1-K) = 0.149$$
+
+Para los valores de las resistencias, las expresiones resultantes
+tomadas del libro son:
+
+$$R_2 = \frac{2Q_0}{\omega_0C} \hspace{2cm} R_1 = \frac{R_2}{4{Q_0}^2} \hspace{2cm} a = \frac{H}{2{Q_0}^2}$$
+
+En la siguiente tabla se resumen los valores obtenidos para ambas
+celdas. En principio se elige $R = 10K\Omega$ dado que al multiplicar
+por $K$ y $(1-K)$, la resistencia resultante en ambos casos no resulte
+demasiado baja (menor a $1K\Omega$). Con ese mismo criterio se elige
+el valor de los capacitores, buscando además que los mismos sean multicapa
+debido que éstos presentan una mejor respuesta en frecuencia que los
+electrolíticos.
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+ & Celda 1 & Celda 2\tabularnewline
+\hline 
+\hline 
+$C$ & $470pF$ & $1nF$\tabularnewline
+\hline 
+$R1$ & $3.3K\Omega$ & $1.39K\Omega$\tabularnewline
+\hline 
+$R_1/a$ & $99.7K\Omega$ & $42.2K\Omega$\tabularnewline
+\hline 
+$R_1/(1-a)$ & $3.4K\Omega$ & $1.4K\Omega$\tabularnewline
+\hline 
+$R_2$ & $29.7K\Omega$ & $12.6K\Omega$\tabularnewline
+\hline 
+$KR$ & $1.55K\Omega$ & $1.55K\Omega$\tabularnewline
+\hline 
+$(1-K)R$ & $8.45K\Omega$ & $8.45K\Omega$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Valores de componentes para las celdas}
+\end{figure}
+
+No se normalizan los valores de las resistencias aún, dado que en
+la sección siguiente se realiza el análisis de sensibilidades para
+definir cuales redondear, o si es necesario agrupar en serie o paralelo,
+utilización de presets o tolerancias de $1\%$ según sea necesario.
+El valor de $C$ para la Celda 1 se eligió de manera tal que el módulo
+de la impedancia de entrada verificara la condición pedida de ser
+$\geq 50K\Omega$, por lo que dicha celda se colocará primera a la
+entrada. La segunda celda posee una impedancia de entrada menor, pero
+que en módulo sigue siendo del mismo orden que la primera (siendo
+los capacitores cercanos y las resistencias del mismo orden de magnitud,
+puede intuirse sin necesidad de recalcular la impedancia de entrada
+analíticamente para la segunda celda), y dado que la impedancia de
+salida del operacional es muy baja comparada a la de entrada en cuestión,
+no es necesario colocar un buffer que las separe, evitando utilizar
+otro operacional adicional.
+
+\newpage
+
+\subsection{Sensibilidades - Ajuste de valores de componentes}
+
+Se busca ahora ver, en base a los valores definidos anteriormente,
+como resultan las sensibilidades a los parámetros $Q$ y $\omega_0$
+en cada celda, para definir si se requiere algún ajuste para mantener
+dichos parámetros lo más controlados posible. Se toma como sensibilidad
+relativa de una función $y$ respecto a una variable $x$ como $S_x^y = \frac{dy}{dx} \frac{x}{y}|_{x_0}$
+
+Se despeja $\omega_0$ de las expresiones anteriores utilizadas (ver
+procedimiento en $Anexo$):
+
+$$\omega_0 = \frac{2}{R_2 C}\sqrt{\frac{R_2}{4R_1}}$$
+
+De forma tal de verificar como afectan los tres componentes en juego.
+Para $Q$:
+
+$$Q = \frac{Q_0}{1-\frac{2K{Q_0}^2}{1-K}}$$
+
+Donde se buscará analizar la sensibilidad respecto a $K$, ya que
+termina siendo fijado por $R$ en la celda. Realizando los respectivos
+cálculos de sensibilidades y evaluando las expresiones (ver expresiones
+generales en $Anexo$), se muestra en la siguiente tabla los valores
+obtenidos.
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+Sensibilidad & Celda 1 & Celda 2\tabularnewline
+\hline 
+\hline 
+$S_{R_1}^{\omega_0}$ & -0.5 & -0.5\tabularnewline
+\hline 
+$S_{R_2}^{\omega_0}$ & -0.5 & -0.5\tabularnewline
+\hline 
+$S_{C}^{\omega_0}$ & -1 & -1\tabularnewline
+\hline 
+$S_K^Q$ & 5.59 & 5.59\tabularnewline
+\hline 
+$S_{R_1}^G$ & -1.21 & -0.74\tabularnewline
+\hline 
+$S_{R_2}^G$ & 0.76 & 1.23\tabularnewline
+\hline 
+$S_C^G$ & -0.45 & 0.48\tabularnewline
+\hline 
+$S_K^G$ & 0.18 & 0.18\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Tabla de sensibilidades para los valores diseñados}
+
+\end{figure}
+
+Dado que la mayor sensibilidad está dada en el parámetro $Q$ respecto
+al valor de $K$, se decidió poder regular con un preset la relación
+entre $KR$ y $(1-K)R$ de manera tal que, en lugar de utilizar el
+valor de $R$ original, se recalcula con $R = 9.9K\Omega$. Se obtiene
+así que $KR = 1.53K\Omega$ y $(1-K)R = 8.37K\Omega$, para poder
+fijaralas ahora en $KR_N = 1.5K\Omega$ y $$(1-K)R_N = 8.2K\Omega$$
+agregando un preset de $200\Omega$ para el ajuste fino, verificando
+$8.2K\Omega + 1.5K\Omega + 200\Omega = 9.9K\Omega$.
+
+\subsubsection{Conclusiones}
+
+La desventaja que surge entonces para esta celda es la alta sensibilidad
+de $K$ sobre la selectividad $Q$, que además está relacionada con
+$H_B$, por lo que esta última aumenta o disminuye con $Q$.
+
+Para compensar las variaciones que puede sufrir $\omega_0$ y la ganancia
+$G$, dado que $C$ es fijo con tolerancia de $5\%$, se optó por
+utilizar una $R_2$ con tolerancia de $1\%$, y a las resultantes
+$R_1/a$ y $R_1/(1-a)$ también al $1\%$. Todo esto se replicó en
+ambas celdas\@. Se normalizan entonces para la celda 1 $R_2 = 30K\Omega$,
+$R_1/a = 100K\Omega$ y $R_1/(1-a) = 3.3K\omega$, y en la celda 2
+$R_2 = 13K\Omega$ $R_1/a = 42K\Omega$ y $R_1/(1-a) = 1.4K\omega$\@.
+
+La posibilidad de ajustar el $Q$ resultante con el preset permite
+entonces a su vez ajustar la ganancia en el rango buscado en la plantilla
+(como se verificará luego en los gráficos de respuesta en frecuencia
+donde se superponen el teórico, simulado y medido), por lo que tampoco
+es necesario implementar una etapa compensadora de ganancia, evitando
+sumar otro operacional adicional, por lo que finalmente el filtro
+es implementado utilizando únicamente dos operacionales (uno para
+cada celda de orden 2). Es razonable que la sensibilidad de la ganancia
+$G$ al parámetro $K$ sea menor que con los capacitores, dado que
+al afectar solamente a $Q$ la curva se mueve hacia arriba o hacia
+abajo, siendo estos cambios mas uniformes ya que no desplaza la frecuencia
+central, mientras que los capacitores modifican la frecuencia central
+haciendo que la ganancia en el punto evaluado $f_0$ cambie más bruscamente
+al desplazarse la curva sobre el eje de las frecuencias.
+
+\newpage
+
+\subsection{Respuesta en frecuencia}
+
+A partir de la transferencia teórica, simulada y medida, se superponen
+las curvas obtenidas, verificando que se cumple la plantilla propuesta.
+Se efectuaron las mediciones utilizando una señal de entrada de $1V_p$,
+en el rango de frecuencias de $20KHz$ a $50KHz$ porque por un lado,
+al alcanzar dichas frecuencias, la señal de salida toma una amplitud
+del orden de los $20mV$ considerados como piso de ruido, y por otro
+para poder observar en detalle la sección de interés que es la banda
+pasante, es decir la frecuencia central y las frecuencias a $-3dB$
+para verificar que la plantilla se cumple.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.65,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_mag_legendre.png}
+\par\end{centering}
+\caption{Respuesta en frecuencia - Módulo}
+\end{figure}
+
+De los puntos indicados en $f_0$ y en aproximadamente $-3dB$, se
+obtiene el $Q$ práctico resultante:
+
+$$Q = \frac{f_0}{f_2-f_1} = \frac{36KHz}{37.45KHz - 34.22KHz} = 11.14$$
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.65,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/EJ1_pha_legendre.png}
+\par\end{centering}
+\caption{Respuesta en frecuencia - Fase}
+
+\end{figure}
+
+
+\subsection{Impedancia de entrada}
+
+Para la medición de la impedancia de entrada, se evitó utilizar el
+método de incluir una resistencia en serie a la entrada para medir
+la corriente, dado que se modifica el comportamiento de la celda debido
+a la sensibilidad a $R_1/a$. En cambio, se midió directamente sobre
+esta resistencia, calculando la impedancia de entrada como:
+
+$$Z_{in} = \frac{V_i}{\frac{V_i - V_1}{R_1/a}}$$
+
+Donde $V_i$ y $V_1$ son las tensiones entre bornes de la resistencia.
+La expresión resultante analítica se incluye en el $Anexo$.
+
+Dado que se está conectando las puntas del osciloscopio directamente
+en el circuito, se tuvo la precaución de verificar mediante simulación
+si éstas afectaban a la medición, lo cual ocurría notablemente para
+la configuración en $\times 1$, mientras que en configuración $\times 10$
+no se producían modificaciones apreciables, por lo que se realizaron
+las mediciones con esta configuracion.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_mag.png}
+\par\end{centering}
+\caption{Impedancia de entrada - Módulo}
+
+\end{figure}
+
+Donde, en las curvas obtenidas, se observa que el módulo cumple con
+la especificación buscada de ser $\geq 50K\Omega$.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/graficos_express/output/Zin_pha.png}
+\par\end{centering}
+\caption{Impedancia de entrada - Fase}
+
+\end{figure}
+
+Por otra parte, de la curva de fase obtenida se observa que en la
+banda pasante la impedancia de entrada adquiere un poco de carácter
+capacitivo, mientras que en el resto de las frecuencias es prácticamente
+resistiva pura. Al tener además una impedancia de salida muy baja,
+permite acoplar las etapas en cascada fácilmente sin requerir de un
+buffer intermedio.
+
+\subsection{Calibración}
+
+Conectando la alimentación al circuito de $\pm 12V$, se procede:
+\begin{itemize}
+\item Medir en $V_A$, y buscar la frecuencia donde la relación $\frac{V_A}{V_i}$
+es máxima, y ajustar $R_{10}$ de manera tal que dicha relación sea
+$6dB$.
+\item Medir ahora en la salida $V_o$, encontrar la segunda frecuencia donde
+hay un máximo en la relación $\frac{V_o}{V_i}$, y ajustar el preset
+$R_{11}$ de manera tal que la relación sea de $0dB$. 
+\item Verificar que en las frecuencias que delimitan el ancho de banda (que
+recordando son $34.25KHz$ y $37.84KHz$) y dentro de la banda la
+relación sea $>-3dB$, sino repetir el paso anterior con el preset
+$R_{10}$, midiendo en $V_o$ y buscando la primer frecuencia donde
+se tiene un máximo de ganancia.
+\end{itemize}
+
+\subsection{Rango dinámico}
+
+Se calcula el rango dinámico teniendo en cuenta el caso de ganancia
+máxima, que en este caso se da a la salida de la etapa 1, con $G_{MAX} = 6dB \Rightarrow 2$.
+Considerando como tensión de salida máxima antes de saturación $10.5V$
+(dado que la alimentación es de $\pm 12V$), resulta:
+
+$$Vi_{MAX} = \frac{Vo_{MAX}}{2} = 6V$$
+
+Tomando la ganancia mínima, resulta de $-0.2dB \Rightarrow 0.98$
+a la salida del filtro, y considerando como $Vo_{MIN} = 10mV$, se
+calcula:
+
+$$Vi_{MIN} = \frac{Vo_{MIN}}{0.98} = 10.2mV$$
+
+Por lo que el rango dinámico resulta:
+
+$$RD = 2Log(\frac{Vi{MAX}}{Vi_{MIN}}) = 55.39dB$$
+
+\subsection{Análisis de Montecarlo - Histogramas}
+
+Se realizó el análisis de montercarlo en LTSpice considerando las
+tolerancias de los resistores y capacitores, tanto del $5\%$ como
+del $1\%$.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.4]{EJ2/Dibujos/MontecarloRauch}
+\par\end{centering}
+\caption{Análisis de montecarlo}
+
+\end{figure}
+
+En el cual se observa la gran dispersión en la banda pasante debido
+a las altas sensibilidades de los parámetros hacia los componentes
+que los determinan.
+
+A partir de este análisis, se obtuvieron los siguientes histogramas
+de la dispresión de las frecuencias que delimitan el ancho de banda.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/histogramas/output/histograma_marce_EJ2_f13db.png}
+\par\end{centering}
+\caption{Histograma - Dispersión de $f_p^- = 34.25KHz$}
+
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6,bb = 0 0 200 100, draft, type=eps]{C:/Users/Marcelo/Documents/GitHub/InformesTC/TP5/histogramas/output/histograma_marce_EJ2_f23db.png}
+\par\end{centering}
+\caption{Histograma - Dispersión de $f_p^+ = 37.84KHz$}
+
+\end{figure}
+
+La dispersión observada en ambos valores resulta consistente, debido
+a que los parámetros de $\omega_0$ y $Q$ en este filtro, como se
+calculó anteriormente, son bastante sensibles a variaciones en los
+componentes debido a las tolerancias.
+
+\newpage
+
+\subsection{Anexo}
+
+\subsubsection{Transferencia numérica}
+
+Para la transferencia numérica, con los datos propuestos, dado que
+$A_p$ no es $3dB$, se debe calcula el valor de $\varepsilon$ (que
+será distinto de 1):
+
+$$\varepsilon = \sqrt{10^{\frac{A_p}{10}} - 1} = \sqrt{10^{\frac{1}{10}} - 1} = 0.5088$$
+
+Teniendo esto, se calculan la singularidades de la transferencia pasabajos
+normalizada, sabiendo que:
+
+$$S_p = \sigma_k + j\omega_k = -sen(\alpha)senh(\beta) + j cos(\alpha)cosh(\beta)$$
+
+Donde $\alpha = \pi \frac{(2k-1)}{2n}$ y $\beta = \frac{arcsenh(\frac{1}{\varepsilon})}{n}$,
+y $k$ varía entre 0 y $2n-1$. Se obtienen 4 polos (2 pares complejos
+conjugados), y se utiliza el par que se encuentra en el semiplano
+izquierdo. Reemplazando en las expresiones anteriores por los datos
+numéricos obtenidos, se obtiene que:
+
+$$H(S)_{LPN} = \frac{1}{(S-S_{p1})(S-S_{\overline{p1}})} = \frac{1}{S^2 + 1.098S + 1.103}$$
+
+Dado que el filtro buscado es un pasabajos, se aplica la transformación:
+
+$$S \longrightarrow \frac{1}{B}(\frac{S}{\omega_0} + \frac{\omega_0}{S})$$
+
+Por lo que resulta:
+
+$$H_{BP}(S) = \frac{708.078 \cdot 10^6 \cdot S^2}{S^4 + 29.217 \cdot 10^3 \cdot S^3 + 1.031 \cdot 10^{11} \cdot S^2 + 1.495 \cdot 10^{15} \cdot S + 2.618 \cdot 10^{21}}$$
+
+\subsubsection{Transferencia analítica del circuito}
+
+Para calcular la transferencia de la celda, se plantean los sentidos
+de corriente indicados a continuación.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{EJ2/Dibujos/CircuitoAnalisis}
+\par\end{centering}
+\caption{Circuito de análisis}
+
+\end{figure}
+
+Considerando al operacional como ideal, se tiene:
+
+$$i_6 = i_7 \Longrightarrow V = V_o \frac{KR}{KR + (1-K)R} \Longrightarrow V = K \cdot V_o$$
+
+Por otro lado:
+
+$$i_3 = i_4 \Longrightarrow (V_1 - V)SC = \frac{V - V_o}{R_2}$$
+
+Reemplazando con la expresión de $V$ se obtiene:
+
+$$V_1 = V_o(K+\frac{K-1}{SCR_2})$$
+
+Se plantea la ecuación de las corrientes sobre el nodo con $V_1$:
+
+$$i_1 + i_5 = i_2 + i_3$$
+
+$$\frac{V_i - V_1}{R_1/a} + (V_o - V_1)SC = \frac{V_1}{R_1}(1-a) + (V_1 - V)SC$$
+
+Donde, reemplazando las expresiones obtenidas anteriormente para $V$
+y $V_1$, desarrollando algebraicamente se obtiene finalmente la transferencia
+de la celda:
+
+$$H(S) = \frac{V_o}{V_i} = -\left(\frac{1}{1-K}\right) \cdot \frac{\frac{aS}{CR_1}}{S^2 + S \cdot \frac{2}{CR_2} (1-\frac{1}{2R_1R_2} \cdot \frac{K}{1-K}) + \frac{1}{C^2 R_1R_2}}$$
+
+\subsubsection{Impedancia de entrada analítica}
+
+Para la impedancia de entrada, considerando $V_i$ y $V_1$ las tensiones
+en bornes de la resistencia, se calcula como:
+
+$$Z_{in} = \frac{V_i}{\frac{V_i - V_1}{R_1/a}} = \frac{V_i \cdot R_1/a}{V_i-V_1} = \frac{R_1/a}{1-\frac{V_1}{V_i}}$$
+
+Donde, reemplazando por la expresión de $V_1$ obtenida anteriormente:
+
+$$Z_{in} = \frac{R_1/a}{1-\frac{V_o}{V_i}(K+\frac{(K-1)}{SCR_2})}$$
+
+Siendo $\frac{V_o}{V_i}$ la relación entre la entrada y salida de
+la celda, por lo que desarrollando algebraicamente se llega a que:
+
+$$Z_{in} = \frac{S}{a\, \left(\frac{a\, \left(K - \frac{K - 1}{C\, R_2\, S}\right)}{C\, \left(K - 1\right)\, \left(S^2 + \frac{1}{C^2\, R_2\, S} + \frac{2\, S\, \left(\frac{K}{2\, R_2\, S\, \left(K - 1\right)} + 1\right)}{C\, R_2}\right)} + 1\right)}$$
+
+\subsubsection{Sensibilidades - Cálculo de expresiones literales}
+
+Partiendo de las expresiones:
+
+$$R_2 = \frac{2Q_0}{\omega_0C} \hspace{2cm} R_1 = \frac{R_2}{4{Q_0}^2} \hspace{2cm} a = \frac{H}{2{Q_0}^2}$$
+
+Comenzando por obtener $\omega_0$, se despeja $Q_0$ de la expresión
+de $R_1$:
+
+$$Q_0 = \sqrt{\frac{R_2}{4R_1}}$$
+
+Reemplazando en la expresión de $R_2$, se despeja $\omega_0$:
+
+$$R_2 = \frac{2}{\omega_0 C}\sqrt{\frac{R_2}{4R_1}} \Longrightarrow \omega_0 = \frac{2}{R_2 C}\sqrt{\frac{R_2}{4R_1}}$$
+
+Calculando ahora la sensibilidad de $\omega_0$ respecto a los componentes
+que la afectan se obtiene:
+
+$$S_{R_1}^{\omega_0} = \frac{d\omega_0}{dR_1}\frac{R_1}{\omega_0} = -0.5$$
+
+$$S_{R_2}^{\omega_0} = \frac{d\omega_0}{dR_2}\frac{R_2}{\omega_0} = -0.5$$
+
+$$S_C^{\omega_0} = \frac{d\omega_0}{dC}\frac{C}{\omega_0} = -1$$
+
+Que para la configuración del circuito propuesta, resultan constantes.
+
+Ahora analizando $Q$, se retoman las expresiones:
+
+$$\alpha = \frac{K}{1-K} \hspace{2cm} \alpha = \frac{1}{2{Q_0}^2}\left(1-\frac{Q_0}{Q}\right)$$
+
+Se igualan ambas expresiones para despejar $Q$, obteniendo:
+
+$$Q = \frac{Q_0}{1-\frac{2{Q_0}^2 K}{1-K}}$$
+
+Donde $Q_0$ se había determinado constante (1.5). Se calcula entonces
+la sensibilidad relativa a la variable $K$ (que es regulada por el
+preset en la realimentación positiva):
+
+$$S_K^Q = \frac{dQ}{dK}\frac{K}{Q} = \frac{9\, K}{11\, K^2 - 13\, K + 2}$$
+
+Finalmente, para la ganancia $G$ de la celda, se toma el módulo evaluado
+en la frecuencia central $S = j\omega_0$, siendo:
+
+$$G = |H(j\omega_0)| = \frac{a\, \omega_0}{C\, \mathrm{R1}\, \left(K - 1\right)\, \sqrt{{\left({\omega_0}^2 - \frac{1}{C^2\, \mathrm{R1}\, R_2}\right)}^2 + \frac{4\, {\omega_0}^2\, {\left(\frac{K}{2\, \mathrm{R1}\, R_2\, \left(K - 1\right)} + 1\right)}^2}{C^2\, {R_2}^2}}}$$
+
+Se calculan entonces las sensibilidades respecto a los parámetros
+$R_1$, $R_2$, $C$ y $K$:
+
+$$S_{R_1}^G = \frac{dG}{dR_1}\frac{R_1}{G} = -\frac{{\omega_0}^2\, \left(2\, K - 4\, \mathrm{R1}\, R_2 - K\, {R_2}^2 + {R_2}^2 + 4\, K\, \mathrm{R1}\, R_2 - C^2\, \mathrm{R1}\, {R_2}^3\, {\omega_0}^2 + C^2\, K\, \mathrm{R1}\, {R_2}^3\, {\omega_0}^2\right)}{C^2\, \mathrm{R1}\, {R_2}^3\, \left(\frac{{\left(C^2\, \mathrm{R1}\, R_2\, {\omega_0}^2 - 1\right)}^2}{C^4\, {\mathrm{R1}}^2\, {R_2}^2} + \frac{{\omega_0}^2\, {\left(K - 2\, \mathrm{R1}\, R_2 + 2\, K\, \mathrm{R1}\, R_2\right)}^2}{C^2\, {\mathrm{R1}}^2\, {R_2}^4\, {\left(K - 1\right)}^2}\right)\, \left(K - 1\right)} $$
+
+$$S_{R_2}^G = \frac{dG}{dR_2}\frac{R_2}{G} = \frac{R_2\, \left(\frac{8\, {\omega_0}^2\, {\left(\frac{K}{2\, \mathrm{R1}\, R_2\, \left(K - 1\right)} + 1\right)}^2}{C^2\, {R_2}^3} - \frac{2\, \left({\omega_0}^2 - \frac{1}{C^2\, \mathrm{R1}\, R_2}\right)}{C^2\, \mathrm{R1}\, {R_2}^2} + \frac{4\, K\, {\omega_0}^2\, \left(\frac{K}{2\, \mathrm{R1}\, R_2\, \left(K - 1\right)} + 1\right)}{C^2\, \mathrm{R1}\, {R_2}^4\, \left(K - 1\right)}\right)}{2\, \left({\left({\omega_0}^2 - \frac{1}{C^2\, \mathrm{R1}\, R_2}\right)}^2 + \frac{4\, {\omega_0}^2\, {\left(\frac{K}{2\, \mathrm{R1}\, R_2\, \left(K - 1\right)} + 1\right)}^2}{C^2\, {R_2}^2}\right)} $$
+
+$$S_C^G = \frac{dG}{dC}\frac{C}{G} \hspace{2cm} S_K^G = \frac{dG}{dK}\frac{K}{G}$$
+
+La expresión matemática resultante es demasiado extensa para estos
+últimos, por lo que solamente se deja expresado la forma de cálculo
+de las mismas.
+
+\newpage
+
+\section{Sedra-Ghorab-Martin}
+
+En el paper ''Optimum Configurations for Single-Amplifier Biquadratic
+Filters'' se introducen nuevos circuitos biquad (que poseen terminos
+bicuadráticos en la función transferencia) basados en la estructura
+de realimentación positiva de la celda Sallen Key y brindan la posibilidad
+de poder realizar cualquier función transferencia de segundo orden. 
+
+Una de las principales desventajas de los Single-Amplifier Biquads
+es que tienen una sensibilidad relativa de Q con respecto de la ganancia
+del amplificador es alta. El diseño en este paper se especializa en
+reducir S$_{A}^{Q}$ en los SABs pero a cambio del aumento de las
+sensibilidades de los componentes pasivos.
+
+\subsection{Especificaciones del filtro}
+
+Las especificaciones para el filtro de cauer fueron las siguientes:
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+$f_{a}$ & 10550Hz\tabularnewline
+\hline 
+$f_{p}$ & 21100Hz\tabularnewline
+\hline 
+$A_{p}$ & 2dB\tabularnewline
+\hline 
+$A_{a}$ & 40dB\tabularnewline
+\hline 
+$G$ & 0dB\tabularnewline
+\hline 
+$|Z_{IN}(f)|$ & $\geq$50K$\Omega$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Especificaciones de la plantilla de la consigna\label{fig:Especificaciones-de-la}}
+\end{figure}
+
+Con los parámetros de la Figura \ref{fig:Especificaciones-de-la},
+para poder cumplir plantilla se necesita de un filtro de cauer de
+orden 4 (orden mínimo). Como es debido, realizaremos una plantilla
+aún más restrictiva para establecer un margen. 
+
+Sabiendo esto, se propone una nueva plantilla:
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+$f_{a}$ & 11000Hz\tabularnewline
+\hline 
+$f_{p}$ & 20500Hz\tabularnewline
+\hline 
+$A_{p}$ & 1dB\tabularnewline
+\hline 
+$A_{a}$ & 45dB\tabularnewline
+\hline 
+$G$ & -0.5dB\tabularnewline
+\hline 
+$|Z_{IN}(f)|$ & $\geq$50K$\Omega$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Plantilla más restrictiva propuesta}
+\end{figure}
+
+
+\subsection{Circuito a implementar}
+
+En el paper que se pidió investigar se presentan dos circuitos: LPB
+y HPB (Low Pass Biquad y High Pass Biquad). Como lo que se planea
+realizar es un pasa altos sólo se analizará el HPB. 
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.8]{EJ3/Informe/Images/Highpass_BQ}
+\par\end{centering}
+\caption{Circuito HPB\label{fig:Circuito-highpass}}
+\end{figure}
+
+El circuito de la Figura \ref{fig:Circuito-highpass} se puede utilizar
+tanto para implementar un high pass como un high pass notch. En nuestro
+caso, al observar que la función transferencia de cauer tiene ceros
+de transmisión, nos concentraremos en el high pass notch .
+
+Todos los componentes indicados con G corresponden a la conductancia
+del elemento pasivo, por ende si se refiere a la componente resistiva
+esta es de la forma $G_{X}=\frac{1}{R_{X}}$.
+
+La función transferencia de la celda está dada por 
+
+\[
+T(s)=\frac{n_{2}s^{2}+n_{1}s+n_{0}}{s^{2}+s(\frac{\omega_{0}}{Q})+\omega_{0}^{2}}
+\]
+
+Donde: 
+
+\[
+\omega_{0}^{2}=\frac{G_{1}(G_{41}+G_{42})}{C_{3}(C_{21}+C_{22})}
+\]
+
+\[
+\frac{\omega_{0}}{Q}=(G_{41}+G_{42})(\frac{1}{C_{21}+C_{22}}+\frac{1}{C_{3}})-(\frac{G_{1}}{C_{21}+C_{22}})(\frac{G_{a1}+G_{a2}}{G_{b}})
+\]
+
+\[
+n_{2}=(\frac{G_{a1}+G_{a2}+G_{b}}{G_{b}})(\frac{C_{22}}{C_{21}+C_{22}})-\frac{G_{a2}}{G_{b}}
+\]
+
+\[
+n_{1}=(\frac{G_{a1}+G_{a2}+G_{b}}{G_{b}})G_{42}(\frac{1}{C_{21}+C_{22}}+\frac{1}{C_{3}})-\frac{G_{a2}}{G_{b}}\left[\frac{G_{1}}{C_{21}+C_{22}}+(G_{41}+G_{42})(\frac{1}{C_{21}+C_{22}}+\frac{1}{C_{3}})\right]
+\]
+
+\[
+n_{0}=\frac{G_{1}(G_{41}+G_{42})}{C_{3}(C_{21}+C_{22})}\left[(\frac{G_{42}}{G_{41}+G_{42}})(\frac{G_{a1}+G_{a2}+G_{b}}{G_{b}})-\frac{G_{a2}}{G_{b}}\right]
+\]
+
+
+\subsection{Ecuaciones utilizadas para cada celda}
+
+Fijando los parámetros Q, $\omega_{0}$, $\omega_{z}$, n$_{2}$ ,
+Q0, C, Gb se obtienen los valores de componentes. 
+
+n$_{2}$ es la ganancia de la celda en $\omega\rightarrow\infty$
+. Las costantes n$_{2}$ y K fijan las constantes k, n y m que determinan
+las relaciones de los componentes.
+
+$\omega_{0}$ y Q son propiedades de los polos de la función de la
+función transferencia y $\omega_{z}$ es la frecuencia de corte de
+los ceros de la función transferencia. 
+
+Q0 no representa físicamente nada sino que es un parámetro el cual
+se fija de forma tal que queden valores nominales de componentes pero
+siempre manteniendo Q0<Q. Hay que tener en cuenta que tiene cierta
+influencia en la sensibilidad de los parámetros Q y $\omega_{0}$,
+que se verá plasmada en el análisis de sensibilidad.
+
+C, G4 y Gb se fijan por lo cual conviene asignarle un valor nominal.
+
+Todo componente que se llame Z$_{N}$$_{i}$ (donde Z y N corresponden
+a qué componente pertenece e i denota el número de componente) es
+parte de la suma de dos componentes que forman uno, por ejemplo G4
+= G$_{41}$ + G$_{42}$. 
+
+\[
+G4=C*\frac{\omega_{0}}{2*Q0}
+\]
+
+\[
+G1=4*Q0^{2}*G4
+\]
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+Parámetro & Fórmula\tabularnewline
+\hline 
+\hline 
+K & $1+\frac{(1-\frac{Q0}{Q})}{2*Q0^{2}}$\tabularnewline
+\hline 
+k & $n_{2}*\frac{(\frac{\omega_{z}}{\omega_{0}})^{2}}{1-\frac{Q0}{Q}}$\tabularnewline
+\hline 
+n & $k*(1-\frac{Q0}{K*Q})$\tabularnewline
+\hline 
+m & $k*(K-1)*\frac{(1+2*Q0^{2}*(\frac{\omega_{0}}{\omega_{z}})^{2})}{K}$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Parámetros intrínsecos de cada celda}
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+Componente & Relación\tabularnewline
+\hline 
+\hline 
+G$_{a}$ & (K-1){*}G$_{b}$\tabularnewline
+\hline 
+G$_{a1}$ & (1-k){*}G$_{a}$\tabularnewline
+\hline 
+G$_{a2}$ & k{*}G$_{a}$\tabularnewline
+\hline 
+G$_{41}$ & (1-n){*}G4\tabularnewline
+\hline 
+G$_{42}$ & n{*}G4\tabularnewline
+\hline 
+C$_{21}$ & (1-m){*}C\tabularnewline
+\hline 
+C$_{22}$ & C\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Relación entre componentes según los parámetros intrinsecos}
+
+\end{figure}
+
+
+\subsection{Análisis de sensibilidades}
+
+Se introduce la tabla correspondiente a las sensibilidades del HPB:
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+ & $\omega_{0}$ & $Q$\tabularnewline
+\hline 
+$R_{1}$ & -$\frac{1}{2}$ & -($\frac{Q}{Q_{0}}$-$\frac{1}{2}$)\tabularnewline
+\hline 
+$C_{2}$ & -$\frac{1}{2}$ & -$\frac{1}{2}(\frac{Q}{Q_{0}}-1)$\tabularnewline
+\hline 
+$C_{3}$ & -$\frac{1}{2}$ & $\frac{1}{2}(\frac{Q}{Q_{0}}-1)$\tabularnewline
+\hline 
+$R_{4}$ & -$\frac{1}{2}$ & $\frac{Q}{Q_{0}}-\frac{1}{2}$\tabularnewline
+\hline 
+$R_{a}$ & 0 & $-(\frac{Q}{Q_{0}}-1)$\tabularnewline
+\hline 
+$R_{b}$ & 0 & $\frac{Q}{Q_{0}}-1$\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Sensibilidades de $\omega_{0}$ y $Q$ respecto de los componentes
+pasivos}
+\end{figure}
+
+Dado que tanto la sensibilidad de $\omega_{0}$ respecto de R$_{a}$
+y R$_{b}$ es 0, resulta útil colocar un preset de ajuste del Q en
+alguno de los dos componentes, por ese motivo se elige arbitrariamente
+R$_{b}$ como componente de resistencia variable.
+
+\subsection{Función transferencia }
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.8]{\string"EJ3/Informe/Images/Función transferencia\string".eps}
+\par\end{centering}
+\caption{Función transferencia graficada en Atenuación (dB)}
+\end{figure}
+
+Como en este caso el filtro de cauer es de orden 4, se requiere de
+dos BIQUADS para poder implementar la función transferencia. Dicho
+esto se desglosa la función transferencia en dos etapas las cuales
+se implementarán con la celda Sedra que darán como resultado dos high
+pass notch puestos en cascada. Más adelante se discutirán detalles
+de implementación como asociación de polos y ceros, rango dinámico
+y asignación de ganancia.
+
+Sabemos que Q y $\omega_{0}$ de los polos de cada etapa y $\omega_{z}$
+de los ceros de cada etapa, son fijos (dada la plantilla). Estos son
+de: 
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+Etapa & Q & $\omega_{0}$($\frac{rad}{s}$) & $f_{0}$(Hz) & $\omega_{z}$($\frac{rad}{s}$)  & $f_{z}$(Hz)\tabularnewline
+\hline 
+\hline 
+Bajo Q & 0.81 & 220935.8 & 35163,02 & 31779 & 5057,78\tabularnewline
+\hline 
+Alto Q & 4.41 & 129062.66 & 20540,96 & 71273.16 & 11343,47\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Q y $\omega_{0}$ de los polos de la función transferencia}
+\end{figure}
+
+Más adelante se podrá ver que por la forma de la curva en el gráfico
+de bode (magnitud), la etapa de bajo Q empieza a atenuar antes que
+la de alto Q, por lo cual resulta razonable poner esta etapa primero,
+para maximizar el rango dinámico. Esto puede ser visto de la siguiente
+forma probando por el absurdo:
+
+Asumiendo que la primera etapa es tal que maximiza el rango dinámico
+y que se trata de la de alto Q, si analizamos el comportamiento frente
+al mismo intervalo de frecuencias (alrededor de los 10KHz - 50 KHz),
+se da antes la saturación que si se pusiera al revés, por lo cual
+con esta configuración no hemos maximizado el rango dinámico ergo
+nos quedamos con la otra. 
+
+Esta situación se puede generalizar como ordenar las etapas según
+Q de forma creciente.
+
+Para la asignación de la ganancia en cada etapa se tiene que tener
+en consideración que dado que se quiere maximizar el rango dinámico
+en un filtro en cascada, es necesario maximizar en cada sección del
+filtro el mínimo nivel de señal. Además, la tensión de salida de todas
+las secciones debe ser igual. Para poder lograr ese objetivo primero
+se eligen los pares cero-polo , luego ordenamos por Q creciente y
+por último se determina la ganancia para cada etapa. Para poder llegar
+a la solución óptima es necesario tener un programa adecuado. Para
+más información ver páginas 237, 238 y 239 de ''Design with Operational
+Amplifiers and Analog Integrated Circuits - Sergio Franco''.
+
+Como en nuestro caso si se disponía se obtuvieron las siguientes ganancias
+para cada etapa:
+
+Recordamos que como las funciones transferencia por separado son de
+high pass notch cumplen con el formato:
+
+\[
+T(s)=\frac{n_{2}s^{2}+n_{1}s+n_{0}}{s^{2}+s(\frac{\omega_{0}}{Q})+\omega_{0}^{2}}=n_{2}\frac{(s^{2}+\frac{n_{1}}{n_{2}}s+\frac{n_{0}}{n_{2}})}{s^{2}+s(\frac{\omega_{0}}{Q})+\omega_{0}^{2}}
+\]
+
+Donde $T(s)|_{s\rightarrow\infty}=n_{2}$
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+Etapa & Ganancia (n$_{2}$) en dB\tabularnewline
+\hline 
+\hline 
+Bajo Q & 1.73\tabularnewline
+\hline 
+Alto Q & -3.23\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Ganancias obtenidas por medio de software}
+
+\end{figure}
+
+
+\subsection{Primer etapa: Etapa de bajo Q}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7]{EJ3/Informe/Images/Stage1}
+\par\end{centering}
+\caption{Respuesta en frecuencia de la magnitud de la primera etapa}
+\end{figure}
+
+
+\subsection{Segunda etapa: Etapa de alto Q}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.7]{EJ3/Informe/Images/Stage2_}
+\par\end{centering}
+\caption{Respuesta en frecuencia de la magnitud de la segunda etapa}
+\end{figure}
+
+
+\subsection{Diagrama de polos y ceros de H(s)}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.85]{\string"EJ3/Informe/Images/polos y ceros de la funcion\string".eps}
+\par\end{centering}
+\caption{Diagrama de polos y ceros de la función transferencia\label{fig:Diagrama-de-polos}}
+\end{figure}
+
+Para la implementación de la función transferencia se deben asociar
+los polos y ceros de forma tal que se mantenga la distancia mínima
+entre los mismos. Esto se ve reflejado en la figura \ref{fig:Diagrama-de-polos}
+con las flechas que indican cómo deben asociarse los mismos, el color
+denota que pertenecen a funciones transferencia distintas. 
+
+Se puede observar que H(s) posee ceros de transmisión. 
+
+\subsubsection{Asociación de polos y ceros}
+
+La estrategia para cualquier BIQUAD en un circuito en cascada debemos
+evadir atenuación indebida y ganancia innecesaria, lo cual nos lleva
+a pensar en el criterio de que la señal sea lo más ''plana'' posible,
+por arriba del nivel de ruido y por debajo de la tensión de saturación
+del amplificador operacional. Especificada la ganancia total del sistema,
+si algún contenido armónico de la señal se vuelve muy pequeño, el
+mismo debe ser amplificado hasta el nivel fijado por la ganancia total
+pero como consecuencia, se amplifica el ruido. De la misma forma,
+si un contenido armónico de la señal se vuelve muy grande debe ser
+atenuado hasta el nivel de la ganancia total, pero esto reduce las
+componentes restantes de baja señal, cuya magnitud se acerca al piso
+de ruido. Por ende se concluye que mantener la señal lo más plana
+posible en la banda pasante optimiza el rango dinámico.
+
+Según la distribución de polos y ceros se puede llevar a cabo o no,
+que la señal sea lo más plana posible en la banda pasante. Existen
+algoritmos para poder llevar a cabo la correcta asignación de polos
+pero también se puede llegar intuitivamente a una solución subóptima:
+Si un par cero-polo fuera idéntico, no se proveería ningún tipo de
+filtro pero la función sería optimamente plana. Se sigue que para
+poder lograr nuestro objetivo, simplemente asignamos cada polo o par
+de polos al cero más cercano (tiene prioridad el que más cerca está).
+
+\newpage
+
+\subsection{Obtención de los valores de componentes para las celdas}
+
+Utilizando las ecuaciones para cada celda y teniendo las precauciones
+ya mencionadas sobre Q0 se obtuvieron los siguientes valores:
+
+\subsubsection*{Para la celda de bajo Q:}
+
+Q0 = 0.31
+
+C = 10nf
+
+Gb = 1/(1000$\Omega$) 
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+Componente & Valor obtenido ($\Omega$) & Valor nominal asignado ($\Omega$)\tabularnewline
+\hline 
+\hline 
+R1 & 730 & 750\tabularnewline
+\hline 
+Ra1 & 324.64 & 330\tabularnewline
+\hline 
+Ra2 & 7612.11 & 7500\tabularnewline
+\hline 
+R41 & 291.46 & 300\tabularnewline
+\hline 
+R42 & 7546.34 & 7500\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+Componente & Valor obtenido (nf)  & Valor nominal asignado (nf)\tabularnewline
+\hline 
+\hline 
+C21 & 6.7904 & 6.8nf\tabularnewline
+\hline 
+C22 & 3.2095 & 3.3nf\tabularnewline
+\hline 
+C3 & 10 & 10nf\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Valores asignados de componentes para la celda de bajo Q}
+\end{figure}
+
+
+\subsubsection*{Para la celda de alto Q:}
+
+Gb = 1/(100$\Omega$)
+
+Q0 = 2.20
+
+C = 10nf
+
+\begin{figure}[H]
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+Componente & Valor obtenido ($\Omega$) & Valor nominal asignado ($\Omega$)\tabularnewline
+\hline 
+\hline 
+R1 & 176.094 & 180\tabularnewline
+\hline 
+Ra1 & 3327.8 & 3300\tabularnewline
+\hline 
+Ra2 & 4603.8 & 4700\tabularnewline
+\hline 
+R41 & 4373.9 & 4300\tabularnewline
+\hline 
+R42 & 15457 & 15000\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\begin{centering}
+\begin{tabular}{|c|c|c|}
+\hline 
+Componente & Valor obtenido (nf)  & Valor nominal asignado (nf)\tabularnewline
+\hline 
+\hline 
+C21 & 3.23838 & 3.3nf\tabularnewline
+\hline 
+C22 & 6.7616 & 6.8nf\tabularnewline
+\hline 
+C3 & 10 & 10nf\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+\caption{Valores asignados de componentes para la celda de alto Q}
+\end{figure}
+
+\newpage
+
+\subsection{Mediciones}
+
+En un principio se había considerado poner un buffer entre las distintas
+etapas para que una no cargue a la otra, sin embargo, al efectuar
+las correspondientes simulaciones, se pudo inferir que no había problema
+alguno al poner las dos etapas en cascada sin el buffer.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.8]{EJ3/Informe/Images/impedanciadesalidabajoQ}
+\par\end{centering}
+\caption{Impedancia de salida de la etapa de bajo Q}
+
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.8]{\string"EJ3/Informe/Images/impedancia de entradaAltoQ\string".eps}
+\par\end{centering}
+\caption{Impedancia de entrada de la etapa de alto Q}
+
+\end{figure}
+
+Sin embargo, no fue lo que en un principio se hizo, sino que se utilizó
+un buffer y ahí es cuando surgió una problemática al medir y es que
+el sistema oscilaba. Por esta razón es que se investigó acerca de
+la impedancia de salida de la etapa 1 y la impedancia de entrada de
+la etapa 2.
+
+Una vez que se retiró el buffer del circuito, el sistema dejó de oscilar,
+esto se debe a que seguramente algún polo de los amplificadores operacionales
+involucrados tenía un sobrepico que hacía que disminuya el gain margin
+de alguno de las ganancias a lazo abierto, dando lugar a que se produzca
+la situación descripta por el criterio de barkhausen.
+
+\subsection{Impedancia de entrada}
+
+Por medio de las simulaciones adecuadas se obtuvo que la impedancia
+de entrada del circuito total es baja, del orden de los K$\Omega$.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.8]{EJ3/Informe/Images/ImpedanciaentradTot}
+\par\end{centering}
+\caption{Impedancia de entrada del circuito \label{fig:Impedancia-de-entrada}}
+\end{figure}
+
+Se concluye de la figura \ref{fig:Impedancia-de-entrada} que la impedancia
+de entrada no se mantiene mayor a 50KHz como lo pide la consigna el
+mayor rango de frecuencias posibles. Para solucionar este percance
+se optó por poner un buffer a la entrada y que la impedancia de entrada
+sea muy grande en un rango mucho más abarcativo.
+
+Se realizó además un montecarlo para ver como variaba la función según
+las tolerancias de los componentes asigando tolerancia 0.01 a los
+resistores (dado que se utilizó SMD) y 0.1 a los capacitores cerámicos.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.8]{EJ3/Informe/Images/Montecarlo_Mag}
+\par\end{centering}
+\caption{Montecarlo del diagrama de Bode (módulo)}
+
+\end{figure}
+
+Se puede destacar que a pesar de las tolerancias, la función siempre
+cumple la plantilla en la banda atenuada. Debido a que los capacitores
+varían tanto en su valor, la curva tiene pocos aciertos donde cumple
+plantilla.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.8]{EJ3/Informe/Images/Montecarlo_Pha}
+\par\end{centering}
+\caption{Montecarlo del diagrama de Bode (fase)\label{fig:Montecarlo-del-diagrama}}
+\end{figure}
+
+Se puede ver en la Figura \ref{fig:Montecarlo-del-diagrama} que hay
+un salto repentino de fase en 5KHz que tiene que ver con el cero de
+la primera etapa. Dado que no se puede lograr un circuito perfecto
+y el cero se encuentra sobre el eje j$\omega$ el mismo puede cambiar
+de fase abruptamente dependiendo en qué parte del plano complejo s
+se encuentre.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{EJ3/mediciones/MagnitudBode}
+\par\end{centering}
+\caption{Diagrama de Bode (módulo) del sistema completo \label{fig:Diagrama-de-Bode-Mod}}
+\end{figure}
+
+Se puede observar en la Figura \ref{fig:Diagrama-de-Bode-Mod} que
+a grandes frecuencias empieza a crecer el medido y se separa del modelo
+teórico y de la simulación. Esto se debe al polo dominante del amplificador
+operacional que tiene un sobrepico. Por más que exceda 0dB a los 300KHz
+ya para ese entonces el sistema empieza a estar limitado por el slew
+rate, dado que se usó un LM833 con slew rate = 7$\frac{V}{\mu s}$
+y un TL082 con slew rate de $13\frac{V}{\mu s}$. Significa que si
+entro con una señal de Vp = 12 V la máxima frecuencia de operación
+es de 92.84KHz. Sin embargo las mediciones se realizaron con Vp =
+1 cuya máxima frecuencia de opreacion es 1.114MHz.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{EJ3/Informe/Images/bandapsnt}
+\par\end{centering}
+\caption{Diagrama de Bode (módulo) de la banda pasante (21KHz - 500KHz)}
+
+\end{figure}
+
+Notar que todos dan distintas curvas para la banda pasante, sin embargo
+todas cumplen plantilla sin lugar a duda. El medido no coincide ya
+que sufrió un par de ajustes con los presets propuestos inicialmente.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{EJ3/mediciones/FaseBode}
+\par\end{centering}
+\caption{Diagrama de Bode (fase) del sistema completo\label{fig:Diagrama-de-Bode-Phase}}
+\end{figure}
+
+En la figura \ref{fig:Diagrama-de-Bode-Phase} se observa el cambio
+abrupto de fase en la simulación en 4KHz aproximadamente, si se ve
+en el gráfico de módulo el mismo se atenúa. dando lugar a un cero
+que provoca un salto de fase. 
+
+\subsection{Rango dinámico}
+
+El rango dinámico se calcula teniendo en cuenta la ganancia máxima
+en el espectro cada etapa. Llamemos G1$_{max}$ a la ganancia máxima
+en la etapa de bajo Q y G2$_{max}$ a la ganancia máxima de la etapa
+de alto Q.
+
+En la etapa de bajo Q la mayor ganancia se obtiene a los 2.368 dB
+y en la de alto Q se obtiene a los 6.06dB
+
+G1$_{max}$=1.313409
+
+G2$_{max}$=2.0009
+
+Le asignamos como Vout = 13.5V
+
+Vout = G2$_{max}$. V$_{in2}$
+
+V$_{in2}$= G1$_{max}$ . V$_{in1}$
+
+$\frac{Vout}{G2_{max}G1_{max}}=V_{in1}$= $V_{max_{in}}=5.11627V$
+
+Realizamos lo mismo pero con la ganancia mínima en la banda pasante.
+
+Vout = 10mV
+
+Vout = G2$_{min}$ . V$_{in2}$
+
+Vin$_{2}$= G1$_{min}$V$_{in1}$
+
+G1$_{min}$=1.78dB $\rightarrow G1_{min}=$1.227439
+
+G2$_{min}$=-3.415dB $\rightarrow G2_{min}=$0.67491
+
+$\frac{Vout}{G2_{min}G1_{min}}=V_{in1}=V_{min_{in}}=8.28418x10^{-3}V$
+
+Rd = 20 log ($\frac{Vmax_{in}}{Vmin_{in}}$)=55.81407dB
+
+\subsection{Respuesta al escalón}
+
+Se midió la respuesta al escalón con una tensión Vpp =2V y Voffset
+= 1V y se obtuvieron las siguientes gráficas:
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{EJ3/mediciones/step_resp}
+\par\end{centering}
+\caption{Respuesta al escalón del sistema}
+
+\end{figure}
+
+Estas pruebas suelen realizarse para saber si el sistema oscila o
+no, ya que el escalón posee una gran variedad de armónicos. Si en
+algún momento en el circuito se cumpliera el criterio de Barkhousen,
+veríamos oscilaciones. Otra alternativa es entrar con ruido al sistema.
+
+Para ver una oscilación, se procede a mostrar con un buffer entre
+etapa y etapa para ver cómo afecta.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{EJ3/Informe/Images/rta_esc}
+\par\end{centering}
+\caption{Respuesta al escalón oscilando\label{fig:Respuesta-al-escal=0000F3n} }
+\end{figure}
+
+Al principio la Figura \ref{fig:Respuesta-al-escal=0000F3n} puede
+resultar inusual. La verdad es que dentro de esas distintas bandas
+hay distintas frequencias. Va a alcanzar un punto en el que se mantiene
+como si fuera un clock de algún sistema digital.
+
+\newpage
+
+\subsection{Dispersión del ancho de banda y frecuencia de los polos}
+
+Partiendo de las fórmulas necesarias para construir la función transferencia
+y variando los componentes con su respectiva tolerancia dentro de
+un rango lineal, se tomaron 1000 muestras y se armaron distintos histogramas.
+En cada muestra el valor de cada componente fue elegido aleatoriamente
+entre todos los valores que según la tolerancia podia tener.
+
+Se tomará la nomenclatura polo$_{XY}$ donde X denota a que etapa
+pertenece e Y cuál de los polos es. En este caso, hacemos una distinción
+con lo planteado en un principio como etapa 1 y 2, ahora pasará a
+ser etapas 0 y 1 respectivamente.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_q_poles_00}\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_poles_00}
+\par\end{centering}
+\caption{Dispersión del polo 00}
+
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_q_poles_01}\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_poles_01}
+\par\end{centering}
+\caption{Dispersión del polo 01}
+
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_q_poles_10}\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_poles_10}
+\par\end{centering}
+\caption{Dispersión del polo 10}
+
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_q_poles_11}\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_poles_11}
+\par\end{centering}
+\caption{Dispersión del polo 11}
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_zeros_00}\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_zeros_01}
+\par\end{centering}
+\caption{Dispersión del cero de la primer transferencia}
+\end{figure}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_zeros_10}\includegraphics[scale=0.6]{histogramas/output/joaco/histograma_joaco_w0_zeros_11}
+\par\end{centering}
+\caption{Dispersión del cero de la segunda transferencia}
+\end{figure}
+
+En esta parte de la sección, no informamos sobre Q ya que es muy grande
+considerando que están en el caso ideal en el origen.
+
+\subsection{Conclusiones}
+
+Para finalizar, podemos concluir que si bien la celda Sedra nos permite
+realizar cualquier función transferencia de segundo orden, tiene sus
+ventajas y desventajas. Por ejemplo, es fácil hacerlo oscilar dependiendo
+de los valores que se hayan puesto en los capacitores. Sin embargo,
+la regulación de Q resulta trivial con un preset, por lo que sería
+cuestión de ser precavido con los $\omega_{0}$, si ya conseguimos
+eso, solamente va a haber que ajustar ganancia con un sobrepico o
+sin él. No tener en cuenta el sobrepico dado por el amplificador operacional
+es un error gravísimo ya que es lo que me hace ganar más en alta frecuencia.
+Como es un filtro elítpico de orden 4 es sabido que el roll-off va
+a ser mucho mejor de esta forma. 
+
+Por último, la celda puede llegar a alto Q muy fácilmente y en general
+uno tiende a diseñar para que la celda tenga bajas sensibilidades. 
+
+\newpage
+\selectlanguage{english}%
+
+\section{Celda universal }
+
+\subsection{Introducción}
+
+El método de conexión de celdas en cascada es uno de los mas utilizados
+para la implementación de filtros activos de orden alto. Dependiendo
+de la aplicación del filtro se determina la configuración y el tipo
+de celda a utilizar. Para el caso de la celda universal, también conocida
+como de variables de estado, existen distintas configuraciones donde
+cada una de ellas tiene sus ventajas y desventajas. Para construirlas
+se utilizan bloques sumadores, restadores, amplificadores, atenuadores
+e integradores conectados en cascada para lograr la tranferencia buscada.
+Los filtros de variable de estado son filtros activos de segundo orden
+RC que consisten en dos integradores de amplificador operacional idénticos,
+cada uno de los cuales actúa como un filtro de paso bajo de un solo
+polo de primer orden, un amplificador de suma alrededor del cual podemos
+configurar la ganancia de los filtros y su realimentación de amortiguamiento
+red. Permiten hacer cualquier tipo de filtro de segundo orden y son
+muy útiles para los de alto factor de calidad (Q). A continuación
+se analizarán cuatro configuraciones para luego elegiruna de ellas
+para cumplir la plantilla deseada.
+
+\begin{figure}[H]
+\centering{}\includegraphics{\string"EJ4/informe/KHN GENERICO\string".eps}\caption{Celda Universal}
+\end{figure}
+
+
+\subsection{Implementaciones}
+
+\subsubsection{Kerwin-Huelsman-Newcomb}
+
+La configuración KHN es la siguiente:
+
+\begin{figure}[H]
+\centering{}\includegraphics[scale=0.5]{\string"EJ4/informe/CONFIG KHN\string".eps}\caption{Configuración KHN}
+\end{figure}
+
+\newpage
+
+A la cual le corresponde el siguiente diagrama de bloques:
+
+\begin{figure}[H]
+\centering{}\includegraphics[scale=0.5]{\string"EJ4/informe/CONFIG KHN BLOCK INVERTING\string".eps}\caption{Configuración KHN: diagrama de bloques}
+\end{figure}
+
+Observando el diagrama de bloques se puede obtener:
+
+\begin{equation}
+V_{HP}=-V_{I}+V_{BP}\frac{3R_{3}}{R_{3}+R_{4}}-V_{LP}\label{eq:1}
+\end{equation}
+
+En donde:
+
+\begin{equation}
+V_{LP}=-\frac{1}{sC_{2}R_{2}}V_{BP}\label{eq:2}
+\end{equation}
+\begin{equation}
+V_{BP}=-\frac{1}{sC_{1}R_{1}}V_{HP}\label{eq:3}
+\end{equation}
+Reemplazando \ref{eq:3} en \ref{eq:2} y luego en \ref{eq:1}se llega
+a:
+
+\begin{equation}
+V_{HP}=-V_{I}-\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,\frac{1}{s}\,V_{HP}-\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}\,\frac{1}{s^{2}}\,V_{HP}
+\end{equation}
+
+Realizando el despeje algebraico:
+
+\begin{equation}
+\frac{V_{HP}}{V_{I}}=-\frac{s^{2}}{s^{2}+\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}}
+\end{equation}
+
+Por lo tanto también se tiene que:
+
+\begin{equation}
+V_{BP}=-\frac{1}{sC_{1}R_{1}}V_{HP}\Longrightarrow\frac{V_{BP}}{V_{I}}=\frac{\frac{s}{C_{1}R_{1}}}{s^{2}+\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}}\label{eq:3-1}
+\end{equation}
+
+\begin{equation}
+V_{LP}=\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}\,\frac{1}{s^{2}}\,V_{HP}\Longrightarrow\frac{V_{LP}}{V_{I}}=-\frac{\frac{1}{R_{1}R_{2}C_{1}C_{2}}}{s^{2}+\frac{1}{C_{1}R_{1}}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C_{1}R_{1}}\,\frac{1}{C_{2}R_{2}}}
+\end{equation}
+
+Tomando a $C_{1}=C_{2}=C$ y a $R_{1}=R_{2}=R$:
+
+\begin{equation}
+\omega_{0}=\frac{1}{RC}
+\end{equation}
+
+\begin{equation}
+Q=\frac{R_{3}+R_{4}}{3R_{3}}
+\end{equation}
+
+\selectlanguage{spanish}%
+\newpage
+
+\selectlanguage{english}%
+Con este resultado se puede ver que hay un control independiente en
+Q ajustando el valor de $R_{4}$sin afectar al $\omega_{0}$ del filtro.
+La magnitud de la ganancia en $\omega_{0}$ en cualquiera de las tres
+salidas está determinada por Q.
+
+Otra de las ventajas de la celda universal son las múltiples salidas
+que posee, con ellas se puede obtener una respuesta pasa-banda, pasa-altos,
+pasa-bajos, y combinando las dos últimas una rechaza-banda, ya que
+$H_{BR}=H_{LP}+H_{HP}$, por lo que la función transferencia se puede
+obtener con un sumador y con las dos transferencias ya obtenidas como
+se muestra en las siguiente figura:
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.75]{EJ4/informe/SUMADOR}\caption{Bloque sumador}
+\par\end{centering}
+\selectlanguage{spanish}%
+\selectlanguage{english}%
+\end{figure}
+
+De aquí se obtiene que:
+
+\begin{equation}
+V_{BR}=-\frac{R_{X}}{R_{LP}}\,V_{LP}-\frac{R_{X}}{R_{HP}}\,V_{HP}
+\end{equation}
+
+Por lo tanto
+
+\begin{equation}
+\frac{V_{BR}}{V_{I}}=\frac{\frac{R_{X}}{R_{HP}}\left(\frac{R_{HP}}{R_{LP}}\,\frac{1}{C^{2}R^{2}}+\,s^{2}\right)}{s^{2}+\frac{1}{CR}\,\frac{3R_{3}}{R_{3}+R_{4}}\,s+\frac{1}{C^{2}R^{2}}}
+\end{equation}
+
+
+\subsubsection{Tow-Thomas}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics{\string"EJ4/informe/tt config\string".eps}
+\par\end{centering}
+\caption{Configuración Tow-Thomas}
+
+\selectlanguage{spanish}%
+\selectlanguage{english}%
+\end{figure}
+
+La configuración Tow-Thomas parte de la configuración anterior. La
+diferencia es que se junta el bloque sumador con el primer integrador
+y se agrega un inversor, que combinado con el segundo integrador forman
+un integrador no inversor. En este caso se pierde la salida del pasa
+altos, por lo que no es posible realizar un Notch.
+
+Las funciones transferencia del pasa bajos y del pasa banda son las
+siguientes:
+
+\begin{equation}
+\frac{V_{BP}}{V_{I}}=-\frac{\frac{s}{C_{1}R_{1}}}{s^{2}+\frac{s}{C_{1}R_{1}}+\frac{1}{C_{1}C_{2}R_{2}R_{3}}}
+\end{equation}
+
+La condición del rechazabanda impone $R_{1}=R_{4}$.
+
+\begin{equation}
+\frac{V_{LP}}{V_{I}}=\frac{\frac{1}{C_{1}C_{2}R_{2}R_{4}}}{s^{2}+\frac{s}{C_{1}R_{1}}+\frac{1}{C_{1}C_{2}R_{2}R_{3}}}
+\end{equation}
+
+Donde
+
+\begin{equation}
+\omega_{0}=\frac{1}{\sqrt{C_{1}C_{2}R_{2}R_{3}}},\,\,\,\,\,Q=R_{1}\,\sqrt{\frac{C_{1}}{C_{2}R_{2}R_{3}}}
+\end{equation}
+
+Tomando $C_{1}=C_{2}=C$ y a $R_{3}=R_{2}=R$:
+
+\begin{equation}
+\omega_{0}=\frac{1}{CR},\,\,\,\,\,Q=\frac{R_{1}}{R}
+\end{equation}
+
+De esta manera la resistencia R modifica tanto el factor de calidad
+como el $\omega_{0}$ del circuito, lo que hace que el diseño sea
+mas restrictivo
+
+\subsubsection{Ackerberg-Mossberg}
+
+\begin{figure}[H]
+\centering{}\includegraphics{\string"EJ4/informe/AM CONFIG 2\string".eps}\caption{Configuración Ackerberg-Mossberg}
+\end{figure}
+
+Esta configuración es muy similar a Tow-Thomas y las ecuaciones de
+diseño son las mismas y por lo tanto también coinciden las sensibilidades.
+La diferencia entre ambas es la forma de implementar el integrador
+no inversor, de forma de mejorar el comportamiento del filtro, el
+segundo integrador tiende a compensar los efectos del primero cuando
+estos estan matcheados.
+
+En este caso tampoco se cuenta con una salida pasa altos, por lo que
+tampoco sirve para realizar el filtro del ejercicio.
+
+\subsubsection{Fleischer-Tow}
+
+\begin{figure}[H]
+\centering{}\includegraphics{\string"EJ4/informe/FR CONFIG\string".eps}\caption{Configuración Fleischer-Tow}
+\end{figure}
+
+Esta configuración es una modificación de la Tow-Thomas, utilizando
+la técnica del feedfoward, se inyecta la señal la señal de entrada
+en las entradas de los sucesivos amplificadores. Esto produce que
+haya ceros en el numerador de la transferencia y hace posible obtener
+una función rechaza-banda, por ejemplo. 
+
+A continuación se resuelve la transferencia del circuito:
+
+Se tiene que
+
+\begin{equation}
+\frac{V_{in}}{R_{4}}=-\frac{V_{o1}}{\frac{R_{1}}{sC_{1}R_{1}+1}}-\frac{V_{o3}}{R_{3}}
+\end{equation}
+
+\begin{equation}
+\frac{V_{in}}{R_{6}}=-\frac{V_{o1}}{R_{7}}-\frac{V_{o}}{R_{8}}
+\end{equation}
+
+\begin{equation}
+\frac{V_{in}}{R_{5}}=-\frac{V_{o}}{R_{2}}-V_{o3}sC_{2}
+\end{equation}
+
+Y resolviendo el sistema se llega a la transferencia buscada:
+
+\begin{equation}
+\frac{V_{o}}{V_{in}}=\frac{\frac{R_{8}}{R_{6}}s^{2}+\frac{1}{R_{1}C_{1}}\left(\frac{R_{8}}{R_{6}}-\frac{R_{8}R_{1}}{R_{4}R_{7}}\right)s+\frac{R_{8}}{R_{3}R_{5}R_{7}C_{1}C_{2}}}{s^{2}+\frac{1}{R_{1}C_{1}}s+\frac{R_{8}}{R_{3}R_{2}R_{7}C_{1}C_{2}}}
+\end{equation}
+
+A partir de una sola salida, dependiendo de las condiciones de diseño
+se pueden obtener diferentes funciones. En el caso de la respuesta
+rechaza bandas se debe cumplir que $R_{4}=\frac{R_{6}R_{1}}{R_{8}}$
+y $R_{7}=R_{8}$ para anular el termino lineal en el numerador. Por
+lo tanto la función transferencia queda:
+
+\begin{equation}
+\frac{V_{o}}{V_{in}}=\frac{\frac{R_{8}}{R_{6}}s^{2}+\frac{1}{R_{3}R_{5}C_{1}C_{2}}}{s^{2}+\frac{1}{R_{1}C_{1}}s+\frac{1}{R_{3}R_{2}C_{1}C_{2}}}
+\end{equation}
+
+Donde:
+
+\begin{equation}
+\omega_{z}=\sqrt{\frac{R_{6}}{R_{3}R_{5}R_{8}C_{1}C_{2}}}
+\end{equation}
+
+\begin{equation}
+\omega_{0}=\sqrt{\frac{1}{R_{3}R_{2}C_{1}C_{2}}}
+\end{equation}
+\begin{equation}
+Q=R_{1}C_{1}\omega_{0}=R_{1\,}\sqrt{\frac{C_{1}}{R_{3}R_{2}C_{2}}}
+\end{equation}
+
+Para simplificar el diseño y poder ajustar los parámetros del circuito
+facilmente y de manera independiente al resto se eligen $R_{2}=R_{3}=R$,
+$C_{1}=C_{2}=C$ y $R_{5}=R_{6}$:
+
+\begin{equation}
+H(s)=G\frac{\left(\frac{s}{\omega_{z}}\right)^{2}+1}{\left(\frac{s}{\omega_{0}}\right)^{2}+\frac{1}{Q\,\omega_{0}}s+1}
+\end{equation}
+
+\begin{equation}
+\omega_{z}=\frac{1}{C\sqrt{RR_{7}}}\label{eq:WZ}
+\end{equation}
+
+\begin{equation}
+\omega_{0}=\frac{1}{RC}\label{eq:W0}
+\end{equation}
+\begin{equation}
+Q=\frac{R_{1}}{R}\label{eq:Q}
+\end{equation}
+
+\begin{equation}
+G=\frac{R}{R_{6}}\label{eq:G}
+\end{equation}
+
+
+\subsection{Elección de configuración}
+
+De acuerdo con los parámetros del filtro rechaza banda provistos por
+la consigna:
+
+\begin{equation}
+Q=3,5\,\,\,\,\,\,\,f_{\infty}=51KHz
+\end{equation}
+
+Para realizar los cálculos se utilizó $Q=5$ para tomar un margen
+respecto del mínimo que pide la consigna. Además se pide un filtro
+de orden 5, pero aprovechando de que cada celda es de orden 2, se
+optó por realizar uno de orden 6.
+
+Por lo tanto:
+
+\begin{equation}
+\Delta f_{p}=\frac{f_{\infty}}{Q}=10.2KHz
+\end{equation}
+
+Además se sabe que:
+
+\begin{equation}
+\Delta f_{p}=f_{p}^{+}-f_{p}^{-}
+\end{equation}
+
+\begin{equation}
+f_{\infty}^{2}=f_{p}^{+}\,f_{p}^{-}
+\end{equation}
+
+Resolviendo el sistema:
+
+\begin{equation}
+f_{p}^{-}=46154.4Hz
+\end{equation}
+\begin{equation}
+f_{p}^{+}=56354.4Hz
+\end{equation}
+
+Para obtener el $\Delta f_{a}$, utilizando el programa de aproximaciones
+realizado en el tp anterior, se buscó el máximio valor tal que se
+cumpla el orden deseado, en este caso se eligió $\Delta f_{a}=1.5KHz$,
+y análogamente al cálculo anterior se llega a:
+
+\begin{equation}
+f_{a}^{-}=50255.5Hz
+\end{equation}
+\begin{equation}
+f_{a}^{+}=51755.5Hz
+\end{equation}
+
+Una vez elegida la plantilla se procede la elección de la configuración
+que se utilizará. Como se mencionó anterioirmente las configuraciones
+Tow-Thomas y Akerberg-Mossberg al no tener la salida pasa altos se
+descartaron, por lo que queda decidir entre la KHN y la Fleischer-Tow.
+Considerando que para la KHN se necesita agregar un sumador para lograr
+la respuesta Notch se optó por la configuración Fleischer Tow. Además
+la KHN no tiene buena sensibilidad para la ganancia lo que puede afectar
+el rango dinámico.
+
+\subsection{Análsis de sensibilidades}
+
+Ya seleccionada la configuración a utilizar, se procederá a analizar
+como afecta cada componente de la celda a los parámetros de la misma.
+A continuación se realiza el cálculo de las sensibilidades relativas
+para la ganancia, el factor de calidad y la frecuencias de los polos
+y los ceros. Para ello se utilizó la siguiente fórmula:
+
+\begin{equation}
+s_{x_{k}}^{f(X)}=\left(\frac{\partial f\,(X)}{\partial x_{k}}\,\frac{x_{k}}{f(X)}\right)
+\end{equation}
+
+\begin{itemize}
+\item Factor de calidad del cero
+\end{itemize}
+Para realizar este cálculo se ignorarán las igualdades de componentes
+realizadas en la sección 2, ya que si se cumplen el factor de calidad
+sería infinito y el propósito es saber cuales son los componentes
+que mas lo afectan.
+
+\begin{equation}
+Q_{z}=\frac{R_{1}R_{4}}{R_{4}R_{7}-R_{1}R_{6}}\sqrt{\frac{R_{6}R_{7}C_{1}}{R_{3}R_{5}C_{2}}}
+\end{equation}
+
+\begin{equation}
+s_{C_{2}}^{Q_{z}}=s_{R_{3}}^{Q_{z}}=s_{R_{5}}^{Q_{z}}=-\frac{1}{2}
+\end{equation}
+
+\begin{equation}
+s_{C_{1}}^{Q_{z}}=\frac{1}{2}
+\end{equation}
+
+\begin{equation}
+s_{R_{1}}^{Q_{z}}=-\frac{R_{4}R_{7}}{R_{1}R_{6}-R_{4}R_{7}}
+\end{equation}
+
+\begin{equation}
+s_{R_{4}}^{Q_{z}}=\frac{R_{1}R_{6}}{R_{1}R_{6}-R_{4}R_{7}}
+\end{equation}
+
+\begin{equation}
+s_{R_{6}}^{Q_{z}}=-\frac{1}{2}\frac{R_{1}R_{6}+R_{7}R_{4}}{R_{1}R_{6}-R_{7}R_{4}}
+\end{equation}
+
+\begin{equation}
+s_{R_{7}}^{Q_{z}}=\frac{1}{2}\frac{R_{1}R_{6}+R_{7}R_{4}}{R_{1}R_{6}-R_{7}R_{4}}
+\end{equation}
+
+\begin{itemize}
+\item Frecuencia del polo 
+\end{itemize}
+\begin{equation}
+\omega_{0}=\frac{1}{RC}
+\end{equation}
+
+\begin{equation}
+s_{C}^{\omega_{0}}=s_{R}^{\omega_{0}}=-1
+\end{equation}
+
+\begin{itemize}
+\item Factor de calidad
+\end{itemize}
+\begin{equation}
+Q=\frac{R_{1}}{R}
+\end{equation}
+
+\begin{equation}
+s_{R_{1}}^{Q}=1
+\end{equation}
+
+\begin{equation}
+s_{R}^{Q}=1
+\end{equation}
+
+\begin{itemize}
+\item Frecuencia del cero
+\end{itemize}
+\begin{equation}
+\omega_{z}=\frac{1}{C\sqrt{RR_{7}}}
+\end{equation}
+\begin{equation}
+s_{C}^{\omega_{z}}=-1
+\end{equation}
+\begin{equation}
+s_{R}^{\omega_{z}}=s_{R_{7}}^{\omega_{z}}=-\frac{1}{2}
+\end{equation}
+
+\begin{itemize}
+\item Ganancia
+\end{itemize}
+\begin{equation}
+G=\frac{R}{R_{6}}
+\end{equation}
+\begin{equation}
+s_{R}^{G}=1
+\end{equation}
+\begin{equation}
+s_{R_{6}}^{Q}=-1
+\end{equation}
+
+
+\subsection{Rango dinámico}
+
+Para realizar este cálculo se tomó como piso de ruido $V_{Outmin}=10mV$
+y $V_{OutMax}=13.5V$ (tensión de saturación del amplificador menos
+un margen de tensión). Se tiene que las ganancias máximas de cada
+etapa son:
+
+\begin{equation}
+G3(dB)=9.5dB\Longrightarrow G3=2.985
+\end{equation}
+
+\begin{equation}
+G2(dB)=16.5dB\Longrightarrow G2=6.683
+\end{equation}
+
+\begin{equation}
+G1(dB)=0.5dB\Longrightarrow G1=1.059
+\end{equation}
+
+Por lo tanto:
+
+\begin{equation}
+V_{out}=G3.V_{in3}
+\end{equation}
+
+\begin{equation}
+V_{in3}=V_{out2}=G2.V_{in2}
+\end{equation}
+
+\begin{equation}
+V_{in2}=G1.V_{in}
+\end{equation}
+
+\begin{equation}
+V_{out}=G3.G2.G1.V_{IN}\Longrightarrow V_{inMax}=0.639V
+\end{equation}
+
+Ahora se realizó lo mismo pero con la ganancia mínima de la banda
+pasante
+
+\begin{equation}
+G3(dB)=-4.1dB\Longrightarrow G3=0.624
+\end{equation}
+
+\begin{equation}
+G2(dB)=-2.2dB\Longrightarrow G2=0.776
+\end{equation}
+
+\begin{equation}
+G1(dB)=-2.5dB\Longrightarrow G1=0.750
+\end{equation}
+
+\begin{equation}
+V_{out}=G3.G2.G1.V_{IN}\Longrightarrow V_{inMin}=0.03V
+\end{equation}
+
+Finalmente, el rango dinámico será:
+
+\begin{equation}
+RD=20\log\left(\frac{V_{InMax}}{V_{InMin}}\right)=26.57dB
+\end{equation}
+
+\newpage
+
+\subsection{Diseño}
+
+Para el diseño del filtro se utilizó un programa de aproximaciones.
+En este caso se pide usar Chebyshev II, introduciendo los parámetros
+calculados en la sección 3, el programa calcula los factores de calidad,
+los polos y los ceros de cada etapa. Cada una de ellas esta compuesta
+por un par de polos y otro de ceros complejos conjugados. En cada
+caso se eligió agrupar el par de polos con el par de ceros mas cercano
+para mejorar el rango dinámico lo mas posible. El diagrama de bode
+que se obtuvo fué el siguiente:
+
+\begin{figure}[H]
+\centering{}%
+\begin{minipage}[t]{0.4\columnwidth}%
+\includegraphics[scale=0.35]{\string"EJ4/informe/mag teorica\string".eps}%
+\end{minipage}~~~~~~~~~~~%
+\begin{minipage}[t]{0.7\columnwidth}%
+\includegraphics[scale=0.35]{\string"EJ4/informe/pha teorica\string".eps}%
+\end{minipage}\caption{Diagrama de bode teórico}
+\end{figure}
+
+Cuyos polos y ceros corresponden a:
+\begin{itemize}
+\item Etapa 1:
+\end{itemize}
+\begin{equation}
+\omega_{0}=320442\,\frac{rad}{s}
+\end{equation}
+
+\begin{equation}
+\omega_{z}=320442\,\frac{rad}{s}
+\end{equation}
+
+\begin{equation}
+Q=4,23
+\end{equation}
+
+\begin{itemize}
+\item Etapa 2:
+\end{itemize}
+\begin{equation}
+\omega_{0}=288919\,\frac{rad}{s}
+\end{equation}
+
+\begin{equation}
+\omega_{z}=315250\,\frac{rad}{s}
+\end{equation}
+
+\begin{equation}
+Q=8,51
+\end{equation}
+
+\begin{itemize}
+\item Etapa 3
+\end{itemize}
+\begin{equation}
+\omega_{0}=355404\,\frac{rad}{s}
+\end{equation}
+
+\begin{equation}
+\omega_{z}=325719\,\frac{rad}{s}
+\end{equation}
+
+\begin{equation}
+Q=8,51
+\end{equation}
+
+En base a los valores obtenidos obtenidos en cada etapa, como se ha
+visto en la sección 2 en la configuración Fleischer-Tow, con las ecuaciones
+\ref{eq:Q}, \ref{eq:W0}, \ref{eq:WZ}, \ref{eq:G} y con las igualdad
+necesaria de $R_{4}$ para el notch se calcularon los valores de los
+componentes.
+
+\subsection{Simulación}
+
+Se realizó la simulación con el modelo real del operacional utilizado,
+el TL074. Los valores predefinidos, al haber sido calculados con los
+operacionales ideales, no cumplían los valores de la consigna, es
+por ello, que teniendo en cuenta las sensibilidades, se fueron ajustando
+para llegar a la plantilla deseada.
+
+Se obtuvieron los siguientes resultados:
+
+\begin{figure}[H]
+\centering{}%
+\begin{minipage}[t]{0.4\columnwidth}%
+\includegraphics[scale=0.35]{\string"EJ4/informe/BODE SIMULADO MAG\string".eps}%
+\end{minipage}~~~~~~~~~~~%
+\begin{minipage}[t]{0.4\columnwidth}%
+\includegraphics[scale=0.35]{\string"EJ4/informe/BODE SIM FAASE\string".eps}%
+\end{minipage}\caption{Diagrama de Bode simulado}
+\end{figure}
+
+El Q simulado da de 8.15, el cual es mucho mas alto del que se utilizó
+para hacer los cálculos.
+
+\newpage
+
+\subsection{Análisis Montecarlo}
+
+Se realizó un análsis montecarlo antes de armar la placa para buscra
+los mejores y peores casos que pueden aparecer según la tolerancia
+de los componentes. En este caso se usó $1\%$ para las resistencias
+y $5\%$ para los capacitores.
+
+\begin{figure}[H]
+\centering{}%
+\noindent\begin{minipage}[t]{1\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.7]{\string"EJ4/informe/montecarlo fase\string".eps}
+\par\end{center}%
+\end{minipage}\\
+\noindent\begin{minipage}[t]{1\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.7]{\string"EJ4/informe/montecarlo mag\string".eps}
+\par\end{center}%
+\end{minipage}\caption{Diagrama de bode con análsis Montecarlo}
+\end{figure}
+
+En este gráfico se puede ver como en los peores casos los parámetros
+buscados no se llegan a cumplir. Lo que sucede es que todas las ecuaciones
+que los definen son válidas si es que se cumple la condición de resistencias
+para el notch. Cuanto más se desvien estos valores, peores serán los
+parámetros del filtro. 
+
+Otro problema es la tolerancia de los capacitores, que para evitar
+conflictos se midieron en el analizador de impedancias para ver conseguir
+el valor mas cercano al utilizado en la simulación.
+
+También se decidió poner un preset en cada etapa para poder ajustar
+otras variables que lo necesiten. Los presets se colocaron en el lugar
+de $R_{6}$ debido a que forma parte de la condición de notch y afecta
+al $Q_{z}$, además permite regular la ganancia en cada etapa.
+
+\newpage
+
+\subsection{Histogramas}
+
+En el Montecarlo se graficaron 100 curvas distintas para estudiar
+en cada una el valor del notch depth, el ancho de banda del circuito
+y la freceuncia del notch. Para poder visualizar la dispersión de
+dichos parámetros se realizaron los siguientes histogramas:
+
+\begin{figure}[H]
+\centering{}%
+\begin{minipage}[t]{0.4\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.5]{EJ4/informe/histograma_martu_notch_bw}
+\par\end{center}%
+\end{minipage}%
+\begin{minipage}[t]{0.4\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.5]{EJ4/informe/histograma_martu_notch_depth}
+\par\end{center}%
+\end{minipage}\\
+\noindent\begin{minipage}[t]{1\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.5]{EJ4/informe/histograma_martu_notch_frecuency}
+\par\end{center}%
+\end{minipage}\caption{Histogramas\protect \\
+De arriba hacia abajo y de izquierda a derecha: Ancho de banda, profundidad
+del notch y frecuencia del notch}
+\end{figure}
+
+\newpage
+
+\subsection{Impedancia de entrada y de salida}
+
+\subsubsection{De una etapa}
+
+Para ver como se comporta cada etapa cuando se conecta con otra se
+simularon las impedancias de entrada y de salida
+
+\begin{figure}[H]
+\centering{}%
+\begin{minipage}[t]{0.4\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.35]{\string"EJ4/informe/impedancia de entrada etapa 1\string".eps}
+\par\end{center}%
+\end{minipage}~~~~~~%
+\begin{minipage}[t]{0.4\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.35]{\string"EJ4/informe/impedancia de salida etapa 1\string".eps}
+\par\end{center}%
+\end{minipage}\caption{Impedancia de entrada y de salida de una etapa del circuito}
+\end{figure}
+
+Como se puede ver en ambos gráficos, ambas impedancias son comparables
+entre si, lo que provocaria que cuando se conecten en cascada se carguen
+entre sí. Para evitar este problema se decidió poner un buffer entre
+cada conexión.
+
+\subsubsection{De todo el circuito}
+
+\begin{figure}[H]
+\centering{}%
+\begin{minipage}[t]{0.4\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.35]{\string"EJ4/informe/Impedancia de entrada\string".eps}
+\par\end{center}%
+\end{minipage}~~~~~~%
+\begin{minipage}[t]{0.4\columnwidth}%
+\begin{center}
+\includegraphics[scale=0.35]{\string"EJ4/informe/impedancia de salida\string".eps}
+\par\end{center}%
+\end{minipage}\caption{Impedancia de entrada y de salida del circuito}
+\end{figure}
+
+En ambas figuras de la impedancia de ntrada se presenta un sobrepico,
+esto se debe a que en esa frecuencia el circuito está en resonancia,
+por lo que la impedancia será máxima y resistiva pura. 
+
+Debido a que la impedancia de entrada es baja, se optó por poner un
+buffer también a la entrada para evitar el efecto de carga.
+
+\subsection{Mediciones}
+
+Debido a que el circuito oscilaba no llegó a medir la placa.
+
+\subsection{Conclusiones}
+
+A pesar de que no se puedieron llevar a cabo las mediciones, se observó
+como a partir de un circuito dado, solo variando el valor de sus componentes
+se puede obtener distintos tipos de filtros y además se aprendió cómo
+diseñar un filto de orden mayor conectando varios bloques de celdas
+en cascada. 
+
+Es muy importante la elección de los componentes para el circuito
+y también tener en cuenta los efectos de los amplificadores para poder
+conseguir el correcto funcionamiento del filtro, ya que al no hacerlo
+pueden aparecer efectos indeseados como en este caso la oscilación.\selectlanguage{spanish}%
+
+\end{document}
