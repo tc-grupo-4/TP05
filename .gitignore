@@ -4,3 +4,25 @@
 *.log
 
 *.gz
+
+*.bak
+
+*.bbl
+
+*.blg
+
+*.dvi
+
+*.imp
+
+*.net
+
+Ex2/Simulacion/cell1_build.plt
+
+Ex2/Simulacion/cell1_build.raw
+
+Ex2/Simulacion/rauch_build.raw
+
+Ex2/Simulacion/rauch_sim.plt
+
+Ex2/Simulacion/rauch_sim.raw

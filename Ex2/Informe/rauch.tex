@@ -1,14 +1,16 @@
 \begin{circuitikz}[american voltages]
 \draw
-(0,0) node[op amp] (opamp) {}
-(opamp.+) node[ground]{}
-(opamp.-) to[generic=$Z_2$,*-*] ++(-3,0) coordinate(tmp)
-(tmp) to[generic=$Z_1'$] ++(0,-2) node[ground]{}
-(tmp) to[generic=$Z_1$,-o] ++(-3,0) node[left]{$V_{in}$}
-(opamp.out) to[short] ++(0,2) coordinate(tmp1) to [short] ++(0,1) coordinate(tmp2)
-(tmp1) to[generic=$Z_2'$] ++(-2,0) -| (opamp.-)
-(tmp2) to[generic=$Z_3$] ++(-2,0) -| (tmp)
+(0,0) node[op amp] (opamp) {$A$}
+(opamp.-) to[capacitor=$C$,*-*] ++(-3,0) coordinate(tmp)
+(tmp) to[resistor=$\frac{R_1}{(1-a)}$] ++(0,-2) node[ground]{}
+(tmp) to[resistor=$\frac{R_1}{a}$,-o] ++(-3,0) node[left]{$V_{in}$}
+(opamp.out) to[short] ++(0,2) coordinate(tmp1) to [short] ++(0,1.5) coordinate(tmp2)
+(tmp1) to[resistor=$R_2$] ++(-2,0) -| (opamp.-)
+(tmp2) to[capacitor=$C$] ++(-2,0) -| (tmp)
 (opamp.out) to[short,-o] ++(1,0) node[right]{$V_{out}$}
+(opamp.out) to[resistor=$R(1-K)$] ++(0,-2) coordinate(vp)
+(vp) to[resistor=$RK$] ++(0,-2) node[ground]{}
+(vp) -| (opamp.+)
 ;
 \end{circuitikz}
-\caption{Celda Rauch}
+\caption{Celda Rauch con Q mejorado}
