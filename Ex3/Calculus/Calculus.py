@@ -156,6 +156,7 @@ if __name__ == "__main__":
     plot=True
     plotSpice=True
     spiceFile=False
+    
     if spiceFile is True:
         parser=SpiceParser()
         if parser.parseSpiceFile(filePath="spicetxt.txt") != -1:
@@ -168,6 +169,7 @@ if __name__ == "__main__":
         print("No es posible hacerlo de orden 4")
     else:
         z,p,k = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True, output='zpk')
+        test = p[0] +1j
         z,p,k = signal.lp2hp_zpk(z,p,k,wp)
         # num,den = signal.ellip(n, Ap, Aa, wn, 'lowpass', analog=True)
         # num,den = signal.lp2hp(num,den,wp)
@@ -211,11 +213,11 @@ if __name__ == "__main__":
         Etapa2.printComponentValues()
 
         ## Solo para mi despues queda comentado
-        #num,den = signal.zpk2tf(z,p,k)#signal.ellip(n, Ap, Aa, wn, 'highpass', analog=True)
-        #print('Numerador=  '+str(num[0])+','+str(num[1])+','+str(num[2])+','+str(num[3])+','+str(num[4]))
-        #print('Denominad=  '+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3])+','+str(den[4]))
-        print('Numerador='+str(tf2[0])+','+str(tf2[1])+','+str(tf2[2]))
-        print('Denominad='+str(tf2[3])+','+str(tf2[4])+','+str(tf2[5]))
+        num,den = signal.zpk2tf(z,p,k)#signal.ellip(n, Ap, Aa, wn, 'highpass', analog=True)
+        print('Numerador=  '+str(num[0])+','+str(num[1])+','+str(num[2])+','+str(num[3])+','+str(num[4]))
+        print('Denominad=  '+str(den[0])+','+str(den[1])+','+str(den[2])+','+str(den[3])+','+str(den[4]))
+        #print('Numerador='+str(tf2[0])+','+str(tf2[1])+','+str(tf2[2]))
+        #print('Denominad='+str(tf2[3])+','+str(tf2[4])+','+str(tf2[5]))
         
         if ExportarLTSpice is True:
             timestr = time.strftime("%Y%m%d-%H%M%S")
