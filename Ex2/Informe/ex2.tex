@@ -1,0 +1,448 @@
+\chapter{Celda Rauch (Deliyannis-Friend modificada}
+
+Se buscó implementar un filtro pasa banda que cumpla con los parámetros indicados en el Cuadro \ref{tab:e2spec}.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{||c|c||}
+\hline
+Pendiente Pasabajos normalizado	&	$-40 \si{\deci\bel}/dec$ \\
+\hline
+$f_p$ & $56 \si{\kilo\hertz}$\\
+\hline
+$B$ & $1/10$\\
+\hline
+$A_p$ & $3\si{\deci\bel}$\\
+\hline
+$Z_{in}(f)$ & $\geq 50 \si{\kilo\ohm}$\\
+\hline
+\end{tabular}
+\caption{Filtro Chebycheff}
+\label{tab:e2spec}
+\end{center}
+\end{table}
+
+\section{Transferencia Numérica}
+
+A partir del dato de la pendiente del pasabajos normalizado, se determina que utilizando la aproximación de Chebycheff el orden del filtro será $n=2$. Aunque la amplitud máxima del filtro en banda pasante es $A_p = 3 \si{\deci\bel}$ se utilizó para el cálculo de la transferencia $A_p = 1$ ya que se previó que por las tolerancias de los componentes la curva de la transferencia se desplazará.
+
+Usando la aproximación de Chebycheff para el filtro pasabajos normalizado y desnormalizándolo a un filtro pasabajos (véase Anexo), se obtuvo la expresión \eqref{eq:e2BP} de orden $n=4$.
+
+\begin{equation}
+H_{BP}(s)=\frac{1.2380\cdot10^9s^2}{s^4+3.8625\cdot10^4 s^3+2.4897\cdot10^{11}s^2+4.7819\cdot10^{15}+1.5328\cdot10^{22}}
+\label{eq:e2BP}
+\end{equation}
+
+La plantilla resultante para este filtro se puede observar en la Figura \ref{fig:e2template}.
+
+\begin{figure}[ht]
+\begin{center}
+\input{plantilla.tex}
+\end{center}
+\caption{Plantilla del Pasabandas}
+\label{fig:e2template}
+\end{figure}
+
+Luego, utilizando herramientas matemáticas, se factorizó \eqref{eq:e2BP} en productos de transferencias de orden 2 para poder implementar el circuito correspondiente:
+
+\begin{equation}
+H_{BP}(s)=\frac{3.3645\cdot 10^4s}{s^2 + 1.8449\cdot10^4 s + 1.1320\cdot10^{11}} \cdot \frac{3.6797\cdot 10^4s}{s^2 + 2.0176\cdot10^4 s + 1.3540\cdot10^{11}}
+\label{eq:e2BPf}
+\end{equation}
+
+\section{Implementación del Filtro}
+
+Ambas transferencias de segundo orden de la expresión \eqref{eq:e2BPf} se pueden expresar de la manera estándar:
+
+\begin{equation}
+\mathlarger{
+H_{BPi} (s) = \frac{ G \frac{w_{0i}}{Q_i}s }{s^2+ \frac{w_{0i}}{Q_i}s+w_0^2}
+}
+\label{eq:e2bpgen}
+\end{equation}
+
+Se utilizaron dos celdas Rauch pasabanda para la implementación física cada etapa del filtro.
+
+\subsection{Transferencia de la Celda Rauch}
+
+\begin{figure}[ht]
+\begin{center}
+\input{rauch.tex}
+\label{fig:e2cell}
+\end{center}
+\end{figure}
+
+Se buscó implementar el filtro con transferencia \eqref{eq:e2BPf} utilizando dos celdas Rauch en configuración Pasabandas con los criterios de diseño de \textit{Rolf Schaumann} en su libro \textit{"Design of Analog Filters"}. A partir de la expresión \eqref{eq:e2bpgen} se puede observar que en ambos casos, se requiere de un Q alto al implementar esta celda. Sin embargo, si se intentara sintetizar con la configuración básica de este se una relación entre $R_1$ y $R_2$ demasiado alta. Para resolver este problema, se implementó la celda Rauch con retroalimentación positiva para mejorar este factor de calidad sin necesidad de una relación alta entre resistencias.
+
+Como se observa en la figura \ref{fig:e2cell}, esta celda suele construirse con ambos capacitores del mismo valor.
+
+Asumiendo que el amplificador operacional es ideal para la etapa de diseño del filtro, resolviendo el circuito con asistencia de herramientas matemáticas, se obtuvo la transferencia de la celda:
+
+\begin{equation}
+\mathlarger{
+H(s)=-\frac{1}{1-K}\cdot\frac{G_0 \frac{w_0}{Q_0}s}{s^2 + \frac{w_0}{Q_0}\cdot\left(1-2 Q_0^2\alpha\right)s + w_0^2}
+}
+\label{eq:e2cell}
+\end{equation}
+
+donde
+
+\begin{equation*}
+w_0^2=\frac{1}{R_1R_2C^2} \qquad G_0 = \frac{aR_2}{2R_1} \qquad Q_0=\frac{1}{2}\sqrt{\frac{R_2}{R_1}} \qquad	\alpha=\frac{K}{1-K}
+\end{equation*}
+
+Para llevar la transferencia \eqref{eq:e2cell} a la forma estándar \eqref{eq:e2bpgen} se tiene:
+
+\begin{equation*}
+Q = \frac{Q_0}{\left(1-2 Q_0^2\alpha\right)} \qquad	G=G_0\cdot\frac{Q}{Q_0}\cdot\frac{1}{1-K}
+\end{equation*}
+
+\subsection{Impedancia de Entrada}
+
+Para continuar con el diseño, se calculó también la impedancia de entrada de la celda:
+\begin{equation}
+Z_{in} = \frac{R_1}{a} \cdot \frac{s^2 + \frac{w_0}{Q}s + w_0^2}{s^2 + \frac{w_0}{Q}(1-GK) s + w_0^2 + \frac{w_0}{Q} \frac{G(1-K)}{C R_2}}
+\label{eq:e2zin}
+\end{equation}
+
+El proceso del cálculo se encuentra en el anexo. Los valores en la expresión \eqref{eq:e2zin} corresponden a los utilizados en el diseño de la celda. 
+
+\subsection{Diseño de la Celda}
+
+Una vez obtenidas las expresiones de las transferencias de las celdas y sus impedancias de entrada, se pudo calcular los valores de los componentes a utilizarse para construirlas.
+
+De acuerdo al libro de Schaumann, fue estudiado que un valor óptimo para la construcción del circuito es tomar $Q_0 \approx 1.5$ así que este será tomado como valor para el cálculo de los componentes.
+
+Tomando como ejemplo la primera etapa de la transferencia \eqref{eq:e2BPf} se calculó que:
+
+\begin{equation}
+\frac{3.3645\cdot 10^4s}{s^2 + 1.8449\cdot10^4 s + 1.1320\cdot10^{11}} = \frac{ G \frac{w_0}{Q}s }{s^2+ \frac{w_0}{Q}s+w_0^2}
+\end{equation}
+
+\begin{equation*}
+\Rightarrow \frac{w_0}{Q}= 1.8449\cdot10^4	\qquad w_0^2=1.1320\cdot10^{11} \qquad	G \frac{w_0}{Q}=3.3645\cdot 10^4
+\end{equation*}
+
+\begin{equation}
+\Rightarrow w_0=3.3645\cdot10^5 \qquad	Q=18.24 \qquad	G=1.824
+\end{equation}
+
+A partir de las expresiones anteriores se puede despejar
+\begin{equation*}
+\alpha=\frac{1}{2Q_0^2}\left(1-\frac{Q_0}{Q}\right) = 0.203
+\end{equation*}
+
+Conociendo también la expresión de $K$ se obtiene que
+\begin{equation*}
+K=\frac{\alpha}{1+\alpha} = 0.169
+\end{equation*}
+
+\begin{equation*}
+G_0=G\frac{Q_0}{Q}(1-K) = 1.824\frac{1.5}{18.24}(1-0.169)=0.1246
+\end{equation*}
+
+Finalmente, para calcular los valores de las resistencias se utilizaron las fórmulas descritas en el libro y se registraron los resultados en el cuadro \ref{tab:e2 componentes teoricos}.
+
+\begin{equation}
+R_2=2Q_0\frac{1}{w_0C} \qquad R_1=\frac{R_2}{4Q_0^2} \qquad a=\frac{G_0}{2Q_0^2}
+\end{equation}
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{||l|r|r||}
+\hline
+Valor				&	Celda 1						&	Celda 2\\
+\hline
+\hline
+$C$				&	$470 \si{\pico\farad}$	&	$820 \si{\pico\farad}$ \\
+\hline
+$R_1$			&	$2.11 \si{\kilo\ohm}$	&	$1.10 \si{\kilo\ohm}$	\\
+$a$				&	$0.0277$					&	$0.0277$						\\
+$R_1/a$			&	$76.1 \si{\kilo\ohm}$	&	$39.9 \si{\kilo\ohm}$	\\
+$R_1/(1-a)$	&	$2.17 \si{\kilo\ohm}$	&	$1.14 \si{\kilo\ohm}$	\\
+\hline
+$R_2$			&	$19.0 \si{\kilo\ohm}$	&	$9.94 \si{\kilo\ohm}$	\\
+\hline
+$RK$				&	$1.69 \si{\kilo\ohm}$	&	$1.69 \si{\kilo\ohm}$	\\
+$R(1-K)$		&	$8.31 \si{\kilo\ohm}$	&	$8.31 \si{\kilo\ohm}$	\\
+\hline
+$Q$				&	$18.27$						&	$18.27$						\\
+$f_0$				&	$5.35 \si{\kilo\hertz}$	&	$58.6 \si{\kilo\hertz}$	\\
+\hline
+\end{tabular}
+\caption{Valores calculador para los componentes}
+\label{tab:e2 componentes teoricos}
+\end{center}
+\end{table}
+
+Dado que era necesario que la impedancia de entrada sea $Z_{in} \geq 50 \si{\kilo\ohm}$ se escogió un capacitor tal que se cumpla esta condición para la primera celda. El valor de la capacitancia se escogió iterativamente para que se cumpla esta condición en la simulación del circuito. En la segunda celda se escogió el capacitor para que todas las resistencias utilizadas se encuentren en el orden de los $\si{\kilo\ohm}$.
+
+\subsection{Análisis de Sensibilidades}
+
+Para construir físicamente los componentes con sus valores necesarios, se analizó la sensibilidad en los parámetros $Q$, $G$, y $\omega_0$ en relación a sus componentes. Se calculó la sensibilidad de un parámetro $X$ respecto a un componente $Y$ con la expresión \eqref{eq:e2 sensibilidad}
+
+\begin{equation}
+S_{Y}^{X} = \frac{\partial X}{X} / \frac{\partial Y}{Y}= \frac{Y}{X} \cdot \frac{\partial X}{\partial Y}
+\label{eq:e2 sensibilidad}
+\end{equation}
+
+A partir de los resultados en el Cuadro \ref{tab:e2 sens gen} (Anexo) se obtuvieron los valores de las sensibilidades de cada celda.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{||c|c|c|c||}
+\hline
+$f(...)$			&	$\omega_0$	&	$Q$	&	$G$	\\
+\hline
+\hline
+$S_{R1}^f$	&	$-0.5$			&	$-11.7 $	&	$-12.2 $	\\
+\hline
+$S_{R2}^f$	&	$-0.5$			&	$11.7$	&	$12.2$	\\
+\hline
+$S_{C}^f$		&	$-1$				&	$0$	&	$0$	\\
+\hline
+$S_{K}^f$		&	$0$				&	$13.4$	&	$13.4$	\\
+\hline
+$S_{A}^f$		&	$0$				&	$0$	&	$0$	\\
+\hline
+$S_{a}^f$		&	$0$				&	$0$	&	$1$	\\
+\hline
+\end{tabular}
+\caption{Sensibilidades de los parámetros en la Celda 1}
+\label{tab:e2 sens 1}
+\end{center}
+\end{table}
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{||c|c|c|c||}
+\hline
+$f(...)$			&	$\omega_0$	&	$Q$		&	$G$		\\
+\hline
+\hline
+$S_{R1}^f$	&	$-0.5$			&	$-11.7$	&	$-12.2$	\\
+\hline
+$S_{R2}^f$	&	$-0.5$			&	$11.7$	&	$12.2$	\\
+\hline
+$S_{C}^f$		&	$-1$				&	$0$		&	$0$		\\
+\hline
+$S_{K}^f$		&	$0$				&	$13.4$	&	$13.6$	\\
+\hline
+$S_{A}^f$		&	$0$				&	$0$		&	$0$		\\
+\hline
+$S_{a}^f$		&	$0$				&	$0$		&	$1$		\\
+\hline
+\end{tabular}
+\caption{Sensibilidades de los parámetros en la Celda 2}
+\label{tab:e2 sens 2}
+\end{center}
+\end{table}
+
+Dado los altos niveles de sensibilidad respecto que se observan en ambas celdas respecto a las resistencias utilizadas, será necesario utilizar resistencias con tolerancias del $1\%$ para que el circuito funcione dentro de los márgenes deseados.
+Por otro lado, para los valores de $K$ también se observa un alto nivel de sensibilidad; por lo tanto, se utilizarán un preset más 2 resistencias para fijar el valor de $K$. Se utilizaron resistencias fijas de $8.2\si{\kilo\ohm}$ y $1.5\si{\kilo\ohm}$ más un preset de $200\si{\ohm}$, llegando a un total de $R = 9.9 \si{\kilo\ohm}$. Recalculando las resistencias se obtiene que:
+
+\begin{equation*}
+KR = 1.677\si{\kilo\ohm} \qquad (1-K)R = 8.223 \si{\kilo\ohm}
+\end{equation*}
+
+A partir de los valores de las sensibilidades, 
+%Sacar conclusiones sobre las sensibilidades
+
+\newpage
+
+\section{Anexo}
+
+\subsection{Transferencia Numérica}
+
+Dado que se utilizó $A_p=1 \si{\deci\bel}$ se obtuvo $\epsilon$ tal que:
+
+\begin{equation}
+\epsilon=\sqrt{10^{A_p/10}-1}=\sqrt{10^{0.1}-1} = 0.5088
+\end{equation}
+
+Luego se calcularon las singularidades correspondientes al pasabajos normalizado de orden $n=2$:
+
+\begin{equation}
+s_P= -\sigma _k  + j \omega _k
+\label{eq:e2sing}
+\end{equation}
+
+\begin{equation}
+\sigma _k=-senh( \beta ) sen(\alpha _k)
+\label{eq:e2sigma}
+\end{equation}
+
+\begin{equation}
+\omega _k=cosh( \beta) cos(\alpha _k)
+\label{eq:e2omega}
+\end{equation}
+
+\begin{equation}
+\alpha_k=\frac{2k-1}{2n}\pi \qquad (0 \leq k \leq 2n-1)
+\label{eq:e2alphak}
+\end{equation}
+
+\begin{equation}
+\beta=senh^{-1}\left( \epsilon^{-1}\right) 
+\label{eq:e2beta}
+\end{equation}
+
+A partir de las ecuaciones \eqref{eq:e2sigma} a \eqref{eq:e2beta} se obtienen 4 polos (2 pares complejos conjugados). Para el diseño del filtro, se tomaron aquellos en el semiplano izquierdo y se obtuvo la transferencia del pasabajos normalizado:
+
+\begin{equation}
+H_{LPN}(s)=\frac{1}{(s-s_{p1})(s-\bar{s_{p1}})}
+\label{eq:e2LPN}
+\end{equation}
+
+A la expresión \eqref{eq:e2LPN} se le aplicó la desnormalización del pasabajos al pasabanda:
+
+\begin{equation}
+s \rightarrow \frac{1}{B}\left(\frac{s}{\omega_0}+\frac{\omega_0}{s}\right)
+\label{eq:e2LP2BP}
+\end{equation}
+
+Aplicando la desnormalización \eqref{eq:e2LP2BP} se obtuvo la transferencia de 4º orden:
+
+\begin{equation}
+H_{BP}(s) = \frac{B^2 \omega_0^2 s}{s^4 + \left(2 \sigma B \omega_0\right) s^3 + \left[ 2+B^2 \left(\sigma^2 + \omega^2 \right) \right] w_o^2 + \left(2 \sigma B \omega_0^3\right) s + w_0^4}
+\end{equation}
+
+\begin{equation*}
+H_{BP}(s)=\frac{1.2380\cdot10^9s^2}{s^4+3.8625\cdot10^4 s^3+2.4897\cdot10^{11}s^2+4.7819\cdot10^{15}+1.5328\cdot10^{22}}
+\end{equation*}
+
+\subsection{Transferencia de la Celda Rauch}
+
+Se calculó la transferencia de la Celda Rauch aplicando la ley de Nodos de Kirchoff y con asistencia de MATLAB.
+
+\begin{figure}[ht]
+\begin{center}
+\input{rauch2.tex}
+\end{center}
+\end{figure}
+
+Se aplicó la ley de nodos de Kirchoff en $V_x$ y $V^-$:
+
+\begin{equation}
+\mathlarger{
+\frac{V_{in}-V_x}{R_1/a}=\frac{V_x-V_{out}}{1/sC}+\frac{V_x}{R_1/(1-a)}+\frac{V_x-V^-}{1/sC}
+}
+\label{eq:e2vx}
+\end{equation}
+
+\begin{equation}
+\mathlarger{
+\frac{V_x-V^-}{1/sC}=\frac{V^--V_{out}}{R_2}
+}
+\label{eq:e2v-}
+\end{equation}
+
+\begin{equation}
+\mathlarger{
+V^-=V^+ - \frac{V_{out}}{A} = V_{out} (K - 1/A)
+}
+\label{eq:e2v-val}
+\end{equation}
+
+Además, tomando divisor de tensiones:
+
+\begin{equation}
+\mathlarger{
+V^+=V_{out}\cdot\frac{KR}{KR+(1-K)R}=V_{out}K
+}
+\label{eq:e2v+}
+\end{equation}
+
+Resolviendo algebráicamente las ecuaciones \eqref{eq:e2vx}, \eqref{eq:e2v-}, \eqref{eq:e2v-val} y \eqref{eq:e2v+} se obtuvo la transferencia de la celda:
+
+\begin{equation}
+\mathlarger{
+H(s)=-\frac{1}{1-K+1/A} \cdot \frac{\frac{a}{R_1C}s}{s^2 + \frac{2}{R_2 C}\cdot \left(1-\frac{R_2}{2 R_1}\cdot \frac{K-1/A}{1-K+1/A} \right)s + \frac{1}{R_1R_2C^2}}
+}
+\label{eq:e2 cell avol}
+\end{equation}
+
+Aproximando con $A\rightarrow \infty$ para un amplificador operacional ideal, se obtiene la transferencia en \eqref{eq:e2cell}
+
+\subsection{Impedancia de Entrada}
+
+\begin{equation}
+i_{in} = \left(V_{in} - V_x \right) / \frac{R_1}{a} = \left( V_{in} - V_{out} \frac{1}{sC} \left[ K(1/R_2 + sC) - 1/R_2 \right]\right)/\frac{R_1}{a}
+\end{equation}
+
+\begin{equation*}
+i_{in} = V_{in} \left[1- H(s) \frac{1}{sC} \left[ K(1/R_2+sC) - 1/R_2 \right] \right]=V_{in} \left[1+ H(s) \left(\frac{1-K}{sCR_2} - K \right) \right]/\frac{R_1}{a}
+\end{equation*}
+
+\begin{equation}
+Z_{in} = \frac{V_{in}}{i_{in}}= \frac{R_1/a}{1+H(s) \left(\frac{1-K}{sCR_2} - K \right)}
+\end{equation}
+
+Operando algebráicamente se obtiene la expresión
+
+\begin{equation*}
+Z_{in} = \frac{R_1}{a} \cdot \frac{s^2 + \frac{\omega_0}{Q}s + \omega_0^2}{s^2 + \frac{\omega_0}{Q}(1-GK) s + \omega_0^2 + \frac{\omega_0}{Q} \frac{G(1-K)}{C R_2}}
+\end{equation*}
+
+\subsection{Análisis de Sensibilidades}
+
+Operando sobre las siguientes expresiones:
+
+\begin{equation*}
+w_0^2=\frac{1}{R_1R_2C^2} \qquad G_0 = \frac{aR_2}{2R_1} \qquad Q_0=\frac{1}{2}\sqrt{\frac{R_2}{R_1}} \qquad	\alpha=\frac{K}{1-K}
+\end{equation*}
+
+\begin{equation*}
+Q = \frac{Q_0}{\left(1-2 Q_0^2\alpha\right)} \qquad	G=G_0\cdot\frac{Q}{Q_0}\cdot\frac{1}{1-K}
+\end{equation*}
+
+se obtuvieron expresiones en función de los componentes con los cuales se calcula la sensibilidad:
+
+\begin{equation}
+\omega_0 = \frac{1}{\sqrt{R_1 R_2}C}
+\end{equation}
+
+\begin{equation}
+Q=\frac{1}{2} \sqrt{\frac{R_2}{R_1}} \frac{R_1(1-K)}{2R_1-K(2R_1+R_2)}
+\end{equation}
+
+\begin{equation}
+G=a\frac{R_2}{2R_1-K(2R_1+R_2)}
+\end{equation}
+
+Para poder calcular las sensibilidades de los parámetros $\omega_0$, $Q$, y $G$ respecto a $A_{VOL}$ se obtuvieron sus funciones a partir de la expresión \eqref{eq:e2 cell avol}
+
+\begin{equation}
+Q (R_1,R_2,K,A)= \frac{0.5 \sqrt{R_2/R_1}}{1 - \frac{R_2}{2R_1}\cdot \frac{K-1/A}{1-K+1/A}}
+\end{equation}
+
+\begin{equation}
+G (R_1,R_2,K,A,a) = \frac{a R_2}{2R_1-(K-1/A)(2R_1+R_2)}
+\end{equation}
+
+Se calcularon las derivadas sensibilidades de cada parámetro respecto a sus componentes utilizando expresiones simbólicas en MATLAB y operando algebraicamente:
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{||c|c|c|c||}
+\hline
+$f(...)$			&	$\omega_0$	&	$Q$	&	$G$	\\
+\hline
+\hline
+$S_{R1}^f$	&	$-0.5$	&	$-\frac{K R_2}{2R_1(1-K)-KR_2}-\frac{1}{2}$	&	$-\frac{2R_1(1-K)}{2R_1(1-K)-KR_2}$\\
+\hline
+$S_{R2}^f$	&	$-0.5$	&	$\frac{K R_2}{2R_1(1-K)-KR_2}+\frac{1}{2}$	&	$\frac{2R_1(1-K)}{2R_1(1-K)-KR_2}$\\
+\hline
+$S_{C}^f$		&	$-1$	&	$0$	&	$0$	\\
+\hline
+$S_{K}^f$		&	$0$	&	$\frac{KR_2(1-K)}{2R_1(1-K)-KR_2}$	&	 $\frac{2R_1}{2R_1-K(2R_1+R_2)}-1$\\
+\hline
+$S_{A}^f$		&	$0$	&	$\frac{1}{A}\cdot\frac{R_2}{(1-K+1/A)[2R_1 + (R_2+2R_1)(1/A-K)]}$& $\frac{1}{A}\cdot\frac{R_2+2R_1}{(R_2+2R_1)(1/A-K)+2R_1}$	\\
+\hline
+$S_{a}^f$		&	$0$	&	$0$	&	$1$	\\
+\hline
+\end{tabular}
+\caption{Sensibilidades de los parámetros en una celda}
+\label{tab:e2 sens gen}
+\end{center}
+\end{table}
