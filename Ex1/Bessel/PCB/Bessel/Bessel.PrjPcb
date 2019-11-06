@@ -72,18 +72,14 @@ GenerateClassCluster=0
 DocumentUniqueId=ESBLPJQR
 
 [GeneratedDocument1]
-DocumentPath=
-DItemRevisionGUID=
-
-[GeneratedDocument2]
 DocumentPath=Project Outputs for Bessel\Bessel2.REP
 DItemRevisionGUID=
 
-[GeneratedDocument3]
+[GeneratedDocument2]
 DocumentPath=Project Outputs for Bessel\Board Information - Bessel.html
 DItemRevisionGUID=
 
-[GeneratedDocument4]
+[GeneratedDocument3]
 DocumentPath=Project Outputs for Bessel\Move Component(s) Origin To Grid - Bessel.html
 DItemRevisionGUID=
 
