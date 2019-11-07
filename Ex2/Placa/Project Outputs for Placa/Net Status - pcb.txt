@@ -1,0 +1,32 @@
+Net Status Report
+Filename     : C:\Users\ohvic\Documents\ITBA\TP05\Ex2\Placa\pcb.PcbDoc
+Date         : 7/11/2019
+Time         : 19:56:10
+Time Elapsed : 00:00:01
+
+Nets, Layer, Length
+    +VCC, Signal Layers Only, 28.1069mm
+    -VCC, Signal Layers Only, 15.9639mm
+    GND, Signal Layers Only, 205.8862mm
+    NetC1a_1, Signal Layers Only, 19.4502mm
+    NetC1a_2, Signal Layers Only, 37.4895mm
+    NetC2a_1, Signal Layers Only, 30.401mm
+    NetC2a_2, Signal Layers Only, 37.2178mm
+    NetJ1a_1, Signal Layers Only, 4.572mm
+    NetJ1b_2, Signal Layers Only, 3.556mm
+    NetJ2a_1, Signal Layers Only, 4.826mm
+    NetJ2b_2, Signal Layers Only, 3.302mm
+    NetR1Aa_2, Signal Layers Only, 4.318mm
+    NetR2a_2, Signal Layers Only, 4.572mm
+    NetR3Aa_2, Signal Layers Only, 4.064mm
+    NetRK1a_2, Signal Layers Only, 3.81mm
+    NetRK1b_1, Signal Layers Only, 3.81mm
+    NetRK1p_2, Signal Layers Only, 40.0317mm
+    NetRK2a_2, Signal Layers Only, 3.81mm
+    NetRK2b_1, Signal Layers Only, 3.81mm
+    NetRK2p_2, Signal Layers Only, 38.9152mm
+    V1in, Signal Layers Only, 6.604mm
+    V1out, Signal Layers Only, 62.5923mm
+    V2in, Signal Layers Only, 46.3874mm
+    V2out, Signal Layers Only, 57.2113mm
+count : 24
