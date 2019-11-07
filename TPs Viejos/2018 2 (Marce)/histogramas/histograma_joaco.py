@@ -21,15 +21,15 @@ muestras = 1000
 k = 1e3
 n = 1e-9
 
-RA1 = [330, 3.3*k]
-RA2 = [7.5*k, 4.7*k]
-RB = [1*k, 100]
-R41 = [300, 4.3*k]
-R42 = [7.5*k, 15*k]
-R1 = [750, 180]
-C3 = [10*n, 10*n]
-C21 = [6.8*n, 3.2*n]
-C22 = [3.2*n, 6.8*n]
+RA1 = [68, 12*k]
+RA2 = [3*k, 15*k]
+RB = [1*k, 1000]
+R41 = [270, 6.2*k]
+R42 = [12*k, 12*k]
+R1 = [2400, 430]
+C3 = [4.7*n, 4.7*n]
+C21 = [4.7*n, 0.39*n]
+C22 = [0.39*n, 4.7*n]
 
 
 def disp(value, tol):
@@ -111,15 +111,15 @@ def plot_hist(circuit_id, mode, sing_id, width, width2):
     make_histogram(variable="Fo",
                    unidad="Hz",
                    data=data["w0"],
-                   filename="joaco/histograma_joaco_w0_"+str(mode)+"_"+str(sing_id) + str(circuit_id) +".png",
+                   filename="histograma_w0_"+str(mode)+"_"+str(sing_id) + str(circuit_id) +".png",
                    bar_width=width)
 
-    # plt.title(textmode + " " + str(sing_id) + str(circuit_id))
-    # make_histogram(variable="Q",
-    #                unidad="Sin unidad",
-    #                data=data["q"],
-    #                filename="joaco/histograma_joaco_q_" + str(mode) + "_" + str(sing_id) + str(circuit_id) + ".png",
-    #                bar_width=width2)
+    plt.title(textmode + " " + str(sing_id) + str(circuit_id))
+    make_histogram(variable="Q",
+                   unidad="Sin unidad",
+                   data=data["q"],
+                   filename="joaco/histograma_joaco_q_" + str(mode) + "_" + str(sing_id) + str(circuit_id) + ".png",
+                   bar_width=width2)
 
 
 plot_hist(circuit_id=0,

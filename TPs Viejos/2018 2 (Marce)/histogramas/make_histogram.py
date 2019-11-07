@@ -21,7 +21,7 @@ def make_histogram(variable, unidad, data, filename, bar_width):
     make_datacursor_general(
         x1= variable,
         u1= unidad,
-        filename="histogramas/output/"+filename,
+        filename=filename,
         my_plt=plt,
         ax1=ax1)
 
