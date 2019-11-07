@@ -8,6 +8,7 @@ from math import pi
 import numpy as np
 from math import atan2
 from make_histogram import make_histogram
+from distutils.spawn import find_executable
 
 f_range = np.logspace(4.3, 4.8, 10000)
 w_range = [2 * pi * i for i in f_range]
@@ -15,7 +16,7 @@ w_range = [2 * pi * i for i in f_range]
 
 res_tol = 1
 cap_tol = 1
-muestras = 1000
+muestras =1800
 
 
 k = 1e3
@@ -75,6 +76,8 @@ sns.set(style="darkgrid")
 
 def plot_hist(circuit_id, mode, sing_id, width, width2):
     data = {"w0": [], "q": []}
+    
+    sns.set_style("whitegrid")
     for i in range(muestras):
         tf = conseguir_tf(
             ra1=disp(RA1[circuit_id], res_tol),
@@ -106,19 +109,20 @@ def plot_hist(circuit_id, mode, sing_id, width, width2):
         textmode = "Polo"
     else:
         textmode = "Cero"
-    plt.title(textmode + " " + str(sing_id) + str(circuit_id))
-
+    plt.title(textmode + " " + str(sing_id+1) + ", etapa "+str(circuit_id+1))
+    
     make_histogram(variable="Fo",
                    unidad="Hz",
                    data=data["w0"],
                    filename="histograma_w0_"+str(mode)+"_"+str(sing_id) + str(circuit_id) +".png",
                    bar_width=width)
 
-    plt.title(textmode + " " + str(sing_id) + str(circuit_id))
+    plt.title(textmode + " " + str(sing_id+1) + ", etapa "+str(circuit_id+1))
+    
     make_histogram(variable="Q",
-                   unidad="Sin unidad",
+                   unidad="adimensional",
                    data=data["q"],
-                   filename="joaco/histograma_joaco_q_" + str(mode) + "_" + str(sing_id) + str(circuit_id) + ".png",
+                   filename="histograma_q_" + str(mode) + "_" + str(sing_id) + str(circuit_id) + ".png",
                    bar_width=width2)
 
 
