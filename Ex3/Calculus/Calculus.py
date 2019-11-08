@@ -151,9 +151,9 @@ if __name__ == "__main__":
     Rb = 1e3
     C = 5e-9
     Round = True
-    Montecarlo = False
-    ExportarLTSpice = False
-    plot=True
+    Montecarlo = True
+    ExportarLTSpice = True
+    plot=False
     plotSpice=False
     spiceFile=False
     
