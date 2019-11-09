@@ -75,7 +75,7 @@ Se utilizaron dos celdas Rauch pasabanda para la implementación física cada et
 \end{center}
 \end{figure}
 
-Se buscó implementar el filtro con transferencia \eqref{eq:e2BPf} utilizando dos celdas Rauch en configuración Pasabandas con los criterios de diseño de \textit{Rolf Schaumann} en su libro \textit{"Design of Analog Filters"}. A partir de la expresión \eqref{eq:e2bpgen} se puede observar que en ambos casos, se requiere de un Q alto al implementar esta celda. Sin embargo, si se intentara sintetizar con la configuración básica de este se una relación entre $R_1$ y $R_2$ demasiado alta. Para resolver este problema, se implementó la celda Rauch con retroalimentación positiva para mejorar este factor de calidad sin necesidad de una relación alta entre resistencias.
+Se buscó implementar el filtro con transferencia \eqref{eq:e2BPf} utilizando dos celdas Rauch en una configuración Pasabandas con los criterios de diseño de \textit{Rolf Schaumann} en su libro \textit{"Design of Analog Filters"}. A partir de la expresión \eqref{eq:e2bpgen} se puede observar que en ambos casos, se requiere de un Q alto al implementar esta celda. Sin embargo, si se intentara sintetizar con la configuración básica de este se una relación entre $R_1$ y $R_2$ demasiado alta. Para resolver este problema, se implementó la celda Rauch con retroalimentación positiva para mejorar este factor de calidad sin necesidad de una relación alta entre resistencias.
 
 Como se observa en la figura \ref{fig:e2cell}, esta celda suele construirse con ambos capacitores del mismo valor.
 
@@ -291,7 +291,7 @@ $C$	&	$809 p$	&	$809 p$	&	$\si{\farad}$	\\
 \end{center}
 \end{table}
 
-Todas las resistencias utilizadas fueron de tecnología SMD ya que el circuito presentaba sensibilidades muy altas en todos los parámetros, no sólo de la relación de las resistencias en la retroalimentación positiva. Los capacitores utilizados fueron de tecnología multicapa para la primera celda por su disponibilidad y su respuesta en frecuencia más óptima para este rango de frecuencias. Por otro lado se utilizaron resistencias de tipo \textit{Plate} para la segunda celda ya que para esa capacitancia era la tecnología disponible.
+Todas las resistencias utilizadas fueron de tecnología SMD ya que las sensibilidades del circuito eran muy altas en todos los parámetros, no sólo de la relación de las resistencias en la retroalimentación positiva. Los capacitores utilizados fueron de tecnología multicapa para la primera celda por su disponibilidad y su respuesta en frecuencia más óptima para este rango de frecuencias. Por otro lado se utilizaron resistencias de tipo \textit{Plate} para la segunda celda ya que para esa capacitancia era la tecnología disponible.
 
 \subsection{Resultados de las Mediciones}
 
@@ -358,7 +358,7 @@ En el caso de este filtro, dado que las capacitancias de los componentes son men
 
 Por otro lado, la atenuación observada en la transferencia sólo podría ser atribuida a las resistencias utilizadas o a la configuración del preset. Sin embargo, aunque todas estas fueron calibradas de previo a la medición, esta reducción en la amplitud de salida podría ser atribuida a defectos en el amplificador operacional.
 
-Observando la figura \ref{fig:e2 Z total} se puede observar cómo, a pesar que las capacitancias no son iguales a las deseadas, la impedancia de entrada del filtro se siguió manteniendo sobre los $50 \si{\kilo{\ohm}$ para todo el rango de frecuencias de la banda pasante.
+Observando la figura \ref{fig:e2 Z total} se puede observar cómo, a pesar que las capacitancias no son iguales a las deseadas, la impedancia de entrada del filtro se siguió manteniendo sobre los $50 \si{\kilo\ohm}$ para todo el rango de frecuencias de la banda pasante.
 
 \subsection{Calibración}
 
@@ -378,11 +378,11 @@ Teniendo en cuenta que la máxima ganancia en cualquiera de estas celdas deberí
 V_{i Max} = \frac{V_{o Max}}{1.8} = 7.78 V
 \end{equation}
 
-Considerando una tensión mínima de salida $V_{oMin} = 10 \si{\mili\volt}$ y que la ganancia mínima de este circuito según la plantilla debe ser de
+Considerando una tensión mínima de salida $V_{oMin} = 10 \si{\milli\volt}$ y que la ganancia mínima de este circuito según la plantilla debe ser de
 $-3 \si{\deci\bel} \approx 0.708 V/V $:
 
 \begin{equation}
-V_{iMin} = \frac{V_{oMin}}{0.708} = 14.1 \si{\mili\volt}
+V_{iMin} = \frac{V_{oMin}}{0.708} = 14.1 \si{\milli\volt}
 \end{equation}
 
 En conclusión, el rango dinámico de este filtro debería ser:
