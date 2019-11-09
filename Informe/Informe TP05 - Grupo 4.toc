@@ -17,21 +17,21 @@
 \contentsline {subsection}{\numberline {1.4.2}Transferencia de la Celda Rauch}{10}% 
 \contentsline {subsection}{\numberline {1.4.3}Impedancia de Entrada}{11}% 
 \contentsline {subsection}{\numberline {1.4.4}An\IeC {\'a}lisis de Sensibilidades}{11}% 
-\contentsline {chapter}{\numberline {2}Celda Sedra-Ghorab-Martin (R)}{14}% 
-\contentsline {section}{\numberline {2.1}Introducci\IeC {\'o}n}{14}% 
+\contentsline {chapter}{\numberline {2}Celda Sedra-Ghorab-Martin (R)}{13}% 
+\contentsline {section}{\numberline {2.1}Introducci\IeC {\'o}n}{13}% 
 \contentsline {section}{\numberline {2.2}Dise\IeC {\~n}o}{14}% 
 \contentsline {subsection}{\numberline {2.2.1}Aproximaci\IeC {\'o}n eliptica del filtro (Cauer)}{14}% 
-\contentsline {chapter}{\numberline {3}Celda Universal}{16}% 
-\contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{16}% 
-\contentsline {section}{\numberline {3.2}Plantilla}{16}% 
-\contentsline {section}{\numberline {3.3}C\IeC {\'a}lculos te\IeC {\'o}ricos}{16}% 
-\contentsline {section}{\numberline {3.4}Implementaci\IeC {\'o}n}{18}% 
-\contentsline {section}{\numberline {3.5}Dise\IeC {\~n}o}{20}% 
-\contentsline {subsection}{\numberline {3.5.1}Selecci\IeC {\'o}n de configuracion de celda}{20}% 
-\contentsline {subsection}{\numberline {3.5.2}Selecci\IeC {\'o}n de componentes}{23}% 
-\contentsline {subsection}{\numberline {3.5.3}Sensibilidades}{24}% 
-\contentsline {subsection}{\numberline {3.5.4}An\IeC {\'a}lisis de montecarlo}{27}% 
-\contentsline {subsection}{\numberline {3.5.5}Impedancia de entrada}{27}% 
-\contentsline {subsection}{\numberline {3.5.6}Impedancia de salida}{28}% 
-\contentsline {section}{\numberline {3.6}Medici\IeC {\'o}n}{28}% 
-\contentsline {section}{\numberline {3.7}Conclusi\IeC {\'o}n}{30}% 
+\contentsline {chapter}{\numberline {3}Celda Universal}{15}% 
+\contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{15}% 
+\contentsline {section}{\numberline {3.2}Plantilla}{15}% 
+\contentsline {section}{\numberline {3.3}C\IeC {\'a}lculos te\IeC {\'o}ricos}{15}% 
+\contentsline {section}{\numberline {3.4}Implementaci\IeC {\'o}n}{17}% 
+\contentsline {section}{\numberline {3.5}Dise\IeC {\~n}o}{19}% 
+\contentsline {subsection}{\numberline {3.5.1}Selecci\IeC {\'o}n de configuracion de celda}{19}% 
+\contentsline {subsection}{\numberline {3.5.2}Selecci\IeC {\'o}n de componentes}{22}% 
+\contentsline {subsection}{\numberline {3.5.3}Sensibilidades}{23}% 
+\contentsline {subsection}{\numberline {3.5.4}An\IeC {\'a}lisis de montecarlo}{26}% 
+\contentsline {subsection}{\numberline {3.5.5}Impedancia de entrada}{26}% 
+\contentsline {subsection}{\numberline {3.5.6}Impedancia de salida}{27}% 
+\contentsline {section}{\numberline {3.6}Medici\IeC {\'o}n}{27}% 
+\contentsline {section}{\numberline {3.7}Conclusi\IeC {\'o}n}{29}% 
