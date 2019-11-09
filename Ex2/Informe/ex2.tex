@@ -1,4 +1,7 @@
+%path = ../Ex2/Informe/
+
 \chapter{Celda Rauch (Deliyannis-Friend modificada}
+
 
 Se buscó implementar un filtro pasa banda que cumpla con los parámetros indicados en el Cuadro \ref{tab:e2spec}.
 
@@ -37,7 +40,7 @@ La plantilla resultante para este filtro se puede observar en la Figura \ref{fig
 
 \begin{figure}[ht]
 \begin{center}
-\input{plantilla.tex}
+\input{../Ex2/Informe/plantilla.tex}
 \end{center}
 \caption{Plantilla del Pasabandas}
 \label{fig:e2template}
@@ -67,7 +70,7 @@ Se utilizaron dos celdas Rauch pasabanda para la implementación física cada et
 
 \begin{figure}[ht]
 \begin{center}
-\input{rauch.tex}
+\input{../Ex2/Informe/rauch.tex}
 \label{fig:e2cell}
 \end{center}
 \end{figure}
@@ -298,7 +301,7 @@ La respuesta en frecuencia fue medida, utilizando un \textit{Analog Discovery}, 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=7.5cm]{TransferenciaTotal.png}
+\includegraphics[height=7.5cm]{../Ex2/Informe/TransferenciaTotal.png}
 \caption{Transferencia de las Celdas en Cascada}
 \label{fig:e2 H total}
 \end{center}
@@ -306,7 +309,7 @@ La respuesta en frecuencia fue medida, utilizando un \textit{Analog Discovery}, 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=7.5cm]{TransferenciaCell1.png}
+\includegraphics[height=7.5cm]{../Ex2/Informe/TransferenciaCell1.png}
 \caption{Transferencia de la primera Celda}
 \label{fig:e2 H cell1}
 \end{center}
@@ -314,7 +317,7 @@ La respuesta en frecuencia fue medida, utilizando un \textit{Analog Discovery}, 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=7.5cm]{TransferenciaCell2.png}
+\includegraphics[height=7.5cm]{../Ex2/Informe/TransferenciaCell2.png}
 \caption{Transferencia de la segunda Celda}
 \label{fig:e2 H cell2}
 \end{center}
@@ -322,7 +325,7 @@ La respuesta en frecuencia fue medida, utilizando un \textit{Analog Discovery}, 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=7.5cm]{ImpedanciaTotal.png}
+\includegraphics[height=7.5cm]{../Ex2/Informe/ImpedanciaTotal.png}
 \caption{Impedancia de Entrada de las Celdas en Cascada}
 \label{fig:e2 Z total}
 \end{center}
@@ -330,7 +333,7 @@ La respuesta en frecuencia fue medida, utilizando un \textit{Analog Discovery}, 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=7.5cm]{ImpedanciaCell1.png}
+\includegraphics[height=7.5cm]{../Ex2/Informe/ImpedanciaCell1.png}
 \caption{Impedancia de Entrada de la primera Celda}
 \label{fig:e2 Z cell1}
 \end{center}
@@ -338,7 +341,7 @@ La respuesta en frecuencia fue medida, utilizando un \textit{Analog Discovery}, 
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=7.5cm]{ImpedanciaCell2.png}
+\includegraphics[height=7.5cm]{../Ex2/Informe/ImpedanciaCell2.png}
 \caption{Impedancia de Entrada de la segunda Celda}
 \label{fig:e2 Z cell2}
 \end{center}
@@ -353,6 +356,7 @@ En el caso de este filtro, dado que las capacitancias de los componentes son men
 Por otro lado, la atenuación observada en la transferencia sólo podría ser atribuida a las resistencias utilizadas o a la configuración del preset. Sin embargo, aunque todas estas fueron calibradas de previo a la medición, esta reducción en la amplitud de salida podría ser atribuida a defectos en el amplificador operacional.
 
 Observando la figura \ref{fig:e2 Z total} se puede observar cómo, a pesar que las capacitancias no son iguales a las deseadas, la impedancia de entrada del filtro se siguió manteniendo sobre los $50 \si{\kilo{\ohm}$ para todo el rango de frecuencias de la banda pasante.
+
 
 \subsection{Calibración}
 
@@ -372,10 +376,11 @@ Teniendo en cuenta que la máxima ganancia en cualquiera de estas celdas deberí
 V_{i Max} = \frac{V_{o Max}}{1.8} = 7.78 V
 \end{equation}
 
-Considerando una tensión mínima de salida $V_{o min} = 10 \si{\mili\volt}$ y que la ganancia mínima de este circuito según la plantilla debe ser de $-3 \si{\deci\bel} \approx 0.708 V/V$:
+Considerando una tensión mínima de salida $V_{oMin} = 10 \si{\mili\volt}$ y que la ganancia mínima de este circuito según la plantilla debe ser de
+$-3 \si{\deci\bel} \approx 0.708 V/V $:
 
 \begin{equation}
-V_{i min} = \frac{V_{o min}}{0.708} = 14.1 \si{\mili\volt}
+V_{iMin} = \frac{V_{oMin}}{0.708} = 14.1 \si{\mili\volt}
 \end{equation}
 
 En conclusión, el rango dinámico de este filtro debería ser:
@@ -452,7 +457,7 @@ Se calculó la transferencia de la Celda Rauch aplicando la ley de Nodos de Kirc
 
 \begin{figure}[ht]
 \begin{center}
-\input{rauch2.tex}
+\input{../Ex2/Informe/rauch2.tex}
 \end{center}
 \end{figure}
 
