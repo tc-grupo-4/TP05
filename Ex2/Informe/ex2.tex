@@ -248,6 +248,141 @@ KR = 1.677\si{\kilo\ohm} \qquad (1-K)R = 8.223 \si{\kilo\ohm}
 A partir de los valores de las sensibilidades, 
 %Sacar conclusiones sobre las sensibilidades
 
+\section{Celda Construida}
+
+\subsection{Selección de componentes}
+
+Se utilizaron los componentes indicados en los Cuadros \ref{tab:e2 comp cell 1} y \ref{tab:e2 comp cell 2} para construir las celdas.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{||c|c|c|c||}
+\hline
+Componente	&	Construcción	&	Valor	&	Unidad	\\
+\hline
+$R_1/a$	&	$68k + 8.2 k$	&	$76.2 k$	&	$\si{\ohm}$	\\
+$R_1/(1-a)$	&	$150k // 2.2 k$	&	$2.17 k$	&	$\si{\ohm}$	\\
+$R_2$ &	$18 k + 1 k$	&$19.0k$&	$\si{\ohm}$	\\
+$C$	&	$468 p$	&	$468 p$	&	$\si{\farad}$	\\
+\hline
+\end{tabular}
+\caption{Componentes de la primera celda}
+\label{tab:e2 comp cell 1}
+\end{center}
+\end{table}
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{||c|c|c|c||}
+\hline
+Componente	&	Construcción	&	Valor	&	Unidad	\\
+\hline
+$R_1/a$	&	$39k + 820 k$	&	$76.2 k$	&	$\si{\ohm}$	\\
+$R_1/(1-a)$	&	$1.5k // 4.7 k$	&	$2.17 k$	&	$\si{\ohm}$	\\
+$R_2$ &	$1.8 M // 10 k$	&$19.0k$&	$\si{\ohm}$	\\
+$C$	&	$809 p$	&	$809 p$	&	$\si{\farad}$	\\
+\hline
+\end{tabular}
+\caption{Componentes de la segunda celda}
+\label{tab:e2 comp cell 2}
+\end{center}
+\end{table}
+
+Todas las resistencias utilizadas fueron de tecnología SMD ya que el circuito presentaba sensibilidades muy altas en todos los parámetros, no sólo de la relación de las resistencias en la retroalimentación positiva. Los capacitores utilizados fueron de tecnología multicapa para la primera celda por su disponibilidad y su respuesta en frecuencia más óptima para este rango de frecuencias. Por otro lado se utilizaron resistencias de tipo \textit{Plate} para la segunda celda ya que para esa capacitancia era la tecnología disponible.
+
+\subsection{Resultados de las Mediciones}
+
+\textit{Los resultados de las mediciones se agregarán más tarde.}
+
+La respuesta en frecuencia fue medida, utilizando un \textit{Analog Discovery}, excitando el circuito con una señal de entrada de amplitud $1 V_{PP}$. La impedancia de entrada, por su lado, fue medida conectando un resistor de $100 \si{\kilo\ohm}$ previo a la entrada del filtro y utilizando el \textit{Analog Discovery} configurado para medir esta impedancia de entrada.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[height=7.5cm]{TransferenciaTotal.png}
+\caption{Transferencia de las Celdas en Cascada}
+\label{fig:e2 H total}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[height=7.5cm]{TransferenciaCell1.png}
+\caption{Transferencia de la primera Celda}
+\label{fig:e2 H cell1}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[height=7.5cm]{TransferenciaCell2.png}
+\caption{Transferencia de la segunda Celda}
+\label{fig:e2 H cell2}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[height=7.5cm]{ImpedanciaTotal.png}
+\caption{Impedancia de Entrada de las Celdas en Cascada}
+\label{fig:e2 Z total}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[height=7.5cm]{ImpedanciaCell1.png}
+\caption{Impedancia de Entrada de la primera Celda}
+\label{fig:e2 Z cell1}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[height=7.5cm]{ImpedanciaCell2.png}
+\caption{Impedancia de Entrada de la segunda Celda}
+\label{fig:e2 Z cell2}
+\end{center}
+\end{figure}
+
+\subsection{Análisis de los Resultados}
+
+En la figura \ref{fig:e2 H total} se puede observar que no pudo obtenerse una transferencia que corresponda a la plantilla, a pesar que sí se pudo obtener un filtro pasabandas de cuarto orden. Esto puede deberse a que por las altas sensibilidades a los componentes que tienen los parámetros de las celdas, cualquier pequeña desviación en los valores necesarios pueden causar una significante modificación de estos.
+
+En el caso de este filtro, dado que las capacitancias de los componentes son menores a las deseadas, toda la banda pasante se vio desplazada hacia la derecha en el gráfico de la respuesta en frecuencia. La causa de esto es más evidente en los gráficos \ref{fig:e2 H cell1} y \ref{fig:e2 H cell2} donde se puede observar cómo estas capacitancias distintas a las usadas para diseñar la celda causan que las frecuencias centrales de cada pasa banda de primer orden sean desplazadas hacia frecuencias mayores, relación que puede observarse también en el cálculo de la frecuencia central de cada celda.
+
+Por otro lado, la atenuación observada en la transferencia sólo podría ser atribuida a las resistencias utilizadas o a la configuración del preset. Sin embargo, aunque todas estas fueron calibradas de previo a la medición, esta reducción en la amplitud de salida podría ser atribuida a defectos en el amplificador operacional.
+
+Observando la figura \ref{fig:e2 Z total} se puede observar cómo, a pesar que las capacitancias no son iguales a las deseadas, la impedancia de entrada del filtro se siguió manteniendo sobre los $50 \si{\kilo{\ohm}$ para todo el rango de frecuencias de la banda pasante.
+
+\subsection{Calibración}
+
+Idealmente si el filtro se encontrase en correcto funcionamiento, con una alimentación de $\pm 15 V$ se debe calibrar el filtro de la siguiente manera:
+
+\begin{itemize}
+\item Medir la ganancia en la salida de la primera celda y buscar la frecuencia donde se encuentre el máximo de ganancia. Modificar el preset de esta celda hasta que la ganancia sea de $5 \si{\deci\bel}$.
+\item Medir la ganancia en la salida de la segunda celda, conectada en cascada y buscar la otra frecuencia donde se encuentre el otro máximo de la ganancia. Una vez encontrado ajustar el preset de la segunda celda hasta que la ganancia de este punto sea de $0 \si{\deci\bel}$
+\item Buscar las frecuencias donde la ganancia sea de $-3 \si{\deci\bel}$ y verificar que estar frecuencias se encuentren dentro de la banda pasante de la plantilla del diseño.
+\end{itemize}
+
+\subsection{Rango Dinámico}
+
+Teniendo en cuenta que la máxima ganancia en cualquiera de estas celdas debería ser de $5.1 \si{\deci\bel}\approx 1.8 V/V$, la señal de entrada debe ser tal que no sature la salida de ningún amplificador operacional, principalmente el que pertenece a la primera celda. Dado que se alimenta el integrado con una tensión de $\pm 15 V$ se considera que este saturará con una tensión de $14 V$, por lo tanto:
+
+\begin{equation}
+V_{i Max} = \frac{V_{o Max}}{1.8} = 7.78 V
+\end{equation}
+
+Considerando una tensión mínima de salida $V_{o min} = 10 \si{\mili\volt}$ y que la ganancia mínima de este circuito según la plantilla debe ser de $-3 \si{\deci\bel} \approx 0.708 V/V$:
+
+\begin{equation}
+V_{i min} = \frac{V_{o min}}{0.708} = 14.1 \si{\mili\volt}
+\end{equation}
+
+En conclusión, el rango dinámico de este filtro debería ser:
+\begin{equation}
+RD = 20 log\left(\frac{V_{i Max}}{V_{i min}} \right)= 54.84 \si{\deci\bel}
+\end{equation}
+
 \newpage
 
 \section{Anexo}
@@ -420,7 +555,7 @@ Q (R_1,R_2,K,A)= \frac{0.5 \sqrt{R_2/R_1}}{1 - \frac{R_2}{2R_1}\cdot \frac{K-1/A
 G (R_1,R_2,K,A,a) = \frac{a R_2}{2R_1-(K-1/A)(2R_1+R_2)}
 \end{equation}
 
-Se calcularon las derivadas sensibilidades de cada parámetro respecto a sus componentes utilizando expresiones simbólicas en MATLAB y operando algebraicamente:
+Se calcularon las derivadas sensibilidades de cada parámetro respecto a sus componentes utilizando expresiones simbólicas en MATLAB y operando algebráicamente:
 
 \begin{table}[ht]
 \begin{center}
@@ -446,3 +581,4 @@ $S_{a}^f$		&	$0$	&	$0$	&	$1$	\\
 \label{tab:e2 sens gen}
 \end{center}
 \end{table}
+
