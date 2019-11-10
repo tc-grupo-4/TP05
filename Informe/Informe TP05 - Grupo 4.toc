@@ -33,21 +33,21 @@
 \contentsline {section}{\numberline {2.3}Dise\IeC {\~n}o}{25}{section.2.3}% 
 \contentsline {subsection}{\numberline {2.3.1}Aproximaci\IeC {\'o}n del filtro}{25}{subsection.2.3.1}% 
 \contentsline {subsection}{\numberline {2.3.2}Separaci\IeC {\'o}n en etapas}{26}{subsection.2.3.2}% 
-\contentsline {subsubsection}{Funciones transferencia de las etapas}{26}{section*.38}% 
-\contentsline {subsubsection}{Asociaci\IeC {\'o}n de polos y ceros para cada etapa}{27}{section*.41}% 
+\contentsline {subsubsection}{Funciones transferencia de las etapas}{26}{section*.39}% 
+\contentsline {subsubsection}{Asociaci\IeC {\'o}n de polos y ceros para cada etapa}{27}{section*.42}% 
 \contentsline {subsection}{\numberline {2.3.3}Implementaci\IeC {\'o}n de etapas: celdas Sedra}{27}{subsection.2.3.3}% 
-\contentsline {subsubsection}{Valores reales del circuito}{27}{section*.42}% 
-\contentsline {subsubsection}{Selecci\IeC {\'o}n del orden de las etapas: rango din\IeC {\'a}mico}{28}{section*.46}% 
-\contentsline {subsubsection}{Asociaci\IeC {\'o}n de impedancias para conexi\IeC {\'o}n en cascada}{28}{section*.47}% 
+\contentsline {subsubsection}{Valores reales del circuito}{27}{section*.43}% 
+\contentsline {subsubsection}{Selecci\IeC {\'o}n del orden de las etapas: rango din\IeC {\'a}mico}{28}{section*.47}% 
+\contentsline {subsubsection}{Asociaci\IeC {\'o}n de impedancias para conexi\IeC {\'o}n en cascada}{28}{section*.48}% 
 \contentsline {subsection}{\numberline {2.3.4}Par\IeC {\'a}metros del circuito completo}{29}{subsection.2.3.4}% 
-\contentsline {subsubsection}{Impedancia de entrada}{29}{section*.50}% 
-\contentsline {subsubsection}{Impedancia de salida}{30}{section*.52}% 
-\contentsline {subsubsection}{Transferencia total del circuito}{30}{section*.54}% 
-\contentsline {subsubsection}{Regulaci\IeC {\'o}n del Q: \emph {presets}}{33}{section*.60}% 
-\contentsline {subsubsection}{Estabilidad: respuesta a una se\IeC {\~n}al cuadrada}{34}{section*.63}% 
+\contentsline {subsubsection}{Impedancia de entrada}{29}{section*.51}% 
+\contentsline {subsubsection}{Impedancia de salida}{30}{section*.53}% 
+\contentsline {subsubsection}{Transferencia total del circuito}{30}{section*.55}% 
+\contentsline {subsubsection}{Regulaci\IeC {\'o}n del Q: \emph {presets}}{33}{section*.61}% 
+\contentsline {subsubsection}{Estabilidad: respuesta a una se\IeC {\~n}al cuadrada}{34}{section*.64}% 
 \contentsline {section}{\numberline {2.4}Mediciones}{34}{section.2.4}% 
-\contentsline {subsubsection}{Respuesta en frecuencia}{35}{section*.65}% 
-\contentsline {subsubsection}{Respuesta al escal\IeC {\'o}n}{36}{section*.67}% 
+\contentsline {subsubsection}{Respuesta en frecuencia}{35}{section*.66}% 
+\contentsline {subsubsection}{Respuesta al escal\IeC {\'o}n}{36}{section*.68}% 
 \contentsline {section}{\numberline {2.5}Conclusi\IeC {\'o}n}{37}{section.2.5}% 
 \contentsline {chapter}{\numberline {3}Celda Universal}{38}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{38}{section.3.1}% 
