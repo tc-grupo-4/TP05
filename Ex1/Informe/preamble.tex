@@ -1,0 +1,57 @@
+\usepackage[utf8]{inputenc}	%Necesitamos los 8 bits, por eso se usa utf8 para el ASCII
+\usepackage[spanish, es-tabla, es-nodecimaldot]{babel} %Por defecto las tablas se llaman cuadro en babel spanish, es-tabla es para definir el cuadro como tabla
+\usepackage{sansmathfonts}				% Sans Serif equations		
+%Las ecuaciones las hagan con esta font, la biblioteca jodió con que se use uno y este es el más parecido
+\renewcommand*\familydefault{\sfdefault} 		% Sans Serif as default font 
+%\textsf{Lo que escribo acá se escribe en Sans Serif si no fuera el formato por defecto}
+\usepackage[a4paper, 					% Page Layout
+                     %showframe,				% This shows the frame
+                     includehead,
+                     footskip=7mm, headsep=6mm, headheight=4.8mm,
+                     top=25mm, bottom=25mm, left=25mm, right=25mm]{geometry}
+\RequirePackage{caption} 				% Caption customization
+\captionsetup{justification=centerlast,font=small,labelfont=sc,margin=1cm}
+\usepackage{hyperref}	%Permite que si hago click en una referencia o link me lleve a ella
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    citecolor=blue,    
+}
+\usepackage{fancyhdr}
+\fancyhead{}
+%Acá empezo a escribir en el encabezado
+%\lhead{A la izquierda}
+%\rhead{\framebox{A la derecha con borde}}
+\fancyfoot{}
+\rfoot{\thepage}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}	%Tamaño de la raya que marca en encabezado
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{babel}
+
+\usepackage{amsmath}	%Para manejo dentro de ecuaciones
+\usepackage{bm}	%Es el bold map
+
+\usepackage{float}
+
+
+
+
+
+
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+\usepackage{siunitx}
