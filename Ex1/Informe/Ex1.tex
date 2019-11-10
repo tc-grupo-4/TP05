@@ -130,6 +130,7 @@ $\mathbf{|Z_{in}(f)|}$          & $\geq \SI{50}{k\ohm}$             \\ \hline
 	H(S) = \dfrac{G}{(s+p_1)(s+p_1^*)(s+p_2)(s+p_2^*)(s+p3)}
 \label{eq:legendrepolos}
 \end{equation}
+
 	Con los valores $p_1 = (-32840 + 206900 \, j ) \, , \, p_2 = (-82990 + 125800 \, j) \, , \, y p_3 = -100100$, se puede notar que se necesita de tres etapas, una de primer orden y otras dos de segundo orden.
 	Para las dos etapas de orden dos se utilizarán dos celdas Sallen-Key con la configuración pasa-bajos. A partir de la Ecuación \ref{eq:legendrepolos} podemos obtener:
 	
@@ -169,12 +170,12 @@ Q_2 = 0.91
 \begin{tabular}{|c|c|c|}
 \hline
             & \textbf{Etapa 1} & \textbf{Etapa 2} \\ \hline
-$\mathbf{R_1}$ & $\geq \SI{26}{\ohm}$               & $\geq \SI{7.7}{k\ohm}$             \\ \hline
-$\mathbf{R_2}$ & $\geq \SI{26}{\ohm}$               & $\geq \SI{7.7}{k\ohm}$             \\ \hline
+$\mathbf{R_1}$ & $\SI{26}{\ohm}$               & $\SI{7.7}{k\ohm}$             \\ \hline
+$\mathbf{R_2}$ & $\SI{26}{\ohm}$               & $\SI{7.7}{k\ohm}$             \\ \hline
 $\mathbf{C_1}$ & $470 \, nF$             & $4.1 \, nF$              \\ \hline
 $\mathbf{C_2}$ & $142.6 \, nF$           & $100 \, pF$             \\ \hline
-$\mathbf{R_3}$ & $\geq \SI{4.7}{M\ohm}$             & $\geq \SI{4.7}{M\ohm}$             \\ \hline
-$\mathbf{R_4}$ & $\geq \SI{77.6}{\ohm}$             & $\geq \SI{77.6}{\ohm}$             \\ \hline
+$\mathbf{R_3}$ & $\SI{4.7}{M\ohm}$             & $\SI{4.7}{M\ohm}$             \\ \hline
+$\mathbf{R_4}$ & $\SI{77.6}{\ohm}$             & $\SI{77.6}{\ohm}$             \\ \hline
 \end{tabular}
 \caption{Valores de componentes para etapas de orden dos}
 \label{tabla:legendreetapasorden2}
@@ -185,7 +186,7 @@ $\mathbf{R_4}$ & $\geq \SI{77.6}{\ohm}$             & $\geq \SI{77.6}{\ohm}$    
 \begin{tabular}{|c|c|c|}
 \hline
 $\mathbf{Ri1}$ & $\mathbf{Ri2}$ & $\mathbf{Ci}$     \\ \hline
-$\mathbf{\geq \SI{56}{k\ohm}}$ & $\mathbf{\geq \SI{56}{k\ohm}}$ & $\mathbf{183.8 \,pF}$ \\ \hline
+$\mathbf{\SI{56}{k\ohm}}$ & $\mathbf{\SI{56}{k\ohm}}$ & $\mathbf{183.8 \,pF}$ \\ \hline
 \end{tabular}
 \caption{Valores de componentes para la etapa de orden uno}
 \label{tabla:legendreetapaorden1}
@@ -199,4 +200,65 @@ $\mathbf{\geq \SI{56}{k\ohm}}$ & $\mathbf{\geq \SI{56}{k\ohm}}$ & $\mathbf{183.8
 	\label{fig:montecarlolegendre}
 \end{figure}
 	En este diagrama de montecarlo se puede observar que al momento en que la atenuación es de $3 \, dB$, el peor caso hacia ambos extremos cae dentro del margen del $\pm 5 \%$ que se especifica de $f_p = 33 \, kHz$.
+
+\subsection{Bessel}
+	De igual manera que con el caso de la aproximación anterior se consiguió obtener la funcion transferencia que resulto ser la siguiente:
+
+\begin{equation}
+	H(S) = \dfrac{G}{(s+p_1)(s+p_1^*)(s+p_2)(s+p_2^*)(s+p3)}
+\label{eq:besselpolos}
+\end{equation}
+
+	Con $p_1 = -13260 + 20370 \, j$ , $p_2 = -19120 + 9940 \,j$ y $p_3 = -20800$.
+	Se utilizo la misma configuración que para el caso anterior solo que se cambio el orden, ahora colocando en primer lugar aquella con mayor $Q$ ya que al ser para baja señal no queremos que se atenúe demasiado y se pueda mezclar con el piso de ruido.
+	De la Ecuación \eqref{eq:besselpolos} se consiguen los siguientes valores:
+
+\begin{equation}
+	{W_0}_1 = 24.3 \, kHz
+\label{eq:wo1Bessel}
+\end{equation}
+
+\begin{equation}
+	Q_1 = 0.92
+\end{equation}
+
+\begin{equation}
+	{W_0}_2 = 21.55 \, kHz
+\end{equation}
+
+\begin{equation}
+	Q_2 = 0.56
+\end{equation}
+
+	Estos primeros fueron para las etapas de orden dos y a continuación lo conseguido para la de orden uno.
+
+\begin{equation}
+	{W_0}_3 = 20800 \, kHz
+\end{equation}
+
+\begin{equation}
+	Q_3 = 0.5
+\end{equation}
+
+	Gracias a esto se consiguieron los siguientes valores de componentes:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+            & \textbf{Etapa 1} & \textbf{Etapa 2} \\ \hline
+$\mathbf{R_1}$ & $\SI{100}{k\ohm}$               & $\SI{7.7}{k\ohm}$             \\ \hline
+$\mathbf{R_2}$ & $\SI{100}{k\ohm}$               & $\SI{7.7}{k\ohm}$             \\ \hline
+$\mathbf{C_1}$ & $754.2 \, pF$             & $523 \, pF$              \\ \hline
+$\mathbf{C_2}$ & $224.5 \, pF$           & $411.8 \, pF$             \\ \hline
+$\mathbf{R_3}$ & $\SI{2.2}{M\ohm}$             & $\SI{2.2}{M\ohm}$             \\ \hline
+$\mathbf{R_4}$ & $\SI{24}{\ohm}$             & $\SI{24}{\ohm}$             \\ \hline
+\end{tabular}
+\caption{Valores de componentes para etapas de orden dos}
+\label{tabla:legendreetapasorden2}
+\end{table}
+
+	Estos valores mediante combinaciones se pueden conseguir con un error menor al $1 \%$.
+	
+
+
 \end{document}
