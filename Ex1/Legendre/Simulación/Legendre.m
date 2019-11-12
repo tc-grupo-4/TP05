@@ -22,3 +22,6 @@ expand(eq2);
 eq2 = eq2/22712980100;
 wo2=sqrt(22712980100); %El termino que acompaña s^2 es 1/wo
 Q2 = 1135649005 / (8299*wo2);  %El termino que acompaña s es 1/(Q*wo)
+
+H= 1/((s+p1)*(s+p1c)*(s+p2)*(s+p2c)*(s+p3));
+expand(H)
