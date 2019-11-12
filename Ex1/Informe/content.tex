@@ -1,4 +1,5 @@
-\part{Celda Sallen-Key} 
+\chapter{Celda Sallen-Key}
+ 
 \section{Introducción}
 	Se llama filtros activos a aquellos que agregan componentes activos al circuito, como lo es en este caso la utilización de un amplificador operacional. En el caso de la celda Sallen-Key se utilizan solo resistores y capacitores como componentes pasivos y dependiendo de su ubicación dentro del circuito se obtienen los diferentes tipos de filtros.
 	En esta primer parte se mostrará el análisis e implementación de celdas Sallen-Key para la creación de dos filtros pasa-bajos, utilizando la aproximación de Legendre para uno y la de Bessel para el restante.
@@ -269,19 +270,54 @@ $\mathbf{\SI{10}{k\ohm}}$ & $\mathbf{\SI{10}{k\ohm}}$ & $\mathbf{4.8 \, nF}$ \\ 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{../Ex1/Informe/montecarlobesselMAL.pdf}
+	\includegraphics[scale=0.5]{../Ex1/Informe/montecarlobessel.pdf}
 	\caption{Montecarlo con los componentes elegidos}
 	\label{fig:montecarlobessel}
 \end{figure}
 
-	El caso ideal posee una atenuación de $3 \, dB$ en la frecuencia requerida de $2200 \, Hz$, se realizo el diagrama de montecarlo y por un error de percepción de los alumnos no se noto que la frecuencia se encontraba corrida a los $2700 \, Hz$ como frecuencia central y se procedió sin darse cuenta de este error, se desconoce tambien el porque del corrimiento de la frecuencia en la simulación ya que se confirmo que los valores de los componentes fueran los mismos que los del caso ideal.
+	Los valores del filtro no varían demasiado tanto en ganancia como en fase teniendo en cuanta la variación de valores de los componentes, por lo que no se debería de necesitar un ajuste demasiado grande y es por lo que no se consideró la utilización de un preset en este caso.
+
 \section{Mediciones}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5,keepaspectratio]{../Ex1/Informe/BodeLegendreMagnitud.png}
+	\caption{Medición de la magnitud del filtro con aproximación de Legendre}
+	\label{fig:medicionlegendremagnitud}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5,keepaspectratio]{../Ex1/Informe/BodeLegendreFase.png}
+	\caption{Medición de la fase del filtro con aproximación de Legendre}
+	\label{fig:medicionlegendrefase}
+\end{figure}
+
+	Se puede notar como el bode medido en magnitud se corresponde con una de las curvas que se pueden observar en el montecarlo mostrado anteriormente con los componentes elegidos, la atenuación de $3 \, dB$ se da a la frecuencia de $31.7 \, kHz$, que se encuentra dentro del rango del $\pm 5 \%$ de la $f_p = 33 \, kHz$ que abarca desde $31.35 \, kHz$ hasta $34.65 \, kHz.$. Se tiene una ganancia en un rango de frecuencias anterior a $f_p$ pero al ser de solamente $1 \, dB$ no debería de generar ningún inconveniente, por lo que se puede decir que se cumplió con la plantilla pedida y que si se requiere poder ajustar esta frecuencia a exactamente $33 \, kHz$ basta con colocar un preset en lugar de $R1$ y poder realizar el ajuste manualmente. 
+
+	Comentario: Para la instancia anterior de entrega no se logró adjuntar las mediciones ya que el circuito no se comportaba de forma adecuada, se encontró que el error era ocasionado por una resistencia en el circuito que en vez de ser del valor de $\SI{4.7}{M\ohm}$ era de $\SI{4.7}{k\ohm}$, por lo que al ser de varios ordenes de magnitud menor afectaba en gran medida el comportamiento.
 	
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5,keepaspectratio]{../Ex1/Informe/BodeBessel.png}
-	\caption{Medición del filtro con aproximación de Bessel}
-	\label{fig:medicionbessel}
+	\includegraphics[scale=0.5,keepaspectratio]{../Ex1/Informe/BodeBesselMagnitud.png}
+	\caption{Medición de la magnitud del filtro con aproximación de Bessel}
+	\label{fig:medicionbesselmagnitud}
 \end{figure}
-	Como se prosiguió con la implementacion de este filtro sin darse cuenta del error comentado anteriormente, lo medido corresponde a una frecuencia de $2.7 \, kHz$.
-	Se sabe que este circuito no cumple con las especificaciones dadas por la cátedra en la consigna, por lo que volverá a implementarse esta vez de forma correcta para una nueva entrega y se adjuntara también las mediciones del filtro con aproximación de Legendre que no lograron a realizarse a tiempo.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5,keepaspectratio]{../Ex1/Informe/BodeBesselFase.png}
+	\caption{Medición de la fase del filtro con aproximación de Bessel}
+	\label{fig:medicionbesselfase}
+\end{figure}
+
+	Como se puede observar, se logró conseguir que el filtro cumpla con la plantilla pedida, teniendo una atenuación de $3 \, dB$ en la frecuencia pedida y una atenuación mayor a $40 \, dB$ a partir de los $10.4 \, kHz$, siendo está de aproximadamente $43 \, dB$ en dicha frecuencia.
+	Como aclaración se debe mencionar que los saltos de fase que se pueden notar en ambos filtros en realidad no lo son, sino que se deben a que estos mismos se interpretan sólo en el rango de $-180º$ a $180º$.
+	
+	Comentario: Se logró encontrar el porqué del error tanto para el montecarlo como para el circuito fabricado, el mismo era que en uno de los capacitores de la última etapa en vez de utilizarse un capacitor de $4.7 \, nF$ por error del alumno se utilizó uno de $4.7 \, pF$ tanto en la simulación con tolerancias como en fabricación del circuito, por lo que con cambiar este capacitor se logró conseguir lo que se buscaba en una primera instancia.
+
+\section{Conclusión}
+
+	Se pudieron implementar ambos filtros con relativa sencillez, que es la ventaja de los filtros Sallen-Key ya que con sólo saber los valores de $w_0$ y $Q$ y las expresiones de los mismos, se pueden conseguir los valores para los componentes. Se puede decir que en estos filtros, la frecuencia de corte es poco sensible a los cambios ya que su sensibilidad con respecto a los componentes del circuito es de $-0.5$ con respecto a $R_1 \, , \, R_2 \, , \, C_1 \, \text{y} \, C_2 $, relacionado con las sensibilidades también se debe mencionar que las mismas pero del parámetro $Q$ se encuentra íntimamente relacionada con los componentes a utilizar, por lo que si se utilizan valores muy altos de componentes, estos según su variación del valor ideal, más afectarán al comportamiento del circuito y entonces se dificultará la tarea de poder alcanzar valores altos de $Q$ ya que es muy sensible este parámetro.
+	
+	Las dificultades por las que ha pasado el alumno han ayudado a obtener un nuevo criterio y a adquirir nuevas consideraciones en la fabricación y diseño de un circuito con las que no se había enfrentado en ocasiones anteriores.

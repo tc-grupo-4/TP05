@@ -1,50 +1,51 @@
-\BOOKMARK [-1][-]{part.1}{I Celda Sallen-Key}{}% 1
-\BOOKMARK [0][-]{section.0.1}{Introducci\363n}{part.1}% 2
-\BOOKMARK [1][-]{section.0.2}{An\341lisis Te\363rico}{section.0.1}% 3
-\BOOKMARK [1][-]{section.0.3}{Dise\361o del Filtro}{section.0.1}% 4
-\BOOKMARK [2][-]{subsection.0.3.1}{Legendre}{section.0.3}% 5
-\BOOKMARK [2][-]{subsection.0.3.2}{Bessel}{section.0.3}% 6
-\BOOKMARK [1][-]{section.0.4}{Mediciones}{section.0.1}% 7
-\BOOKMARK [0][-]{chapter.1}{Celda Rauch \(Deliyannis-Friend modificada}{part.1}% 8
-\BOOKMARK [1][-]{section.1.1}{Transferencia Num\351rica}{chapter.1}% 9
-\BOOKMARK [1][-]{section.1.2}{Implementaci\363n del Filtro}{chapter.1}% 10
-\BOOKMARK [2][-]{subsection.1.2.1}{Transferencia de la Celda Rauch}{section.1.2}% 11
-\BOOKMARK [2][-]{subsection.1.2.2}{Impedancia de Entrada}{section.1.2}% 12
-\BOOKMARK [2][-]{subsection.1.2.3}{Dise\361o de la Celda}{section.1.2}% 13
-\BOOKMARK [2][-]{subsection.1.2.4}{An\341lisis de Sensibilidades}{section.1.2}% 14
-\BOOKMARK [2][-]{subsection.1.2.5}{An\341lisis de Montecarlo}{section.1.2}% 15
-\BOOKMARK [1][-]{section.1.3}{Celda Construida}{chapter.1}% 16
-\BOOKMARK [2][-]{subsection.1.3.1}{Selecci\363n de componentes}{section.1.3}% 17
-\BOOKMARK [2][-]{subsection.1.3.2}{Resultados de las Mediciones}{section.1.3}% 18
-\BOOKMARK [2][-]{subsection.1.3.3}{An\341lisis de los Resultados}{section.1.3}% 19
-\BOOKMARK [2][-]{subsection.1.3.4}{Calibraci\363n}{section.1.3}% 20
-\BOOKMARK [2][-]{subsection.1.3.5}{Rango Din\341mico}{section.1.3}% 21
-\BOOKMARK [1][-]{section.1.4}{Anexo}{chapter.1}% 22
-\BOOKMARK [2][-]{subsection.1.4.1}{Transferencia Num\351rica}{section.1.4}% 23
-\BOOKMARK [2][-]{subsection.1.4.2}{Transferencia de la Celda Rauch}{section.1.4}% 24
-\BOOKMARK [2][-]{subsection.1.4.3}{Impedancia de Entrada}{section.1.4}% 25
-\BOOKMARK [2][-]{subsection.1.4.4}{An\341lisis de Sensibilidades}{section.1.4}% 26
-\BOOKMARK [0][-]{chapter.2}{Celda Sedra-Ghorab-Martin \(R\)}{part.1}% 27
-\BOOKMARK [1][-]{section.2.1}{Introducci\363n}{chapter.2}% 28
-\BOOKMARK [1][-]{section.2.2}{Marco te\363rico}{chapter.2}% 29
-\BOOKMARK [1][-]{section.2.3}{Dise\361o}{chapter.2}% 30
-\BOOKMARK [2][-]{subsection.2.3.1}{Aproximaci\363n del filtro}{section.2.3}% 31
-\BOOKMARK [2][-]{subsection.2.3.2}{Separaci\363n en etapas}{section.2.3}% 32
-\BOOKMARK [2][-]{subsection.2.3.3}{Implementaci\363n de etapas: celdas Sedra}{section.2.3}% 33
-\BOOKMARK [2][-]{subsection.2.3.4}{Par\341metros del circuito completo}{section.2.3}% 34
-\BOOKMARK [1][-]{section.2.4}{Mediciones}{chapter.2}% 35
-\BOOKMARK [1][-]{section.2.5}{Conclusi\363n}{chapter.2}% 36
-\BOOKMARK [0][-]{chapter.3}{Celda Universal}{part.1}% 37
-\BOOKMARK [1][-]{section.3.1}{Introducci\363n}{chapter.3}% 38
-\BOOKMARK [1][-]{section.3.2}{Plantilla}{chapter.3}% 39
-\BOOKMARK [1][-]{section.3.3}{C\341lculos te\363ricos}{chapter.3}% 40
-\BOOKMARK [1][-]{section.3.4}{Implementaci\363n}{chapter.3}% 41
-\BOOKMARK [1][-]{section.3.5}{Dise\361o}{chapter.3}% 42
-\BOOKMARK [2][-]{subsection.3.5.1}{Selecci\363n de configuracion de celda}{section.3.5}% 43
-\BOOKMARK [2][-]{subsection.3.5.2}{Selecci\363n de componentes}{section.3.5}% 44
-\BOOKMARK [2][-]{subsection.3.5.3}{Sensibilidades}{section.3.5}% 45
-\BOOKMARK [2][-]{subsection.3.5.4}{An\341lisis de montecarlo}{section.3.5}% 46
-\BOOKMARK [2][-]{subsection.3.5.5}{Impedancia de entrada}{section.3.5}% 47
-\BOOKMARK [2][-]{subsection.3.5.6}{Impedancia de salida}{section.3.5}% 48
-\BOOKMARK [1][-]{section.3.6}{Medici\363n}{chapter.3}% 49
-\BOOKMARK [1][-]{section.3.7}{Conclusi\363n}{chapter.3}% 50
+\BOOKMARK [0][-]{chapter.1}{Celda Sallen-Key}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Introducci\363n}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{An\341lisis Te\363rico}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Dise\361o del Filtro}{chapter.1}% 4
+\BOOKMARK [2][-]{subsection.1.3.1}{Legendre}{section.1.3}% 5
+\BOOKMARK [2][-]{subsection.1.3.2}{Bessel}{section.1.3}% 6
+\BOOKMARK [1][-]{section.1.4}{Mediciones}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.5}{Conclusi\363n}{chapter.1}% 8
+\BOOKMARK [0][-]{chapter.2}{Celda Rauch \(Deliyannis-Friend modificada}{}% 9
+\BOOKMARK [1][-]{section.2.1}{Transferencia Num\351rica}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.2}{Implementaci\363n del Filtro}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.1}{Transferencia de la Celda Rauch}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.2}{Impedancia de Entrada}{section.2.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.3}{Dise\361o de la Celda}{section.2.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.4}{An\341lisis de Sensibilidades}{section.2.2}% 15
+\BOOKMARK [2][-]{subsection.2.2.5}{An\341lisis de Montecarlo}{section.2.2}% 16
+\BOOKMARK [1][-]{section.2.3}{Celda Construida}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.3.1}{Selecci\363n de componentes}{section.2.3}% 18
+\BOOKMARK [2][-]{subsection.2.3.2}{Resultados de las Mediciones}{section.2.3}% 19
+\BOOKMARK [2][-]{subsection.2.3.3}{An\341lisis de los Resultados}{section.2.3}% 20
+\BOOKMARK [2][-]{subsection.2.3.4}{Calibraci\363n}{section.2.3}% 21
+\BOOKMARK [2][-]{subsection.2.3.5}{Rango Din\341mico}{section.2.3}% 22
+\BOOKMARK [1][-]{section.2.4}{Anexo}{chapter.2}% 23
+\BOOKMARK [2][-]{subsection.2.4.1}{Transferencia Num\351rica}{section.2.4}% 24
+\BOOKMARK [2][-]{subsection.2.4.2}{Transferencia de la Celda Rauch}{section.2.4}% 25
+\BOOKMARK [2][-]{subsection.2.4.3}{Impedancia de Entrada}{section.2.4}% 26
+\BOOKMARK [2][-]{subsection.2.4.4}{An\341lisis de Sensibilidades}{section.2.4}% 27
+\BOOKMARK [0][-]{chapter.3}{Celda Sedra-Ghorab-Martin \(R\)}{}% 28
+\BOOKMARK [1][-]{section.3.1}{Introducci\363n}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.2}{Marco te\363rico}{chapter.3}% 30
+\BOOKMARK [1][-]{section.3.3}{Dise\361o}{chapter.3}% 31
+\BOOKMARK [2][-]{subsection.3.3.1}{Aproximaci\363n del filtro}{section.3.3}% 32
+\BOOKMARK [2][-]{subsection.3.3.2}{Separaci\363n en etapas}{section.3.3}% 33
+\BOOKMARK [2][-]{subsection.3.3.3}{Implementaci\363n de etapas: celdas Sedra}{section.3.3}% 34
+\BOOKMARK [2][-]{subsection.3.3.4}{Par\341metros del circuito completo}{section.3.3}% 35
+\BOOKMARK [1][-]{section.3.4}{Mediciones}{chapter.3}% 36
+\BOOKMARK [1][-]{section.3.5}{Conclusi\363n}{chapter.3}% 37
+\BOOKMARK [0][-]{chapter.4}{Celda Universal}{}% 38
+\BOOKMARK [1][-]{section.4.1}{Introducci\363n}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.2}{Plantilla}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.3}{C\341lculos te\363ricos}{chapter.4}% 41
+\BOOKMARK [1][-]{section.4.4}{Implementaci\363n}{chapter.4}% 42
+\BOOKMARK [1][-]{section.4.5}{Dise\361o}{chapter.4}% 43
+\BOOKMARK [2][-]{subsection.4.5.1}{Selecci\363n de configuracion de celda}{section.4.5}% 44
+\BOOKMARK [2][-]{subsection.4.5.2}{Selecci\363n de componentes}{section.4.5}% 45
+\BOOKMARK [2][-]{subsection.4.5.3}{Sensibilidades}{section.4.5}% 46
+\BOOKMARK [2][-]{subsection.4.5.4}{An\341lisis de montecarlo}{section.4.5}% 47
+\BOOKMARK [2][-]{subsection.4.5.5}{Impedancia de entrada}{section.4.5}% 48
+\BOOKMARK [2][-]{subsection.4.5.6}{Impedancia de salida}{section.4.5}% 49
+\BOOKMARK [1][-]{section.4.6}{Medici\363n}{chapter.4}% 50
+\BOOKMARK [1][-]{section.4.7}{Conclusi\363n}{chapter.4}% 51

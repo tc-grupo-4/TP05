@@ -1,65 +1,66 @@
 \babel@toc {spanish}{}
-\contentsline {part}{I\hspace {1em}Celda Sallen-Key}{3}{part.1}%
-\contentsline {section}{\numberline {0.1}Introducción}{4}{section.0.1}%
-\contentsline {section}{\numberline {0.2}Análisis Teórico}{4}{section.0.2}%
-\contentsline {subsubsection}{Función Transferencia}{4}{section*.3}%
-\contentsline {subsubsection}{Sensibilidades}{5}{section*.5}%
-\contentsline {section}{\numberline {0.3}Diseño del Filtro}{6}{section.0.3}%
-\contentsline {subsection}{\numberline {0.3.1}Legendre}{6}{subsection.0.3.1}%
-\contentsline {subsection}{\numberline {0.3.2}Bessel}{8}{subsection.0.3.2}%
-\contentsline {section}{\numberline {0.4}Mediciones}{10}{section.0.4}%
-\contentsline {chapter}{\numberline {1}Celda Rauch (Deliyannis-Friend modificada}{11}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Transferencia Numérica}{11}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Implementación del Filtro}{11}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Transferencia de la Celda Rauch}{12}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Impedancia de Entrada}{13}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Diseño de la Celda}{13}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Análisis de Sensibilidades}{14}{subsection.1.2.4}%
-\contentsline {subsection}{\numberline {1.2.5}Análisis de Montecarlo}{15}{subsection.1.2.5}%
-\contentsline {section}{\numberline {1.3}Celda Construida}{15}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Selección de componentes}{15}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Resultados de las Mediciones}{16}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}Análisis de los Resultados}{16}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}Calibración}{17}{subsection.1.3.4}%
-\contentsline {subsection}{\numberline {1.3.5}Rango Dinámico}{18}{subsection.1.3.5}%
-\contentsline {section}{\numberline {1.4}Anexo}{19}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Transferencia Numérica}{19}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Transferencia de la Celda Rauch}{20}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Impedancia de Entrada}{21}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}Análisis de Sensibilidades}{21}{subsection.1.4.4}%
-\contentsline {chapter}{\numberline {2}Celda Sedra-Ghorab-Martin (R)}{23}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introducción}{23}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Marco teórico}{23}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Diseño}{25}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Aproximación del filtro}{25}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Separación en etapas}{26}{subsection.2.3.2}%
-\contentsline {subsubsection}{Funciones transferencia de las etapas}{26}{section*.40}%
-\contentsline {subsubsection}{Asociación de polos y ceros para cada etapa}{27}{section*.43}%
-\contentsline {subsection}{\numberline {2.3.3}Implementación de etapas: celdas Sedra}{27}{subsection.2.3.3}%
-\contentsline {subsubsection}{Valores reales del circuito}{27}{section*.44}%
-\contentsline {subsubsection}{Selección del orden de las etapas: rango dinámico}{28}{section*.48}%
-\contentsline {subsubsection}{Asociación de impedancias para conexión en cascada}{28}{section*.49}%
-\contentsline {subsection}{\numberline {2.3.4}Parámetros del circuito completo}{29}{subsection.2.3.4}%
-\contentsline {subsubsection}{Impedancia de entrada}{29}{section*.52}%
-\contentsline {subsubsection}{Impedancia de salida}{30}{section*.54}%
-\contentsline {subsubsection}{Transferencia total del circuito}{30}{section*.56}%
-\contentsline {subsubsection}{Regulación del Q: \emph {presets}}{33}{section*.62}%
-\contentsline {subsubsection}{Estabilidad: respuesta a una señal cuadrada}{34}{section*.65}%
-\contentsline {section}{\numberline {2.4}Mediciones}{34}{section.2.4}%
-\contentsline {subsubsection}{Respuesta en frecuencia}{35}{section*.67}%
-\contentsline {subsubsection}{Respuesta al escalón}{36}{section*.69}%
-\contentsline {section}{\numberline {2.5}Conclusión}{37}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Celda Universal}{38}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introducción}{38}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Plantilla}{38}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Cálculos teóricos}{38}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Implementación}{40}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Diseño}{42}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Selección de configuracion de celda}{42}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Selección de componentes}{45}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Sensibilidades}{46}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Análisis de montecarlo}{49}{subsection.3.5.4}%
-\contentsline {subsection}{\numberline {3.5.5}Impedancia de entrada}{49}{subsection.3.5.5}%
-\contentsline {subsection}{\numberline {3.5.6}Impedancia de salida}{50}{subsection.3.5.6}%
-\contentsline {section}{\numberline {3.6}Medición}{50}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Conclusión}{51}{section.3.7}%
+\contentsline {chapter}{\numberline {1}Celda Sallen-Key}{3}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Introducci\IeC {\'o}n}{3}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}An\IeC {\'a}lisis Te\IeC {\'o}rico}{3}{section.1.2}% 
+\contentsline {subsubsection}{Funci\IeC {\'o}n Transferencia}{3}{section*.3}% 
+\contentsline {subsubsection}{Sensibilidades}{5}{section*.5}% 
+\contentsline {section}{\numberline {1.3}Dise\IeC {\~n}o del Filtro}{5}{section.1.3}% 
+\contentsline {subsection}{\numberline {1.3.1}Legendre}{5}{subsection.1.3.1}% 
+\contentsline {subsection}{\numberline {1.3.2}Bessel}{7}{subsection.1.3.2}% 
+\contentsline {section}{\numberline {1.4}Mediciones}{9}{section.1.4}% 
+\contentsline {section}{\numberline {1.5}Conclusi\IeC {\'o}n}{11}{section.1.5}% 
+\contentsline {chapter}{\numberline {2}Celda Rauch (Deliyannis-Friend modificada}{12}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Transferencia Num\IeC {\'e}rica}{12}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Implementaci\IeC {\'o}n del Filtro}{12}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Transferencia de la Celda Rauch}{13}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}Impedancia de Entrada}{14}{subsection.2.2.2}% 
+\contentsline {subsection}{\numberline {2.2.3}Dise\IeC {\~n}o de la Celda}{14}{subsection.2.2.3}% 
+\contentsline {subsection}{\numberline {2.2.4}An\IeC {\'a}lisis de Sensibilidades}{15}{subsection.2.2.4}% 
+\contentsline {subsection}{\numberline {2.2.5}An\IeC {\'a}lisis de Montecarlo}{16}{subsection.2.2.5}% 
+\contentsline {section}{\numberline {2.3}Celda Construida}{16}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Selecci\IeC {\'o}n de componentes}{16}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}Resultados de las Mediciones}{17}{subsection.2.3.2}% 
+\contentsline {subsection}{\numberline {2.3.3}An\IeC {\'a}lisis de los Resultados}{17}{subsection.2.3.3}% 
+\contentsline {subsection}{\numberline {2.3.4}Calibraci\IeC {\'o}n}{18}{subsection.2.3.4}% 
+\contentsline {subsection}{\numberline {2.3.5}Rango Din\IeC {\'a}mico}{19}{subsection.2.3.5}% 
+\contentsline {section}{\numberline {2.4}Anexo}{20}{section.2.4}% 
+\contentsline {subsection}{\numberline {2.4.1}Transferencia Num\IeC {\'e}rica}{20}{subsection.2.4.1}% 
+\contentsline {subsection}{\numberline {2.4.2}Transferencia de la Celda Rauch}{21}{subsection.2.4.2}% 
+\contentsline {subsection}{\numberline {2.4.3}Impedancia de Entrada}{22}{subsection.2.4.3}% 
+\contentsline {subsection}{\numberline {2.4.4}An\IeC {\'a}lisis de Sensibilidades}{22}{subsection.2.4.4}% 
+\contentsline {chapter}{\numberline {3}Celda Sedra-Ghorab-Martin (R)}{24}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{24}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Marco te\IeC {\'o}rico}{24}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Dise\IeC {\~n}o}{26}{section.3.3}% 
+\contentsline {subsection}{\numberline {3.3.1}Aproximaci\IeC {\'o}n del filtro}{26}{subsection.3.3.1}% 
+\contentsline {subsection}{\numberline {3.3.2}Separaci\IeC {\'o}n en etapas}{27}{subsection.3.3.2}% 
+\contentsline {subsubsection}{Funciones transferencia de las etapas}{27}{section*.43}% 
+\contentsline {subsubsection}{Asociaci\IeC {\'o}n de polos y ceros para cada etapa}{28}{section*.46}% 
+\contentsline {subsection}{\numberline {3.3.3}Implementaci\IeC {\'o}n de etapas: celdas Sedra}{28}{subsection.3.3.3}% 
+\contentsline {subsubsection}{Valores reales del circuito}{28}{section*.47}% 
+\contentsline {subsubsection}{Selecci\IeC {\'o}n del orden de las etapas: rango din\IeC {\'a}mico}{29}{section*.51}% 
+\contentsline {subsubsection}{Asociaci\IeC {\'o}n de impedancias para conexi\IeC {\'o}n en cascada}{29}{section*.52}% 
+\contentsline {subsection}{\numberline {3.3.4}Par\IeC {\'a}metros del circuito completo}{30}{subsection.3.3.4}% 
+\contentsline {subsubsection}{Impedancia de entrada}{30}{section*.55}% 
+\contentsline {subsubsection}{Impedancia de salida}{31}{section*.57}% 
+\contentsline {subsubsection}{Transferencia total del circuito}{31}{section*.59}% 
+\contentsline {subsubsection}{Regulaci\IeC {\'o}n del Q: \emph {presets}}{34}{section*.65}% 
+\contentsline {subsubsection}{Estabilidad: respuesta a una se\IeC {\~n}al cuadrada}{35}{section*.68}% 
+\contentsline {section}{\numberline {3.4}Mediciones}{35}{section.3.4}% 
+\contentsline {subsubsection}{Respuesta en frecuencia}{36}{section*.70}% 
+\contentsline {subsubsection}{Respuesta al escal\IeC {\'o}n}{37}{section*.72}% 
+\contentsline {section}{\numberline {3.5}Conclusi\IeC {\'o}n}{38}{section.3.5}% 
+\contentsline {chapter}{\numberline {4}Celda Universal}{39}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{39}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Plantilla}{39}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}C\IeC {\'a}lculos te\IeC {\'o}ricos}{39}{section.4.3}% 
+\contentsline {section}{\numberline {4.4}Implementaci\IeC {\'o}n}{41}{section.4.4}% 
+\contentsline {section}{\numberline {4.5}Dise\IeC {\~n}o}{43}{section.4.5}% 
+\contentsline {subsection}{\numberline {4.5.1}Selecci\IeC {\'o}n de configuracion de celda}{43}{subsection.4.5.1}% 
+\contentsline {subsection}{\numberline {4.5.2}Selecci\IeC {\'o}n de componentes}{46}{subsection.4.5.2}% 
+\contentsline {subsection}{\numberline {4.5.3}Sensibilidades}{47}{subsection.4.5.3}% 
+\contentsline {subsection}{\numberline {4.5.4}An\IeC {\'a}lisis de montecarlo}{50}{subsection.4.5.4}% 
+\contentsline {subsection}{\numberline {4.5.5}Impedancia de entrada}{50}{subsection.4.5.5}% 
+\contentsline {subsection}{\numberline {4.5.6}Impedancia de salida}{51}{subsection.4.5.6}% 
+\contentsline {section}{\numberline {4.6}Medici\IeC {\'o}n}{51}{section.4.6}% 
+\contentsline {section}{\numberline {4.7}Conclusi\IeC {\'o}n}{52}{section.4.7}% 
